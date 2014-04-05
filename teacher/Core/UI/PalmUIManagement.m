@@ -1,0 +1,103 @@
+//
+//  PalmUIManagement.m
+//  teacher
+//
+//  Created by singlew on 14-3-7.
+//  Copyright (c) 2014年 ws. All rights reserved.
+//
+
+#import "PalmUIManagement.h"
+#import "UserProfileOperation.h"
+#import "MyOperation.h"
+#import "GroupOperation.h"
+#import "ClassOperation.h"
+
+@implementation PalmUIManagement
+static PalmUIManagement *sharedInstance = nil;
+
++(PalmUIManagement *) sharedInstance{
+    @synchronized(sharedInstance){
+        if (nil == sharedInstance){
+            sharedInstance = [[PalmUIManagement alloc] init];
+        }
+    }
+    return sharedInstance;
+}
+
+-(void) getUserProfile{
+    UserProfileOperation *operation = [[UserProfileOperation alloc] initGetUser];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+-(void) getuserContacts{
+    UserProfileOperation *operation = [[UserProfileOperation alloc] initGetContacts];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+-(void) getUserCredits{
+    MyOperation *operation = [[MyOperation alloc] initGetCredits];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+-(void) getUserGroupList{
+    GroupOperation *operation = [[GroupOperation alloc] initGetGroupList];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+// 更新用户头像
+-(void) updateUserHeader : (NSData *) imageData{
+    UserProfileOperation *operation = [[UserProfileOperation alloc] initUpdateUserHeaderImage:imageData];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+-(void) updateuserHeaderResult : (NSString *) urlPath{
+    UserProfileOperation *operation = [[UserProfileOperation alloc] initUpdateUserHeader:urlPath];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+// 获取有指示
+-(void) getNotiData : (int) timeStamp{
+    ClassOperation *operation = [[ClassOperation alloc] initNotiList:timeStamp];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+-(void) getGroupList{
+    ClassOperation *operation = [[ClassOperation alloc] initGroupList];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+-(void) getGroupTopic:(int)groupID withTimeStamp:(int)timeStamp withOffset:(int)offset withLimit:(int)limit{
+    ClassOperation *operation = [[ClassOperation alloc] initGroupTopic:groupID withTimeStamp:timeStamp withOffset:offset withLimit:limit];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+// 点赞
+-(void) postPraise : (int) topicID{
+    ClassOperation *operation = [[ClassOperation alloc] initPraise:topicID];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+// 发表评论
+-(void) postComment : (NSString *) commentContent withReplyToUid : (int) uid withTopicID : (int) topicID{
+    ClassOperation *operation = [[ClassOperation alloc] initComment:commentContent withReplyToUid:uid withTopicID:topicID];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+// 获取新消息数量
+-(void) getNotiCount{
+    ClassOperation *operation = [[ClassOperation alloc] initGetNotiCount];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+// 获取新消息列
+-(void) getNotiList : (int) offset withLimit : (int) limit{
+    ClassOperation *operation = [[ClassOperation alloc] initGetNotiList:offset withLimit:limit];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+-(void) postCheckVersion{
+    MyOperation *operation = [[MyOperation alloc] initCheckVersion];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+@end

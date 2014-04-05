@@ -1,0 +1,124 @@
+//
+//  TImageOperator.m
+//  ShakeIcon
+//
+//  Created by lixiaosong on 12-4-12.
+//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import "TImageOperator.h"
+#import "UIImage+Utility.h"
+
+@interface TImageOperator(private)
+
+@end
+
+@implementation TImageOperator
+
+const CGFloat kRoundRadius = 20;
+const CGFloat kReflectPercent = -0.25f;
+const CGFloat kReflectOpacity = 0.3f;
+const CGFloat kReflectDistance = 10.0f;
+
+static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWidth,float ovalHeight)
+{
+    float fw,fh;
+    if (ovalWidth == 0 || ovalHeight == 0) {
+        CGContextAddRect(context, rect);
+        return;
+    }
+    
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, CGRectGetMinX(rect), CGRectGetMinY(rect));
+    CGContextScaleCTM(context, ovalWidth, ovalHeight);
+    fw = CGRectGetWidth(rect) / ovalWidth;
+    fh = CGRectGetHeight(rect) / ovalHeight;
+    
+    CGContextMoveToPoint(context, fw, fh/2);  // Start at lower right corner
+    CGContextAddArcToPoint(context, fw, fh, fw/2, fh, 1);  // Top right corner
+    CGContextAddArcToPoint(context, 0, fh, 0, fh/2, 1); // Top left corner
+    CGContextAddArcToPoint(context, 0, 0, fw/2, 0, 1); // Lower left corner
+    CGContextAddArcToPoint(context, fw, 0, fw, fh/2, 1); // Back to lower right
+    
+    CGContextClosePath(context);
+    CGContextRestoreGState(context);
+}
+
+static TImageOperator * sharedInstance = nil;
+- (id)init{
+    self = [super init];
+    if(self){
+        
+    }
+    return self;
+}
++ (TImageOperator *)sharedInstance{
+    if(sharedInstance == nil){
+        sharedInstance = [[super allocWithZone:NULL] init];
+    }
+    return sharedInstance;
+}
++ (id)allocWithZone:(NSZone *)zone{
+    return [self sharedInstance];
+}
+- (id)copyWithZone:(NSZone *)zone{
+    return self;
+}
+
+#pragma mark RoundedImage
+- (UIImage *)doCreateCircleImage:(UIImage *)image{
+    
+    CGSize imageSize = image.size;
+    UIImage *roundImage = [image roundedRectWith:imageSize.height/2
+                                          cornerMask:UIImageRoundedCornerBottomLeft|UIImageRoundedCornerBottomRight|UIImageRoundedCornerTopLeft|UIImageRoundedCornerTopRight];
+    return roundImage;
+
+}
+- (UIImage *)doCreateRoundImage:(UIImage *)image{
+    CGSize imageSize = image.size;
+    return [self doCreateRoundImage:image size:imageSize radius:kRoundRadius];
+}
+- (UIImage *)doCreateRoundImage:(UIImage *)image size:(CGSize)size{
+    return [self doCreateRoundImage:image size:size radius:kRoundRadius];
+}
+- (UIImage *)doCreateRoundImage:(UIImage *)image size:(CGSize)size radius:(CGFloat)radius{
+    CGFloat w = size.width;
+    CGFloat h = size.height;
+    
+    UIImage *img = image;
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpace, kCGImageAlphaPremultipliedFirst);
+    CGRect rect = CGRectMake(0, 0, w, h);
+    
+    CGContextBeginPath(context);
+    addRoundedRectToPath(context, rect, radius, radius);
+    CGContextClosePath(context);
+    CGContextClip(context);
+    
+    CGContextDrawImage(context, CGRectMake(0, 0, w, h), img.CGImage);
+    
+    CGImageRef imageMasked = CGBitmapContextCreateImage(context);
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    
+    return [UIImage imageWithCGImage:imageMasked];
+}
+
+#pragma mark ClipImage
+-(UIImage *)doCreateClipImage:(UIImage *)image{
+    CGFloat width = 100;
+    CGFloat height = 30;
+    CGRect imageRect = CGRectMake(0, 30, width, height);
+    CGSize imageSize = CGSizeMake(width, height);
+    
+    UIGraphicsBeginImageContext(imageSize);
+    [image drawInRect:imageRect];
+    UIImage * clipImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return clipImage;
+}
+
+@end
+
+
+

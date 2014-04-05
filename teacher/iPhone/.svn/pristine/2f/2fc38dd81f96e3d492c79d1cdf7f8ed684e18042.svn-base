@@ -1,0 +1,45 @@
+//
+//  AFSectionHeaderView.h
+//  AllFriends_dev
+//
+//  Created by ming bright on 12-8-15.
+//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+@interface AFSectionHeaderView : UIImageView
+{
+    UILabel *_titleLabel;
+}
+
++(AFSectionHeaderView *)headerViewWith:(NSString *)title_; 
+
+@end
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+@interface AFNavgationBar : UIView
+{
+    
+    UIButton *backButton;    // 返回
+    UIButton *cancelButton;  // 取消选人
+    UIButton *convertButton; // 转到选人
+    UIButton *chatButton;    // 发起聊天
+    
+}
+
+@property (nonatomic,strong) UIButton *backButton;
+@property (nonatomic,strong) UIButton *cancelButton;
+@property (nonatomic,strong) UIButton *convertButton;
+@property (nonatomic,strong) UIButton *chatButton;
+
+@end
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////

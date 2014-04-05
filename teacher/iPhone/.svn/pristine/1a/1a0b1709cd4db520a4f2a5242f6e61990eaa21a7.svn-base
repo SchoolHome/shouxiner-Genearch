@@ -1,0 +1,128 @@
+//
+//  SingleSoundCell.m
+//  iCouple
+//
+//  Created by ming bright on 12-5-2.
+//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import "SingleSoundCell.h"
+
+@interface SingleSoundCell ()
+-(void) changeState;
+@end
+
+@implementation SingleSoundCell
+
+
+
+
+- (void)playButtonTaped:(UIButton *)sender{
+    CPLogInfo(@"start");
+    //sender.backgroundColor = [UIColor blackColor];
+    if ([self.delegate respondsToSelector:@selector(soundCellTaped:)]) {
+        [self.delegate soundCellTaped:self];
+    }
+
+}
+
+
+-(void)refreshPlayStatus:(BOOL) isPlaying_{
+    [self changeState];
+
+}
+
+-(void) changeState{
+    ExMessageModel *exModel = (ExMessageModel *)self.data;
+    CPLogInfo(@"%@",exModel.isPlaySound == YES ? @"YES" : @"NO");
+    if (exModel.isPlaySound) {
+        if (self.isBelongMe) {
+            [playButton setBackgroundImage:[UIImage imageNamed:@"btn_im_pause_grey_white"] forState:UIControlStateNormal];
+            [playButton setBackgroundImage:[UIImage imageNamed:@"btn_im_pause_grey_black"] forState:UIControlStateHighlighted];
+        }else {
+            [playButton setBackgroundImage:[UIImage imageNamed:@"btn_im_pause_white_white"] forState:UIControlStateNormal];
+            [playButton setBackgroundImage:[UIImage imageNamed:@"btn_im_pause_white_white_black"] forState:UIControlStateHighlighted];
+        }
+    }else {
+        if (self.isBelongMe) {
+            [playButton setBackgroundImage:[UIImage imageNamed:@"btn_im_play_grey_white"] forState:UIControlStateNormal];
+            [playButton setBackgroundImage:[UIImage imageNamed:@"btn_im_play_grey_black"] forState:UIControlStateHighlighted];
+        }else {
+            if ([exModel.messageModel.sendState intValue] == MSG_SEND_STATE_AUDIO_READED) {
+                [playButton setBackgroundImage:[UIImage imageNamed:@"btn_im_play_white_white.png"] forState:UIControlStateNormal];
+                [playButton setBackgroundImage:[UIImage imageNamed:@"btn_im_play_white_white_black.png"] forState:UIControlStateHighlighted];
+            }else {
+                [playButton setBackgroundImage:[UIImage imageNamed:@"btn_noreadwhite_message.png"] forState:UIControlStateNormal];
+                [playButton setBackgroundImage:[UIImage imageNamed:@"btn_noreadwhite_messagepress.png"] forState:UIControlStateHighlighted];
+            }
+        }
+    }
+}
+
+-(void)playCompleted{
+    ExMessageModel *model = (ExMessageModel*)self.data;
+    playTimeLabel.text = [NSString stringWithFormat:@"%ds",[model.messageModel.mediaTime intValue]];
+
+}
+
+- (id)initWithType : (MessageCellType) messageCellType  withBelongMe : (BOOL) isBelongMe withKey:(NSString *)key{
+    
+    self = [super initWithType:messageCellType withBelongMe:isBelongMe withKey:key];
+    if (self) {
+        
+        playButton = [[UIButton alloc] initWithFrame: CGRectMake(160-kWidthOfSound/2, kCellTopPadding, kWidthOfSound, kHeightOfSound)];
+        playButton.backgroundColor = [UIColor clearColor];
+        [playButton addTarget:self action:@selector(playButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+        playButton.exclusiveTouch = YES;
+        
+        stateImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidthOfSound/2 - 50, 5, 50, kHeightOfSound-10)];
+        stateImageView.userInteractionEnabled = YES;
+        stateImageView.backgroundColor = [UIColor redColor];
+        
+        playTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(kWidthOfSound - 28, 10, 35, kHeightOfSound -20)];
+        playTimeLabel.backgroundColor = [UIColor clearColor];
+        playTimeLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+        playTimeLabel.font = [UIFont systemFontOfSize:10];
+        
+    }
+    return self;
+}
+
+-(CGFloat)cellHeight{
+    return 60.0;
+}
+
+-(void)updatePlayTime:(float)second{
+    if (second <= 0.0f) {
+        second = 0.0f;
+    }
+    playTimeLabel.text = [NSString stringWithFormat:@"%.0fs",second];
+}
+
+- (void)refreshCell{
+    [super refreshCell];
+    
+    ExMessageModel *model = (ExMessageModel*)self.data;
+    CPLogInfo(@"model.messageModel.filePath :  %@",model.messageModel.filePath);
+    
+    
+    playTimeLabel.text = [NSString stringWithFormat:@"%ds",[model.messageModel.mediaTime intValue]];
+
+    [self addSubview:playButton];
+    //[playButton addSubview:stateImageView];
+    [playButton addSubview:playTimeLabel];
+    
+    
+    [self changeState];
+    
+    timestampLabel.frame = CGRectMake((320 -50)/2, playButton.frame.size.height+kCellTopPadding, 50, kTimestampLabelHeight);
+    timestampLabel.text = [self timeStringFromNumber:model.messageModel.date];
+    
+    self.resendButton.frame = CGRectMake(playButton.frame.origin.x + playButton.frame.size.width + 10.0f, 
+                                         ( playButton.frame.size.height - kResendButtonWidth ) /2.0f + 2.0f,
+                                         kResendButtonWidth, kResendButtonWidth);
+    
+}
+
+
+@end

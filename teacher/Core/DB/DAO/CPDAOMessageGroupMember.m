@@ -1,0 +1,166 @@
+#import "CPDAOMessageGroupMember.h"
+
+#import "CPDBModelMessageGroupMember.h"
+
+
+/**
+ * 群组成员
+ */
+
+@implementation CPDAOMessageGroupMember
+
+- (void)initilizeData
+{
+//    CPDBModelMessageGroupMember *member = [[CPDBModelMessageGroupMember alloc]init];
+//    [member setMsgGroupID:[NSNumber numberWithInt:1]];
+//    [member setUserName:@"shuangshuang"];
+//    [self insertMessageGroupMember:member];
+//    
+//    [member setMsgGroupID:[NSNumber numberWithInt:2]];
+//    [member setUserName:@"system"];
+//    [self insertMessageGroupMember:member];
+//    
+//    [member setMsgGroupID:[NSNumber numberWithInt:3]];
+//    [member setUserName:@"xiaoshuang"];
+//    [self insertMessageGroupMember:member];
+    
+    
+}
+- (id)initWithStatusCode:(NSInteger)statusCode
+{
+    self = [super init];
+    if(self)
+    {
+        if (statusCode==1)
+        {
+            [self createMessageGroupMemberTable];
+            [self initilizeData];
+        }
+    }
+    return self;
+}
+
+-(void)createMessageGroupMemberTable
+{
+    [db executeUpdate:@"CREATE TABLE message_group_member (id INTEGER PRIMARY KEY  AUTOINCREMENT,group_id INTEGER,mobile_number TEXT,user_name TEXT,nick_name TEXT,sign TEXT,header_resource_id INTEGER,domain TEXT,header_path TEXT)"];
+    if ([db hadError])
+    {
+        CPLogError(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
+}
+-(NSNumber *)insertMessageGroupMember:(CPDBModelMessageGroupMember *)dbMessageGroupMember
+{
+    [db executeUpdate:@"insert into message_group_member (group_id,mobile_number,user_name,nick_name,sign,header_resource_id,domain,header_path) values (?,?,?,?,?,?,?,?)",
+        dbMessageGroupMember.msgGroupID,dbMessageGroupMember.mobileNumber,dbMessageGroupMember.userName,dbMessageGroupMember.nickName,dbMessageGroupMember.sign,dbMessageGroupMember.headerResourceID,dbMessageGroupMember.domain,dbMessageGroupMember.headerPath];
+    if ([db hadError])
+    {
+//        NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        CPLogError(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
+    return [self lastRowID];
+}
+-(void)updateMessageGroupMemberWithID:(NSNumber *)objID  obj:(CPDBModelMessageGroupMember *)dbMessageGroupMember
+{
+    [db executeUpdate:@"update message_group_member set group_id=?,mobile_number=?,user_name=?,nick_name=?,sign=?,header_resource_id=?,domain=?,header_path=?  where id =?",
+dbMessageGroupMember.msgGroupID,dbMessageGroupMember.mobileNumber,dbMessageGroupMember.userName,dbMessageGroupMember.nickName,dbMessageGroupMember.sign,dbMessageGroupMember.headerResourceID,dbMessageGroupMember.domain,dbMessageGroupMember.headerPath,objID];
+    if ([db hadError])
+    {
+        CPLogError(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
+}
+-(CPDBModelMessageGroupMember *)getMessageGroupMemberWithResultSet:(FMResultSet *)rs
+{
+    CPDBModelMessageGroupMember *dbMessageGroupMember = [[CPDBModelMessageGroupMember alloc] init];
+    [dbMessageGroupMember setMsgGroupMemID:[NSNumber numberWithLongLong:[rs longLongIntForColumn:@"id"]]];
+    [dbMessageGroupMember setMsgGroupID:[NSNumber numberWithLongLong:[rs longLongIntForColumn:@"group_id"]]];
+    [dbMessageGroupMember setMobileNumber:[rs stringForColumn:@"mobile_number"]];
+    [dbMessageGroupMember setUserName:[rs stringForColumn:@"user_name"]];
+    [dbMessageGroupMember setNickName:[rs stringForColumn:@"nick_name"]];
+    [dbMessageGroupMember setSign:[rs stringForColumn:@"sign"]];
+    [dbMessageGroupMember setDomain:[rs stringForColumn:@"domain"]];
+    [dbMessageGroupMember setHeaderPath:[rs stringForColumn:@"header_path"]];
+    [dbMessageGroupMember setHeaderResourceID:[NSNumber numberWithLongLong:[rs longLongIntForColumn:@"header_resource_id"]]];
+    return dbMessageGroupMember;
+}
+-(CPDBModelMessageGroupMember *)findMessageGroupMemberWithID:(NSNumber *)id
+{
+    CPDBModelMessageGroupMember *reMessageGroupMember = nil;
+    if (id)
+    {
+        FMResultSet *rs = [db executeQuery:@"select * from message_group_member where id = ?",id];
+        if ([rs next])
+        {
+            reMessageGroupMember = [self getMessageGroupMemberWithResultSet:rs];
+        }
+        [rs close];
+    }
+    return reMessageGroupMember;
+}
+-(CPDBModelMessageGroupMember *)findMessageGroupMemberWithID:(NSNumber *)groupID andUserName:(NSString *)userName
+{
+    CPDBModelMessageGroupMember *reMessageGroupMember = nil;
+    if (groupID&&userName)
+    {
+        FMResultSet *rs = [db executeQuery:@"select * from message_group_member where group_id = ? and user_name = ?",groupID,userName];
+        if ([rs next])
+        {
+            reMessageGroupMember = [self getMessageGroupMemberWithResultSet:rs];
+        }
+        [rs close];
+    }
+    return reMessageGroupMember;
+}
+-(NSArray *)findAllMessageGroupMembers
+{
+    FMResultSet *rs = [db executeQuery:@"select * from message_group_member"];
+    NSMutableArray *MessageGroupMemberList = [[NSMutableArray alloc] init];
+    while ([rs next])
+    {
+        [MessageGroupMemberList addObject:[self getMessageGroupMemberWithResultSet:rs]];
+    }
+    [rs close];
+    return MessageGroupMemberList;
+}
+-(NSArray *)findAllMessageGroupMembersWithGroupID:(NSNumber *)msgGroupID
+{
+    FMResultSet *rs = [db executeQuery:@"select * from message_group_member where header_resource_id is null and group_id = ?",msgGroupID];
+    NSMutableArray *MessageGroupMemberList = [[NSMutableArray alloc] init];
+    while ([rs next])
+    {
+        [MessageGroupMemberList addObject:[self getMessageGroupMemberWithResultSet:rs]];
+    }
+    [rs close];
+    return MessageGroupMemberList;
+}
+
+-(NSArray *)findAllMessageGroupMembersByOrderByGroupID
+{
+    FMResultSet *rs = [db executeQuery:@"select * from message_group_member where header_resource_id is null order by group_id asc"];
+    NSMutableArray *MessageGroupMemberList = [[NSMutableArray alloc] init];
+    while ([rs next])
+    {
+        [MessageGroupMemberList addObject:[self getMessageGroupMemberWithResultSet:rs]];
+    }
+    [rs close];
+    return MessageGroupMemberList;
+}
+-(void)deleteAllGroupMemsWithGroupID:(NSNumber *)msgGroupID
+{
+    [db executeUpdate:@"update message_group_member set header_resource_id=1 where group_id=?",msgGroupID];
+//    [db executeUpdate:@"delete from message_group_member where group_id=?",msgGroupID];
+    if ([db hadError])
+    {
+        CPLogError(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
+}
+-(void)deleteGroupMemWithMemName:(NSString *)memName andGroupID:(NSNumber *)msgGroupID
+{
+    [db executeUpdate:@"update message_group_member set header_resource_id=1 where group_id=? and user_name=?",msgGroupID,memName];
+//    [db executeUpdate:@"delete from message_group_member where group_id=? and user_name=?",msgGroupID,memName];
+    if ([db hadError])
+    {
+        CPLogError(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
+}
+@end
+

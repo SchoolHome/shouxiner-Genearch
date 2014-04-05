@@ -1,0 +1,170 @@
+//
+//  Login.m
+//  teacher
+//
+//  Created by singlew on 14-3-3.
+//  Copyright (c) 2014年 ws. All rights reserved.
+//
+
+#import "Login.h"
+#import "CPUIModelManagement.h"
+#import "PalmUIManagement.h"
+
+@interface Login ()<UITextFieldDelegate>
+@property (nonatomic,strong) UIImageView *bgImage;
+@property (nonatomic,strong) UITextField *userName;
+@property (nonatomic,strong) UITextField *password;
+@property (nonatomic,strong) UIButton *LoginButton;
+
+-(void) clickBG : (UIGestureRecognizer *) recognizer;
+-(void) login:(UIButton *) sender;
+@end
+
+@implementation Login
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        
+    }
+    return self;
+}
+
+-(id) init{
+    return [super init];
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"loginCode" options:0 context:@"loginCode"];
+}
+
+-(void) viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[CPUIModelManagement sharedInstance ] removeObserver:self forKeyPath:@"loginCode"];
+}
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+    
+    self.bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, self.screenHeight)];
+    if (self.screenHeight == 568.0f) {
+        self.bgImage.image = [UIImage imageNamed:@"Login568.jpg"];
+    }else{
+        self.bgImage.image = [UIImage imageNamed:@"Login"];
+    }
+    self.bgImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBG:)];
+    [self.bgImage addGestureRecognizer:tap];
+    [self.view addSubview:self.bgImage];
+    
+    float height = 370.0f;
+    if (self.screenHeight != 568.0f) {
+        height = 370.0f - (568.0f - 480.0f);
+    }
+    
+    self.userName = [[UITextField alloc] initWithFrame:CGRectMake(60.0f, height, 200.0f, 20.0f)];
+    self.userName.placeholder = @"用户名/邮箱/手机";
+    self.userName.returnKeyType = UIReturnKeyDone;
+    self.userName.delegate = self;
+    [self.bgImage addSubview:self.userName];
+    
+    height = 415.0f;
+    if (self.screenHeight != 568.0f) {
+        height = 415.0f - (568.0f - 480.0f);
+    }
+    self.password = [[UITextField alloc] initWithFrame:CGRectMake(60.0f, height, 200.0f, 20.0f)];
+    self.password.returnKeyType = UIReturnKeyDone;
+    self.password.delegate = self;
+    self.password.secureTextEntry = YES;
+    [self.bgImage addSubview:self.password];
+    
+    self.LoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.LoginButton.frame = CGRectMake((320.0f - 271.0f)/2.0f, self.screenHeight - 43.0f*2, 271.0f, 43.0f);
+    [self.LoginButton setImage:[UIImage imageNamed:@"LoginButton"] forState:UIControlStateNormal];
+    [self.LoginButton setImage:[UIImage imageNamed:@"LoginButtonPress"] forState:UIControlStateHighlighted];
+    [self.LoginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    [self.bgImage addSubview:self.LoginButton];
+}
+
+-(void) clickBG : (UIGestureRecognizer *) recognizer{
+    [self.userName resignFirstResponder];
+    [self.password resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void) login:(UIButton *)sender{
+    [self.userName resignFirstResponder];
+    [self.password resignFirstResponder];
+    
+    self.userName.text = @"13709832805";
+    self.password.text = @"123456";
+    
+    NSString *userName  = [self.userName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if ( nil == userName || [userName isEqualToString:@""] ) {
+        [self showProgressWithText:@"请填写用户名" withDelayTime:1.5f];
+        return;
+    }
+    NSString *password = [self.password.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if (nil == password || [password isEqualToString:@""]) {
+        [self showProgressWithText:@"请填写密码" withDelayTime:1.5f];
+        return;
+    }
+    
+    [self showProgressWithText:@"正在登陆"];
+    [[CPUIModelManagement sharedInstance] loginWithName:userName password:password];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([@"loginCode" isEqualToString:keyPath]){
+        NSInteger login_code_int = [CPUIModelManagement sharedInstance].loginCode;
+        
+        if(login_code_int == 0){
+#ifndef SYS_STATE_MIGR
+            NSInteger sys_on_int = [CPUIModelManagement sharedInstance].sysOnlineStatus;
+            if(sys_on_int == SYS_STATUS_NO_ACTIVE){
+                /*激活*/
+                NSLog(@"激活");
+            }else{
+                /*已经登录*/
+                NSLog(@"已经登录");
+                [self closeProgress];
+                AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                [appDelegate launchApp];
+            }
+#else
+            NSInteger accState = [CPUIModelManagement sharedInstance].accountState;
+            if( ACCOUNT_STATE_INACTIVE == accState ){
+                NSLog(@"激活");
+            }else{
+                /*已经登录*/
+                NSLog(@"已经登录");
+                [self closeProgress];
+                AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                [appDelegate launchApp];
+            }
+#endif
+        }else{
+            /*登录失败*/
+            NSLog(@"登录失败");
+            [self showProgressWithText:@"登陆失败" withDelayTime:2.0f];
+        }
+    }
+}
+
+- (void)didReceiveMemoryWarning{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void) dealloc{
+    
+}
+
+@end

@@ -1,0 +1,88 @@
+//
+//  BBXXXTableViewCell.m
+//  teacher
+//
+//  Created by xxx on 14-3-24.
+//  Copyright (c) 2014年 ws. All rights reserved.
+//
+
+#import "BBXXXTableViewCell.h"
+#import "ColorUtil.h"
+#import "BBBaseTableViewCell.h"
+
+@implementation BBXXXTableViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        // Initialization code
+        
+        icon = [[EGOImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
+        icon.backgroundColor = [UIColor grayColor];
+        [self addSubview:icon];
+        CALayer *roundedLayer = [icon layer];
+        [roundedLayer setMasksToBounds:YES];
+        roundedLayer.cornerRadius = 25.0;
+        roundedLayer.borderWidth = 0;
+        roundedLayer.borderColor = [[UIColor grayColor] CGColor];
+        
+        title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 200, 20)];
+        [self addSubview:title];
+        title.font = [UIFont systemFontOfSize:14];
+        title.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
+        
+        content = [[UILabel alloc] initWithFrame:CGRectMake(70, 30, 160, 40)];
+        [self addSubview:content];
+        content.font = [UIFont systemFontOfSize:14];
+        content.numberOfLines = 2;
+        
+        like = [[UIImageView alloc] initWithFrame:CGRectMake(70, 35, 25, 25)];
+        like.backgroundColor = [UIColor grayColor];
+        [self addSubview:like];
+        
+        time = [[UILabel alloc] initWithFrame:CGRectMake(70, 70, 100, 20)];
+        time.textColor = [UIColor lightGrayColor];
+        time.font = [UIFont systemFontOfSize:12];
+        [self addSubview:time];
+
+        thumbnail = [[EGOImageView alloc] initWithFrame:CGRectMake(240, 30, 60, 60)];
+        [self addSubview:thumbnail];
+        thumbnail.backgroundColor = [UIColor grayColor];
+    }
+    return self;
+}
+
+-(void)setData:(BBNotifyModel *)data{
+
+    _data = data;
+    
+    //icon.image = [UIImage imageNamed:@"girl"];
+    
+    icon.image = nil;
+    icon.imageURL = [NSURL URLWithString:_data.sender_avatar];
+    
+    title.text = _data.sender_name;
+    content.text = data.topic_title;
+    time.text = @"3小时前";
+    
+//    tlike
+//    tcomment
+    
+    if ([_data.type isEqualToString:@"tlike"]) {
+        like.hidden = NO;
+        content.hidden = YES;
+    }else if([_data.type isEqualToString:@"tcomment"]){
+        like.hidden = YES;
+        content.hidden = NO;
+    }
+    //[self showDebugRect:YES];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+    // Configure the view for the selected state
+}
+
+@end

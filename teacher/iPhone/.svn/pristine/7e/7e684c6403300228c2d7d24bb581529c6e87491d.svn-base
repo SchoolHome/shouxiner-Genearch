@@ -1,0 +1,115 @@
+//
+//  SingleImageCell.m
+//  iCouple
+//
+//  Created by ming bright on 12-5-2.
+//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import "SingleImageCell.h"
+
+
+
+@implementation SingleImageCell
+@synthesize displayImageView;
+
+
+
+
+
+-(void)backgroundTaped:(id)sender{
+    if ([self.delegate respondsToSelector:@selector(imageCellTaped:)]) {
+        [self.delegate imageCellTaped:self];
+    }
+}
+
+
+- (id)initWithType : (MessageCellType) messageCellType  withBelongMe : (BOOL) isBelongMe withKey:(NSString *)key{
+    self = [super initWithType:messageCellType withBelongMe:isBelongMe withKey:key];
+    if (self) {
+        
+        displayImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+
+        ellipticalBackground.exclusiveTouch = YES;
+        [ellipticalBackground addTarget:self action:@selector(backgroundTaped:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return self;
+}
+
+- (void)createAvatar{
+
+}
+
+- (void)refreshCell{
+    [super refreshCell];
+    
+    ExMessageModel *model = (ExMessageModel*)self.data;
+    UIImage *image = [model getUserImage];
+    
+    CGFloat w = image.size.width;
+    CGFloat h = image.size.height;
+    
+    CGRect imageRect;
+    
+    
+    if (w>=h) {
+        if (w<kMaxImageHeight&&h<kMaxImageHeight) { //宽高都不超越，用原始大小
+            imageRect = CGRectMake((320 - w)/2, kTopAndButtomPadding+kCellTopPadding, w, h);
+        }else {
+
+            CGFloat wNew = kMaxImageHeight;  // 宽为基准
+            CGFloat hNew = h * wNew / w;
+            imageRect = CGRectMake((320 -wNew)/2 , kTopAndButtomPadding+kCellTopPadding, wNew, hNew);
+        }
+    }else {
+        if (w<kMaxImageHeight&&h<kMaxImageHeight) { //宽高都不超越，用原始大小
+            imageRect = CGRectMake((320 - w)/2, kTopAndButtomPadding+kCellTopPadding, w, h);
+        }else {
+            CGFloat hNew = kMaxImageHeight;  // 高为基准
+            CGFloat wNew = w * hNew / h;
+            imageRect = CGRectMake((320 -wNew)/2 , kTopAndButtomPadding+kCellTopPadding, wNew, hNew);
+        }
+    }
+    
+    /*
+    if (w<kMaxImageWidth&&h<kMaxImageHeight) { //宽高都不超越，用原始大小
+        imageRect = CGRectMake((320 - w)/2, kTopAndButtomPadding+kCellTopPadding, w, h);
+    }else {
+        CGFloat wScale = w/kMaxImageWidth;
+        CGFloat hScale = h/kMaxImageHeight;
+        
+        if (wScale>hScale) {  //以宽为基准
+            CGFloat wNew = kMaxImageWidth;
+            CGFloat hNew = h * wNew / w;
+            imageRect = CGRectMake((320 -wNew)/2 , kTopAndButtomPadding+kCellTopPadding, wNew, hNew);
+        }else {
+            CGFloat hNew = kMaxImageHeight;
+            CGFloat wNew = w * hNew / h;
+            imageRect = CGRectMake((320 -wNew)/2 , kTopAndButtomPadding+kCellTopPadding, wNew, hNew);
+        }
+    }
+
+     */
+    
+    
+    ellipticalBackground.frame = CGRectMake((320 -(imageRect.size.width+2*kLeftAndRightPadding))/2, kCellTopPadding, imageRect.size.width+2*kLeftAndRightPadding, imageRect.size.height+2*kTopAndButtomPadding);
+    
+
+    [self adaptEllipticalBackgroundImage];
+    
+    
+    displayImageView.frame = imageRect;
+    [displayImageView removeFromSuperview];
+    [self addSubview:displayImageView];
+    displayImageView.image = image;
+    
+    timestampLabel.frame = CGRectMake((320 -50)/2, ellipticalBackground.frame.size.height+kCellTopPadding, 50, kTimestampLabelHeight);
+    timestampLabel.text = [self timeStringFromNumber:model.messageModel.date];
+    
+    self.resendButton.frame = CGRectMake(ellipticalBackground.frame.origin.x + ellipticalBackground.frame.size.width + 10.0f, 
+                                         ( ellipticalBackground.frame.size.height - kResendButtonWidth ) /2.0f ,
+                                         kResendButtonWidth, kResendButtonWidth);
+    
+}
+
+@end

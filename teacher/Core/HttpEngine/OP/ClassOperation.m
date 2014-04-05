@@ -1,0 +1,259 @@
+//
+//  ClassOperation.m
+//  teacher
+//
+//  Created by singlew on 14-3-16.
+//  Copyright (c) 2014年 ws. All rights reserved.
+//
+
+#import "ClassOperation.h"
+#import "PalmUIManagement.h"
+#import "CPHttpEngineConst.h"
+
+@interface ClassOperation ()
+@property (nonatomic) ClassData type;
+-(void) getNotiList;
+-(void) getGroupList;
+-(void) getGroupTopic;
+-(void) postPraise;
+-(void) postComment;
+-(void) getNotiCount;
+-(void) getNewNotiList;
+
+@end
+
+@implementation ClassOperation
+
+-(ClassOperation *) initNotiList : (int) timeStamp{
+    if ([self initOperation]) {
+        self.type = kClassNotification;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/OAList?ts=%d",K_HOST_NAME_OF_PALM_SERVER,timeStamp];
+        [self setHttpRequestGetWithUrl:urlStr];
+    }
+    return self;
+}
+
+-(ClassOperation *) initGroupList{
+    if ([self initOperation]) {
+        self.type = kGetGroupListData;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/getGroupList",K_HOST_NAME_OF_PALM_SERVER];
+        [self setHttpRequestGetWithUrl:urlStr];
+    }
+    return self;
+}
+
+-(ClassOperation *) initGroupTopic : (int) groupID withTimeStamp : (int) timeStamp withOffset : (int) offset withLimit : (int) limit{
+    if ([self initOperation]) {
+        self.type = kGetGroupTopic;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/getTopicInfoList?groupid=%d&ts=%d&offset=%d&size=%d",K_HOST_NAME_OF_PALM_SERVER,groupID,timeStamp,offset,limit];
+        [self setHttpRequestGetWithUrl:urlStr];
+    }
+    return self;
+}
+
+// 点赞
+-(ClassOperation *) initPraise : (int) topicID{
+    if ([self initOperation]) {
+        self.type = kPostPraise;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/praise/%d",K_HOST_NAME_OF_PALM_SERVER,topicID];
+        [self setHttpRequestGetWithUrl:urlStr];
+    }
+    return self;
+}
+
+// 发表评论
+-(ClassOperation *) initComment : (NSString *) commentContent withReplyToUid : (int) uid withTopicID : (int) topicID{
+    if ([self initOperation]) {
+        self.type = kPostComment;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/comment/%d",K_HOST_NAME_OF_PALM_SERVER,topicID];
+        [self setHttpRequestPostWithUrl:urlStr params:[NSDictionary dictionaryWithObjectsAndKeys:commentContent,@"comment",
+                                                       [NSNumber numberWithInt:uid],@"replyto",nil]];
+    }
+    return self;
+}
+
+// 获取新消息数量
+-(ClassOperation *) initGetNotiCount{
+    if ([self initOperation]) {
+        self.type = kGetNotiCount;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/getNotifyCount",K_HOST_NAME_OF_PALM_SERVER];
+        [self setHttpRequestGetWithUrl:urlStr];
+    }
+    return self;
+}
+
+// 获取新消息列
+-(ClassOperation *) initGetNotiList : (int) offset withLimit : (int) limit{
+    if ([self initOperation]) {
+        self.type = kGetNotiList;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/getNotifyList?offset=%d&size=%d",K_HOST_NAME_OF_PALM_SERVER,offset,limit];
+        [self setHttpRequestGetWithUrl:urlStr];
+    }
+    return self;
+}
+
+-(void) getNotiList{
+    self.request.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
+#ifdef TEST
+    [self.request addRequestHeader:@"Host" value:@"www.shouxiner.com"];
+#endif
+    [self.request setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t t = ^{
+            DDLogCInfo(@"%@",data);
+            [PalmUIManagement sharedInstance].notiList = data;
+        };
+        dispatch_async(dispatch_get_main_queue(), t);
+    }];
+    [self startAsynchronous];
+}
+
+-(void) getGroupList{
+    self.request.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
+#ifdef TEST
+    [self.request addRequestHeader:@"Host" value:@"www.shouxiner.com"];
+#endif
+    [self.request setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t t = ^{
+            
+            NSLog(@"%@",data);
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            NSArray *list = data[@"data"][@"list"];
+            [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                BBGroupModel *model = [BBGroupModel fromJson:obj];
+                if (model) {
+                    [arr addObject:model];
+                }
+            }];
+            [PalmUIManagement sharedInstance].groupList = arr;
+        };
+        dispatch_async(dispatch_get_main_queue(), t);
+    }];
+    [self startAsynchronous];
+}
+
+-(void) getGroupTopic{
+    self.request.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
+#ifdef TEST
+    [self.request addRequestHeader:@"Host" value:@"www.shouxiner.com"];
+#endif
+    [self.request setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t t = ^{
+            DDLogCInfo(@"%@",data);
+            
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            NSArray *list = data[@"data"][@"list"];
+            [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                BBTopicModel *model = [BBTopicModel fromJson:obj];
+                if (model&&(idx<8)) { // 最多8张图，避免测试数据错误
+                    [arr addObject:model];
+                }
+            }];
+            [PalmUIManagement sharedInstance].groupTopicList = arr;
+            
+        };
+        dispatch_async(dispatch_get_main_queue(), t);
+    }];
+    [self startAsynchronous];
+}
+
+-(void) postPraise{
+    self.request.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
+#ifdef TEST
+    [self.request addRequestHeader:@"Host" value:@"www.shouxiner.com"];
+#endif
+    [self.request setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t t = ^{
+            DDLogCInfo(@"%@",data);
+            [PalmUIManagement sharedInstance].praiseResult = data;
+        };
+        dispatch_async(dispatch_get_main_queue(), t);
+    }];
+    [self startAsynchronous];
+}
+
+-(void) postComment{
+    self.dataRequest.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
+#ifdef TEST
+    [self.dataRequest addRequestHeader:@"Host" value:@"www.shouxiner.com"];
+#endif
+    [self.dataRequest setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t t = ^{
+            DDLogCInfo(@"%@",data);
+            [PalmUIManagement sharedInstance].commentResult = data;
+        };
+        dispatch_async(dispatch_get_main_queue(), t);
+    }];
+    [self startAsynchronous];
+}
+
+-(void) getNotiCount{
+    self.request.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
+#ifdef TEST
+    [self.request addRequestHeader:@"Host" value:@"www.shouxiner.com"];
+#endif
+    [self.request setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t t = ^{
+            DDLogCInfo(@"%@",data);
+            [PalmUIManagement sharedInstance].notifyCount = data;
+        };
+        dispatch_async(dispatch_get_main_queue(), t);
+    }];
+    [self startAsynchronous];
+}
+
+-(void) getNewNotiList{
+    self.request.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
+#ifdef TEST
+    [self.request addRequestHeader:@"Host" value:@"www.shouxiner.com"];
+#endif
+    [self.request setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t t = ^{
+            DDLogCInfo(@"%@",data);
+            
+//            BBNotifyModel
+            
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            NSArray *list = data[@"data"][@"list"];
+            [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                BBNotifyModel *model = [BBNotifyModel fromJson:obj];
+                if (model) {
+                    [arr addObject:model];
+                }
+            }];
+            
+            [PalmUIManagement sharedInstance].notifyList = arr;
+        };
+        dispatch_async(dispatch_get_main_queue(), t);
+    }];
+    [self startAsynchronous];
+}
+
+-(void) main{
+    switch (self.type) {
+        case kClassNotification:
+            [self getNotiList];
+            break;
+        case kGetGroupListData:
+            [self getGroupList];
+            break;
+        case kGetGroupTopic:
+            [self getGroupTopic];
+            break;
+        case kPostPraise:
+            [self postPraise];
+            break;
+        case kPostComment:
+            [self postComment];
+            break;
+        case kGetNotiCount:
+            [self getNotiCount];
+            break;
+        case kGetNotiList:
+            [self getNewNotiList];
+            break;
+        default:
+            break;
+    }
+}
+
+@end

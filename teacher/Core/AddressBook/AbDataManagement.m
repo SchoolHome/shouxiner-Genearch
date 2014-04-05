@@ -1,0 +1,132 @@
+//
+//  AddressBookManagement.m
+//  
+//
+//  Created by yong weiy on 12-3-21.
+//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import "AbDataManagement.h"
+#import "AbPersonModel.h"
+
+@implementation AbDataManagement
+@synthesize delegate = _delegate;
+static AbDataManagement *sharedInstance = nil;
+
+#pragma mark Singleton method
++ (AbDataManagement *) sharedInstance
+{
+    if (sharedInstance == nil)
+    {
+        sharedInstance = [[super allocWithZone:NULL] init];
+    }
+    
+    return sharedInstance;
+}
+
++ (id) allocWithZone:(NSZone *)zone
+{
+    return [self sharedInstance];
+}
+
+- (id) copyWithZone:(NSZone*)zone
+{
+    return self;
+}
+
+
+
+-(id)init
+{
+    self = [super init];
+	if (self) {
+        
+	}
+	return self;
+}
+
+-(void) initAddressData{
+//    if (&ABAddressBookCreateWithOptions != NULL) {
+//        CFErrorRef error = nil;
+//        m_addressBook = ABAddressBookCreateWithOptions(NULL,&error);
+//        
+//        ABAddressBookRequestAccessWithCompletion(m_addressBook, ^(bool granted, CFErrorRef error) {
+//            // callback can occur in background, address book must be accessed on thread it was created on
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                if (error) {
+//                    // 出现错误
+//                    NSLog(@"申请授权出错");
+//                } else if (!granted) {
+//                    // 被拒绝授权
+//                    NSLog(@"通讯录未被授权");
+//                } else {
+//                    //                        m_addressBook = ABAddressBookCreate();
+//                    if ([self.delegate respondsToSelector:@selector(importAbData)]) {
+//                        [self.delegate importAbData];
+//                    }
+//                }
+//            });
+//        });
+//    }else{
+//        m_addressBook = ABAddressBookCreate();
+//        if ([self.delegate respondsToSelector:@selector(importAbData)]) {
+//            [self.delegate importAbData];
+//        }
+//    }
+}
+
+#pragma mark  联系人相关接口
+-(NSInteger)getContactsCount
+{
+	return ABAddressBookGetPersonCount (m_addressBook);
+}
+-(AbPersonModel*)getContact:(NSNumber*)recordid
+{
+    ABRecordRef recordref = ABAddressBookGetPersonWithRecordID(m_addressBook,[recordid integerValue]);
+	return [[AbPersonModel alloc] initWithABRecordRef:recordref];
+}
+//获取所有联系人    startDateTime：时间  nil-表示取所有联系人。
+-(NSMutableArray*)getContacts:(NSDate *)startDateTime
+{
+	
+	CFArrayRef abPersons = ABAddressBookCopyArrayOfAllPeople (m_addressBook);
+	if (nil == abPersons) 
+    {
+		return nil;
+	}
+	CFIndex abPersonCount = ABAddressBookGetPersonCount (m_addressBook);
+	NSMutableArray* recordArray = [NSMutableArray array];
+	[recordArray  removeAllObjects];
+	for (NSInteger i = 0; i < abPersonCount; i++) 
+	{
+		ABRecordRef abPerson = CFArrayGetValueAtIndex(abPersons, i);
+        //		ABRecordID abPersonId = ABRecordGetRecordID(abPerson);
+        AbPersonModel *abPersonModel = [[AbPersonModel alloc] initWithABRecordRef:abPerson];
+		if (!startDateTime) //读取全部
+		{
+			[recordArray addObject:abPersonModel];
+		}else //读取某个时间后发生变化的联系人
+		{
+			if ([abPersonModel.updateDate compare:startDateTime] == NSOrderedDescending) 
+			{
+				if ([abPersonModel.createDate compare:startDateTime] == NSOrderedDescending) 
+				{
+					abPersonModel.abPersonState = AB_PERSON_STATE_ADD;
+				}else 
+                {
+					abPersonModel.abPersonState = AB_PERSON_STATE_UPDATE;
+				}
+				[recordArray addObject:abPersonModel];
+		    }
+		}
+	}
+	CFRelease(abPersons);
+	return recordArray;
+}
+
+-(void)dealloc
+{
+	CFRelease(m_addressBook);
+}
+
+@end

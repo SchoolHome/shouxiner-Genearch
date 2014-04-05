@@ -1,0 +1,489 @@
+
+#import "BBBJQViewController.h"
+#import "BBXXXViewController.h"
+#import "BBCellHeight.h"
+#import "BBBJQManager.h"
+#import "CoreUtils.h"
+
+@interface BBBJQViewController ()
+
+@end
+
+@implementation BBBJQViewController
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([@"groupList" isEqualToString:keyPath])  // 班级列表
+    {
+        bjDropdownView.listData = [PalmUIManagement sharedInstance].groupList;
+        
+        if ([bjDropdownView.listData count]>0) {
+            
+            NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+            int index = [def integerForKey:@"saved_topic_group_index"];  // 上次选中的班级
+            
+            if ([bjDropdownView.listData count]>index) {
+                _currentGroup = bjDropdownView.listData[index];
+                [titleButton setTitle:_currentGroup.alias forState:UIControlStateNormal];
+            }else{
+                _currentGroup = bjDropdownView.listData[0];
+                [titleButton setTitle:_currentGroup.alias forState:UIControlStateNormal];
+            }
+            
+//            if ([_currentGroup.avatar length]>0) {
+//                avatar.imageURL = [NSURL URLWithString:_currentGroup.avatar];
+//            }
+            
+            [bjqTableView triggerPullToRefresh];
+            
+        }
+    }
+    
+    if ([@"groupTopicList" isEqualToString:keyPath])  // 圈信息列表
+    {
+        switch (loadStatus) {
+            case TopicLoadStatusRefresh:
+                //
+            {
+                NSArray *arr = [PalmUIManagement sharedInstance].groupTopicList;
+                [allTopicList removeAllObjects];
+                [allTopicList addObjectsFromArray:arr];
+                
+                [bjqTableView.pullToRefreshView stopAnimating];
+                
+                NSDate *now = [CoreUtils convertDateToLocalTime:[NSDate date]];
+                NSString *date = [NSString stringWithFormat:@"最近更新: %@",[[now description] substringToIndex:16]];
+                [bjqTableView.pullToRefreshView setSubtitle:date forState:SVPullToRefreshStateAll];
+                
+            }
+                break;
+            case TopicLoadStatusAppend:
+                //
+            {
+                NSArray *arr = [PalmUIManagement sharedInstance].groupTopicList;
+                [allTopicList addObjectsFromArray:arr];
+                
+                [bjqTableView.infiniteScrollingView stopAnimating];
+            }
+                break;
+            default:
+                break;
+        }
+        
+        [bjqTableView reloadData];
+    }
+    
+    if ([@"notifyCount" isEqualToString:keyPath])  // 圈信息列表
+    {
+        NSDictionary *dict = [PalmUIManagement sharedInstance].notifyCount;
+        //int count = [dict[@"count"] intValue];
+        
+        int count = 3;
+        
+        if (notifyCount != count) {
+            notifyCount = count;
+            [bjqTableView reloadData];
+        }
+    }
+}
+
+-(void)addObservers{
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupList" options:0 context:NULL];
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupTopicList" options:0 context:NULL];
+    
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notifyCount" options:0 context:NULL];
+    
+}
+
+
+
+-(void)checkNotify{
+
+    [[PalmUIManagement sharedInstance] getNotiCount];
+    [self performSelector:@selector(checkNotify) withObject:nil afterDelay:5];
+
+}
+
+-(void)addNewTaped:(id)sender{
+
+    [[UIApplication sharedApplication].keyWindow addSubview:fsDropdownView];
+    [fsDropdownView show];
+}
+
+-(void)newNotifyTaped:(id)sender{
+
+    BBXXXViewController *xxx = [[BBXXXViewController alloc] init];
+    xxx.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:xxx animated:YES];
+}
+
+-(void)bjButtonTaped:(id)sender{
+
+    [[UIApplication sharedApplication].keyWindow addSubview:bjDropdownView];
+    if (bjDropdownView.unfolded) {
+        [bjDropdownView dismiss];
+    }else{
+        [bjDropdownView show];
+    }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    allTopicList = [[NSMutableArray alloc] init];
+    
+    [self addObservers];
+    
+    notifyCount = 0;
+    
+    hasNew = YES;
+    
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    
+    self.view.backgroundColor = [UIColor brownColor];
+
+    bjqTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -64, 320, self.view.bounds.size.height+20) style:UITableViewStylePlain];
+    bjqTableView.backgroundColor = [UIColor whiteColor];
+    bjqTableView.dataSource = self;
+    bjqTableView.delegate = self;
+    [self.view addSubview:bjqTableView];
+    [bjqTableView reloadData];
+    
+    
+    
+    // 刷新
+    [bjqTableView addPullToRefreshWithActionHandler:^{
+        
+        loadStatus = TopicLoadStatusRefresh;
+        
+        [[PalmUIManagement sharedInstance] getGroupTopic:[_currentGroup.groupid intValue] withTimeStamp:1 withOffset:0 withLimit:30];
+    }];
+    
+    // 追加
+    [bjqTableView addInfiniteScrollingWithActionHandler:^{
+        
+        loadStatus = TopicLoadStatusAppend;
+        
+        int offset = [allTopicList count];
+        
+        BBTopicModel *model = [allTopicList lastObject];
+        
+        int st = [model.ts intValue];
+        
+        [[PalmUIManagement sharedInstance] getGroupTopic:[_currentGroup.groupid intValue] withTimeStamp:1 withOffset:offset withLimit:30];
+        
+    }];
+    
+    
+    UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 210+20)];
+    head.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 214)];
+    headImage.backgroundColor = [UIColor orangeColor];
+    headImage.image = [UIImage imageNamed:@"BBTopBG"];
+    [head addSubview:headImage];
+    
+    UILabel *point = [[UILabel alloc] initWithFrame:CGRectMake(0, 190, 320, 23)];
+    point.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+    [head addSubview:point];
+    point.text = @"           你已有2000积分可以兑换";
+    point.textAlignment = NSTextAlignmentCenter;
+    point.font = [UIFont boldSystemFontOfSize:12];
+    point.textColor = [UIColor whiteColor];
+    
+    avatar = [[EGOImageView alloc] initWithFrame:CGRectMake(22, 145, 80, 80)];
+    avatar.backgroundColor = [UIColor grayColor];
+    avatar.image = [UIImage imageNamed:@"girl"];
+    
+    [head addSubview:avatar];
+    CALayer *roundedLayer = [avatar layer];
+    [roundedLayer setMasksToBounds:YES];
+    roundedLayer.cornerRadius = 40.0;
+    roundedLayer.borderWidth = 2;
+    roundedLayer.borderColor = [[UIColor whiteColor] CGColor];
+    
+    bjqTableView.tableHeaderView = head;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewTaped:)];
+    
+    titleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 44)];
+    [titleButton setTitle:@"班级" forState:UIControlStateNormal];
+    self.navigationItem.titleView = titleButton;
+    [titleButton addTarget:self action:@selector(bjButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    bjDropdownView = [[BBBJDropdownView alloc] initWithFrame:self.view.bounds];
+    bjDropdownView.delegate = self;
+    
+    fsDropdownView = [[BBFSDropdownView alloc] initWithFrame:self.view.bounds];
+    fsDropdownView.delegate = self;
+    
+    CGFloat h = [[UIScreen mainScreen] bounds].size.height;
+    inputBar = [[BBInputView alloc] initWithFrame:CGRectMake(0, h, 320, 44)];
+    inputBar.delegate = self;
+    
+    [[PalmUIManagement sharedInstance] getGroupList];
+    
+    [self checkNotify];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [inputBar endEdit];
+}
+
+#pragma mark - UITableViewDatasource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [allTopicList count];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    if (notifyCount>0) {
+        
+        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 46)];
+        backView.backgroundColor = [UIColor whiteColor];
+        
+        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(60, 0, 8, backView.bounds.size.height)];
+        //line.backgroundColor = [UIColor lightGrayColor];
+        line.image = [UIImage imageNamed:@"BBLine"];
+        //line.alpha = 0.5;
+        [backView addSubview:line];
+        
+        UIButton *newNotify = [UIButton buttonWithType:UIButtonTypeCustom];
+        newNotify.frame = CGRectMake(K_LEFT_PADDING, 3, 172, 38);
+        [newNotify setBackgroundImage:[UIImage imageNamed:@"BBNewMessage"] forState:UIControlStateNormal];
+        newNotify.backgroundColor = [UIColor clearColor];
+        [backView addSubview:newNotify];
+        [newNotify addTarget:self action:@selector(newNotifyTaped:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 30, 30)];
+        [newNotify addSubview:icon];
+        CALayer *roundedLayer = [icon layer];
+        [roundedLayer setMasksToBounds:YES];
+        roundedLayer.cornerRadius = 15.0;
+        roundedLayer.borderWidth = 1;
+        roundedLayer.borderColor = [[UIColor whiteColor] CGColor];
+        icon.image = [UIImage imageNamed:@"girl"];
+        
+        UILabel *msg = [[UILabel alloc] initWithFrame:CGRectMake(50, 9, 100, 20)];
+        [newNotify addSubview:msg];
+        msg.textColor = [UIColor whiteColor];
+        msg.font = [UIFont boldSystemFontOfSize:13];
+        msg.text = [NSString stringWithFormat:@"你有%d条新消息",notifyCount];
+        
+        return backView;
+    }
+    
+    return nil;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"defCell";
+    static NSString *cellIdentifier1 = @"linkCell";
+    static NSString *cellIdentifier2 = @"replyCell";
+    static NSString *cellIdentifier3 = @"imageCell";
+    
+    BBTopicModel *model = allTopicList[indexPath.row];
+    /*
+    1 班级通知
+    2 家庭作业
+    3 安全教育
+    4 班级生活
+    6 安全作业
+    7 转发“有指示”
+    */
+    
+    // 发作业2，发通知1，拍表现4，随便说4
+    
+    switch ([model.topictype intValue]) {
+        case 1:  // 发通知1
+            //
+        {
+        
+            BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
+            if (!cell) {
+                cell = [[BBWorkTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier2];
+                cell.delegate = self;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            [cell setData:model];
+            cell.delegate = self;
+            return cell;
+        }
+            break;
+        case 2:  // 发作业2
+            //
+        {
+            
+            BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
+            if (!cell) {
+                cell = [[BBWorkTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier2];
+                cell.delegate = self;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            [cell setData:model];
+            cell.delegate = self;
+            return cell;
+        }
+            break;
+        case 4:  // 拍表现4，随便说4
+            //
+        {
+            BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
+            if (!cell) {
+                cell = [[BBImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier3];
+                cell.delegate = self;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            [cell setData:model];
+            cell.delegate = self;
+            return cell;
+        }
+            break;
+
+        case 7:  // 转发 forword
+            //
+        {
+            BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
+            
+            if (!cell) {
+                cell = [[BBLinkTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier1];
+                
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            [cell setData:model];
+            cell.delegate = self;
+            return cell;
+        }
+            break;
+        default:   // 默认，随便说
+            
+            //
+        {
+            BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
+            if (!cell) {
+                cell = [[BBImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier3];
+                cell.delegate = self;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            [cell setData:model];
+            cell.delegate = self;
+            return cell;
+        }
+            
+            break;
+    }
+
+    return nil;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    //return 340;
+    return [BBCellHeight heightOfData:allTopicList[indexPath.row]];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (notifyCount>0) { // hasNew
+        return 46;
+    }
+    return 0;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+#pragma mark - BBFSDropdownViewDelegate
+
+-(void)bbFSDropdownView:(BBFSDropdownView *) dropdownView_ didSelectedAtIndex:(NSInteger) index_{
+    BBFZYViewController *fzy = [[BBFZYViewController alloc] init];
+    fzy.hidesBottomBarWhenPushed = YES;
+    fzy.style = index_;
+    [self.navigationController pushViewController:fzy animated:YES];
+}
+
+-(void)bbFSDropdownViewTaped:(BBFSDropdownView *) dropdownView_{
+
+}
+
+#pragma mark - BBBJDropdownViewDelegate
+-(void)bbBJDropdownView:(BBBJDropdownView *) dropdownView_ didSelectedAtIndex:(NSInteger) index_{
+    _currentGroup = dropdownView_.listData[index_];
+    [titleButton setTitle:_currentGroup.alias forState:UIControlStateNormal];
+    
+//    avatar.image = nil;
+//    if ([_currentGroup.avatar length]>0) {
+//        avatar.imageURL = [NSURL URLWithString:_currentGroup.avatar];
+//    }
+    
+    
+    loadStatus = TopicLoadStatusRefresh;
+    [[PalmUIManagement sharedInstance] getGroupTopic:[_currentGroup.groupid intValue] withTimeStamp:1 withOffset:0 withLimit:30];
+    
+    
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    [def setInteger:index_ forKey:@"saved_topic_group_index"];
+    [def synchronize];
+    
+}
+
+-(void)bbBJDropdownViewTaped:(BBBJDropdownView *) dropdownView_{
+
+}
+
+#pragma mark - BBBaseTableViewCellDelegate
+
+// 赞
+-(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell likeButtonTaped:(UIButton *)sender{
+
+    BBTopicModel *model = cell.data;
+    [[PalmUIManagement sharedInstance] postPraise:[model.topicid intValue]];
+
+}
+
+// 评论
+-(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell replyButtonTaped:(UIButton *)sender{
+
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:inputBar];
+    inputBar.data = cell.data;
+    [inputBar beginEdit];
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [inputBar endEdit];
+}
+
+#pragma mark - BBInputViewDelegate
+
+-(void)bbInputView:(BBInputView *)view sendText:(NSString *)text{
+    // send
+    
+    BBTopicModel *model = view.data;
+    [[PalmUIManagement sharedInstance] postComment:text
+                                    withReplyToUid:[model.author_uid intValue]
+                                       withTopicID:[model.topicid intValue]];
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+@end

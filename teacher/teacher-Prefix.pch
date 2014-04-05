@@ -1,0 +1,39 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#define WWAN_TEST       //外网环境
+
+// 注释掉TEST为线上环境
+//#define TEST
+
+//#define SYS_STATE_MIGR    // 网络处理标记，内网没有加密，
+
+//#define SEND_FEEDBACK       //用户消息回执，不需要回执请注掉
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import "DDLog.h"
+#import "DDTTYLogger.h"
+#import "DDFileLogger.h"
+
+// Log levels: off, error, warn, info, verbose
+#if DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_INFO;
+#endif
+
+#import "JSONKit.h"
+#import "MKNetworkKit.h"
+
+#endif
