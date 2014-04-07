@@ -46,6 +46,10 @@
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notifyList" options:0 context:NULL];
 }
 
+-(void)backButtonTaped:(id)sender{
+
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)viewDidLoad
 {
@@ -57,6 +61,14 @@
     allNotifyList = [[NSMutableArray alloc] init];
     
     self.title = @"新消息";
+    
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"BBBack"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
     
     xxxTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height) style:UITableViewStylePlain];
     xxxTableView.backgroundColor = [UIColor whiteColor];

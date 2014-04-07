@@ -20,8 +20,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)rightBarButtonTaped:(id)sender{
+-(void)sendButtonTaped:(id)sender{
     [self showWhileExecuting:@selector(loading) withText:@"发送" withDetailText:@"正在发送..."];
+}
+
+-(void)backButtonTaped:(id)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
@@ -30,8 +35,20 @@
 	
     self.title = @"分享";
     
+    // left
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"BBBack"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(rightBarButtonTaped:)];
+    // right
+    UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [sendButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+    [sendButton setBackgroundImage:[UIImage imageNamed:@"BBSendButton"] forState:UIControlStateNormal];
+    [sendButton addTarget:self action:@selector(sendButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sendButton];
+    
     
     UIView *textBack = [[UIView alloc] initWithFrame:CGRectMake(15, 15, 320-30, 70)];
     [self.view addSubview:textBack];

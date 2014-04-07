@@ -49,10 +49,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)rightBarButtonTaped:(id)sender{
-    [self showWhileExecuting:@selector(loading) withText:@"发送" withDetailText:@"正在发送..."];
-}
-
 -(void)kemuButtonTaped:(id)sender{
 
     BBXKMViewController *xkm = [[BBXKMViewController alloc] init];
@@ -86,14 +82,34 @@
     return self;
 }
 
+-(void)backButtonTaped:(id)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)sendButtonTaped:(id)sender{
+    
+   [self showWhileExecuting:@selector(loading) withText:@"发送" withDetailText:@"正在发送..."];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
-    //self.title = @"发作业";
+    // left
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"BBCancelSendButton"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(rightBarButtonTaped:)];
+    // right
+    UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [sendButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+    [sendButton setBackgroundImage:[UIImage imageNamed:@"BBSendButton"] forState:UIControlStateNormal];
+    [sendButton addTarget:self action:@selector(sendButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sendButton];
     
     
     kmList = @[@"不指定科目",@"语文",@"数学",@"英语",@"体育",@"自然科学",@"其它"];

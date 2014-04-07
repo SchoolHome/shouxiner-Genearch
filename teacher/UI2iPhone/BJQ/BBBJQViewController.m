@@ -205,12 +205,24 @@
     
     bjqTableView.tableHeaderView = head;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewTaped:)];
+    
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+    [addButton setBackgroundImage:[UIImage imageNamed:@"BBAdd"] forState:UIControlStateNormal];
+    [addButton addTarget:self action:@selector(addNewTaped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
+//    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BBAdd"] style:UIBarButtonItemStylePlain  target:self action:@selector(addNewTaped:)];
     
     titleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 44)];
     [titleButton setTitle:@"班级" forState:UIControlStateNormal];
     self.navigationItem.titleView = titleButton;
     [titleButton addTarget:self action:@selector(bjButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImageView *arrow = [[UIImageView alloc] initWithFrame:CGRectMake(124, 9, 22, 22)];
+    [titleButton addSubview:arrow];
+    arrow.image = [UIImage imageNamed:@"BBDown"];
+    
     
     bjDropdownView = [[BBBJDropdownView alloc] initWithFrame:self.view.bounds];
     bjDropdownView.delegate = self;

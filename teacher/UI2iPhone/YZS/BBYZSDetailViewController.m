@@ -15,6 +15,11 @@
 
 @implementation BBYZSDetailViewController
 
+-(void)backButtonTaped:(id)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -24,6 +29,11 @@
     
     self.navigationItem.title = @"广电总局";
     
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"BBBack"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     yzsDetailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height+20) style:UITableViewStylePlain];
     yzsDetailTableView.dataSource = self;
