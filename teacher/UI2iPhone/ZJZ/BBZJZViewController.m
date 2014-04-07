@@ -49,7 +49,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    self.title = @"找家长";
+    //self.title = @"找家长";
     
     
     _messageListTableSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];

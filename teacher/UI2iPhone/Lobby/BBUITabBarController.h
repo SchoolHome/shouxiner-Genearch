@@ -12,5 +12,12 @@
 #import "BBMeViewController.h"
 #import "BBZJZViewController.h"
 @interface BBUITabBarController : UITabBarController
+{
 
+    UIImageView *_imageTabBar;
+    UIImageView *_subTabItem[5];
+    
+    NSArray *_tapImages;
+    
+}
 @end
