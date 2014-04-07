@@ -178,15 +178,22 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *messageGroupCellIdentifier = @"messageGroupCellIdentifier";
-    BBMessageGroupBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:messageGroupCellIdentifier];
+    static NSString *messageSingleCellIdentifier = @"messageSingleCellIdentifier";
+    
     CPUIModelMessageGroup *tempMsgGroup = [self.tableviewDisplayDataArray objectAtIndex:indexPath.row];
-    if (!cell) {
-        if ([tempMsgGroup isMsgSingleGroup]) {
-            cell = [[BBSingleMessageGroupCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:messageGroupCellIdentifier];
-        }else{
+
+    BBMessageGroupBaseCell *cell;
+    
+    if ([tempMsgGroup isMsgSingleGroup]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:messageSingleCellIdentifier];
+        if (nil == cell) {
+            cell = [[BBSingleMessageGroupCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:messageSingleCellIdentifier];
+        }
+    }else{
+        cell = [tableView dequeueReusableCellWithIdentifier:messageGroupCellIdentifier];
+        if (nil ==cell) {
             cell = [[BBGroupMessageGroupCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:messageGroupCellIdentifier];
         }
-
     }
     
     cell.msgGroup = tempMsgGroup;
