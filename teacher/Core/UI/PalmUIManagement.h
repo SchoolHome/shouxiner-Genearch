@@ -43,7 +43,10 @@
 @property(nonatomic,strong) NSArray *notifyList;
 
 @property(nonatomic,strong) NSArray *groupTopicList;
-
+// 上传图片结果
+@property(nonatomic,strong) NSDictionary *updateImageResult;
+// 发表Topic结果
+@property(nonatomic,strong) NSDictionary *topicResult;
 
 @property(nonatomic,strong) NSHTTPCookie *php;
 @property(nonatomic,strong) NSHTTPCookie *suid;
@@ -76,6 +79,12 @@
 -(void) getNotiCount;
 // 获取新消息列
 -(void) getNotiList : (int) offset withLimit : (int) limit;
+
+// 上传图片
+-(void) updateUserImageFile : (NSData *) imageData withGroupID : (int) groupID;
+// 发表Topic
+-(void) postTopic : (int) groupid withTopicType : (int) topicType withSubject : (int) subject withTitle : (NSString *) title
+                            withContent : (NSString *) content withAttach : (NSString *) attach;
 
 -(void) postCheckVersion;
 @end

@@ -95,6 +95,19 @@ static PalmUIManagement *sharedInstance = nil;
     [[PalmNetWorkService sharedInstance] networkEngine:operation];
 }
 
+// 上传图片
+-(void) updateUserImageFile : (NSData *) imageData withGroupID : (int) groupID{
+    UserProfileOperation *operation =[[UserProfileOperation alloc] initUpdateUserImageFile:imageData withGroupID:groupID];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+// 发表Topic
+-(void) postTopic : (int) groupid withTopicType : (int) topicType withSubject : (int) subject withTitle : (NSString *) title
+      withContent : (NSString *) content withAttach : (NSString *) attach{
+    UserProfileOperation *operation =[[UserProfileOperation alloc] initPostTopic:groupid withTopicType:topicType withSubject:subject withTitle:title withContent:content withAttach:attach];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
 -(void) postCheckVersion{
     MyOperation *operation = [[MyOperation alloc] initCheckVersion];
     [[PalmNetWorkService sharedInstance] networkEngine:operation];

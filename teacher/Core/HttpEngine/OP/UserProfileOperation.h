@@ -11,6 +11,8 @@ typedef enum{
     kGetUserContacts,
     kUpdateUserHeaderImage,
     kUpdateUserHeader,
+    kUpdateUserImage,
+    kPostTopic,
 }UserProfile;
 
 #import "PalmOperation.h"
@@ -23,4 +25,9 @@ typedef enum{
 -(UserProfileOperation *) initUpdateUserHeaderImage : (NSData*)imageData;
 
 -(UserProfileOperation *) initUpdateUserHeader:(NSString *)imageUrlPath;
+
+-(UserProfileOperation *) initUpdateUserImageFile : (NSData *) imageData withGroupID : (int) groupID;
+
+-(UserProfileOperation *) initPostTopic : (int) groupid withTopicType : (int) topicType withSubject : (int) subject withTitle : (NSString *) title
+                            withContent : (NSString *) content withAttach : (NSString *) attach;
 @end
