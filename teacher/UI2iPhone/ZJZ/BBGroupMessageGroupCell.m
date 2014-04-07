@@ -30,7 +30,7 @@
     [super setMsgGroup:msgGroup];
     
     if (msgGroup) {
-        if (msgGroup.memberList.count > 0) {
+        if (msgGroup.memberList.count > 1) {
             //群聊
             self.userNameLabel.text = @"群聊";
         }
