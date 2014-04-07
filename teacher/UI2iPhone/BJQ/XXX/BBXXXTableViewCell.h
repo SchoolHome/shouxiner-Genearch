@@ -10,6 +10,11 @@
 #import "EGOImageView.h"
 #import "BBNotifyModel.h"
 
+
+
+
+
+
 @interface BBXXXTableViewCell : UITableViewCell
 {
     EGOImageView *icon;
