@@ -25,7 +25,7 @@
         {
             //title + content + image +comment
             CGFloat titleHeight = K_TITLE_HEIGHT;
-            CGFloat contentHeight = [data.content sizeWithFont:[UIFont systemFontOfSize:12]
+            CGFloat contentHeight = [data.content sizeWithFont:[UIFont systemFontOfSize:14]
                                              constrainedToSize:CGSizeMake(175, CGFLOAT_MAX)].height;
             
             if (contentHeight>=(41-6)) {
@@ -91,7 +91,7 @@
         {
             //title + content + image +comment
             CGFloat titleHeight = K_TITLE_HEIGHT;
-            CGFloat contentHeight = [data.content sizeWithFont:[UIFont systemFontOfSize:12]
+            CGFloat contentHeight = [data.content sizeWithFont:[UIFont systemFontOfSize:14]
                                              constrainedToSize:CGSizeMake(200, CGFLOAT_MAX)].height;
             
             CGFloat imageHeight = 0;
@@ -149,7 +149,7 @@
             //titleHeight+contentHeight+linkHeight+commentHeight
             
             CGFloat titleHeight = K_TITLE_HEIGHT;
-            CGFloat contentHeight = [data.content sizeWithFont:[UIFont systemFontOfSize:12]
+            CGFloat contentHeight = [data.content sizeWithFont:[UIFont systemFontOfSize:14]
                                              constrainedToSize:CGSizeMake(200, CGFLOAT_MAX)].height;
             
             
@@ -182,7 +182,7 @@
             {
                 //title + content + image +comment
                 CGFloat titleHeight = K_TITLE_HEIGHT;
-                CGFloat contentHeight = [data.content sizeWithFont:[UIFont systemFontOfSize:12]
+                CGFloat contentHeight = [data.content sizeWithFont:[UIFont systemFontOfSize:14]
                                                  constrainedToSize:CGSizeMake(200, CGFLOAT_MAX)].height;
                 
                 CGFloat imageHeight = 0;

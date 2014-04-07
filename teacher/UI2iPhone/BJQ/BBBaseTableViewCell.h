@@ -54,6 +54,8 @@
 
 @property(nonatomic,strong) BBTopicModel *data;
 
+-(NSString *)timeStringFromNumber:(NSNumber *) number;
+
 @end
 
 @protocol BBBaseTableViewCellDelegate <NSObject>

@@ -16,7 +16,7 @@
     if (self) {
         // Initialization code
         
-        title = [[UILabel alloc] initWithFrame:CGRectMake(K_LEFT_PADDING, 0, 200, 20)];
+        title = [[UILabel alloc] initWithFrame:CGRectMake(K_LEFT_PADDING, 0, 225, 20)];
         [self addSubview:title];
         title.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
         
@@ -34,13 +34,13 @@
 -(void)setData:(BBTopicModel *)data{
     [super setData:data];
     
-    content.frame = CGRectMake(K_LEFT_PADDING, 20, 200, 0);//
+    content.frame = CGRectMake(K_LEFT_PADDING, 20, 225, 0);//
     
     title.text = self.data.title;
     title.font = [UIFont systemFontOfSize:14];
     
     content.text = self.data.content;
-    content.font = [UIFont systemFontOfSize:12];
+    content.font = [UIFont systemFontOfSize:14];
     content.numberOfLines = 0;
     [content sizeToFit];
     
@@ -85,7 +85,7 @@
     self.reply.frame = CGRectMake(165+70, timeBegin+5, 62, 27);
     
     self.time.frame = CGRectMake(K_LEFT_PADDING, timeBegin+5, 60, 27);
-    self.time.text = @"1小时前";
+    self.time.text = [self timeStringFromNumber:self.data.ts];
     
     
     if ([self.data.praisesStr length]>0||[self.data.commentsStr length]>0) {

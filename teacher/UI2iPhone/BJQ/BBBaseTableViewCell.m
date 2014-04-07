@@ -7,6 +7,7 @@
 //
 
 #import "BBBaseTableViewCell.h"
+#import "CoreUtils.h"
 
 @implementation BBBaseTableViewCell
 
@@ -21,6 +22,33 @@
     if (_delegate&&[_delegate respondsToSelector:@selector(bbBaseTableViewCell:likeButtonTaped:)]) {
         [_delegate bbBaseTableViewCell:self likeButtonTaped:sender];
     }
+}
+
+-(NSString *)timeStringFromNumber:(NSNumber *) number{
+    
+    NSDate *date =  [CoreUtils getDateFormatWithLong:number];
+    date = [CoreUtils convertDateToLocalTime:date];
+    long long  second = -[[NSDate date] timeIntervalSinceDate:date];
+    NSString *final = @"刚刚";
+    
+    
+    NSNumber * mm = [CoreUtils getLongFormatWithNowDate];
+    
+    if (second<60) {
+        final = @"刚刚";
+    }else if(second<60*60){
+        int min = second%60;
+        final = [NSString stringWithFormat:@"%d分钟前",min];
+    }else if(second<60*60*24){
+    
+        int hour = second%(60*60);
+        final = [NSString stringWithFormat:@"%d小时前",hour];
+    }else{
+    
+        int day = second%(60*60*24);
+        final = [NSString stringWithFormat:@"%d天前",day];
+    }
+    return final;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
