@@ -8,7 +8,7 @@
 
 #import "BBBJDropdownView.h"
 #define kDropdownWidth      130
-#define kDropdownCellHeight 32
+#define kDropdownCellHeight 36
 
 @implementation BBBJDropdownView
 
@@ -35,7 +35,7 @@
         _list.delegate = self;
         _list.scrollEnabled = NO;
         _list.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.55];
-        _list.separatorColor = [UIColor grayColor];//[UIColor colorWithHexString:@"515151"];
+        _list.separatorColor = [UIColor darkGrayColor];//[UIColor colorWithHexString:@"515151"];
         
         [self addSubview:_list];
         
@@ -98,14 +98,21 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
+        
+        cell.backgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 83, 44)];
+        cell.backgroundView.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.7];
+        
+        cell.selectedBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 83, 44)];
+        cell.selectedBackgroundView.backgroundColor = [UIColor orangeColor];
+        
     }
     
     BBGroupModel *group = _listData[indexPath.row];
     
     cell.textLabel.text = group.alias;
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
+    cell.textLabel.font = [UIFont systemFontOfSize:13];
     cell.textLabel.textAlignment = UITextAlignmentCenter;
-    cell.textLabel.textColor = [UIColor whiteColor];//[UIColor colorWithHexString:@"cccccc"];
+    cell.textLabel.textColor = [UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1.0];//[UIColor colorWithHexString:@"cccccc"];
     // Configure the cell...
     
     return cell;

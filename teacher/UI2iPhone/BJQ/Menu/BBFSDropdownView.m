@@ -8,8 +8,8 @@
 
 #import "BBFSDropdownView.h"
 
-#define kDropdownWidth      110
-#define kDropdownCellHeight 32
+#define kDropdownWidth      83
+#define kDropdownCellHeight 44
 
 @implementation BBFSDropdownView
 
@@ -22,7 +22,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         _listData = [[NSArray alloc] initWithObjects:
-                     @"发作业",@"发通知",@"拍表现",@"随便说", nil];
+                     @"BBFZY",@"BBFTZ",@"BBPBX",@"BBSBS", nil];
         
         _list = [[UITableView alloc] initWithFrame:CGRectMake((self.frame.size.width-kDropdownWidth), 44+20, kDropdownWidth, 0) style:UITableViewStylePlain];
         _list.rowHeight = kDropdownCellHeight;
@@ -30,7 +30,7 @@
         _list.delegate = self;
         _list.scrollEnabled = NO;
         _list.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.55];
-        _list.separatorColor = [UIColor grayColor];//[UIColor colorWithHexString:@"515151"];
+        _list.separatorColor = [UIColor darkGrayColor];//[UIColor colorWithHexString:@"515151"];
         
         [self addSubview:_list];
         
@@ -93,14 +93,20 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
+        
+        cell.backgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 83, 44)];
+        cell.selectedBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 83, 44)];
+
     }
-    cell.textLabel.text = [_listData objectAtIndex:indexPath.row];
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
-    cell.textLabel.textAlignment = UITextAlignmentCenter;
-    cell.textLabel.textColor = [UIColor whiteColor];//[UIColor colorWithHexString:@"cccccc"];
+//    cell.textLabel.text = [_listData objectAtIndex:indexPath.row];
+//    cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
+//    cell.textLabel.textAlignment = UITextAlignmentCenter;
+//    cell.textLabel.textColor = [UIColor whiteColor];
     
-    //cell.imageView
-    // Configure the cell...
+    UIImageView *bk = (UIImageView *)cell.backgroundView;
+    UIImageView *sbk = (UIImageView *)cell.selectedBackgroundView;
+    bk.image = [UIImage imageNamed:_listData[indexPath.row]];
+    sbk.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@Press",_listData[indexPath.row]]];
     
     return cell;
 }
