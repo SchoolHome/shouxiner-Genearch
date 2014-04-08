@@ -463,7 +463,7 @@
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell likeButtonTaped:(UIButton *)sender{
 
     BBTopicModel *model = cell.data;
-    [[PalmUIManagement sharedInstance] postPraise:[model.topicid intValue]];
+    [[PalmUIManagement sharedInstance] postPraise:[model.topicid longLongValue]];
 
 }
 
@@ -489,7 +489,7 @@
     BBTopicModel *model = view.data;
     [[PalmUIManagement sharedInstance] postComment:text
                                     withReplyToUid:[model.author_uid intValue]
-                                       withTopicID:[model.topicid intValue]];
+                                       withTopicID:[model.topicid longLongValue]];
     
 }
 

@@ -71,9 +71,9 @@
 // 获取班级Topic
 -(void) getGroupTopic : (int) groupID withTimeStamp : (int) timeStamp withOffset : (int) offset withLimit : (int) limit;
 // 点赞
--(void) postPraise : (int) topicID;
+-(void) postPraise : (long long) topicID;
 // 发表评论
--(void) postComment : (NSString *) commentContent withReplyToUid : (int) uid withTopicID : (int) topicID;
+-(void) postComment : (NSString *) commentContent withReplyToUid : (int) uid withTopicID : (long long) topicID;
 
 // 获取新消息数量
 -(void) getNotiCount;

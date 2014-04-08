@@ -52,20 +52,20 @@
 }
 
 // 点赞
--(ClassOperation *) initPraise : (int) topicID{
+-(ClassOperation *) initPraise : (long long) topicID{
     if ([self initOperation]) {
         self.type = kPostPraise;
-        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/praise/%d",K_HOST_NAME_OF_PALM_SERVER,topicID];
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/praise/%lli",K_HOST_NAME_OF_PALM_SERVER,topicID];
         [self setHttpRequestGetWithUrl:urlStr];
     }
     return self;
 }
 
 // 发表评论
--(ClassOperation *) initComment : (NSString *) commentContent withReplyToUid : (int) uid withTopicID : (int) topicID{
+-(ClassOperation *) initComment : (NSString *) commentContent withReplyToUid : (int) uid withTopicID : (long long) topicID{
     if ([self initOperation]) {
         self.type = kPostComment;
-        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/comment/%d",K_HOST_NAME_OF_PALM_SERVER,topicID];
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/comment/%lli",K_HOST_NAME_OF_PALM_SERVER,topicID];
         [self setHttpRequestPostWithUrl:urlStr params:[NSDictionary dictionaryWithObjectsAndKeys:commentContent,@"comment",
                                                        [NSNumber numberWithInt:uid],@"replyto",nil]];
     }

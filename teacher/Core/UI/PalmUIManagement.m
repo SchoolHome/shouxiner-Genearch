@@ -72,13 +72,13 @@ static PalmUIManagement *sharedInstance = nil;
 }
 
 // 点赞
--(void) postPraise : (int) topicID{
+-(void) postPraise : (long long) topicID{
     ClassOperation *operation = [[ClassOperation alloc] initPraise:topicID];
     [[PalmNetWorkService sharedInstance] networkEngine:operation];
 }
 
 // 发表评论
--(void) postComment : (NSString *) commentContent withReplyToUid : (int) uid withTopicID : (int) topicID{
+-(void) postComment : (NSString *) commentContent withReplyToUid : (int) uid withTopicID : (long long) topicID{
     ClassOperation *operation = [[ClassOperation alloc] initComment:commentContent withReplyToUid:uid withTopicID:topicID];
     [[PalmNetWorkService sharedInstance] networkEngine:operation];
 }

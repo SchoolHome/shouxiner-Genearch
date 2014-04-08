@@ -30,9 +30,9 @@ typedef enum{
 -(ClassOperation *) initGroupTopic : (int) groupID withTimeStamp : (int) timeStamp withOffset : (int) offset withLimit : (int) limit;
 
 // 点赞
--(ClassOperation *) initPraise : (int) topicID;
+-(ClassOperation *) initPraise : (long long) topicID;
 // 发表评论
--(ClassOperation *) initComment : (NSString *) commentContent withReplyToUid : (int) uid withTopicID : (int) topicID;
+-(ClassOperation *) initComment : (NSString *) commentContent withReplyToUid : (int) uid withTopicID : (long long) topicID;
 
 // 获取新消息数量
 -(ClassOperation *) initGetNotiCount;
