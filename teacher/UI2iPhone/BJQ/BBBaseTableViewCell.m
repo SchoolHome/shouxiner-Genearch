@@ -136,7 +136,7 @@
     _data = data;
     //_icon.image = [UIImage imageNamed:@"girl"];
     
-    //_icon.imageURL = [NSURL URLWithString:_data.author_avatar];
+    _icon.imageURL = [NSURL URLWithString:_data.author_avatar];
 }
 
 @end
