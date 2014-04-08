@@ -58,7 +58,7 @@
 {
     [super viewDidLoad];
     
-    
+    self.title = @"群聊";
     if (self.nickName) {
         [self.nickName removeFromSuperview];
     }
