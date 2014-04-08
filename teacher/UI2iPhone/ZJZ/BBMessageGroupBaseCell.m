@@ -8,6 +8,7 @@
 
 #import "BBMessageGroupBaseCell.h"
 #import "CoreUtils.h"
+#import "DateUtil.h"
 @implementation BBMessageGroupBaseCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -88,10 +89,25 @@
         _unreadedCountLabel.layer.borderColor = [[UIColor grayColor] CGColor];
 
         
-        _dateLabel.text = [CoreUtils getStringNormalFormatWithNumber:msgGroup.updateDate];
 
+        
         if (msgGroup.msgList.count >0) {
             CPUIModelMessage *message = [msgGroup.msgList objectAtIndex:msgGroup.msgList.count-1];
+            // _dateLabel.text = [CoreUtils getStringNormalFormatWithNumber:msgGroup.updateDate];
+            if ([message.date longLongValue]/1000 > [msgGroup.updateDate longLongValue]/1000 ) {
+                NSDate *messageDate = [NSDate dateWithTimeIntervalSince1970:[message.date longLongValue]/1000];
+                //NSString *messageStr = [[HomeInfo shareObject] compareDate:messageDate];
+                NSString *messageStr = [[[DateUtil alloc] init] compareDate:messageDate];
+                _dateLabel.text = messageStr;
+                
+            }else {
+                NSDate *messageDate = [NSDate dateWithTimeIntervalSince1970:[msgGroup.updateDate longLongValue]/1000];
+                //NSString *messageStr = [[HomeInfo shareObject] compareDate:messageDate];
+                NSString *messageStr = [[[DateUtil alloc] init] compareDate:messageDate];
+                _dateLabel.text = messageStr;
+                
+            }
+            
             if ([message.flag integerValue] == MSG_FLAG_RECEIVE) {
                 switch ([message.contentType integerValue]) {
                     case MSG_CONTENT_TYPE_TEXT:
@@ -150,7 +166,13 @@
                         break;
                 }
             }
-        }else   _contentLabel.text = @"你们还没聊过天哦，快来说两句";
+     
+        }else
+        {
+            NSString *messageStr = [[[DateUtil alloc] init] compareDate:[NSDate date]];
+            _dateLabel.text = messageStr;
+            _contentLabel.text = @"你们还没聊过天哦，快来说两句";
+        }
     }
 }
 
