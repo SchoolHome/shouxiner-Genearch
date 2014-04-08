@@ -86,7 +86,7 @@
     [DDLog addLogger:fileLogger];
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
     [[CPSystemEngine sharedInstance] initSystem];
-    [[PalmUIManagement sharedInstance] postCheckVersion];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
@@ -134,9 +134,34 @@
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqual:@"checkVersion"]) {
         NSDictionary *result = [PalmUIManagement sharedInstance].checkVersion;
-        
+        result = result[@"data"];
+        if (result != nil) {
+            BOOL recommend = [result[@"recommend"] boolValue];
+            BOOL force = [result[@"force"] boolValue];
+//            NSString *version = result[@"version"];
+            self.url = result[@"url"];
+            
+            if (!recommend && !force) {
+                return;
+            }else if(recommend && !force){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"有更新" message:@"有新版本更新" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+                [alert show];
+            }else if(recommend && force){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"有更新" message:@"有新版本更新" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alert show];
+            }
+        }
     }
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        if (![self.url isEqualToString:@""] && self.url != nil) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.url]];
+        }
+    }
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application{
 }
@@ -148,6 +173,8 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application{
     [self setLatestActiveTime:[CoreUtils getLongFormatWithNowDate]];
     [[CPUIModelManagement sharedInstance] sysActive];
+    
+//    [[PalmUIManagement sharedInstance] postCheckVersion];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application{
@@ -155,6 +182,7 @@
     // 还原播放控制
     [[MediaStatusManager sharedInstance] resetStatus];
     [[CPSystemEngine sharedInstance] xmppReconnect];
+    [[PalmUIManagement sharedInstance] postCheckVersion];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application{

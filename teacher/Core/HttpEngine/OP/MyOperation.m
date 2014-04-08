@@ -20,7 +20,7 @@
 -(MyOperation *)initGetCredits{
     if ([self initOperation]) {
         self.type = kGetCredits;
-        NSString *urlStr = [NSString stringWithFormat:@"http://%@//mapi/credits",K_HOST_NAME_OF_PALM_SERVER];
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/credits",K_HOST_NAME_OF_PALM_SERVER];
         [self setHttpRequestGetWithUrl:urlStr];
     }
     return self;
@@ -29,7 +29,7 @@
 -(MyOperation *) initCheckVersion{
     if ([self initOperation]) {
         self.type = kCheckVersion;
-        NSString *urlStr = [NSString stringWithFormat:@"http://%@//mapi/checkUpdate",K_HOST_NAME_OF_PALM_SERVER];
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/checkUpdate",K_HOST_NAME_OF_PALM_SERVER];
         NSDictionary *pa = [[NSDictionary alloc] initWithObjectsAndKeys:@"ios_v2",@"platform",@"1.0.0.0",@"version", nil];
         [self setHttpRequestPostWithUrl:urlStr params:pa];
     }

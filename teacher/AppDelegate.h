@@ -10,7 +10,7 @@
 #import "HomePageCheatView.h"
 #import "BBUITabBarController.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>{
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate,UIAlertViewDelegate>{
     UIImageView *loadingView;
 }
 @property (strong, nonatomic) UIWindow *window;
@@ -20,6 +20,8 @@
 @property (strong,nonatomic) UINavigationController * verify_nav_c;
 @property (strong,nonatomic) UINavigationController * ground_nav_c;
 @property (strong,nonatomic) UINavigationController * guid_nav_c;
+
+@property (nonatomic,strong) NSString *url;
 
 -(void) launchLogin;
 -(void) launchApp;
