@@ -167,7 +167,9 @@
     self.view.backgroundColor = [UIColor brownColor];
 
     bjqTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -64, 320, self.view.bounds.size.height-20) style:UITableViewStylePlain];
-    bjqTableView.backgroundColor = [UIColor whiteColor];
+    bjqTableView.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
+    bjqTableView.separatorColor = [UIColor clearColor];
+    bjqTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     bjqTableView.dataSource = self;
     bjqTableView.delegate = self;
     [self.view addSubview:bjqTableView];
