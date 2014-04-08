@@ -33,6 +33,7 @@ BBInputViewDelegate>
 {
     UIButton *titleButton;
     EGOImageView *avatar;
+    UILabel *point;
     UITableView *bjqTableView;
     
     BBBJDropdownView *bjDropdownView;

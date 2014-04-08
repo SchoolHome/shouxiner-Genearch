@@ -46,7 +46,7 @@
     [self addObservers];
     self.navigationItem.title = @"有指示";
     
-    yzsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height+20) style:UITableViewStylePlain];
+    yzsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-20-49-44) style:UITableViewStylePlain];
     yzsTableView.dataSource = self;
     yzsTableView.delegate = self;
     [self.view addSubview:yzsTableView];
@@ -54,6 +54,7 @@
     yzsTableView.backgroundColor = [UIColor clearColor];
     
     self.oalist = [[NSMutableArray alloc] init];
+    
     [[PalmUIManagement sharedInstance] getNotiData:1];
     
 }

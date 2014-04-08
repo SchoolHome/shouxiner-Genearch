@@ -10,7 +10,6 @@
 
 @implementation BBIndicationDetailTableViewCell
 
-
 -(void)shareTaped:(UIButton *)sender{
     if (_delegate&&[_delegate respondsToSelector:@selector(bbIndicationDetailTableViewCell:shareTaped:)]) {
         [_delegate bbIndicationDetailTableViewCell:self shareTaped:sender];

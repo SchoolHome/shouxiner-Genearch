@@ -18,6 +18,8 @@
     if (self) {
         // Initialization code
         
+        self.contentView.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
+        
         icon = [[EGOImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
         icon.backgroundColor = [UIColor grayColor];
         [self addSubview:icon];
@@ -38,8 +40,9 @@
         content.numberOfLines = 2;
         
         like = [[UIImageView alloc] initWithFrame:CGRectMake(70, 35, 25, 25)];
-        like.backgroundColor = [UIColor grayColor];
+        like.backgroundColor = [UIColor clearColor];
         [self addSubview:like];
+        like.image = [UIImage imageNamed:@"BBheart"];
         
         time = [[UILabel alloc] initWithFrame:CGRectMake(70, 70, 100, 20)];
         time.textColor = [UIColor lightGrayColor];
@@ -48,7 +51,7 @@
 
         thumbnail = [[EGOImageView alloc] initWithFrame:CGRectMake(240, 30, 60, 60)];
         [self addSubview:thumbnail];
-        thumbnail.backgroundColor = [UIColor grayColor];
+        thumbnail.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

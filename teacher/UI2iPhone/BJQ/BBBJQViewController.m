@@ -5,12 +5,14 @@
 #import "BBBJQManager.h"
 #import "CoreUtils.h"
 
+#import "CPUIModelManagement.h"
+#import "CPUIModelPersonalInfo.h"
+
 @interface BBBJQViewController ()
 
 @end
 
 @implementation BBBJQViewController
-
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([@"groupList" isEqualToString:keyPath])  // 班级列表
@@ -85,16 +87,37 @@
             [bjqTableView reloadData];
         }
     }
+    
+    if ([@"userCredits" isEqualToString:keyPath])  // 刷新积分
+    {
+        NSDictionary *dict = [PalmUIManagement sharedInstance].userCredits;
+        NSNumber *credits = [dict valueForKey:@"credits"];
+        point.text = [NSString stringWithFormat:@"           你已有%d积分可以兑换",[credits intValue]];
+    }
+    
+    if ([@"praiseResult" isEqualToString:keyPath])  // 赞
+    {
+    
+    }
+    
+    if ([@"commentResult" isEqualToString:keyPath])  // 评论
+    {
+        
+    }
 }
 
 -(void)addObservers{
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupList" options:0 context:NULL];
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupTopicList" options:0 context:NULL];
     
+    // 积分
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"userCredits" options:0 context:NULL];
+    
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notifyCount" options:0 context:NULL];
     
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"praiseResult" options:0 context:NULL];
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"commentResult" options:0 context:NULL];
 }
-
 
 
 -(void)checkNotify{
@@ -143,7 +166,7 @@
     
     self.view.backgroundColor = [UIColor brownColor];
 
-    bjqTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -64, 320, self.view.bounds.size.height+20) style:UITableViewStylePlain];
+    bjqTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -64, 320, self.view.bounds.size.height-20) style:UITableViewStylePlain];
     bjqTableView.backgroundColor = [UIColor whiteColor];
     bjqTableView.dataSource = self;
     bjqTableView.delegate = self;
@@ -177,24 +200,30 @@
     
     
     UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 210+20)];
-    head.backgroundColor = [UIColor whiteColor];
+    //head.backgroundColor = [UIColor whiteColor];
+    head.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
     
     UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 214)];
     headImage.backgroundColor = [UIColor orangeColor];
     headImage.image = [UIImage imageNamed:@"BBTopBG"];
     [head addSubview:headImage];
     
-    UILabel *point = [[UILabel alloc] initWithFrame:CGRectMake(0, 190, 320, 23)];
+    point = [[UILabel alloc] initWithFrame:CGRectMake(0, 190, 320, 23)];
     point.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
     [head addSubview:point];
-    point.text = @"           你已有2000积分可以兑换";
+    point.text = @"           你已有0积分可以兑换";
     point.textAlignment = NSTextAlignmentCenter;
     point.font = [UIFont boldSystemFontOfSize:12];
     point.textColor = [UIColor whiteColor];
     
     avatar = [[EGOImageView alloc] initWithFrame:CGRectMake(22, 145, 80, 80)];
     avatar.backgroundColor = [UIColor grayColor];
-    avatar.image = [UIImage imageNamed:@"girl"];
+    //avatar.image = [UIImage imageNamed:@"girl"];
+    
+    NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];
+    if (path) {
+        avatar.imageURL = [NSURL URLWithString:path];
+    }
     
     [head addSubview:avatar];
     CALayer *roundedLayer = [avatar layer];
@@ -222,7 +251,6 @@
     UIImageView *arrow = [[UIImageView alloc] initWithFrame:CGRectMake(124, 9, 22, 22)];
     [titleButton addSubview:arrow];
     arrow.image = [UIImage imageNamed:@"BBDown"];
-    
     
     bjDropdownView = [[BBBJDropdownView alloc] initWithFrame:self.view.bounds];
     bjDropdownView.delegate = self;
@@ -258,7 +286,8 @@
     if (notifyCount>0) {
         
         UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 46)];
-        backView.backgroundColor = [UIColor whiteColor];
+        //backView.backgroundColor = [UIColor whiteColor];
+        backView.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
         
         UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(60, 0, 8, backView.bounds.size.height)];
         //line.backgroundColor = [UIColor lightGrayColor];
@@ -464,7 +493,6 @@
 
     BBTopicModel *model = cell.data;
     [[PalmUIManagement sharedInstance] postPraise:[model.topicid longLongValue]];
-
 }
 
 // 评论
