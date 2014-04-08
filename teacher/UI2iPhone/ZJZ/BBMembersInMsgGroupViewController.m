@@ -27,8 +27,16 @@
 }
 -(void)setMembers:(NSArray *)members
 {
-    _members = members;
-    [self.membersInMsgGroupTableview    reloadData];
+    NSMutableArray *m = [[NSMutableArray alloc] init];
+    CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
+    NSNumber *uid = [NSNumber numberWithInteger:[account.uid integerValue]];
+    for (CPUIModelMessageGroupMember *member in members) {
+        if (![[uid stringValue] isEqualToString:member.userName]) {
+            [m addObject:member];
+        }
+    }
+    _members = m;
+    [self.membersInMsgGroupTableview reloadData];
 }
 -(void)setMembers:(NSArray *)members andMsgGroup:(CPUIModelMessageGroup *)messageGroup
 {
