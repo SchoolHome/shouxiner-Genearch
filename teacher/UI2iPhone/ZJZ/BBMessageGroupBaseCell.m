@@ -169,7 +169,8 @@
      
         }else
         {
-            NSString *messageStr = [[[DateUtil alloc] init] compareDate:[NSDate date]];
+            NSDate *messageDate = [NSDate dateWithTimeIntervalSince1970:[msgGroup.updateDate longLongValue]/1000];
+            NSString *messageStr = [[[DateUtil alloc] init] compareDate:messageDate];
             _dateLabel.text = messageStr;
             _contentLabel.text = @"你们还没聊过天哦，快来说两句";
         }
