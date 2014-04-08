@@ -23,4 +23,6 @@
 @property (nonatomic , strong) UILabel *dateLabel;
 //未读数
 @property (nonatomic , strong) UILabel *unreadedCountLabel;
+//未读书背景图
+@property (nonatomic ,strong) UIImageView *imageviewMessageAlert;
 @end
