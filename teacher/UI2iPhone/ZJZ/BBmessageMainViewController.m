@@ -22,9 +22,9 @@
 @end
 
 @implementation BBmessageMainViewController
-@synthesize mainBGView = _mainBGView, imageviewHeadImg = _imageviewHeadImg ,keybordHeight = _keybordHeight, singleProfileView = _singleProfileView,groupProfileView = _groupProfileView,
+@synthesize  imageviewHeadImg = _imageviewHeadImg ,keybordHeight = _keybordHeight, singleProfileView = _singleProfileView,groupProfileView = _groupProfileView,
 imageviewHeadImgBGView = _imageviewHeadImgBGView,IMView = _IMView,profileView = _profileView,unReadedAlert = _unReadedAlert,unCoupleReadedAlert = _unCoupleReadedAlert,
-currentStatus = _currentStatus,   isMoved = _isMoved ,nickName = _nickName,buttonBack = _buttonBack , recentView = _recentView,loadingView = _loadingView,contactName = _contactName , animationIsPlayed = _animationIsPlayed , keybordView = _keybordView;
+currentStatus = _currentStatus,   isMoved = _isMoved ,nickName = _nickName,buttonBack = _buttonBack , loadingView = _loadingView,contactName = _contactName , animationIsPlayed = _animationIsPlayed , keybordView = _keybordView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -118,11 +118,11 @@ currentStatus = _currentStatus,   isMoved = _isMoved ,nickName = _nickName,butto
     
     
     //背景区域，背景图+个人profile
-    self.mainBGView = [[UIView alloc] initWithFrame:CGRect_mainBGViewInStatusMid];
-    self.mainBGView.backgroundColor = [UIColor colorWithRed:102/255.f green:102/255.f blue:102/255.f alpha:1.0];;
-    [self.view addSubview:self.mainBGView];
+//    self.mainBGView = [[UIView alloc] initWithFrame:CGRect_mainBGViewInStatusMid];
+//    self.mainBGView.backgroundColor = [UIColor colorWithRed:102/255.f green:102/255.f blue:102/255.f alpha:1.0];;
+//    [self.view addSubview:self.mainBGView];
     
-    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"dce6d3"];
     
     self.imageviewHeadImg = [[MSHeadView alloc] init];
     [self.imageviewHeadImg setBorderWidth:5.f];
@@ -252,9 +252,9 @@ currentStatus = _currentStatus,   isMoved = _isMoved ,nickName = _nickName,butto
         [self.nickName setHidden:NO];
     }
     if (self.currentStatus == message_view_Status_Middle) {
-        self.recentView.hidden = NO;
+//        self.recentView.hidden = NO;
     }else {
-        self.recentView.hidden = YES;
+//        self.recentView.hidden = YES;
     }
 }
 

@@ -160,7 +160,7 @@
 @property (nonatomic , strong) UILabel *nickName;
 @property (nonatomic , strong) UILabel *contactName;
 //近况view
-@property (nonatomic , strong) RecentView *recentView;
+//@property (nonatomic , strong) RecentView *recentView;
 //头像view (头像imageview+黄条，即A区)
 @property (nonatomic , strong) UIImageView *imageviewHeadImgBGView;
 //@property (nonatomic , strong) UIImageView *imageviewHeadImg;
@@ -173,7 +173,7 @@
 @property (nonatomic , strong)SingleProfileView *singleProfileView;
 @property (nonatomic , strong)GroupProfileView *groupProfileView;
 //背景图
-@property (nonatomic , strong) UIView *mainBGView;
+//@property (nonatomic , strong) UIView *mainBGView;
 //IM View  (即C区)
 @property (nonatomic , strong) UIView *IMView;
 ////键盘区

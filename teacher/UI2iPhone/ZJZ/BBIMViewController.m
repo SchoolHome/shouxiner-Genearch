@@ -82,6 +82,16 @@ messagePictrueController = _messagePictrueController;
     [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"responseActionDic" options:0 context:@"responseActionDic"];
     [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"coupleMsgGroupTag" options:0 context:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShowNew:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+//
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHideNew:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
     NSLog(@"--------------------------------IM setCurrentMsgGroup--------------------------- ==%@",self.modelMessageGroup);
     if (!isInited) {
         
@@ -105,6 +115,51 @@ messagePictrueController = _messagePictrueController;
     
     
 }
+
+
+-(void) keyboardWillShowNew : (NSNotification *)not{
+    CGRect keyboardBounds;
+    [[not.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+    NSNumber *duration = [not.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    
+    // Need to translate the bounds to account for rotation.
+    keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
+
+    float height = 0.0f;
+    if (self.screenHeight == 568.0f) {
+        height = 461.0f - keyboardBounds.size.height;
+    }else{
+        height = 373.0f - keyboardBounds.size.height;
+    }
+    
+    // animations settings
+    [UIView animateWithDuration:0.0f delay:0.0f options:[duration integerValue] animations:^{
+        self.IMView.frame = CGRectMake(0, 0, self.IMView.frame.size.width, height);
+    } completion:^(BOOL finished) {
+        [self.detailViewController refreshMessageData:self.modelMessageGroup withMove:YES withAnimated:NO withImportData:YES withRefreshMessage:YES];
+    }];
+}
+
+-(void) keyboardWillHideNew : (NSNotification *)not{
+    NSNumber *duration = [not.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [not.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    
+    float height = 461.0f;
+    if (self.screenHeight != 568.0f) {
+        height = 373.0f;
+    }
+    
+    // animations settings
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:[duration doubleValue]];
+    [UIView setAnimationCurve:[curve intValue]];
+    self.IMView.frame = CGRectMake(0, 0, self.IMView.frame.size.width, height);
+    [UIView commitAnimations];
+}
+
+
+
 -(void)viewDidAppear:(BOOL)animated
 {
     
@@ -424,47 +479,47 @@ messagePictrueController = _messagePictrueController;
 //刷新近况
 -(void)refreshFriendRecent:(NSInteger)type
 {
-    if (type == -1) {
-        type = self.currentStatus;
-    }
-    if (self.modelMessageGroup.memberList.count > 0 && ([self.modelMessageGroup.type integerValue] == MSG_GROUP_UI_TYPE_SINGLE || [self.modelMessageGroup.type integerValue] == MSG_GROUP_UI_TYPE_SINGLE_PRE) && type == message_view_Status_Middle) {
-        CPUIModelMessageGroupMember *member = [self.modelMessageGroup.memberList objectAtIndex:0];
-        CPUIModelUserInfo *userInfo = member.userInfo;
-        //近况
-        if (self.recentView.subviews.count >0) {
-            [self.recentView removeFromSuperview];
-        }
-        switch (userInfo.recentType) {
-            case USER_RECENT_TYPE_TEXT:
-            {
-                if ([userInfo.recentContent isEqualToString:@""]) {
-                    //[self.recentView setHidden:YES];
-                }else {
-                    self.recentView = [[RecentView alloc] initWithTextFrame:CGRect_recentTextView withGroupData:self.modelMessageGroup];
-                    [self.recentView setImage:[UIImage imageNamed:@"float_im_state_text.png"]];
-                    [self.recentView setFrame:CGRect_recentTextView];
-                    [self.view addSubview:self.recentView];
-                }
-            }
-                break;
-            case USER_RECENT_TYPE_AUDIO:
-            {
-                self.recentView = [[RecentView alloc] initWithAudioFrame:CGRect_recentAudioView withGroupData:self.modelMessageGroup];
-                self.recentView.recentViewDelegate = self;
-                [self.recentView setImage:[UIImage imageNamed:@"float_im_state_say.png"]];
-                [self.recentView setFrame:CGRect_recentAudioView];
-                [self.view addSubview:self.recentView];
-            }
-                break;
-            default:
-            {
-                [self.recentView setHidden:YES];
-            }
-                break;
-        }
-    }else {
-        self.recentView.hidden = YES;
-    }
+//    if (type == -1) {
+//        type = self.currentStatus;
+//    }
+//    if (self.modelMessageGroup.memberList.count > 0 && ([self.modelMessageGroup.type integerValue] == MSG_GROUP_UI_TYPE_SINGLE || [self.modelMessageGroup.type integerValue] == MSG_GROUP_UI_TYPE_SINGLE_PRE) && type == message_view_Status_Middle) {
+//        CPUIModelMessageGroupMember *member = [self.modelMessageGroup.memberList objectAtIndex:0];
+//        CPUIModelUserInfo *userInfo = member.userInfo;
+//        //近况
+//        if (self.recentView.subviews.count >0) {
+//            [self.recentView removeFromSuperview];
+//        }
+//        switch (userInfo.recentType) {
+//            case USER_RECENT_TYPE_TEXT:
+//            {
+//                if ([userInfo.recentContent isEqualToString:@""]) {
+//                    //[self.recentView setHidden:YES];
+//                }else {
+//                    self.recentView = [[RecentView alloc] initWithTextFrame:CGRect_recentTextView withGroupData:self.modelMessageGroup];
+//                    [self.recentView setImage:[UIImage imageNamed:@"float_im_state_text.png"]];
+//                    [self.recentView setFrame:CGRect_recentTextView];
+//                    [self.view addSubview:self.recentView];
+//                }
+//            }
+//                break;
+//            case USER_RECENT_TYPE_AUDIO:
+//            {
+//                self.recentView = [[RecentView alloc] initWithAudioFrame:CGRect_recentAudioView withGroupData:self.modelMessageGroup];
+//                self.recentView.recentViewDelegate = self;
+//                [self.recentView setImage:[UIImage imageNamed:@"float_im_state_say.png"]];
+//                [self.recentView setFrame:CGRect_recentAudioView];
+//                [self.view addSubview:self.recentView];
+//            }
+//                break;
+//            default:
+//            {
+//                [self.recentView setHidden:YES];
+//            }
+//                break;
+//        }
+//    }else {
+//        self.recentView.hidden = YES;
+//    }
 }
 //设置未读数
 -(void)setunReadedAlertStatus
@@ -1166,30 +1221,30 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 -(void)stopMusicPlayer
 {
     [[MusicPlayerManager sharedInstance] stop];
-    UIButton *btnAudio = (UIButton *)[self.recentView viewWithTag:btnAudioTag];
-    if (btnAudio) {
-        [btnAudio setBackgroundImage:[UIImage imageNamed:@"btn_im_play_little_white.png"] forState:UIControlStateNormal];
-        [btnAudio setBackgroundImage:[UIImage imageNamed:@"btn_im_play_little_grey.png"] forState:UIControlStateHighlighted];
-    }
+//    UIButton *btnAudio = (UIButton *)[self.recentView viewWithTag:btnAudioTag];
+//    if (btnAudio) {
+//        [btnAudio setBackgroundImage:[UIImage imageNamed:@"btn_im_play_little_white.png"] forState:UIControlStateNormal];
+//        [btnAudio setBackgroundImage:[UIImage imageNamed:@"btn_im_play_little_grey.png"] forState:UIControlStateHighlighted];
+//    }
 }
 -(void)musicPlayerDidFinishPlaying:(MusicPlayerManager *) player playerName:(NSString *)name{
     
-    UIButton *btnAudio = (UIButton *)[self.recentView viewWithTag:btnAudioTag];
-    if (self.modelMessageGroup.memberList.count > 0) {
-        CPUIModelMessageGroupMember *member = [self.modelMessageGroup.memberList objectAtIndex:0];
-        CPUIModelUserInfo *userInfo = member.userInfo;
-        NSString *amrPath = userInfo.recentContent;
-        NSRange range = [amrPath rangeOfString:@"header"];
-        NSString *friendAmrPath = [[amrPath substringToIndex:range.location+range.length] stringByAppendingPathComponent:@"friendPath"];
-        NSString *wavPath = [[friendAmrPath stringByDeletingPathExtension] stringByAppendingPathExtension:@"wav"];
-        if ([name isEqualToString:wavPath]) {
-            [btnAudio setBackgroundImage:[UIImage imageNamed:@"btn_im_play_little_white.png"] forState:UIControlStateNormal];
-            [btnAudio setBackgroundImage:[UIImage imageNamed:@"btn_im_play_little_grey.png"] forState:UIControlStateHighlighted];
-        }
-        [self.recentView setAudioLength:-1];
-    }
+//    UIButton *btnAudio = (UIButton *)[self.recentView viewWithTag:btnAudioTag];
+//    if (self.modelMessageGroup.memberList.count > 0) {
+//        CPUIModelMessageGroupMember *member = [self.modelMessageGroup.memberList objectAtIndex:0];
+//        CPUIModelUserInfo *userInfo = member.userInfo;
+//        NSString *amrPath = userInfo.recentContent;
+//        NSRange range = [amrPath rangeOfString:@"header"];
+//        NSString *friendAmrPath = [[amrPath substringToIndex:range.location+range.length] stringByAppendingPathComponent:@"friendPath"];
+//        NSString *wavPath = [[friendAmrPath stringByDeletingPathExtension] stringByAppendingPathExtension:@"wav"];
+//        if ([name isEqualToString:wavPath]) {
+//            [btnAudio setBackgroundImage:[UIImage imageNamed:@"btn_im_play_little_white.png"] forState:UIControlStateNormal];
+//            [btnAudio setBackgroundImage:[UIImage imageNamed:@"btn_im_play_little_grey.png"] forState:UIControlStateHighlighted];
+//        }
+//        [self.recentView setAudioLength:-1];
+//    }
     
-    self.detailViewController.canPlayMagic = YES;
+//    self.detailViewController.canPlayMagic = YES;
 }
 -(void)palyAudio:(UIButton *)sender
 {
@@ -1245,7 +1300,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                         
                         [sender setBackgroundImage:[UIImage imageNamed:@"btn_im_play_little_white.png"] forState:UIControlStateNormal];
                         [sender setBackgroundImage:[UIImage imageNamed:@"btn_im_play_little_grey.png"] forState:UIControlStateHighlighted];
-                        [self.recentView setAudioLength:-1];
+//                        [self.recentView setAudioLength:-1];
                         self.detailViewController.canPlayMagic = YES;
                     }else {
                         [self stopMessageDetailSound];

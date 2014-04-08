@@ -67,12 +67,12 @@
         [imageviewSex removeFromSuperview];
     }
     //群profile
-    self.profileView = [[GroupProfileView alloc] initWithFrame:CGRectMake(0.f, 0.f, 320.f, 460+upHidedPartInStatusMid) andProfileType:[self.modelMessageGroup.type integerValue] andModelMessageGroup:self.modelMessageGroup];
-    self.profileView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
-    [self.mainBGView addSubview:self.profileView];
-    self.groupProfileView = (GroupProfileView *)self.profileView;
-    self.groupProfileView.profileViewDelegate = self;
-    self.groupProfileView.groupProfileDelegate = self;
+//    self.profileView = [[GroupProfileView alloc] initWithFrame:CGRectMake(0.f, 0.f, 320.f, 460+upHidedPartInStatusMid) andProfileType:[self.modelMessageGroup.type integerValue] andModelMessageGroup:self.modelMessageGroup];
+//    self.profileView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
+////    [self.mainBGView addSubview:self.profileView];
+//    self.groupProfileView = (GroupProfileView *)self.profileView;
+//    self.groupProfileView.profileViewDelegate = self;
+//    self.groupProfileView.groupProfileDelegate = self;
     
     //群头像
     

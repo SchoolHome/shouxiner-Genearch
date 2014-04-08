@@ -19,6 +19,7 @@ typedef enum{
     kPostComment,
     kGetNotiCount,
     kGetNotiList,
+    kGetNotiWithTopicID,
 }ClassData;
 
 
@@ -38,4 +39,8 @@ typedef enum{
 -(ClassOperation *) initGetNotiCount;
 // 获取新消息列
 -(ClassOperation *) initGetNotiList : (int) offset withLimit : (int) limit;
+
+// 根据topicID获取
+-(ClassOperation *) initGetNotiWithTopicID : (long long) topicID;
+
 @end

@@ -65,7 +65,7 @@
         //单人profile
         self.profileView = [[SingleProfileView alloc] initWithFrame:CGRectMake(0.f, 0.f, 320, 460+upHidedPartInStatusMid) andProfileType:[self.modelMessageGroup.type integerValue] andModelMessageGroup:self.modelMessageGroup ];
         self.profileView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
-        [self.mainBGView addSubview:self.profileView];
+//        [self.mainBGView addSubview:self.profileView];
         self.singleProfileView = (SingleProfileView *)self.profileView;
         self.singleProfileView.profileViewDelegate = self;
         self.singleProfileView.singleProfileDelegate = self;
@@ -154,15 +154,6 @@
     //被删除
     else if ([keyPath isEqualToString:@"deleteFriendDic"])
     {
-        if ([[[CPUIModelManagement sharedInstance].deleteFriendDic objectForKey:delete_friend_dic_res_code] integerValue] == RESPONSE_CODE_SUCESS) {
-            [[HPTopTipView shareInstance] showMessage:@"Ta已经离开你的双双" duration:2.5f];
-            
-            [self backToHome:nil];
-            [[CPUIModelManagement sharedInstance] setCurrentMsgGroup:nil];
-            
-        }else {
-            [[HPTopTipView shareInstance] showMessage:[[CPUIModelManagement sharedInstance].deleteFriendDic objectForKey:delete_friend_dic_res_desc] duration:1.5f];
-        }
     }
 }
 

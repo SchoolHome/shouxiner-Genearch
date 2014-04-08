@@ -38,12 +38,54 @@
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"loginCode" options:0 context:@"loginCode"];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 -(void) viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [[CPUIModelManagement sharedInstance ] removeObserver:self forKeyPath:@"loginCode"];
 }
+
+-(void) keyboardWillShow : (NSNotification *)not{
+    CGRect keyboardBounds;
+    [[not.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
+    NSNumber *duration = [not.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [not.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    
+    // Need to translate the bounds to account for rotation.
+    keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
+    
+    // animations settings
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:[duration doubleValue]];
+    [UIView setAnimationCurve:[curve intValue]];
+    self.view.frame = CGRectMake(0, -keyboardBounds.size.height, self.view.frame.size.width, self.view.frame.size.height);
+    [UIView commitAnimations];
+}
+
+-(void) keyboardWillHide : (NSNotification *)not{
+//    if ([textView isFirstResponder]) {  // 过滤
+        NSNumber *duration = [not.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+        NSNumber *curve = [not.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+        // animations settings
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationDuration:[duration doubleValue]];
+        [UIView setAnimationCurve:[curve intValue]];
+        self.view.frame = CGRectMake(0, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
+        [UIView commitAnimations];
+//    }
+}
+
 
 - (void)viewDidLoad{
     [super viewDidLoad];

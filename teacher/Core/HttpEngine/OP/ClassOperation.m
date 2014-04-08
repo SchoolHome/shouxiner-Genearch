@@ -92,6 +92,16 @@
     return self;
 }
 
+// 根据topicID获取
+-(ClassOperation *) initGetNotiWithTopicID : (long long) topicID{
+    if ([self initOperation]) {
+        self.type = kPostPraise;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/getTopicInfo?topic=%lli",K_HOST_NAME_OF_PALM_SERVER,topicID];
+        [self setHttpRequestGetWithUrl:urlStr];
+    }
+    return self;
+}
+
 -(void) getNotiList{
     self.request.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
 #ifdef TEST
