@@ -9,7 +9,9 @@
 #import "CPUIModelPersonalInfo.h"
 
 @interface BBBJQViewController ()
-
+@property (nonatomic,strong) BBTopicModel *tempTopModel;
+@property (nonatomic,strong) BBTopicModel *tempTopModelInput;
+@property (nonatomic,copy) NSString *inputText;
 @end
 
 @implementation BBBJQViewController
@@ -43,13 +45,13 @@
     
     if ([@"groupTopicList" isEqualToString:keyPath])  // 圈信息列表
     {
-        switch (loadStatus) {
+        switch (self.loadStatus) {
             case TopicLoadStatusRefresh:
                 //
             {
                 NSArray *arr = [PalmUIManagement sharedInstance].groupTopicList;
-                [allTopicList removeAllObjects];
-                [allTopicList addObjectsFromArray:arr];
+                [self.allTopicList removeAllObjects];
+                [self.allTopicList addObjectsFromArray:arr];
                 
                 [bjqTableView.pullToRefreshView stopAnimating];
                 
@@ -63,7 +65,7 @@
                 //
             {
                 NSArray *arr = [PalmUIManagement sharedInstance].groupTopicList;
-                [allTopicList addObjectsFromArray:arr];
+                [self.allTopicList addObjectsFromArray:arr];
                 
                 [bjqTableView.infiniteScrollingView stopAnimating];
             }
@@ -97,12 +99,56 @@
     
     if ([@"praiseResult" isEqualToString:keyPath])  // 赞
     {
-    
+        NSDictionary *result = [[PalmUIManagement sharedInstance].praiseResult objectForKey:ASI_REQUEST_DATA];
+        if ([result[@"errno"] intValue] == 0) {
+            BBPraiseModel *praise = [[BBPraiseModel alloc] init];
+            CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
+            praise.uid = [NSNumber numberWithInteger:[account.uid integerValue]];;
+            praise.username = [CPUIModelManagement sharedInstance].uiPersonalInfo.nickName;
+            
+            self.tempTopModel.am_i_like = [NSNumber numberWithBool:1];
+            NSMutableArray *p = [[NSMutableArray alloc] initWithArray:self.tempTopModel.praises];
+            [p addObject:praise];
+            self.tempTopModel.praises = [NSArray arrayWithArray:p];
+            self.tempTopModel.praisesStr = [NSString stringWithFormat:@"%@%@,",self.tempTopModel.praisesStr,praise.username];
+            [bjqTableView reloadData];
+        }
     }
     
     if ([@"commentResult" isEqualToString:keyPath])  // 评论
     {
-        
+        /*
+         @property(nonatomic,strong) NSString *comment;
+         @property(nonatomic,strong) NSNumber *id;
+         @property(nonatomic,strong) NSNumber *replyto;
+         @property(nonatomic,strong) NSString *replyto_username;
+         @property(nonatomic,strong) NSNumber *timestamp;
+         @property(nonatomic,strong) NSNumber *uid;
+         @property(nonatomic,strong) NSString *username;
+         */
+        NSDictionary *result = [[PalmUIManagement sharedInstance].commentResult objectForKey:ASI_REQUEST_DATA];
+        if ([result[@"errno"] intValue] == 0) {
+            BBCommentModel *comment = [[BBCommentModel alloc] init];
+            CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
+            comment.comment = self.inputText;
+            comment.replyto = self.tempTopModelInput.author_uid;
+            comment.replyto_username = self.tempTopModelInput.author_username;
+            comment.uid = [NSNumber numberWithInteger:[account.uid integerValue]];;
+            comment.username = [CPUIModelManagement sharedInstance].uiPersonalInfo.nickName;
+            
+            NSMutableArray *p = [[NSMutableArray alloc] initWithArray:self.tempTopModel.comments];
+            [p addObject:comment];
+            self.tempTopModel.comments = [NSArray arrayWithArray:p];
+            NSUInteger len = [comment.username length]+2;
+            NSString *text = [NSString stringWithFormat:@"%@: %@\n",comment.username,comment.comment];
+            NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
+            [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4a7f9d"] range:NSMakeRange(0,len)];
+            
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithAttributedString:self.tempTopModelInput.commentsStr];
+            [str appendAttributedString:attributedText];
+            self.tempTopModelInput.commentsStr = str;
+            [bjqTableView reloadData];
+        }
     }
 }
 
@@ -154,7 +200,7 @@
 {
     [super viewDidLoad];
     
-    allTopicList = [[NSMutableArray alloc] init];
+    self.allTopicList = [[NSMutableArray alloc] init];
     
     [self addObservers];
     
@@ -176,27 +222,27 @@
     [bjqTableView reloadData];
     
     
-    
+    __weak BBBJQViewController *weakSelf = self;
     // 刷新
     [bjqTableView addPullToRefreshWithActionHandler:^{
         
-        loadStatus = TopicLoadStatusRefresh;
+        weakSelf.loadStatus = TopicLoadStatusRefresh;
         
-        [[PalmUIManagement sharedInstance] getGroupTopic:[_currentGroup.groupid intValue] withTimeStamp:1 withOffset:0 withLimit:30];
+        [[PalmUIManagement sharedInstance] getGroupTopic:[weakSelf.currentGroup.groupid intValue] withTimeStamp:1 withOffset:0 withLimit:30];
     }];
     
     // 追加
     [bjqTableView addInfiniteScrollingWithActionHandler:^{
         
-        loadStatus = TopicLoadStatusAppend;
+        weakSelf.loadStatus = TopicLoadStatusAppend;
         
-        int offset = [allTopicList count];
+        int offset = [weakSelf.allTopicList count];
         
-        BBTopicModel *model = [allTopicList lastObject];
+        BBTopicModel *model = [weakSelf.allTopicList lastObject];
         
         int st = [model.ts intValue];
         
-        [[PalmUIManagement sharedInstance] getGroupTopic:[_currentGroup.groupid intValue] withTimeStamp:1 withOffset:offset withLimit:30];
+        [[PalmUIManagement sharedInstance] getGroupTopic:[weakSelf.currentGroup.groupid intValue] withTimeStamp:1 withOffset:offset withLimit:30];
         
     }];
     
@@ -280,7 +326,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [allTopicList count];
+    return [self.allTopicList count];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -332,7 +378,7 @@
     static NSString *cellIdentifier2 = @"replyCell";
     static NSString *cellIdentifier3 = @"imageCell";
     
-    BBTopicModel *model = allTopicList[indexPath.row];
+    BBTopicModel *model = self.allTopicList[indexPath.row];
     /*
     1 班级通知
     2 家庭作业
@@ -436,7 +482,7 @@
     
     
     //return 340;
-    return [BBCellHeight heightOfData:allTopicList[indexPath.row]];
+    return [BBCellHeight heightOfData:self.allTopicList[indexPath.row]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -474,7 +520,7 @@
 //    }
     
     
-    loadStatus = TopicLoadStatusRefresh;
+    self.loadStatus = TopicLoadStatusRefresh;
     [[PalmUIManagement sharedInstance] getGroupTopic:[_currentGroup.groupid intValue] withTimeStamp:1 withOffset:0 withLimit:30];
     
     
@@ -493,8 +539,11 @@
 // 赞
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell likeButtonTaped:(UIButton *)sender{
 
-    BBTopicModel *model = cell.data;
-    [[PalmUIManagement sharedInstance] postPraise:[model.topicid longLongValue]];
+    self.tempTopModel = cell.data;
+    if ([self.tempTopModel.am_i_like boolValue]) {
+        return;
+    }
+    [[PalmUIManagement sharedInstance] postPraise:[self.tempTopModel.topicid longLongValue]];
 }
 
 // 评论
@@ -516,10 +565,12 @@
 -(void)bbInputView:(BBInputView *)view sendText:(NSString *)text{
     // send
     
-    BBTopicModel *model = view.data;
+//    BBTopicModel *model = view.data;
+    self.tempTopModelInput = view.data;
+    self.inputText = text;
     [[PalmUIManagement sharedInstance] postComment:text
-                                    withReplyToUid:[model.author_uid intValue]
-                                       withTopicID:[model.topicid longLongValue]];
+                                    withReplyToUid:[self.tempTopModelInput.author_uid intValue]
+                                       withTopicID:[self.tempTopModelInput.topicid longLongValue]];
     
 }
 

@@ -43,12 +43,13 @@ BBInputViewDelegate>
     
     BOOL hasNew;
     
-    NSMutableArray *allTopicList;
     
-    TopicLoadStatus loadStatus;
+    
+    
     int notifyCount;
 }
 
 @property(nonatomic,strong) BBGroupModel *currentGroup;
-
+@property(nonatomic) TopicLoadStatus loadStatus;
+@property(nonatomic,strong) NSMutableArray *allTopicList;
 @end
