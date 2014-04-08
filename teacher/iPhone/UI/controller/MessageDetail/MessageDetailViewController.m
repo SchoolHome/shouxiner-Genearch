@@ -7,6 +7,7 @@
 //
 
 #define ActivityIndicatorTag 1000;
+#define isIPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
 #import "MessageDetailViewController.h"
 #import "MessageSoundPlayer.h"
@@ -1380,12 +1381,18 @@
     if ([self.delegate respondsToSelector:@selector(clickedMessageCell)]) {
         [self.delegate clickedMessageCell];
     }
-    
+    float height = 0.0f;
+    if (isIPhone5) {
+        height = 568.0f;
+    }else{
+        height = 480.0f;
+    }
+
     CGRect imageRect = imageCell.displayImageView.frame;
     CGRect superViewRect = [imageCell convertRect:imageRect toView:nil];
     self.messagePictrueController = [[MessagePictrueViewController alloc] initWithPictruePath:exModel.messageModel.filePath withRect:superViewRect];
     self.messagePictrueController.delegate = self;
-    self.messagePictrueController.view.frame = CGRectMake(0.0f, 0.0f, 320.0f, 480.0f);
+    self.messagePictrueController.view.frame = CGRectMake(0.0f, 0.0f, 320.0f, height);
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade]; 
     [[UIApplication sharedApplication].keyWindow addSubview:self.messagePictrueController.view]; 
     self.canPlayMagic = NO;

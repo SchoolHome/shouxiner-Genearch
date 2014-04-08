@@ -94,7 +94,7 @@
     [self addSubview:displayImageView];
     displayImageView.image = image;
     
-    timestampLabel.frame = CGRectMake((320 -50)/2, ellipticalBackground.frame.size.height+kCellTopPadding, 50, kTimestampLabelHeight);
+    timestampLabel.frame = CGRectMake((320 -50)/2, ellipticalBackground.frame.size.height+kCellTopPadding -2.0f, 50, kTimestampLabelHeight);
     timestampLabel.text = [self timeStringFromNumber:model.messageModel.date];
     
     self.resendButton.frame = CGRectMake(ellipticalBackground.frame.origin.x + ellipticalBackground.frame.size.width + 10.0f, 

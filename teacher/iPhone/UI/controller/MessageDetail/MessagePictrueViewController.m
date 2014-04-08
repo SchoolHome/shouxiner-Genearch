@@ -6,6 +6,9 @@
 //  Copyright (c) 2012年 fanxer. All rights reserved.
 //
 
+#define isIPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
+
 #import "MessagePictrueViewController.h"
 #import "CustomAlertView.h"
 
@@ -13,7 +16,7 @@
 // 图片的存储路径
 @property (nonatomic,strong) NSString *path;
 // 保存图片按钮
-@property (nonatomic,strong) UIButton *saveImageButton;
+//@property (nonatomic,strong) UIButton *saveImageButton;
 // 保存浮层
 @property (nonatomic,strong) LoadingView *loadingView;
 
@@ -32,7 +35,7 @@
 @implementation MessagePictrueViewController
 @synthesize imageView = _imageView , scrollView = _scrollView , path = _path;
 @synthesize imageViewRect = _imageViewRect , isSaveing = _isSaveing , isuserCloseImageView = _isuserCloseImageView;
-@synthesize delegate = _delegate , saveImageButton = _saveImageButton , isBeganShowAnimation = _isBeganShowAnimation;
+@synthesize delegate = _delegate , isBeganShowAnimation = _isBeganShowAnimation;
 @synthesize isEndCloseAnimation = _isEndCloseAnimation;
 @synthesize loadingView = _loadingView;
 
@@ -76,7 +79,6 @@
         [self.delegate beganCloseImageAnimation];
     }
     
-    [self.saveImageButton removeFromSuperview];
     
     CGRect closeRect = [self.scrollView convertRect:self.imageViewRect fromView:nil];
     
@@ -107,7 +109,15 @@
     CPLogInfo(@"图片的height：%f",image.size.height);
     self.imageView.image = image;
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f)];
+    float height = 0.0f;
+    if (isIPhone5) {
+        height = 568.0f;
+    }else{
+        height = 480.0f;
+    }
+
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, height)];
     [self.scrollView addSubview:self.imageView];
     
     self.scrollView.minimumZoomScale = 1.0f;
@@ -149,12 +159,6 @@
 // 动画的结束回调，回调方法内，增加下载按钮
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
     if ([animationID isEqualToString:@"ImageBegin"]) {
-        self.saveImageButton = [[UIButton alloc] initWithFrame:CGRectMake((320.0f-36.0f) / 2.0f, (480.0f - 36.0f - 15.0f), 36.0f, 36.0f)];
-        [self.saveImageButton setBackgroundImage:[UIImage imageNamed:@"btn_video_download.png"] forState:UIControlStateNormal];
-        [self.saveImageButton setBackgroundImage:[UIImage imageNamed:@"btn_video_downloadpress.png"] forState:UIControlStateHighlighted];
-        // 添加保存图片的点击事件
-        [self.saveImageButton addTarget:self action:@selector(saveImageToLocation) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.saveImageButton];
         self.isBeganShowAnimation = NO;
     }else {
         if ([self.delegate respondsToSelector:@selector(endCloseImageAnimation)]) {

@@ -132,7 +132,7 @@
     }
     
     
-     return imageRect.size.height + kTopAndButtomPadding*2  + kTimestampLabelHeight+1;
+     return imageRect.size.height + kTopAndButtomPadding*2  + kTimestampLabelHeight+1 + 2.0f;
 }
 
 +(CGFloat)heightOfVideoCell:(UIImage *)image{
