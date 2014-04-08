@@ -83,7 +83,7 @@
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     // Configure logging framework
     DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
     fileLogger.rollingFrequency = 60 * 60 * 24;
