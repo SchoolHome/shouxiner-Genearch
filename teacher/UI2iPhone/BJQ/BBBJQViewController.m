@@ -224,7 +224,7 @@
     
     NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];
     if (path) {
-        avatar.imageURL = [NSURL URLWithString:path];
+        avatar.image = [UIImage imageWithContentsOfFile:path];
     }
     
     [head addSubview:avatar];
