@@ -17,9 +17,10 @@ typedef enum{
 
     UITableView *xxxTableView;
     
-    NSMutableArray *allNotifyList;
     
-    NotifyLoadStatus loadStatus;
+    
+    
 }
-
+@property(nonatomic) NotifyLoadStatus loadStatus;
+@property(nonatomic,strong) NSMutableArray *allNotifyList;
 @end

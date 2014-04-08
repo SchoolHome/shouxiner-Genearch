@@ -14,11 +14,11 @@
     {
         NSArray *list = [PalmUIManagement sharedInstance].notifyList;
         
-        switch (loadStatus) {
+        switch (self.loadStatus) {
             case NotifyLoadStatusRefresh:
             {
-                [allNotifyList removeAllObjects];
-                [allNotifyList addObjectsFromArray:list];
+                [self.allNotifyList removeAllObjects];
+                [self.allNotifyList addObjectsFromArray:list];
                 
                 [xxxTableView.pullToRefreshView stopAnimating];
                 
@@ -30,7 +30,7 @@
                 break;
             case NotifyLoadStatusAppend:
             {
-                [allNotifyList addObjectsFromArray:list];
+                [self.allNotifyList addObjectsFromArray:list];
                 [xxxTableView.infiniteScrollingView stopAnimating];
             }
                 break;
@@ -58,7 +58,7 @@
     
     [self addObservers];
     
-    allNotifyList = [[NSMutableArray alloc] init];
+    self.allNotifyList = [[NSMutableArray alloc] init];
     
     self.title = @"新消息";
     
@@ -77,11 +77,11 @@
     [self.view addSubview:xxxTableView];
     [xxxTableView reloadData];
     
-    
+    __weak BBXXXViewController *wekSelf = self;
     // 刷新
     [xxxTableView addPullToRefreshWithActionHandler:^{
         
-        loadStatus = NotifyLoadStatusRefresh;
+        wekSelf.loadStatus = NotifyLoadStatusRefresh;
         [[PalmUIManagement sharedInstance] getNotiList:0 withLimit:30];
 
     }];
@@ -89,9 +89,9 @@
     // 追加
     [xxxTableView addInfiniteScrollingWithActionHandler:^{
         
-        loadStatus = NotifyLoadStatusAppend;
+        wekSelf.loadStatus = NotifyLoadStatusAppend;
         
-        [[PalmUIManagement sharedInstance] getNotiList:[allNotifyList count] withLimit:30];
+        [[PalmUIManagement sharedInstance] getNotiList:[wekSelf.allNotifyList count] withLimit:30];
         
     }];
     
@@ -105,7 +105,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [allNotifyList count];
+    return [self.allNotifyList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -117,7 +117,7 @@
         cell = [[BBXXXTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    [cell setData:allNotifyList[indexPath.row]];
+    [cell setData:self.allNotifyList[indexPath.row]];
     return cell;
 }
 
