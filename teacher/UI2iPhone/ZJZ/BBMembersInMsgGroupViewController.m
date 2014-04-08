@@ -40,7 +40,13 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZJZAdd"] style:UIBarButtonItemStylePlain target:self action:@selector(addMember)];
+        //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ZJZAdd"] style:UIBarButtonItemStyleDone target:self action:@selector(addMember)];
+        UIButton *add = [UIButton buttonWithType:UIButtonTypeCustom];
+        [add setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+        [add setBackgroundImage:[UIImage imageNamed:@"ZJZAdd"] forState:UIControlStateNormal];
+        [add addTarget:self action:@selector(addMember) forControlEvents:UIControlEventTouchUpInside];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:add];
+        
         
         UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
         [back setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
