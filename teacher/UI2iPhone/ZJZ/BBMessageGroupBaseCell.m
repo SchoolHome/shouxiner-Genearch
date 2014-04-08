@@ -39,17 +39,23 @@
         _dateLabel.backgroundColor = [UIColor clearColor];
         _dateLabel.font = [UIFont systemFontOfSize:12.f];
         [self.contentView addSubview:_dateLabel];
+        
+        _imageviewMessageAlert = [[UIImageView alloc] initWithFrame:CGRectZero];
+        UIImage *tempImage = [UIImage imageNamed:@"ZJZBaige"];
+        UIImage *image = [tempImage stretchableImageWithLeftCapWidth:tempImage.size.width/2.f topCapHeight:0];
+        [self.imageviewMessageAlert setImage:image];
+        [self.contentView addSubview:_imageviewMessageAlert];
         //未读数
-        _unreadedCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 10.f, 20.f, 20.f)];
-        _unreadedCountLabel.textAlignment = NSTextAlignmentCenter;
-        _unreadedCountLabel.backgroundColor = [UIColor orangeColor];
-        _unreadedCountLabel.font = [UIFont boldSystemFontOfSize:18.f];
-        _unreadedCountLabel.textColor = [UIColor whiteColor];
-        _unreadedCountLabel.font = [UIFont systemFontOfSize:9];
-        _unreadedCountLabel.layer.cornerRadius = 10.0;
-        _unreadedCountLabel.layer.borderWidth = 0.5;
-        _unreadedCountLabel.layer.borderColor = [[UIColor grayColor] CGColor];
-        [self.contentView addSubview:_unreadedCountLabel];
+//        _unreadedCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 10.f, 20.f, 20.f)];
+//        _unreadedCountLabel.textAlignment = NSTextAlignmentCenter;
+//        _unreadedCountLabel.backgroundColor = [UIColor orangeColor];
+//        _unreadedCountLabel.font = [UIFont boldSystemFontOfSize:18.f];
+//        _unreadedCountLabel.textColor = [UIColor whiteColor];
+//        _unreadedCountLabel.font = [UIFont systemFontOfSize:9];
+//        _unreadedCountLabel.layer.cornerRadius = 10.0;
+//        _unreadedCountLabel.layer.borderWidth = 0.5;
+//        _unreadedCountLabel.layer.borderColor = [[UIColor grayColor] CGColor];
+//        [self.contentView addSubview:_unreadedCountLabel];
 
         
     }
@@ -74,20 +80,46 @@
     
     if (msgGroup) {
         _msgGroup = msgGroup;
-        if ([msgGroup.unReadedCount integerValue] == 0) _unreadedCountLabel.hidden = YES;
-        else _unreadedCountLabel.hidden = NO;
+        if ([msgGroup.unReadedCount integerValue] == 0) self.imageviewMessageAlert.hidden = YES;
+        else self.imageviewMessageAlert.hidden = NO;
         
         
+//        if ([msgGroup.unReadedCount integerValue] < 100) {
+//            _unreadedCountLabel.text = [NSString stringWithFormat:@"%d",[msgGroup.unReadedCount integerValue]];
+//        }else {
+//            _unreadedCountLabel.text = @"99+";
+//        }
+//        [_unreadedCountLabel sizeThatFits:CGSizeMake(20, 20)];
+//        _unreadedCountLabel.layer.cornerRadius = 10.0;
+//        _unreadedCountLabel.layer.borderWidth = 0.5;
+//        _unreadedCountLabel.layer.borderColor = [[UIColor grayColor] CGColor];
+
+        if ([msgGroup.unReadedCount integerValue] < 100) {
+            CGSize unReaderTextSize = [[NSString stringWithFormat:@"%d",[msgGroup.unReadedCount integerValue]] sizeWithFont:[UIFont systemFontOfSize:12]];
+            [self.imageviewMessageAlert setFrame:CGRectMake(55/4*3.f-unReaderTextSize.width/2.f, -55/4.f+15.f, unReaderTextSize.width + 13.f, 20.f)];
+        }else {
+            CGSize unReaderTextSize = [[NSString stringWithFormat:@"%d+",99] sizeWithFont:[UIFont systemFontOfSize:12]];
+            [self.imageviewMessageAlert setFrame:CGRectMake(55/4*3.f-unReaderTextSize.width/2.f, -55/4.f+15.f, unReaderTextSize.width + 10.f, 20.f)];
+        }
+        
+        //未读数
+        
+        
+        if (!_unreadedCountLabel) {
+            _unreadedCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(3.f, 4.f, self.imageviewMessageAlert.frame.size.width-6, 12)];
+            _unreadedCountLabel.textColor = [UIColor colorWithRed:245/255.f green:245/255.f blue:245/255.f alpha:1.f];
+            _unreadedCountLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.f];
+            _unreadedCountLabel.backgroundColor = [UIColor clearColor];
+            _unreadedCountLabel.textAlignment = UITextAlignmentCenter;
+            [self.imageviewMessageAlert addSubview:_unreadedCountLabel];
+        }else {
+            [_unreadedCountLabel setFrame:CGRectMake(3.f, 4.f, self.imageviewMessageAlert.frame.size.width-6, 12)];
+        }
         if ([msgGroup.unReadedCount integerValue] < 100) {
             _unreadedCountLabel.text = [NSString stringWithFormat:@"%d",[msgGroup.unReadedCount integerValue]];
         }else {
             _unreadedCountLabel.text = @"99+";
         }
-        [_unreadedCountLabel sizeThatFits:CGSizeMake(20, 20)];
-        _unreadedCountLabel.layer.cornerRadius = 10.0;
-        _unreadedCountLabel.layer.borderWidth = 0.5;
-        _unreadedCountLabel.layer.borderColor = [[UIColor grayColor] CGColor];
-
         
 
         
