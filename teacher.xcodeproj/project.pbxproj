@@ -64,6 +64,8 @@
 		1975B76318E940F300587B80 /* EGOImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1975B74F18E940F300587B80 /* EGOImageLoader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1975B76418E940F300587B80 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1975B75218E940F300587B80 /* EGOImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1975B76E18E9427100587B80 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1975B76D18E9427100587B80 /* UIImage+Resize.m */; };
+		197FCF9F18F41D5000EE751B /* navBarBg44.png in Resources */ = {isa = PBXBuildFile; fileRef = 197FCF9D18F41D5000EE751B /* navBarBg44.png */; };
+		197FCFA018F41D5000EE751B /* navBarBg44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197FCF9E18F41D5000EE751B /* navBarBg44@2x.png */; };
 		1997CF6318D6A87800A839F7 /* GroupOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997CF6218D6A87800A839F7 /* GroupOperation.m */; };
 		19A83D4618D34C8900441FDE /* LoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A83D4218D34C8900441FDE /* LoginButton.png */; };
 		19A83D4718D34C8900441FDE /* LoginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A83D4318D34C8900441FDE /* LoginButton@2x.png */; };
@@ -1953,6 +1955,8 @@
 		1975B75218E940F300587B80 /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
 		1975B76C18E9427100587B80 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		1975B76D18E9427100587B80 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		197FCF9D18F41D5000EE751B /* navBarBg44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navBarBg44.png; sourceTree = "<group>"; };
+		197FCF9E18F41D5000EE751B /* navBarBg44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navBarBg44@2x.png"; sourceTree = "<group>"; };
 		1997CF6118D6A87800A839F7 /* GroupOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupOperation.h; sourceTree = "<group>"; };
 		1997CF6218D6A87800A839F7 /* GroupOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupOperation.m; sourceTree = "<group>"; };
 		19A83D4218D34C8900441FDE /* LoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButton.png; sourceTree = "<group>"; };
@@ -8845,6 +8849,8 @@
 		7AC51B8118CDD92D00AD1A8C /* UI2iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				197FCF9D18F41D5000EE751B /* navBarBg44.png */,
+				197FCF9E18F41D5000EE751B /* navBarBg44@2x.png */,
 				7A863C7018EB2C000090C430 /* SVPullToRefresh */,
 				7A47061018D967F2006449F3 /* OHAttributedLabel */,
 				1950ADA918D2B293002120C4 /* Resource */,
@@ -9991,6 +9997,7 @@
 				332D823B18C33F0A007A75D5 /* bt_im_profile_x@2x.png in Resources */,
 				332D81F918C33F0A007A75D5 /* zhuakuang16.gif in Resources */,
 				332D816118C33F0A007A75D5 /* huaixiao14.gif in Resources */,
+				197FCF9F18F41D5000EE751B /* navBarBg44.png in Resources */,
 				332D7E5818C33F0A007A75D5 /* alarm_im_btn_chatset_press@2x.png in Resources */,
 				332D804918C33F0A007A75D5 /* btn_pet_surepress@2x.png in Resources */,
 				332D816918C33F0A007A75D5 /* jingya05.gif in Resources */,
@@ -10223,6 +10230,7 @@
 				332D7F6A18C33F0A007A75D5 /* btn_im_chuanqing_white@2x.png in Resources */,
 				332D809918C33F0A007A75D5 /* psdh_29@2x.gif in Resources */,
 				332D81AA18C33F0A007A75D5 /* taiweiqu17.gif in Resources */,
+				197FCFA018F41D5000EE751B /* navBarBg44@2x.png in Resources */,
 				332D826B18C33F0A007A75D5 /* login_btn_sign@2x.png in Resources */,
 				332D7EF718C33F0A007A75D5 /* guide_pet6@2x.png in Resources */,
 				332D81C318C33F0A007A75D5 /* touxiao15.gif in Resources */,

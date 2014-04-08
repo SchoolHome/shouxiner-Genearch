@@ -69,7 +69,13 @@
     CPLogInfo(@"launchOptions %@",launchOptions);
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"checkVersion" options:0 context:nil];
     
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar_back"] forBarMetrics:UIBarMetricsDefault];
+    UIImage *image = nil;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+        image = [UIImage imageNamed:@"navbar_back"];
+    }else{
+        image = [UIImage imageNamed:@"navBarBg44"];
+    }
+    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
     NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,[UIFont boldSystemFontOfSize:18],UITextAttributeFont, nil];
     [[UINavigationBar appearance] setTitleTextAttributes:attributes];
