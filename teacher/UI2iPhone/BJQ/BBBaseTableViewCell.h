@@ -10,6 +10,7 @@
 #import "ColorUtil.h"
 #import "OHAttributedLabel.h"
 #import "EGOImageView.h"
+#import "EGOImageButton.h"
 
 #import "BBTopicModel.h"
 
@@ -61,6 +62,8 @@
 @protocol BBBaseTableViewCellDelegate <NSObject>
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell likeButtonTaped:(UIButton *)sender;
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell replyButtonTaped:(UIButton *)sender;
+
+-(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell imageButtonTaped:(EGOImageButton *)sender;
 
 @end
 

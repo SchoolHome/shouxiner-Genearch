@@ -15,10 +15,14 @@
 @interface MessagePictrueViewController ()
 // 图片的存储路径
 @property (nonatomic,strong) NSString *path;
+
+@property (nonatomic,strong) NSString *url;
 // 保存图片按钮
 //@property (nonatomic,strong) UIButton *saveImageButton;
 // 保存浮层
 @property (nonatomic,strong) LoadingView *loadingView;
+
+@property BOOL fromUrl;
 
 //计算UIImage的最大Frame
 -(CGRect) calculateImageRect;
@@ -33,7 +37,7 @@
 @end
 
 @implementation MessagePictrueViewController
-@synthesize imageView = _imageView , scrollView = _scrollView , path = _path;
+@synthesize imageView = _imageView , scrollView = _scrollView , path = _path,url= _url;
 @synthesize imageViewRect = _imageViewRect , isSaveing = _isSaveing , isuserCloseImageView = _isuserCloseImageView;
 @synthesize delegate = _delegate , isBeganShowAnimation = _isBeganShowAnimation;
 @synthesize isEndCloseAnimation = _isEndCloseAnimation;
@@ -51,6 +55,25 @@
         
         self.isBeganShowAnimation = YES;
         self.isEndCloseAnimation = NO;
+        
+    }
+    return self;
+}
+
+-(id) initWithPictrueURL : (NSString *) pictrueURL withRect : (CGRect) rect;{
+    self = [super init];
+    
+    if (self) {
+        
+        self.url = pictrueURL;
+        self.imageViewRect = rect;
+        self.isSaveing = NO;
+        self.isuserCloseImageView = NO;
+        
+        self.isBeganShowAnimation = YES;
+        self.isEndCloseAnimation = NO;
+        
+        self.fromUrl = YES;
         
     }
     return self;
@@ -102,12 +125,18 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.imageView = [[UIImageView alloc] initWithFrame:self.imageViewRect];
+    self.imageView = [[EGOImageView alloc] initWithFrame:self.imageViewRect];
     UIImage *image = [UIImage imageWithContentsOfFile:self.path];
+    
     CPLogInfo(@"图片的地址：%@",self.path);
     CPLogInfo(@"图片的width：%f",image.size.width);
     CPLogInfo(@"图片的height：%f",image.size.height);
     self.imageView.image = image;
+    
+    if (self.url) {
+        self.imageView.imageURL = [NSURL URLWithString:self.url];
+    }
+    
     
     float height = 0.0f;
     if (isIPhone5) {
@@ -150,6 +179,12 @@
     [UIImageView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     
     self.imageView.frame = [self calculateImageRect];
+    if (self.fromUrl) {
+        self.imageView.frame = CGRectMake(0, 0, 320, height);
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    
+    
     self.view.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor blackColor];
     

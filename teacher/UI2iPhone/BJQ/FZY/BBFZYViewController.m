@@ -12,6 +12,50 @@
 @implementation BBFZYViewController
 
 
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([@"updateImageResult" isEqualToString:keyPath])  // 图片上传成功
+    {
+        NSDictionary *dic = [PalmUIManagement sharedInstance].updateImageResult;
+        NSLog(@"dic %@",dic);
+        if (![dic[@"hasError"] boolValue]) { // 上传成功
+            NSDictionary *data = dic[@"data"];
+            if (data) {
+                [attachList addObject:[data JSONString]];
+            }
+            
+            if ([attachList count]==imageCount) {  // 所有都上传完毕
+                NSString *attach = [attachList componentsJoinedByString:@"***"];
+                [[PalmUIManagement sharedInstance] postTopic:[_currentGroup.groupid intValue]
+                                               withTopicType:_topicType
+                                                 withSubject:_selectedIndex
+                                                   withTitle:nil
+                                                 withContent:thingsTextView.text
+                                                  withAttach:attach];
+            }
+            
+        }else{  // 上传失败
+            [attachList removeAllObjects]; // 只要有一个失败，删除所有返回结果
+            [self showProgressWithText:@"图片发送失败" withDelayTime:0.5];
+        }
+    }
+    
+    if ([@"topicResult" isEqualToString:keyPath])  // 图片上传成功
+    {
+        NSDictionary *dic = [PalmUIManagement sharedInstance].topicResult;
+        NSLog(@"dic %@",dic);
+        
+        [attachList removeAllObjects]; // 清空列表
+        
+        if ([dic[@"hasError"] boolValue]) {
+            [self showProgressWithText:@"发送失败" withDelayTime:0.5];
+        }else{
+        
+            [self showProgressWithText:@"发送成功" withDelayTime:0.5];
+        }
+    }
+}
+
 -(void)setStyle:(int)style{
 
     _style = style;
@@ -22,21 +66,31 @@
             _hasClazz = YES;
             _placeholder = @"作业内容...";
             self.title = @"发作业";
+            
+            _topicType = 2;
             break;
         case 1:
             //
             _placeholder = @"通知内容...";
             self.title = @"发作通知";
+            
+            _topicType = 1;
+            
             break;
         case 2:
             //
             _placeholder = @"说点赞美话...";
             self.title = @"拍表现";
+            
+            _topicType = 4;
             break;
         case 3:
             //
             _placeholder = @"分享新鲜事...";
             self.title = @"随便说";
+            
+            _topicType = 4;
+            
             break;
         default:
             break;
@@ -45,7 +99,7 @@
 
 -(void)loading{
 
-    sleep(3);
+    //sleep(3);
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -89,13 +143,56 @@
 
 -(void)sendButtonTaped:(id)sender{
     
-   [self showWhileExecuting:@selector(loading) withText:@"发送" withDetailText:@"正在发送..."];
+    if ([thingsTextView.text length]==0) {  // 没有输入文本
+        return;
+    }
+    
+    imageCount = 0;
+    
+    for (int i = 0; i<7; i++) {
+        UIImage *image = [imageButton[i] backgroundImageForState:UIControlStateNormal];
+        if (image) {
+            NSData *data = UIImageJPEGRepresentation(image, 1.0f);
+            [[PalmUIManagement sharedInstance] updateUserImageFile:data withGroupID:[_currentGroup.groupid intValue]];
+            imageCount++;
+        }
+    }
+    
+    if (imageCount == 0) {  // 没有图片
+        //
+
+        [[PalmUIManagement sharedInstance] postTopic:[_currentGroup.groupid intValue]
+                                       withTopicType:_topicType
+                                         withSubject:_selectedIndex
+                                           withTitle:nil
+                                         withContent:thingsTextView.text
+                                          withAttach:nil];
+    }
+    
+
+    
+   [self showProgressWithText:@"正在发送..."];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"updateImageResult" options:0 context:NULL];
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"topicResult" options:0 context:NULL];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"updateImageResult"];
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"topicResult"];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    attachList = [[NSMutableArray alloc] init];
     
     // left
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
