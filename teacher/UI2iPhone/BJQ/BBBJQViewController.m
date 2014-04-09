@@ -103,7 +103,7 @@
     if ([@"notifyCount" isEqualToString:keyPath])  // 圈信息列表
     {
         NSDictionary *dict = [PalmUIManagement sharedInstance].notifyCount;
-        int count = [dict[@"count"] intValue];
+        int count = [dict[@"data"][@"count"] intValue];
         
         //int count = 3;
         
