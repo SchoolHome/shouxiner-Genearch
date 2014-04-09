@@ -10,6 +10,7 @@
 #import "CPHttpEngineConst.h"
 #import "PalmUIManagement.h"
 #import "CoreUtils.h"
+#import "NSString+MKNetworkKitAdditions.h"
 
 @interface UserProfileOperation ()
 @property (nonatomic) UserProfile type;
@@ -88,12 +89,17 @@
                             withContent : (NSString *) content withAttach : (NSString *) attach{
     if ([self initOperation]) {
         self.type = kPostTopic;
-        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/createTopic?groupid=%d&topictype=%d&subject=%d&title=%@&content=%@&attach=%@",K_HOST_NAME_OF_PALM_SERVER,groupid,topicType,subject,title,content,attach];
-        [self setHttpRequestGetWithUrl:urlStr];
+        
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:groupid],@"groupid",
+                                [NSNumber numberWithInt:topicType],@"topictype",
+                                [NSNumber numberWithInt:subject],@"subject",
+                                title,@"title",content,@"content",attach,@"attach",nil];
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/createTopic",K_HOST_NAME_OF_PALM_SERVER];
+        [self setHttpRequestPostWithUrl:urlStr params:params];
     }
     return self;
-
 }
+
 
 -(void) getUserProfile{
 #ifdef TEST
@@ -167,9 +173,9 @@
 
 -(void) postTopic{
 #ifdef TEST
-    [self.request addRequestHeader:@"Host" value:@"www.shouxiner.com"];
+    [self.dataRequest addRequestHeader:@"Host" value:@"www.shouxiner.com"];
 #endif
-    [self.request setRequestCompleted:^(NSDictionary *data){
+    [self.dataRequest setRequestCompleted:^(NSDictionary *data){
         dispatch_block_t updateTagBlock = ^{
             [PalmUIManagement sharedInstance].topicResult = data;
         };
