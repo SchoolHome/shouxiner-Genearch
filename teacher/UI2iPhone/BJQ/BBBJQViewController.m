@@ -116,7 +116,7 @@
     if ([@"userCredits" isEqualToString:keyPath])  // 刷新积分
     {
         NSDictionary *dict = [PalmUIManagement sharedInstance].userCredits;
-        NSNumber *credits = [dict valueForKey:@"credits"];
+        NSNumber *credits = dict[@"data"][@"credits"];
         point.text = [NSString stringWithFormat:@"           你已有%d积分可以兑换",[credits intValue]];
     }
     
@@ -346,6 +346,9 @@
     inputBar.delegate = self;
     
     [[PalmUIManagement sharedInstance] getGroupList];
+    
+    [[PalmUIManagement sharedInstance] getUserCredits];
+    
     
     [self checkNotify];
 }
