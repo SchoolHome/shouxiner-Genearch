@@ -15,6 +15,7 @@
 #import "SVPullToRefresh.h"
 #import "EGOImageView.h"
 
+#import "MessagePictrueViewController.h"
 
 typedef enum{
     TopicLoadStatusRefresh, // 刷新
@@ -29,7 +30,8 @@ UIActionSheetDelegate,
 BBBJDropdownViewDelegate,
 BBFSDropdownViewDelegate,
 BBBaseTableViewCellDelegate,
-BBInputViewDelegate>
+BBInputViewDelegate,
+UserMessageImageDelegate>
 {
     UIButton *titleButton;
     EGOImageView *avatar;
@@ -43,13 +45,11 @@ BBInputViewDelegate>
     
     BOOL hasNew;
     
-    
-    
-    
     int notifyCount;
 }
 
 @property(nonatomic,strong) BBGroupModel *currentGroup;
 @property(nonatomic) TopicLoadStatus loadStatus;
 @property(nonatomic,strong) NSMutableArray *allTopicList;
+
 @end

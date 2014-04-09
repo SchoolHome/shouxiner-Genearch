@@ -2,6 +2,8 @@
 #import "PalmViewController.h"
 #import "BBXKMViewController.h"
 #import "UIPlaceHolderTextView.h"
+#import "BBGroupModel.h"
+
 /*
  发作业
  */
@@ -23,7 +25,13 @@
     
     int selectCount;
 
+    int imageCount;
+    NSMutableArray *attachList;
 }
+
+@property(nonatomic,strong) BBGroupModel *currentGroup;
+
+@property int topicType;
 
 @property int selectedIndex;
 

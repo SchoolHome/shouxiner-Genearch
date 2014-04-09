@@ -8,10 +8,15 @@
 #import "CPUIModelManagement.h"
 #import "CPUIModelPersonalInfo.h"
 
+
+
 @interface BBBJQViewController ()
 @property (nonatomic,strong) BBTopicModel *tempTopModel;
 @property (nonatomic,strong) BBTopicModel *tempTopModelInput;
 @property (nonatomic,copy) NSString *inputText;
+
+@property (nonatomic,strong) MessagePictrueViewController *messagePictrueController;
+
 @end
 
 @implementation BBBJQViewController
@@ -80,9 +85,9 @@
     if ([@"notifyCount" isEqualToString:keyPath])  // 圈信息列表
     {
         NSDictionary *dict = [PalmUIManagement sharedInstance].notifyCount;
-        //int count = [dict[@"count"] intValue];
+        int count = [dict[@"count"] intValue];
         
-        int count = 3;
+        //int count = 3;
         
         if (notifyCount != count) {
             notifyCount = count;
@@ -502,6 +507,7 @@
     BBFZYViewController *fzy = [[BBFZYViewController alloc] init];
     fzy.hidesBottomBarWhenPushed = YES;
     fzy.style = index_;
+    fzy.currentGroup = _currentGroup;
     [self.navigationController pushViewController:fzy animated:YES];
 }
 
@@ -549,10 +555,33 @@
 // 评论
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell replyButtonTaped:(UIButton *)sender{
 
-    
     [[UIApplication sharedApplication].keyWindow addSubview:inputBar];
     inputBar.data = cell.data;
     [inputBar beginEdit];
+}
+
+// 点击大图
+-(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell imageButtonTaped:(EGOImageButton *)sender{
+
+    BBTopicModel *model = cell.data;
+    
+    float height = 0.0f;
+    if (isIPhone5) {
+        height = 568.0f;
+    }else{
+        height = 480.0f;
+    }
+    
+    CGRect imageRect = sender.frame;
+    CGRect superViewRect = [cell convertRect:imageRect toView:nil];
+    
+    NSString *url = model.imageList[0];
+    
+    self.messagePictrueController = [[MessagePictrueViewController alloc] initWithPictrueURL:url withRect:superViewRect];
+    self.messagePictrueController.delegate = self;
+    self.messagePictrueController.view.frame = CGRectMake(0.0f, 0.0f, 320.0f, height);
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.messagePictrueController.view];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -574,9 +603,21 @@
     
 }
 
+#pragma 展示图片的委托实现开始
+-(void)beganCloseImageAnimation{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+}
+-(void)endCloseImageAnimation
+{
+    
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
+
+
 
 @end

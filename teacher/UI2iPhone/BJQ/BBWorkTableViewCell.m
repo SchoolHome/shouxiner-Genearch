@@ -10,6 +10,13 @@
 
 @implementation BBWorkTableViewCell
 
+
+-(void)imageButtonTaped:(EGOImageButton *)sender{
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(bbBaseTableViewCell:imageButtonTaped:)]) {
+        [self.delegate bbBaseTableViewCell:self imageButtonTaped:sender];
+    }
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -32,8 +39,11 @@
         [self addSubview:content];
         
         for (int i = 0; i<8; i++) {
-            imageContent[i] = [[EGOImageView alloc] init];
+            imageContent[i] = [[EGOImageButton alloc] init];
+            imageContent[i].tag = i;
             [self addSubview:imageContent[i]];
+            [imageContent[i] addTarget:self action:@selector(imageButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+            
         }
     }
     
