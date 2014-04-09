@@ -160,7 +160,7 @@
     
     if (imageCount == 0) {  // 没有图片
         //
-
+        
         [[PalmUIManagement sharedInstance] postTopic:[_currentGroup.groupid intValue]
                                        withTopicType:_topicType
                                          withSubject:_selectedIndex
@@ -169,9 +169,8 @@
                                           withAttach:nil];
     }
     
-
-    
-   [self showProgressWithText:@"正在发送..."];
+    [thingsTextView resignFirstResponder];
+    [self showProgressWithText:@"正在发送..."];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
