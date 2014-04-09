@@ -25,11 +25,35 @@
             }
             
             if ([attachList count]==imageCount) {  // 所有都上传完毕
+                
+                NSString *title = nil;
+                switch (_style) {
+                    case 0:
+                        //
+                        title = @"最新作业";
+                        break;
+                    case 1:
+                        //
+                        title = @"最新通知";
+                        break;
+                    case 2:
+                        //
+                        title = @"拍表现";
+
+                        break;
+                    case 3:
+                        //
+                        title = @"随便说";
+                        break;
+                    default:
+                        break;
+                }
+                
                 NSString *attach = [attachList componentsJoinedByString:@"***"];
                 [[PalmUIManagement sharedInstance] postTopic:[_currentGroup.groupid intValue]
                                                withTopicType:_topicType
                                                  withSubject:_selectedIndex
-                                                   withTitle:@"1"
+                                                   withTitle:title
                                                  withContent:thingsTextView.text
                                                   withAttach:attach];
             }
@@ -73,7 +97,7 @@
         case 1:
             //
             _placeholder = @"通知内容...";
-            self.title = @"发作通知";
+            self.title = @"发通知";
             
             _topicType = 1;
             
@@ -177,10 +201,33 @@
     if (imageCount == 0) {  // 没有图片
         //
         
+        NSString *title = nil;
+        switch (_style) {
+            case 0:
+                //
+                title = @"最新作业";
+                break;
+            case 1:
+                //
+                title = @"最新通知";
+                break;
+            case 2:
+                //
+                title = @"拍表现";
+                
+                break;
+            case 3:
+                //
+                title = @"随便说";
+                break;
+            default:
+                break;
+        }
+        
         [[PalmUIManagement sharedInstance] postTopic:[_currentGroup.groupid intValue]
                                        withTopicType:_topicType
                                          withSubject:_selectedIndex
-                                           withTitle:nil
+                                           withTitle:title
                                          withContent:thingsTextView.text
                                           withAttach:nil];
     }
