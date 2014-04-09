@@ -46,6 +46,16 @@
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notifyList" options:0 context:NULL];
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self addObservers];
+}
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notifyList"];
+}
+
 -(void)backButtonTaped:(id)sender{
 
     [self.navigationController popViewControllerAnimated:YES];
@@ -56,7 +66,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self addObservers];
+//    [self addObservers];
     
     self.allNotifyList = [[NSMutableArray alloc] init];
     

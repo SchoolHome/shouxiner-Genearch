@@ -83,12 +83,12 @@ messagePictrueController = _messagePictrueController;
     [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"coupleMsgGroupTag" options:0 context:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShowNew:)
-                                                 name:UIKeyboardDidShowNotification
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
                                                object:nil];
 //
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHideNew:)
+                                             selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
@@ -117,11 +117,11 @@ messagePictrueController = _messagePictrueController;
 }
 
 
--(void) keyboardWillShowNew : (NSNotification *)not{
+-(void) keyboardWillShow : (NSNotification *)not{
     CGRect keyboardBounds;
     [[not.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
     NSNumber *duration = [not.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    
+    NSNumber *curve = [not.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
     // Need to translate the bounds to account for rotation.
     keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
 
@@ -133,14 +133,14 @@ messagePictrueController = _messagePictrueController;
     }
     
     // animations settings
-    [UIView animateWithDuration:0.0f delay:0.0f options:[duration integerValue] animations:^{
+    [UIView animateWithDuration:[duration integerValue] delay:0.0f options:[curve intValue] animations:^{
         self.IMView.frame = CGRectMake(0, 0, self.IMView.frame.size.width, height);
     } completion:^(BOOL finished) {
         [self.detailViewController refreshMessageData:self.modelMessageGroup withMove:YES withAnimated:NO withImportData:YES withRefreshMessage:YES];
     }];
 }
 
--(void) keyboardWillHideNew : (NSNotification *)not{
+-(void) keyboardWillHide : (NSNotification *)not{
     NSNumber *duration = [not.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     NSNumber *curve = [not.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
     

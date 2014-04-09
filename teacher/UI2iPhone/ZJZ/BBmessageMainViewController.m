@@ -51,7 +51,6 @@ currentStatus = _currentStatus,   isMoved = _isMoved ,buttonBack = _buttonBack ,
         
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keybordWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnter) name:UIApplicationWillEnterForegroundNotification object:nil];
         
         
