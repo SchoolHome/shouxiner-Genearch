@@ -31,7 +31,7 @@
     [super loadView];
     self.navigationItem.title = @"商城";
     shopWebview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [shopWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.shouxiner.com"]]];
+    [shopWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"]]];
     [shopWebview setDelegate:(id<UIWebViewDelegate>)self];
     
     activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];

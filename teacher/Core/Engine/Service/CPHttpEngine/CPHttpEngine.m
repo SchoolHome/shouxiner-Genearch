@@ -554,6 +554,7 @@ typedef enum httpEngineState HttpEngineState;
 //            [properties setValue:@"PHPSESSID" forKey:NSHTTPCookieName];
 //            NSHTTPCookie *cd = [[NSHTTPCookie alloc] initWithProperties:properties];
             [PalmUIManagement sharedInstance].php =cookie;
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
             
         }else if([cookie.name isEqualToString:@"SUID"]){
 //            NSDictionary *properties = [[NSMutableDictionary alloc] init];
@@ -561,6 +562,7 @@ typedef enum httpEngineState HttpEngineState;
 //            [properties setValue:@"SUID" forKey:NSHTTPCookieName];
 //            [properties setValue:@".shouxiner.com" forKey:NSHTTPCookieDomain];
             [PalmUIManagement sharedInstance].suid = cookie;
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
             tokenString = cookie.value;
         }
         

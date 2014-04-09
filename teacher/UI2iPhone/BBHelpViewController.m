@@ -30,7 +30,7 @@
 {
     [super loadView];
     helpWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [helpWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.shouxiner.com"]]];
+    [helpWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.shouxiner.com/res/mobilemall/helpl.html"]]];
     [helpWebView setDelegate:(id<UIWebViewDelegate>)self];
     
     activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];

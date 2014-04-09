@@ -30,7 +30,7 @@
 {
     [super loadView];
     feedbackWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [feedbackWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.shouxiner.com"]]];
+    [feedbackWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.shouxiner.com/advicebox/mobile_web_advice"]]];
     [feedbackWebView setDelegate:(id<UIWebViewDelegate>)self];
     
     activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
