@@ -118,8 +118,8 @@
         
     }else{  // 通知
     
-        mark.image = [UIImage imageNamed:@"BBOther"];
-        backimage = [UIImage imageNamed:@"BBOtherContent"];
+        mark.image = [UIImage imageNamed:@"BBComentNotification"];
+        backimage = [UIImage imageNamed:@"BBComentNotificationContent"];
         
     }
     
