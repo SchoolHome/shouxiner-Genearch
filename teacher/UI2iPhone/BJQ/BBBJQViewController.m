@@ -407,6 +407,11 @@
         roundedLayer.borderColor = [[UIColor whiteColor] CGColor];
         icon.image = [UIImage imageNamed:@"girl"];
         
+        NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];
+        if (path) {
+            icon.image = [UIImage imageWithContentsOfFile:path];
+        }
+        
         UILabel *msg = [[UILabel alloc] initWithFrame:CGRectMake(50, 9, 100, 20)];
         [newNotify addSubview:msg];
         msg.textColor = [UIColor whiteColor];
