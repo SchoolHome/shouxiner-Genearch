@@ -157,8 +157,8 @@
 //键盘偏移高度，editPanel的偏移值
 @property (nonatomic) CGFloat keybordHeight;
 //昵称
-@property (nonatomic , strong) UILabel *nickName;
-@property (nonatomic , strong) UILabel *contactName;
+//@property (nonatomic , strong) UILabel *nickName;
+//@property (nonatomic , strong) UILabel *contactName;
 //近况view
 //@property (nonatomic , strong) RecentView *recentView;
 //头像view (头像imageview+黄条，即A区)

@@ -456,10 +456,10 @@ messagePictrueController = _messagePictrueController;
             CPUIModelMessageGroupMember *member =  [self.modelMessageGroup.memberList objectAtIndex:0];
             CPUIModelUserInfo *userInfo = member.userInfo;
             //获取最新昵称
-            self.nickName.text = userInfo.nickName;
+//            self.nickName.text = userInfo.nickName;
             //获取通讯录名字
             if ([[CPUIModelManagement sharedInstance] getContactFullNameWithMobile:userInfo.mobileNumber]) {
-                self.contactName.text = [NSString stringWithFormat:@"(%@)",[[CPUIModelManagement sharedInstance] getContactFullNameWithMobile:userInfo.mobileNumber]];
+//                self.contactName.text = [NSString stringWithFormat:@"(%@)",[[CPUIModelManagement sharedInstance] getContactFullNameWithMobile:userInfo.mobileNumber]];
             }
             //获取最新头像
             headImage = [UIImage imageWithContentsOfFile:userInfo.headerPath];

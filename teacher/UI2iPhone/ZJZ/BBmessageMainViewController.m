@@ -24,7 +24,7 @@
 @implementation BBmessageMainViewController
 @synthesize  imageviewHeadImg = _imageviewHeadImg ,keybordHeight = _keybordHeight, singleProfileView = _singleProfileView,groupProfileView = _groupProfileView,
 imageviewHeadImgBGView = _imageviewHeadImgBGView,IMView = _IMView,profileView = _profileView,unReadedAlert = _unReadedAlert,unCoupleReadedAlert = _unCoupleReadedAlert,
-currentStatus = _currentStatus,   isMoved = _isMoved ,nickName = _nickName,buttonBack = _buttonBack , loadingView = _loadingView,contactName = _contactName , animationIsPlayed = _animationIsPlayed , keybordView = _keybordView;
+currentStatus = _currentStatus,   isMoved = _isMoved ,buttonBack = _buttonBack , loadingView = _loadingView, animationIsPlayed = _animationIsPlayed , keybordView = _keybordView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -134,24 +134,24 @@ currentStatus = _currentStatus,   isMoved = _isMoved ,nickName = _nickName,butto
     self.currentStatus = 2;
     
     //昵称
-    self.nickName = [[UILabel alloc] initWithFrame:CGRect_nickNameInStatusMid];
-    self.nickName.textColor = [UIColor whiteColor];
-    self.nickName.textAlignment = UITextAlignmentRight;
-    self.nickName.shadowColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.75f];
-    self.nickName.shadowOffset = CGSizeMake(0.f, 1.f);
-    self.nickName.font = [UIFont boldSystemFontOfSize:15.f];
-    self.nickName.backgroundColor = [UIColor clearColor];
-    [self.nickName setFrame:CGRect_nickNameInStatusMid];
-    [self.view addSubview:self.nickName];
+//    self.nickName = [[UILabel alloc] initWithFrame:CGRect_nickNameInStatusMid];
+//    self.nickName.textColor = [UIColor whiteColor];
+//    self.nickName.textAlignment = UITextAlignmentRight;
+//    self.nickName.shadowColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.75f];
+//    self.nickName.shadowOffset = CGSizeMake(0.f, 1.f);
+//    self.nickName.font = [UIFont boldSystemFontOfSize:15.f];
+//    self.nickName.backgroundColor = [UIColor clearColor];
+//    [self.nickName setFrame:CGRect_nickNameInStatusMid];
+//    [self.view addSubview:self.nickName];
     
     //通讯录姓名
-    self.contactName = [[UILabel alloc] initWithFrame:CGRect_contactNameInStatusDown];
-    self.contactName.textColor = [UIColor colorWithRed:201/255.f green:201/255.f blue:201/255.f alpha:1.0];
-    self.contactName.textAlignment = UITextAlignmentRight;
-    self.contactName.font = [UIFont systemFontOfSize:10.f];
-    self.contactName.backgroundColor = [UIColor clearColor];
-    [self.view insertSubview:self.contactName belowSubview:self.IMView];
-    self.contactName.hidden = YES;
+//    self.contactName = [[UILabel alloc] initWithFrame:CGRect_contactNameInStatusDown];
+//    self.contactName.textColor = [UIColor colorWithRed:201/255.f green:201/255.f blue:201/255.f alpha:1.0];
+//    self.contactName.textAlignment = UITextAlignmentRight;
+//    self.contactName.font = [UIFont systemFontOfSize:10.f];
+//    self.contactName.backgroundColor = [UIColor clearColor];
+//    [self.view insertSubview:self.contactName belowSubview:self.IMView];
+//    self.contactName.hidden = YES;
     
     //IM区域
     self.IMView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, self.screenHeight - 64.0f - [self.keybordView currentHeight])];
@@ -245,11 +245,11 @@ currentStatus = _currentStatus,   isMoved = _isMoved ,nickName = _nickName,butto
 //显示或隐藏头部近况和昵称部分
 -(void)changeStatusForNickNameAndRecent : (BOOL)isChanged :(CGRect)nickNameFrame{
     if (isChanged) {
-        [self.nickName setHidden:YES];
+//        [self.nickName setHidden:YES];
         //[self.nickName setFrame:CGRectMake(320-195.f, 460-55.f, 88.f , 14.f)];
     }else {
-        [self.nickName setFrame:nickNameFrame];
-        [self.nickName setHidden:NO];
+//        [self.nickName setFrame:nickNameFrame];
+//        [self.nickName setHidden:NO];
     }
     if (self.currentStatus == message_view_Status_Middle) {
 //        self.recentView.hidden = NO;

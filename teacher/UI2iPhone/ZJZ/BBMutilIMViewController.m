@@ -59,9 +59,9 @@
     [super viewDidLoad];
     
     self.title = @"群聊";
-    if (self.nickName) {
-        [self.nickName removeFromSuperview];
-    }
+//    if (self.nickName) {
+//        [self.nickName removeFromSuperview];
+//    }
     UIImageView *imageviewSex = (UIImageView *)[self.view viewWithTag:imageviewSexTag];
     if (imageviewSex) {
         [imageviewSex removeFromSuperview];
