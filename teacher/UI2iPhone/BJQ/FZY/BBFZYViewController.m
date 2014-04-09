@@ -29,7 +29,7 @@
                 [[PalmUIManagement sharedInstance] postTopic:[_currentGroup.groupid intValue]
                                                withTopicType:_topicType
                                                  withSubject:_selectedIndex
-                                                   withTitle:nil
+                                                   withTitle:@"1"
                                                  withContent:thingsTextView.text
                                                   withAttach:attach];
             }
