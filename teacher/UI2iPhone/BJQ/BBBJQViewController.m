@@ -8,7 +8,7 @@
 #import "CPUIModelManagement.h"
 #import "CPUIModelPersonalInfo.h"
 
-#import "MessagePictrueViewController.h"
+
 
 @interface BBBJQViewController ()
 @property (nonatomic,strong) BBTopicModel *tempTopModel;
@@ -578,7 +578,7 @@
     NSString *url = model.imageList[0];
     
     self.messagePictrueController = [[MessagePictrueViewController alloc] initWithPictrueURL:url withRect:superViewRect];
-    //self.messagePictrueController.delegate = self;
+    self.messagePictrueController.delegate = self;
     self.messagePictrueController.view.frame = CGRectMake(0.0f, 0.0f, 320.0f, height);
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     [[UIApplication sharedApplication].keyWindow addSubview:self.messagePictrueController.view];
@@ -602,6 +602,16 @@
                                        withTopicID:[self.tempTopModelInput.topicid longLongValue]];
     
 }
+
+#pragma 展示图片的委托实现开始
+-(void)beganCloseImageAnimation{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+}
+-(void)endCloseImageAnimation
+{
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
