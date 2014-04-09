@@ -309,7 +309,7 @@
         }
         
         NSIndexPath *bottomIndexPath = [NSIndexPath indexPathForRow:0 inSection:[self.exMessageModelArray count] - 1];
-        [self.messageTable scrollToRowAtIndexPath:bottomIndexPath atScrollPosition:UITableViewScrollPositionTop animated:animated];
+        [self.messageTable scrollToRowAtIndexPath:bottomIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:animated];
     }else {
         CPLogInfo(@"-------------------------------%f",self.messageTable.contentSize.height);
         CPLogInfo(@"%@",self.messageTable.tableHeaderView);

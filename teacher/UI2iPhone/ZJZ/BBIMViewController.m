@@ -136,7 +136,7 @@ messagePictrueController = _messagePictrueController;
     [UIView animateWithDuration:[duration integerValue] delay:0.0f options:[curve intValue] animations:^{
         self.IMView.frame = CGRectMake(0, 0, self.IMView.frame.size.width, height);
     } completion:^(BOOL finished) {
-        [self.detailViewController refreshMessageData:self.modelMessageGroup withMove:YES withAnimated:NO withImportData:YES withRefreshMessage:YES];
+        [self.detailViewController refreshMessageData:self.modelMessageGroup withMove:YES withAnimated:YES withImportData:YES withRefreshMessage:YES];
     }];
 }
 
