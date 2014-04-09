@@ -52,6 +52,7 @@
         }else{
         
             [self showProgressWithText:@"发送成功" withDelayTime:0.5];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }
@@ -97,12 +98,6 @@
     }
 }
 
--(void)loading{
-
-    //sleep(3);
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 -(void)kemuButtonTaped:(id)sender{
 
     BBXKMViewController *xkm = [[BBXKMViewController alloc] init];
@@ -121,9 +116,16 @@
 
 -(void)imagePickerButtonTaped:(id)sender{
 
-    if (selectCount<7) {
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
-        [sheet showInView:self.view];
+    if (_style == 1) { // 发通知只有3张图
+        if (selectCount<3) {
+            UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
+            [sheet showInView:self.view];
+        }
+    }else{
+        if (selectCount<7) {
+            UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
+            [sheet showInView:self.view];
+        }
     }
 }
 
@@ -144,17 +146,31 @@
 -(void)sendButtonTaped:(id)sender{
     
     if ([thingsTextView.text length]==0) {  // 没有输入文本
+        
+        [self showProgressWithText:@"请输入文字" withDelayTime:0.1];
+        
         return;
     }
     
     imageCount = 0;
     
-    for (int i = 0; i<7; i++) {
-        UIImage *image = [imageButton[i] backgroundImageForState:UIControlStateNormal];
-        if (image) {
-            NSData *data = UIImageJPEGRepresentation(image, 1.0f);
-            [[PalmUIManagement sharedInstance] updateUserImageFile:data withGroupID:[_currentGroup.groupid intValue]];
-            imageCount++;
+    if (_style==1) {
+        for (int i = 0; i<3; i++) {
+            UIImage *image = [imageButton[i] backgroundImageForState:UIControlStateNormal];
+            if (image) {
+                NSData *data = UIImageJPEGRepresentation(image, 1.0f);
+                [[PalmUIManagement sharedInstance] updateUserImageFile:data withGroupID:[_currentGroup.groupid intValue]];
+                imageCount++;
+            }
+        }
+    }else{
+        for (int i = 0; i<7; i++) {
+            UIImage *image = [imageButton[i] backgroundImageForState:UIControlStateNormal];
+            if (image) {
+                NSData *data = UIImageJPEGRepresentation(image, 1.0f);
+                [[PalmUIManagement sharedInstance] updateUserImageFile:data withGroupID:[_currentGroup.groupid intValue]];
+                imageCount++;
+            }
         }
     }
     
@@ -231,23 +247,46 @@
     roundedLayer2.borderWidth = 1;
     roundedLayer2.borderColor = [[UIColor lightGrayColor] CGColor];
     
-    for (int i = 0; i<8; i++) {
-        imageButton[i] = [UIButton buttonWithType:UIButtonTypeCustom];
-        imageButton[i].frame = CGRectMake(35+i*65, 105, 55, 55);
+    
+    if (_style == 1) { // 发通知只有3张图
         
-        if (i>3) {
-            imageButton[i].frame = CGRectMake(35+(i-4)*65, 105+65, 55, 55);
+        for (int i = 0; i<4; i++) {
+            imageButton[i] = [UIButton buttonWithType:UIButtonTypeCustom];
+            imageButton[i].frame = CGRectMake(35+i*65, 105, 55, 55);
+
+            imageButton[i].backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+            [self.view addSubview:imageButton[i]];
+            
+            if (i<3) {
+                [imageButton[i] addTarget:self action:@selector(imageButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+            }else{
+                [imageButton[i] setBackgroundImage:[UIImage imageNamed:@"BBSendAddImage"] forState:UIControlStateNormal];
+                [imageButton[i] addTarget:self action:@selector(imagePickerButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+            }
         }
         
-        imageButton[i].backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
-        [self.view addSubview:imageButton[i]];
+        imageBack.frame = CGRectMake(15, 95, 320-30, 75);
         
-        if (i<7) {
-            [imageButton[i] addTarget:self action:@selector(imageButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
-        }else{
-        
-            [imageButton[i] setBackgroundImage:[UIImage imageNamed:@"BBSendAddImage"] forState:UIControlStateNormal];
-            [imageButton[i] addTarget:self action:@selector(imagePickerButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+    
+        for (int i = 0; i<8; i++) {
+            imageButton[i] = [UIButton buttonWithType:UIButtonTypeCustom];
+            imageButton[i].frame = CGRectMake(35+i*65, 105, 55, 55);
+            
+            if (i>3) {
+                imageButton[i].frame = CGRectMake(35+(i-4)*65, 105+65, 55, 55);
+            }
+            
+            imageButton[i].backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+            [self.view addSubview:imageButton[i]];
+            
+            if (i<7) {
+                [imageButton[i] addTarget:self action:@selector(imageButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+            }else{
+                
+                [imageButton[i] setBackgroundImage:[UIImage imageNamed:@"BBSendAddImage"] forState:UIControlStateNormal];
+                [imageButton[i] addTarget:self action:@selector(imagePickerButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
+            }
         }
     }
     
@@ -372,9 +411,18 @@
         image = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
 
-    if (selectCount<7) {
-        [imageButton[selectCount] setBackgroundImage:image forState:UIControlStateNormal];
-        selectCount++;
+    if (_style == 1) { // 发通知只有3张图
+        
+        if (selectCount<4) {
+            [imageButton[selectCount] setBackgroundImage:image forState:UIControlStateNormal];
+            selectCount++;
+        }
+    }else{
+    
+        if (selectCount<7) {
+            [imageButton[selectCount] setBackgroundImage:image forState:UIControlStateNormal];
+            selectCount++;
+        }
     }
     
     [self dismissModalViewControllerAnimated:YES];

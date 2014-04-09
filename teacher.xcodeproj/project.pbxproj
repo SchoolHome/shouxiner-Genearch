@@ -1802,6 +1802,10 @@
 		7A47062C18D967F2006449F3 /* OHASBasicMarkupParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A47062218D967F2006449F3 /* OHASBasicMarkupParser.m */; };
 		7A47062D18D967F2006449F3 /* OHASMarkupParserBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A47062418D967F2006449F3 /* OHASMarkupParserBase.m */; };
 		7A4D2A1B18DAEE2400C128B4 /* BBYZSShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D2A1A18DAEE2400C128B4 /* BBYZSShareViewController.m */; };
+		7A54E7C818F580E3003C9F36 /* BBAmILike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A54E7C718F580E3003C9F36 /* BBAmILike@2x.png */; };
+		7A54E7CA18F580F5003C9F36 /* BBAmILike.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A54E7C918F580F5003C9F36 /* BBAmILike.png */; };
+		7A54E7CC18F58101003C9F36 /* BBTopBGNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A54E7CB18F58101003C9F36 /* BBTopBGNew.png */; };
+		7A54E7CE18F58109003C9F36 /* BBTopBGNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A54E7CD18F58109003C9F36 /* BBTopBGNew@2x.png */; };
 		7A59194918D6BDA500C03DED /* BBFTZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A59193C18D6BDA500C03DED /* BBFTZViewController.m */; };
 		7A59194A18D6BDA500C03DED /* BBFZYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A59193F18D6BDA500C03DED /* BBFZYViewController.m */; };
 		7A59194B18D6BDA500C03DED /* BBPBXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A59194218D6BDA500C03DED /* BBPBXViewController.m */; };
@@ -4265,6 +4269,10 @@
 		7A47062418D967F2006449F3 /* OHASMarkupParserBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHASMarkupParserBase.m; sourceTree = "<group>"; };
 		7A4D2A1918DAEE2400C128B4 /* BBYZSShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBYZSShareViewController.h; sourceTree = "<group>"; };
 		7A4D2A1A18DAEE2400C128B4 /* BBYZSShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBYZSShareViewController.m; sourceTree = "<group>"; };
+		7A54E7C718F580E3003C9F36 /* BBAmILike@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBAmILike@2x.png"; sourceTree = "<group>"; };
+		7A54E7C918F580F5003C9F36 /* BBAmILike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBAmILike.png; sourceTree = "<group>"; };
+		7A54E7CB18F58101003C9F36 /* BBTopBGNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBTopBGNew.png; sourceTree = "<group>"; };
+		7A54E7CD18F58109003C9F36 /* BBTopBGNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBTopBGNew@2x.png"; sourceTree = "<group>"; };
 		7A59193B18D6BDA500C03DED /* BBFTZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBFTZViewController.h; sourceTree = "<group>"; };
 		7A59193C18D6BDA500C03DED /* BBFTZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBFTZViewController.m; sourceTree = "<group>"; };
 		7A59193E18D6BDA500C03DED /* BBFZYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBFZYViewController.h; sourceTree = "<group>"; };
@@ -8779,6 +8787,10 @@
 		7AA5000518DF168600FC59C4 /* BJQ */ = {
 			isa = PBXGroup;
 			children = (
+				7A54E7CD18F58109003C9F36 /* BBTopBGNew@2x.png */,
+				7A54E7CB18F58101003C9F36 /* BBTopBGNew.png */,
+				7A54E7C918F580F5003C9F36 /* BBAmILike.png */,
+				7A54E7C718F580E3003C9F36 /* BBAmILike@2x.png */,
 				7A46B21518F44CCC006AEA00 /* BBheart.png */,
 				7A46B21318F44CC4006AEA00 /* BBheart@2x.png */,
 				7A334B0B18F2DE60001F57C4 /* BBFTZ.png */,
@@ -9752,6 +9764,7 @@
 				332D7E9D18C33F0A007A75D5 /* icon_im_ss_onbar@2x.png in Resources */,
 				332D805418C33F0A007A75D5 /* tingnide03@2x.gif in Resources */,
 				332D7ED618C33F0A007A75D5 /* headpic_gray_man_50x50@2x.png in Resources */,
+				7A54E7C818F580E3003C9F36 /* BBAmILike@2x.png in Resources */,
 				7A334B0518F2C49F001F57C4 /* BBCancelSendButton.png in Resources */,
 				332D814118C33F0A007A75D5 /* han18.gif in Resources */,
 				332D829018C33F0A007A75D5 /* tiaodou_e@2x.png in Resources */,
@@ -10173,6 +10186,7 @@
 				7A334B2118F2DE60001F57C4 /* BBFZYPress.png in Resources */,
 				332D808F18C33F0A007A75D5 /* psdh_19@2x.gif in Resources */,
 				332D823118C33F0A007A75D5 /* bt_im_profile_presswrite@2x.png in Resources */,
+				7A54E7CC18F58101003C9F36 /* BBTopBGNew.png in Resources */,
 				332D7F0D18C33F0A007A75D5 /* pb_bar_closefriend@2x.png in Resources */,
 				332D7F0918C33F0A007A75D5 /* pb_addcouple@2x.png in Resources */,
 				332D7FDB18C33F0A007A75D5 /* complete_morepress@2x.png in Resources */,
@@ -10228,6 +10242,7 @@
 				332D806A18C33F0A007A75D5 /* tingnide25@2x.gif in Resources */,
 				332D80A518C33F0A007A75D5 /* psdh_41@2x.gif in Resources */,
 				332D803218C33F0A007A75D5 /* btn_pet_back_press@2x.png in Resources */,
+				7A54E7CA18F580F5003C9F36 /* BBAmILike.png in Resources */,
 				332D805B18C33F0A007A75D5 /* tingnide10@2x.gif in Resources */,
 				7A076AC918E1CA0800911291 /* BBComentBG.png in Resources */,
 				332D824918C33F0A007A75D5 /* profile_btn_bar_psd_press@2x.png in Resources */,
@@ -10252,6 +10267,7 @@
 				7A334AE518F2BF6F001F57C4 /* BBBottomBG@2x.png in Resources */,
 				332D819418C33F0A007A75D5 /* se11.gif in Resources */,
 				332D81DC18C33F0A007A75D5 /* xiaohaha05.gif in Resources */,
+				7A54E7CE18F58109003C9F36 /* BBTopBGNew@2x.png in Resources */,
 				332D812318C33F0A007A75D5 /* haixiu02.gif in Resources */,
 				332D7F0E18C33F0A007A75D5 /* pb_bar_closefriend_press@2x.png in Resources */,
 				332D7F7A18C33F0A007A75D5 /* btn_im_play_white_white_black@2x.png in Resources */,

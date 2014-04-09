@@ -22,57 +22,75 @@
 @implementation BBBJQViewController
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([@"groupList" isEqualToString:keyPath])  // 班级列表
+    if ([@"groupListResult" isEqualToString:keyPath])  // 班级列表
     {
-        bjDropdownView.listData = [PalmUIManagement sharedInstance].groupList;
+        NSDictionary *result = [PalmUIManagement sharedInstance].groupListResult;
         
-        if ([bjDropdownView.listData count]>0) {
+        if (![result[@"hasError"] boolValue]) { // 没错
+            bjDropdownView.listData = [NSArray arrayWithArray:result[@"data"]];
             
-            NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-            int index = [def integerForKey:@"saved_topic_group_index"];  // 上次选中的班级
-            
-            if ([bjDropdownView.listData count]>index) {
-                _currentGroup = bjDropdownView.listData[index];
-                [titleButton setTitle:_currentGroup.alias forState:UIControlStateNormal];
-            }else{
-                _currentGroup = bjDropdownView.listData[0];
-                [titleButton setTitle:_currentGroup.alias forState:UIControlStateNormal];
+            if ([bjDropdownView.listData count]>0) {
+                
+                NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+                int index = [def integerForKey:@"saved_topic_group_index"];  // 上次选中的班级
+                
+                if ([bjDropdownView.listData count]>index) {
+                    _currentGroup = bjDropdownView.listData[index];
+                    [titleButton setTitle:_currentGroup.alias forState:UIControlStateNormal];
+                }else{
+                    _currentGroup = bjDropdownView.listData[0];
+                    [titleButton setTitle:_currentGroup.alias forState:UIControlStateNormal];
+                }
+                
+                //            if ([_currentGroup.avatar length]>0) {
+                //                avatar.imageURL = [NSURL URLWithString:_currentGroup.avatar];
+                //            }
+                
+                [bjqTableView triggerPullToRefresh];
+                
             }
-            
-//            if ([_currentGroup.avatar length]>0) {
-//                avatar.imageURL = [NSURL URLWithString:_currentGroup.avatar];
-//            }
-            
-            [bjqTableView triggerPullToRefresh];
-            
+        }else{
+            [self showProgressWithText:@"班级列表加载失败" withDelayTime:0.1];
         }
     }
     
-    if ([@"groupTopicList" isEqualToString:keyPath])  // 圈信息列表
+    if ([@"groupTopicListResult" isEqualToString:keyPath])  // 圈信息列表
     {
+        
+        NSDictionary *result = [PalmUIManagement sharedInstance].groupTopicListResult;
+        
         switch (self.loadStatus) {
             case TopicLoadStatusRefresh:
                 //
             {
-                NSArray *arr = [PalmUIManagement sharedInstance].groupTopicList;
-                [self.allTopicList removeAllObjects];
-                [self.allTopicList addObjectsFromArray:arr];
+                if ([result[@"hasError"] boolValue]) { // 有错
+                    [bjqTableView.pullToRefreshView stopAnimating];
+                }else{
                 
-                [bjqTableView.pullToRefreshView stopAnimating];
-                
-                NSDate *now = [CoreUtils convertDateToLocalTime:[NSDate date]];
-                NSString *date = [NSString stringWithFormat:@"最近更新: %@",[[now description] substringToIndex:16]];
-                [bjqTableView.pullToRefreshView setSubtitle:date forState:SVPullToRefreshStateAll];
-                
+                    NSArray *arr = [NSArray arrayWithArray:result[@"data"]];
+                    [self.allTopicList removeAllObjects];
+                    [self.allTopicList addObjectsFromArray:arr];
+                    
+                    [bjqTableView.pullToRefreshView stopAnimating];
+                    
+                    NSDate *now = [CoreUtils convertDateToLocalTime:[NSDate date]];
+                    NSString *date = [NSString stringWithFormat:@"最近更新: %@",[[now description] substringToIndex:16]];
+                    [bjqTableView.pullToRefreshView setSubtitle:date forState:SVPullToRefreshStateAll];
+                }
             }
                 break;
             case TopicLoadStatusAppend:
                 //
             {
-                NSArray *arr = [PalmUIManagement sharedInstance].groupTopicList;
-                [self.allTopicList addObjectsFromArray:arr];
+                if ([result[@"hasError"] boolValue]) { // 有错
+                    [bjqTableView.infiniteScrollingView stopAnimating];
+                }else{
+                    NSArray *arr = [NSArray arrayWithArray:result[@"data"]];
+                    [self.allTopicList addObjectsFromArray:arr];
+                    
+                    [bjqTableView.infiniteScrollingView stopAnimating];
+                }
                 
-                [bjqTableView.infiniteScrollingView stopAnimating];
             }
                 break;
             default:
@@ -158,8 +176,8 @@
 }
 
 -(void)addObservers{
-    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupList" options:0 context:NULL];
-    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupTopicList" options:0 context:NULL];
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupListResult" options:0 context:NULL];
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupTopicListResult" options:0 context:NULL];
     
     // 积分
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"userCredits" options:0 context:NULL];
@@ -170,6 +188,18 @@
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"commentResult" options:0 context:NULL];
 }
 
+-(void)removeObservers{
+
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"groupListResult"];
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"groupTopicListResult"];
+    
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"userCredits"];
+    
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notifyCount"];
+    
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"praiseResult"];
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"commentResult"];
+}
 
 -(void)checkNotify{
 
@@ -207,7 +237,7 @@
     
     self.allTopicList = [[NSMutableArray alloc] init];
     
-    [self addObservers];
+    
     
     notifyCount = 0;
     
@@ -219,8 +249,8 @@
 
     bjqTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -64, 320, self.view.bounds.size.height-20) style:UITableViewStylePlain];
     bjqTableView.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
-    bjqTableView.separatorColor = [UIColor clearColor];
-    bjqTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //bjqTableView.separatorColor = [UIColor clearColor];
+    //bjqTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     bjqTableView.dataSource = self;
     bjqTableView.delegate = self;
     [self.view addSubview:bjqTableView];
@@ -257,8 +287,8 @@
     head.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
     
     UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 214)];
-    headImage.backgroundColor = [UIColor orangeColor];
-    headImage.image = [UIImage imageNamed:@"BBTopBG"];
+    //headImage.backgroundColor = [UIColor orangeColor];
+    headImage.image = [UIImage imageNamed:@"BBTopBGNew"];
     [head addSubview:headImage];
     
     point = [[UILabel alloc] initWithFrame:CGRectMake(0, 190, 320, 23)];
@@ -320,9 +350,19 @@
     [self checkNotify];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self addObservers];
+    
+    [bjqTableView triggerPullToRefresh];
+}
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [inputBar endEdit];
+    
+    [self removeObservers];
 }
 
 #pragma mark - UITableViewDatasource

@@ -29,6 +29,7 @@
 // 有指示
 @property(nonatomic,strong) NSDictionary *notiList;
 // 班级列表
+@property(nonatomic,strong) NSDictionary *groupListResult;
 @property(nonatomic,strong) NSArray *groupList;
 // 班级Topic
 @property(nonatomic,strong) NSDictionary *groupTopic;
@@ -42,7 +43,8 @@
 // 新消息列表
 @property(nonatomic,strong) NSArray *notifyList;
 
-@property(nonatomic,strong) NSArray *groupTopicList;
+@property(nonatomic,strong) NSDictionary *groupTopicListResult;
+//@property(nonatomic,strong) NSArray *groupTopicList;
 // 上传图片结果
 @property(nonatomic,strong) NSDictionary *updateImageResult;
 // 发表Topic结果

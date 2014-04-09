@@ -141,11 +141,17 @@
 
 }
 
--(void)setData:(id)data{
+-(void)setData:(BBTopicModel *)data{
     _data = data;
     //_icon.image = [UIImage imageNamed:@"girl"];
     
     _icon.imageURL = [NSURL URLWithString:_data.author_avatar];
+    
+    if ([_data.am_i_like boolValue]) {
+        [_like setBackgroundImage:[UIImage imageNamed:@"BBAmILike"] forState:UIControlStateNormal];
+    }else{
+        [_like setBackgroundImage:[UIImage imageNamed:@"BBZan"] forState:UIControlStateNormal];
+    }
 }
 
 @end

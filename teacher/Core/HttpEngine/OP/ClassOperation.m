@@ -134,7 +134,17 @@
                     [arr addObject:model];
                 }
             }];
-            [PalmUIManagement sharedInstance].groupList = arr;
+            //[PalmUIManagement sharedInstance].groupList = arr;
+            
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setObject:data[@"hasError"] forKey:@"hasError"];
+            if ([arr count]>0) {
+                [dic setObject:arr forKey:@"data"];
+            }
+            
+            [PalmUIManagement sharedInstance].groupListResult = dic;
+            
+            
         };
         dispatch_async(dispatch_get_main_queue(), t);
     }];
@@ -158,8 +168,15 @@
                     [arr addObject:model];
                 }
             }];
-            [PalmUIManagement sharedInstance].groupTopicList = arr;
+            //[PalmUIManagement sharedInstance].groupTopicList = arr;
             
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setObject:data[@"hasError"] forKey:@"hasError"];
+            if ([arr count]>0) {
+                [dic setObject:arr forKey:@"data"];
+            }
+            
+            [PalmUIManagement sharedInstance].groupTopicListResult = dic;
         };
         dispatch_async(dispatch_get_main_queue(), t);
     }];
