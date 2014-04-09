@@ -100,7 +100,7 @@
         [bjqTableView reloadData];
     }
     
-    if ([@"notifyCount" isEqualToString:keyPath])  // 圈信息列表
+    if ([@"notifyCount" isEqualToString:keyPath])  // 新消息
     {
         NSDictionary *dict = [PalmUIManagement sharedInstance].notifyCount;
         int count = [dict[@"data"][@"count"] intValue];
