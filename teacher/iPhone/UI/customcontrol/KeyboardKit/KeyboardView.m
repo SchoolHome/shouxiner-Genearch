@@ -25,7 +25,7 @@
 
 //#define kSuperViewHeight 460
 
-@interface KeyboardView()<UIActionSheetDelegate>
+@interface KeyboardView()
 
 -(void)sendText:(NSString *)text;
 
@@ -300,17 +300,8 @@
     if (self.delegate&&[self.delegate respondsToSelector:@selector(keyboardViewDidDisappear)]) {
         [self.delegate keyboardViewDidDisappear];
     }
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"相片" otherButtonTitles:@"拍照", nil];
-    [sheet showInView:self.window];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSLog(@"%d",buttonIndex);
-    if (buttonIndex == 0) {
-        [self photoSwitchTapedIndex:0];
-    }else if (buttonIndex == 1){
-        [self photoSwitchTapedIndex:1];
-    }
+    
+    [self photoSwitchTapedIndex:0];
 }
 
 -(void)photoSwitchTapedIndex:(NSInteger) index{
@@ -437,7 +428,7 @@
     //[[UIApplication sharedApplication].keyWindow addSubview:photoSwitch];
 */
     
-    textView = [[KBGrowingTextView alloc] initWithFrame:CGRectMake(50, keyboardTopBar.frame.size.height-32-6, 220, 32)]; //一行高度32
+    textView = [[KBGrowingTextView alloc] initWithFrame:CGRectMake(45, keyboardTopBar.frame.size.height-61/2-6, 461/2, 63/2)]; //一行高度32
     textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
     
     textView.minNumberOfLines = 1;
@@ -458,7 +449,7 @@
     [keyboardTopBar addSubview:textViewBack];
     [keyboardTopBar addSubview:textView];
     
-    recordButton = [[KBRecordButton alloc] initWithFrame:CGRectMake(89/2, keyboardTopBar.frame.size.height- 64/2, 462/2, 64/2)];
+    recordButton = [[KBRecordButton alloc] initWithFrame:CGRectMake(45, keyboardTopBar.frame.size.height- 63/2, 461/2, 63/2)];
     [keyboardTopBar addSubview:recordButton];
     [recordButton addTarget:self action:@selector(recordBegin) forControlEvents:UIControlEventTouchDown];
     [recordButton addTarget:self action:@selector(recordEnd) forControlEvents:UIControlEventTouchUpInside];
@@ -506,12 +497,12 @@
     CGRect rect1 = CGRectMake(0, self.superview.frame.size.height - (height+22), 320, height+22);
     keyboardTopBar.frame = rect1;
     
-    textView.frame = CGRectMake(50, keyboardTopBar.frame.size.height-height-6+2, textView.frame.size.width, height);
+    textView.frame = CGRectMake(45, keyboardTopBar.frame.size.height-height-6+2, textView.frame.size.width, height);
     textViewBack.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height);
     
     topBarBack.frame = CGRectMake(0, 10, keyboardTopBar.frame.size.width, keyboardTopBar.frame.size.height-10); // 背景
-  //  petButton.frame = CGRectMake(6, keyboardTopBar.frame.size.height - 112/2, 87/2, 112/2);
-    recordButton.frame = CGRectMake(89/2, keyboardTopBar.frame.size.height- 64/2-5-1+2, 462/2, 64/2);
+  //  petButton.frame = CGRectMake(6, keyboardTopBar.frame.size.height - 112/2, 87/2, 112/2);keyboardTopBar.frame.size.height- 63/2-5-1+2
+    recordButton.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height);
     captureButton.frame = CGRectMake(570/2, keyboardTopBar.frame.size.height - 54/2-5-1+2, 54/2, 54/2);
     convertButton.frame = CGRectMake(7, keyboardTopBar.frame.size.height- 54/2-5-1+2, 54/2, 54/2);
   //  emotionButton.frame = CGRectMake(494/2, keyboardTopBar.frame.size.height - 62/2-5-1+2, 62/2, 62/2);
@@ -825,12 +816,12 @@
         rect1 = CGRectMake(0, self.keyboardTopBar.frame.origin.y + (growingTextView.frame.size.height - height), 320, height+22);
     }
     keyboardTopBar.frame = rect1;
-    textView.frame = CGRectMake(50, keyboardTopBar.frame.size.height-height-6+2, textView.frame.size.width, height);
+    textView.frame = CGRectMake(45, keyboardTopBar.frame.size.height-height-6+2, textView.frame.size.width, height);
     textViewBack.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height);
     
     topBarBack.frame = CGRectMake(0, 10, keyboardTopBar.frame.size.width, keyboardTopBar.frame.size.height-10); // 背景
     //  petButton.frame = CGRectMake(6, keyboardTopBar.frame.size.height - 112/2, 87/2, 112/2);
-    recordButton.frame = CGRectMake(89/2, keyboardTopBar.frame.size.height- 64/2-5-1+2, 462/2, 64/2);
+    recordButton.frame = CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, textView.frame.size.height);
     captureButton.frame = CGRectMake(570/2, keyboardTopBar.frame.size.height - 54/2-5-1+2, 54/2, 54/2);
     convertButton.frame = CGRectMake(7, keyboardTopBar.frame.size.height- 54/2-5-1+2, 54/2, 54/2);
   //  emotionButton.frame = CGRectMake(494/2, keyboardTopBar.frame.size.height - 62/2-5-1+2, 62/2, 62/2);

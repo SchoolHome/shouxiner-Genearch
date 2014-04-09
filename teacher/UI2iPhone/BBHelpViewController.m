@@ -29,6 +29,13 @@
 -(void)loadView
 {
     [super loadView];
+    self.navigationItem.title = @"帮助";
+    UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
+    [back setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+    [back setBackgroundImage:[UIImage imageNamed:@"ZJZBack.png"] forState:UIControlStateNormal];
+    [back addTarget:self action:@selector(backViewController) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
+    
     helpWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [helpWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.shouxiner.com/res/mobilemall/helpl.html"]]];
     [helpWebView setDelegate:(id<UIWebViewDelegate>)self];
@@ -56,6 +63,11 @@
 {
     [activityView stopAnimating];
     [activityView removeFromSuperview];
+}
+
+-(void)backViewController
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad

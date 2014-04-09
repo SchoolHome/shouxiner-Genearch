@@ -30,6 +30,13 @@
 {
     [super loadView];
     self.navigationItem.title = @"商城";
+    
+    UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
+    [back setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+    [back setBackgroundImage:[UIImage imageNamed:@"ZJZBack.png"] forState:UIControlStateNormal];
+    [back addTarget:self action:@selector(backViewController) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
+    
     shopWebview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [shopWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"]]];
     [shopWebview setDelegate:(id<UIWebViewDelegate>)self];
@@ -58,6 +65,11 @@
 {
     [activityView stopAnimating];
     [activityView removeFromSuperview];
+}
+
+-(void)backViewController
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
