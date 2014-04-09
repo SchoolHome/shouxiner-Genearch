@@ -33,11 +33,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"个人信息";
     
-    UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"me.png"]
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:self
-                                                                   action:@selector(backViewController:)];
-    self.navigationItem.leftBarButtonItem = backBtnItem;
+    UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
+    [back setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+    [back setBackgroundImage:[UIImage imageNamed:@"me.png"] forState:UIControlStateNormal];
+    [back addTarget:self action:@selector(backViewController) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     
     listData = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"头像", @"名字", nil],
                 [NSArray arrayWithObjects:@"性别", @"地区", @"个性签名", nil], nil];
@@ -245,7 +245,7 @@
     [picker dismissModalViewControllerAnimated:YES];
 }
 
--(void)backViewController:(UIBarButtonItem *)buttonItem
+-(void)backViewController
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -256,8 +256,9 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)dealloc
+-(void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"updateUserHeader"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"updateUserHeaderResult"];
 }

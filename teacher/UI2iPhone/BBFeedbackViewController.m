@@ -29,6 +29,13 @@
 -(void)loadView
 {
     [super loadView];
+    self.navigationItem.title = @"反馈和建议";
+    UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
+    [back setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+    [back setBackgroundImage:[UIImage imageNamed:@"ZJZBack.png"] forState:UIControlStateNormal];
+    [back addTarget:self action:@selector(backViewController) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
+    
     feedbackWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [feedbackWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.shouxiner.com/advicebox/mobile_web_advice"]]];
     [feedbackWebView setDelegate:(id<UIWebViewDelegate>)self];
@@ -57,6 +64,11 @@
 {
     [activityView stopAnimating];
     [activityView removeFromSuperview];
+}
+
+-(void)backViewController
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
