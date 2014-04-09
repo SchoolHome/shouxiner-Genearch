@@ -458,6 +458,9 @@
         image = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
 
+    NSData *data = UIImageJPEGRepresentation(image, 0.5f);
+    image = [[UIImage alloc] initWithData:data];
+    
     if (_style == 1) { // 发通知只有3张图
         
         if (selectCount<4) {
