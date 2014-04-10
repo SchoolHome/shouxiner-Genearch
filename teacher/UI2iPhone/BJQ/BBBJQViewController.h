@@ -46,10 +46,13 @@ UserMessageImageDelegate>
     BOOL hasNew;
     
     int notifyCount;
+    
+    BOOL isLoading;
 }
 
 @property(nonatomic,strong) BBGroupModel *currentGroup;
 @property(nonatomic) TopicLoadStatus loadStatus;
 @property(nonatomic,strong) NSMutableArray *allTopicList;
 
+@property BOOL isLoading;
 @end

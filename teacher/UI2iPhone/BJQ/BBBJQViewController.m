@@ -24,6 +24,9 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([@"groupListResult" isEqualToString:keyPath])  // 班级列表
     {
+        
+        self.isLoading = NO;
+        
         NSDictionary *result = [PalmUIManagement sharedInstance].groupListResult;
         
         if (![result[@"hasError"] boolValue]) { // 没错
@@ -56,6 +59,8 @@
     
     if ([@"groupTopicListResult" isEqualToString:keyPath])  // 圈信息列表
     {
+        
+        self.isLoading = NO;
         
         NSDictionary *result = [PalmUIManagement sharedInstance].groupTopicListResult;
         
@@ -234,6 +239,10 @@
 
 -(void)bjButtonTaped:(id)sender{
 
+    if (self.isLoading) {  // 屏蔽事件
+        return;
+    }
+    
     [[UIApplication sharedApplication].keyWindow addSubview:bjDropdownView];
     if (bjDropdownView.unfolded) {
         [bjDropdownView dismiss];
@@ -272,6 +281,8 @@
     // 刷新
     [bjqTableView addPullToRefreshWithActionHandler:^{
         
+        weakSelf.isLoading = YES;
+        
         weakSelf.loadStatus = TopicLoadStatusRefresh;
         
         [[PalmUIManagement sharedInstance] getGroupTopic:[weakSelf.currentGroup.groupid intValue] withTimeStamp:1 withOffset:0 withLimit:30];
@@ -279,6 +290,8 @@
     
     // 追加
     [bjqTableView addInfiniteScrollingWithActionHandler:^{
+        
+        weakSelf.isLoading = YES;
         
         weakSelf.loadStatus = TopicLoadStatusAppend;
         
@@ -366,6 +379,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    self.isLoading = NO;
     [self addObservers];
     
     [bjqTableView triggerPullToRefresh];
