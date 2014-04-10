@@ -51,6 +51,7 @@
     
     _contactsForGroupTableSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     _contactsForGroupTableSearchBar.placeholder = @"搜索";
+    _contactsForGroupTableSearchBar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_contactsForGroupTableSearchBar];
     _contactsForGroupTableSearchBar.delegate = self;
     
@@ -75,6 +76,19 @@
     }
     
     self.view.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
+    
+    if (!IOS7) {
+        for (UIView *subview in _contactsForGroupTableSearchBar.subviews)
+        {
+            if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")])
+            {
+                [subview removeFromSuperview];
+                break;
+            }
+        }
+        
+        //[_messageListTableSearchBar setScopeBarBackgroundImage:[UIImage imageNamed:@"ZJZSearch"]];
+    }
 	// Do any additional setup after loading the view.
 }
 
@@ -251,8 +265,8 @@
     }
     CPLogInfo(@"selected Items count == %d",self.selectedItemsArray.count);
     //修改UI
-    NSMutableArray *tempAllSelectedArray = [NSMutableArray arrayWithArray:self.selectedItemsArray];
-    [tempAllSelectedArray addObjectsFromArray:self.hidedUserInfosArray];
+    NSMutableArray *tempAllSelectedArray = [NSMutableArray arrayWithArray:self.hidedUserInfosArray];
+    [tempAllSelectedArray addObjectsFromArray:self.selectedItemsArray];
     [self.displaySelectedMembersVIew setSelectedMembersArray:tempAllSelectedArray];
 }
 #pragma mark DisplaySelectedViewDelegate
