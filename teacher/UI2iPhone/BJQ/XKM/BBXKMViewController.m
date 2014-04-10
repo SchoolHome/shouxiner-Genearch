@@ -26,9 +26,9 @@
     kmList = @[@"不指定科目",@"数学",@"语文"];
     //_selectedIndex = 0;
     
-    colorList = @[[UIColor redColor],
-                 [UIColor orangeColor],
-                 [UIColor magentaColor],
+    colorList = @[[UIColor colorWithRed:238/255.0 green:140/255.0 blue:35/255.0 alpha:1.0],
+                 [UIColor colorWithRed:250/255.0 green:80/255.0 blue:97/255.0 alpha:1.0],
+                 [UIColor colorWithRed:87/255.0 green:131/255.0 blue:237/255.0 alpha:1.0],
                  [UIColor brownColor],
                  [UIColor greenColor],
                  [UIColor yellowColor],
