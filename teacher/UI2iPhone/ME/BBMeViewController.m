@@ -17,6 +17,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CPUIModelManagement.h"
 #import "AppDelegate.h"
+#import "CPUIModelManagement.h"
+#import "CPUIModelPersonalInfo.h"
 
 @interface BBMeViewController ()
 
@@ -43,6 +45,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // 不要移除，用户其他页面更新头像后，此页面同步更新
+    [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"uiPersonalInfoTag" options:0 context:NULL];
+    
 	// Do any additional setup after loading the view.
     self.navigationItem.title = @"我";
     
@@ -118,20 +124,26 @@
     if (indexPath.section == 0) {
         [cell.headerImageView.layer setCornerRadius:35];
         [cell.headerImageView.layer setMasksToBounds:YES];
-        //网络读取头像
-        if (userProfile && [userProfile objectForKey:@"avatar"] != [NSNull null] && ![[userProfile objectForKey:@"avatar"] isEqualToString:@""]) {
-            NSLog(@"%@", [userProfile objectForKey:@"avatar"]);
-            NSMutableString *userAvatar = [[NSMutableString alloc] initWithString:[userProfile objectForKey:@"avatar"]];
-#ifdef TEST
-            NSRange range = [userAvatar rangeOfString:@"att0.shouxiner.com"];
-            if (range.length>0) {
-                [userAvatar replaceCharactersInRange:range withString:@"115.29.224.151"];
-            }
-#endif
-            [cell.headerImageView setImageURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", userAvatar]]];
+        NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];
+        if (path) {
+            cell.headerImageView.image = [UIImage imageWithContentsOfFile:path];
         }else{
             [cell.headerImageView setImage:[UIImage imageNamed:@"girl.png"]];
         }
+//        //网络读取头像
+//        if (userProfile && [userProfile objectForKey:@"avatar"] != [NSNull null] && ![[userProfile objectForKey:@"avatar"] isEqualToString:@""]) {
+//            NSLog(@"%@", [userProfile objectForKey:@"avatar"]);
+//            NSMutableString *userAvatar = [[NSMutableString alloc] initWithString:[userProfile objectForKey:@"avatar"]];
+//#ifdef TEST
+//            NSRange range = [userAvatar rangeOfString:@"att0.shouxiner.com"];
+//            if (range.length>0) {
+//                [userAvatar replaceCharactersInRange:range withString:@"115.29.224.151"];
+//            }
+//#endif
+//            [cell.headerImageView setImageURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", userAvatar]]];
+//        }else{
+//            [cell.headerImageView setImage:[UIImage imageNamed:@"girl.png"]];
+//        }
         
         [cell.textLabel setBackgroundColor:[UIColor clearColor]];
         [cell.textLabel setTextColor:[UIColor blackColor]];
@@ -234,6 +246,10 @@
             }
         }
     }
+    if ([@"uiPersonalInfoTag" isEqualToString:keyPath]) {
+        [meTableView reloadData];
+    }
+
 }
 
 -(void)logoutApp:(UIButton *)btn

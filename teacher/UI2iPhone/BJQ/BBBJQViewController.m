@@ -195,7 +195,7 @@
     
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"praiseResult" options:0 context:NULL];
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"commentResult" options:0 context:NULL];
-    [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"uiPersonalInfoTag" options:0 context:NULL];
+    
 }
 
 -(void)removeObservers{
@@ -209,7 +209,7 @@
     
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"praiseResult"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"commentResult"];
-    [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"uiPersonalInfoTag"];
+//    [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"uiPersonalInfoTag"];
 }
 
 -(void)checkNotify{
@@ -248,6 +248,8 @@
     
     self.allTopicList = [[NSMutableArray alloc] init];
     
+    // 不要移除，用户其他页面更新头像后，此页面同步更新
+    [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"uiPersonalInfoTag" options:0 context:NULL];
     
     
     notifyCount = 0;

@@ -9,9 +9,14 @@
 #import "BBMeProfileController.h"
 #import "BBMeProfileTableViewCell.h"
 #import "CPUIModelManagement.h"
+#import "CoreUtils.h"
+#import "CPUIModelManagement.h"
+#import "CPUIModelPersonalInfo.h"
+
 @interface BBMeProfileController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     UIImage *pickImage;
+    NSData *imageData;
 }
 @end
 
@@ -58,18 +63,19 @@
     }
 }
 
--(void) viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"updateUserHeader" options:0 context:nil];
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"updateUserHeaderResult" options:0 context:nil];
 }
-/*
--(void) viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"updateUserHeader"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"updateUserHeaderResult"];
 }
-*/
+
+
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqual:@"updateUserHeader"]) {
         NSDictionary *data = [[PalmUIManagement sharedInstance].updateUserHeader objectForKey:ASI_REQUEST_DATA];
@@ -84,6 +90,19 @@
         if ([[data objectForKey:@"errno"] integerValue] == 0) {
             BBMeProfileTableViewCell *cell = (BBMeProfileTableViewCell *)[profileTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             [cell.headerImageView setImage:pickImage];
+            
+            CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
+            NSString *filePath = [NSString stringWithFormat:@"/%@/",account.loginName];
+            [CoreUtils createPath:filePath];
+            NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];
+            NSRange range = [path rangeOfString:[NSString stringWithFormat:@"/%@/", account.loginName]];
+            NSString *writeFileName = [path substringFromIndex:range.location + range.length];
+            if ([CoreUtils writeToFileWithData:imageData file_name:writeFileName andPath:filePath]) {
+                dispatch_block_t updateTagBlock = ^{
+                    [[CPUIModelManagement sharedInstance] setUiPersonalInfoTag:0];
+                };
+                dispatch_async(dispatch_get_main_queue(), updateTagBlock);
+            }
         }else{
             
         }
@@ -236,11 +255,11 @@
         if (pickImage) {
             pickImage = nil;
         }
-        NSData *data;
-        data = UIImageJPEGRepresentation(image, 0.5f);
-        pickImage = [[UIImage alloc] initWithData:data];
+        
+        imageData = UIImageJPEGRepresentation(image, 0.5f);
+        pickImage = [[UIImage alloc] initWithData:imageData];
         //这里要处理image上传
-        [[PalmUIManagement sharedInstance] updateUserHeader:data];
+        [[PalmUIManagement sharedInstance] updateUserHeader:imageData];
     }
     [picker dismissModalViewControllerAnimated:YES];
 }
@@ -256,11 +275,10 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidDisappear:(BOOL)animated
+-(void)dealloc
 {
-    [super viewDidDisappear:animated];
-    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"updateUserHeader"];
-    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"updateUserHeaderResult"];
+//    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"updateUserHeader"];
+//    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"updateUserHeaderResult"];
 }
 
 @end
