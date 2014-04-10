@@ -147,7 +147,10 @@
     _data = data;
     //_icon.image = [UIImage imageNamed:@"girl"];
     
-    _icon.imageURL = [NSURL URLWithString:_data.author_avatar];
+    if (_data.author_avatar) {
+        _icon.imageURL = [NSURL URLWithString:_data.author_avatar];
+    }
+    
     
     if ([_data.am_i_like boolValue]) {
         [_like setBackgroundImage:[UIImage imageNamed:@"BBAmILike"] forState:UIControlStateNormal];
