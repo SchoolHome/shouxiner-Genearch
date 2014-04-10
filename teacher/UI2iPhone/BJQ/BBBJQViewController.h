@@ -47,7 +47,6 @@ UserMessageImageDelegate>
     
     int notifyCount;
     
-    BOOL isLoading;
 }
 
 @property(nonatomic,strong) BBGroupModel *currentGroup;
