@@ -36,6 +36,24 @@
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiList" options:0 context:NULL];
 }
 
+-(void)removeObservers{
+
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notiList"];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+    [self addObservers];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    [self removeObservers];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -43,7 +61,6 @@
     
     self.dataSource = [PalmUIModelCoding deserializeModel:CacheName];
     
-    [self addObservers];
     self.navigationItem.title = @"有指示";
     
     yzsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-20-49-44) style:UITableViewStylePlain];
