@@ -635,7 +635,7 @@
     CGRect imageRect = sender.frame;
     CGRect superViewRect = [cell convertRect:imageRect toView:nil];
     
-    NSString *url = model.imageList[0];
+    NSString *url = model.imageList[sender.tag];
     
     self.messagePictrueController = [[MessagePictrueViewController alloc] initWithPictrueURL:url withRect:superViewRect];
     self.messagePictrueController.delegate = self;
