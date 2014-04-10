@@ -41,12 +41,6 @@
         [back addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
 
-        
-
-        
-        
-        
-
     }
     return self;
 }

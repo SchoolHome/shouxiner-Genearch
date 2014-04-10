@@ -31,16 +31,27 @@
     return self;
 }
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"个人信息";
     
     UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
     [back setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
-    [back setBackgroundImage:[UIImage imageNamed:@"me.png"] forState:UIControlStateNormal];
+    [back setBackgroundImage:[UIImage imageNamed:@"ZJZBack"] forState:UIControlStateNormal];
     [back addTarget:self action:@selector(backViewController) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     
@@ -78,14 +89,24 @@
 
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqual:@"updateUserHeader"]) {
+        if ([[[PalmUIManagement sharedInstance].updateUserHeader objectForKey:ASI_REQUEST_HAS_ERROR] boolValue]) {
+            [self showProgressWithText:@"头像上传失败" withDelayTime:1.0f];
+            return;
+        }
         NSDictionary *data = [[PalmUIManagement sharedInstance].updateUserHeader objectForKey:ASI_REQUEST_DATA];
         if ([data[@"ret"] isEqual:@"OK"]) {
             NSArray *array = (NSArray *)data[@"data"];
             array = (NSArray *)array[0];
             NSString *fileName = array[4];
             [[PalmUIManagement sharedInstance] updateuserHeaderResult:fileName];
+        }else{
+            [self showProgressWithText:@"头像上传失败" withDelayTime:1.0f];
         }
     }else if([keyPath isEqual:@"updateUserHeaderResult"]){
+        if ([[[PalmUIManagement sharedInstance].updateUserHeaderResult objectForKey:ASI_REQUEST_HAS_ERROR] boolValue]) {
+            [self showProgressWithText:@"头像上传失败" withDelayTime:1.0f];
+            return;
+        }
         NSDictionary *data = [[PalmUIManagement sharedInstance].updateUserHeaderResult objectForKey:ASI_REQUEST_DATA];
         if ([[data objectForKey:@"errno"] integerValue] == 0) {
             BBMeProfileTableViewCell *cell = (BBMeProfileTableViewCell *)[profileTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
@@ -103,8 +124,9 @@
                 };
                 dispatch_async(dispatch_get_main_queue(), updateTagBlock);
             }
+            [self showProgressWithText:@"头像上传成功" withDelayTime:1.0f];
         }else{
-            
+            [self showProgressWithText:@"头像上传失败" withDelayTime:1.0f];
         }
     }else if([@"userProfile" isEqualToString:keyPath]){
         self.userProfile = [[PalmUIManagement sharedInstance].userProfile objectForKey:ASI_REQUEST_DATA];
@@ -259,6 +281,7 @@
         imageData = UIImageJPEGRepresentation(image, 0.5f);
         pickImage = [[UIImage alloc] initWithData:imageData];
         //这里要处理image上传
+        [self showProgressWithText:@"正在上传头像"];
         [[PalmUIManagement sharedInstance] updateUserHeader:imageData];
     }
     [picker dismissModalViewControllerAnimated:YES];

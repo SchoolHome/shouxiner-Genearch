@@ -127,6 +127,9 @@
     
     if ([@"praiseResult" isEqualToString:keyPath])  // 赞
     {
+        if ([[[PalmUIManagement sharedInstance].praiseResult objectForKey:ASI_REQUEST_HAS_ERROR] boolValue]) {
+            return;
+        }
         NSDictionary *result = [[PalmUIManagement sharedInstance].praiseResult objectForKey:ASI_REQUEST_DATA];
         if ([result[@"errno"] intValue] == 0) {
             BBPraiseModel *praise = [[BBPraiseModel alloc] init];
@@ -154,6 +157,9 @@
          @property(nonatomic,strong) NSNumber *uid;
          @property(nonatomic,strong) NSString *username;
          */
+        if ([[[PalmUIManagement sharedInstance].commentResult objectForKey:ASI_REQUEST_HAS_ERROR] boolValue]) {
+            return;
+        }
         NSDictionary *result = [[PalmUIManagement sharedInstance].commentResult objectForKey:ASI_REQUEST_DATA];
         if ([result[@"errno"] intValue] == 0) {
             BBCommentModel *comment = [[BBCommentModel alloc] init];
