@@ -71,6 +71,8 @@
 		19A83D4718D34C8900441FDE /* LoginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A83D4318D34C8900441FDE /* LoginButton@2x.png */; };
 		19A83D4818D34C8900441FDE /* LoginButtonPress.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A83D4418D34C8900441FDE /* LoginButtonPress.png */; };
 		19A83D4918D34C8900441FDE /* LoginButtonPress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A83D4518D34C8900441FDE /* LoginButtonPress@2x.png */; };
+		19AD08AF18F67F7900E8AA55 /* user_credit_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AD08AD18F67F7900E8AA55 /* user_credit_back.png */; };
+		19AD08B018F67F7900E8AA55 /* user_credit_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AD08AE18F67F7900E8AA55 /* user_credit_back@2x.png */; };
 		331447AB18C48621008B5B21 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 331447AA18C48621008B5B21 /* Login.m */; };
 		332D725518C33464007A75D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 332D725418C33464007A75D5 /* Foundation.framework */; };
 		332D725718C33464007A75D5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 332D725618C33464007A75D5 /* CoreGraphics.framework */; };
@@ -1973,6 +1975,8 @@
 		19A83D4318D34C8900441FDE /* LoginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginButton@2x.png"; sourceTree = "<group>"; };
 		19A83D4418D34C8900441FDE /* LoginButtonPress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButtonPress.png; sourceTree = "<group>"; };
 		19A83D4518D34C8900441FDE /* LoginButtonPress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginButtonPress@2x.png"; sourceTree = "<group>"; };
+		19AD08AD18F67F7900E8AA55 /* user_credit_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_credit_back.png; sourceTree = "<group>"; };
+		19AD08AE18F67F7900E8AA55 /* user_credit_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_credit_back@2x.png"; sourceTree = "<group>"; };
 		331447A918C48621008B5B21 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
 		331447AA18C48621008B5B21 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
 		332D725118C33464007A75D5 /* teacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = teacher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4495,6 +4499,8 @@
 		1950ADA918D2B293002120C4 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				19AD08AD18F67F7900E8AA55 /* user_credit_back.png */,
+				19AD08AE18F67F7900E8AA55 /* user_credit_back@2x.png */,
 				7A334AF618F2C49F001F57C4 /* Navbar */,
 				7A334AAD18F2BF37001F57C4 /* Tabbar */,
 				1927E4B218E5544E0079EA53 /* IMAndKeyboard */,
@@ -9251,6 +9257,7 @@
 				332D803A18C33F0A007A75D5 /* btn_pet_heart_press@2x.png in Resources */,
 				332D7EA018C33F0A007A75D5 /* im_couple_ssdownloadpress@2x.png in Resources */,
 				332D7E5B18C33F0A007A75D5 /* alarm_im_btn_sent@2x.png in Resources */,
+				19AD08AF18F67F7900E8AA55 /* user_credit_back.png in Resources */,
 				332D801018C33F0A007A75D5 /* shuohua12@2x.png in Resources */,
 				332D7F4518C33F0A007A75D5 /* index_top_btn_addressbook_press@2x.png in Resources */,
 				332D7E7C18C33F0A007A75D5 /* btn_im_emotion_tab01@2x.png in Resources */,
@@ -9831,6 +9838,7 @@
 				332D807618C33F0A007A75D5 /* yalida_QP@2x.gif in Resources */,
 				1927E4BE18E5544E0079EA53 /* ZJZReceiverText@2x.png in Resources */,
 				332D80AD18C33F0A007A75D5 /* psdh_49@2x.gif in Resources */,
+				19AD08B018F67F7900E8AA55 /* user_credit_back@2x.png in Resources */,
 				332D7F2818C33F0A007A75D5 /* wall_bg_group01@2x.png in Resources */,
 				332D7F3D18C33F0A007A75D5 /* headpic_index_70x70@2x.png in Resources */,
 				332D815A18C33F0A007A75D5 /* huaixiao07.gif in Resources */,
