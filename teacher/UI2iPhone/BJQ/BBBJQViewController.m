@@ -360,7 +360,6 @@
     
     [[PalmUIManagement sharedInstance] getUserCredits];
     
-    
     [self checkNotify];
 }
 
@@ -586,9 +585,10 @@
 //    }
     
     
-    self.loadStatus = TopicLoadStatusRefresh;
-    [[PalmUIManagement sharedInstance] getGroupTopic:[_currentGroup.groupid intValue] withTimeStamp:1 withOffset:0 withLimit:30];
+//    self.loadStatus = TopicLoadStatusRefresh;
+//    [[PalmUIManagement sharedInstance] getGroupTopic:[_currentGroup.groupid intValue] withTimeStamp:1 withOffset:0 withLimit:30];
     
+    [bjqTableView triggerPullToRefresh];
     
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     [def setInteger:index_ forKey:@"saved_topic_group_index"];
