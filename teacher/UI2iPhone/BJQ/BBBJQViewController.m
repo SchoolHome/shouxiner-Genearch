@@ -173,6 +173,15 @@
             [bjqTableView reloadData];
         }
     }
+    
+    if ([@"uiPersonalInfoTag" isEqualToString:keyPath]) {
+        NSLog(@"%@",[CPUIModelManagement sharedInstance].uiPersonalInfo);
+        NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];
+        if (path) {
+            avatar.image = [UIImage imageWithContentsOfFile:path];
+        }
+
+    }
 }
 
 -(void)addObservers{
@@ -186,6 +195,7 @@
     
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"praiseResult" options:0 context:NULL];
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"commentResult" options:0 context:NULL];
+    [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"uiPersonalInfoTag" options:0 context:NULL];
 }
 
 -(void)removeObservers{
@@ -199,6 +209,7 @@
     
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"praiseResult"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"commentResult"];
+    [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"uiPersonalInfoTag"];
 }
 
 -(void)checkNotify{
