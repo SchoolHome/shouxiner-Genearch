@@ -31,6 +31,7 @@
         
         title = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 280, 25)];
         [self addSubview:title];
+        title.backgroundColor = [UIColor clearColor];
         
         thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, 280, 200)];
         [self addSubview:thumbnail];
@@ -40,6 +41,7 @@
         content.font = [UIFont systemFontOfSize:12];
         content.numberOfLines = 0;
         [self addSubview:content];
+        content.backgroundColor = [UIColor clearColor];
         
         line = [[UIImageView alloc] init];
         line.backgroundColor = [UIColor lightGrayColor];

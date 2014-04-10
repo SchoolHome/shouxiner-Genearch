@@ -51,7 +51,8 @@
     
     self.navigationItem.title = @"找家长";
     
-    _messageListTableSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    _messageListTableSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 32)];
+    _messageListTableSearchBar.backgroundColor = [UIColor clearColor];
     //[_messageListTableSearchBar setBackgroundImage:[UIImage imageNamed:@"ZJZSearch"]];
     _messageListTableSearchBar.placeholder = @"搜索";
     [self.view addSubview:_messageListTableSearchBar];
@@ -67,6 +68,18 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
 	// Do any additional setup after loading the view.
+    if (!IOS7) {
+        for (UIView *subview in _messageListTableSearchBar.subviews)
+        {
+            if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")])
+            {
+                [subview removeFromSuperview];
+                break;  
+            }   
+        }
+        
+        //[_messageListTableSearchBar setScopeBarBackgroundImage:[UIImage imageNamed:@"ZJZSearch"]];
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -353,12 +353,14 @@
     [kemuButton addSubview:label1];
     label1.text = @"科目";
     label1.font = [UIFont boldSystemFontOfSize:18];
+    label1.backgroundColor = [UIColor clearColor];
     
     kemuLabel = [[UILabel alloc] initWithFrame:CGRectMake(320-30-100-30, 0, 100, 50)];
     kemuLabel.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
     kemuLabel.textAlignment = NSTextAlignmentRight;
     [kemuButton addSubview:kemuLabel];
     kemuLabel.text = kmList[0];
+    kemuLabel.backgroundColor = [UIColor clearColor];
     
 //    kejianButton = [UIButton buttonWithType:UIButtonTypeCustom];
 //    //kemuButton.backgroundColor = [UIColor brownColor];

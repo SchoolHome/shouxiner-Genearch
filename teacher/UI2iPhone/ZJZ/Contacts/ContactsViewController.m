@@ -82,6 +82,18 @@
     self.view.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
     //[[PalmUIManagement sharedInstance] getuserContacts];
 	// Do any additional setup after loading the view.
+    if (!IOS7) {
+        for (UIView *subview in _contactsTableSearchBar.subviews)
+        {
+            if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")])
+            {
+                [subview removeFromSuperview];
+                break;
+            }
+        }
+        
+        //[_messageListTableSearchBar setScopeBarBackgroundImage:[UIImage imageNamed:@"ZJZSearch"]];
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -33,11 +33,13 @@
         [self addSubview:title];
         title.font = [UIFont systemFontOfSize:14];
         title.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
+        title.backgroundColor = [UIColor clearColor];
         
         content = [[UILabel alloc] initWithFrame:CGRectMake(70, 30, 160, 40)];
         [self addSubview:content];
         content.font = [UIFont systemFontOfSize:14];
         content.numberOfLines = 2;
+        content.backgroundColor = [UIColor clearColor];
         
         like = [[UIImageView alloc] initWithFrame:CGRectMake(70, 35, 25, 25)];
         like.backgroundColor = [UIColor clearColor];
@@ -48,6 +50,7 @@
         time.textColor = [UIColor lightGrayColor];
         time.font = [UIFont systemFontOfSize:12];
         [self addSubview:time];
+        time.backgroundColor = [UIColor clearColor];
 
         thumbnail = [[EGOImageView alloc] initWithFrame:CGRectMake(240, 30, 60, 60)];
         [self addSubview:thumbnail];

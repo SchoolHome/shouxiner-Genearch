@@ -43,14 +43,17 @@
         title = [[UILabel alloc] initWithFrame:CGRectMake(70, 5, 230, 20)];
         [self addSubview:title];
         title.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
+        title.backgroundColor = [UIColor clearColor];
         
         time = [[UILabel alloc] initWithFrame:CGRectMake(260, 5, 50, 20)];
         [self addSubview:time];
         time.textColor =[UIColor grayColor];
+        time.backgroundColor = [UIColor clearColor];
         
         content = [[UILabel alloc] initWithFrame:CGRectMake(70, 30, 230, 20)];
         [self addSubview:content];
         content.textColor =[UIColor grayColor];
+        content.backgroundColor = [UIColor clearColor];
         
         
         title.font = [UIFont systemFontOfSize:14];

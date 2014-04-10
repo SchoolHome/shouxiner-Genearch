@@ -103,7 +103,7 @@
         cell.backgroundView.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.7];
         
         cell.selectedBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 83, 44)];
-        cell.selectedBackgroundView.backgroundColor = [UIColor orangeColor];
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:252/255.0 green:76/255.0 blue:9/255.0 alpha:1.0];
         
     }
     

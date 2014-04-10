@@ -19,23 +19,28 @@
         title = [[UILabel alloc] initWithFrame:CGRectMake(K_LEFT_PADDING, 0, 225, 20)];
         [self addSubview:title];
         title.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
+        title.backgroundColor = [UIColor clearColor];
         
         content = [[UILabel alloc] init];
         [self addSubview:content];
+        content.backgroundColor = [UIColor clearColor];
         
         link = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [self addSubview:link];
         [link setBackgroundImage:[UIImage imageNamed:@"BBNotification"] forState:UIControlStateNormal];
+        link.backgroundColor = [UIColor clearColor];
         
         linkIcon = [[EGOImageView alloc] initWithFrame:CGRectMake(10, 10, 45, 45)];
         [link addSubview:linkIcon];
         
         linkTitle = [[UILabel alloc] initWithFrame:CGRectMake(65, 5, 160, 20)];
         [link addSubview:linkTitle];
+        linkTitle.backgroundColor = [UIColor clearColor];
         
         linkContent = [[UILabel alloc] initWithFrame:CGRectMake(65, 25, 160, 30)];
         [link addSubview:linkContent];
         linkContent.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
+        linkContent.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

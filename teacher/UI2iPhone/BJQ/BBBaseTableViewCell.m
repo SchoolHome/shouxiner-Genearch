@@ -91,6 +91,7 @@
         _time.textColor = [UIColor lightGrayColor];
         _time.font = [UIFont systemFontOfSize:12];
         [self addSubview:_time];
+        _time.backgroundColor = [UIColor clearColor];
         
         _like = [[UIButton alloc] init];
         [self addSubview:_like];
@@ -120,6 +121,7 @@
         _likeContent.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
         _likeContent.font = [UIFont systemFontOfSize:12];
         [self addSubview:_likeContent];
+        _likeContent.backgroundColor = [UIColor clearColor];
         
         _relpyContent = [[OHAttributedLabel alloc] init];
         [self addSubview:_relpyContent];
@@ -145,7 +147,10 @@
     _data = data;
     //_icon.image = [UIImage imageNamed:@"girl"];
     
-    _icon.imageURL = [NSURL URLWithString:_data.author_avatar];
+    if (_data.author_avatar) {
+        _icon.imageURL = [NSURL URLWithString:_data.author_avatar];
+    }
+    
     
     if ([_data.am_i_like boolValue]) {
         [_like setBackgroundImage:[UIImage imageNamed:@"BBAmILike"] forState:UIControlStateNormal];

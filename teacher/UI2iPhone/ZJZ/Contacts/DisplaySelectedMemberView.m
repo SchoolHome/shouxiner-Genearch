@@ -108,8 +108,8 @@
         [headImageview setImage:avatarImage];
         [headImageview.layer setMasksToBounds:YES];
         headImageview.layer.borderWidth = 0;
-        headImageview.layer.cornerRadius = 26.0;
-        headImageview.layer.borderColor = [[UIColor clearColor] CGColor];
+        headImageview.layer.cornerRadius = 20.0;
+        headImageview.layer.borderColor = [[UIColor whiteColor] CGColor];
         [self.membersScrollview addSubview:headImageview];
         
 
@@ -139,8 +139,8 @@
             [headImageview setImage:avatarImage];
             [headImageview.layer setMasksToBounds:YES];
             headImageview.layer.borderWidth = 0;
-            headImageview.layer.cornerRadius = 26.0;
-            headImageview.layer.borderColor = [[UIColor clearColor] CGColor];
+            headImageview.layer.cornerRadius = 20.0;
+            headImageview.layer.borderColor = [[UIColor whiteColor] CGColor];
             [self.membersScrollview addSubview:headImageview];
         }
     }

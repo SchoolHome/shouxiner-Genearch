@@ -24,6 +24,9 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([@"groupListResult" isEqualToString:keyPath])  // 班级列表
     {
+        
+        self.isLoading = NO;
+        
         NSDictionary *result = [PalmUIManagement sharedInstance].groupListResult;
         
         if (![result[@"hasError"] boolValue]) { // 没错
@@ -56,6 +59,8 @@
     
     if ([@"groupTopicListResult" isEqualToString:keyPath])  // 圈信息列表
     {
+        
+        self.isLoading = NO;
         
         NSDictionary *result = [PalmUIManagement sharedInstance].groupTopicListResult;
         
@@ -234,6 +239,10 @@
 
 -(void)bjButtonTaped:(id)sender{
 
+    if (self.isLoading) {  // 屏蔽事件
+        return;
+    }
+    
     [[UIApplication sharedApplication].keyWindow addSubview:bjDropdownView];
     if (bjDropdownView.unfolded) {
         [bjDropdownView dismiss];
@@ -251,7 +260,7 @@
     // 不要移除，用户其他页面更新头像后，此页面同步更新
     [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"uiPersonalInfoTag" options:0 context:NULL];
     
-    
+
     notifyCount = 0;
     
     hasNew = YES;
@@ -274,6 +283,8 @@
     // 刷新
     [bjqTableView addPullToRefreshWithActionHandler:^{
         
+        weakSelf.isLoading = YES;
+        
         weakSelf.loadStatus = TopicLoadStatusRefresh;
         
         [[PalmUIManagement sharedInstance] getGroupTopic:[weakSelf.currentGroup.groupid intValue] withTimeStamp:1 withOffset:0 withLimit:30];
@@ -281,6 +292,8 @@
     
     // 追加
     [bjqTableView addInfiniteScrollingWithActionHandler:^{
+        
+        weakSelf.isLoading = YES;
         
         weakSelf.loadStatus = TopicLoadStatusAppend;
         
@@ -362,13 +375,13 @@
     
     [[PalmUIManagement sharedInstance] getUserCredits];
     
-    
     [self checkNotify];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    self.isLoading = NO;
     [self addObservers];
     
     [bjqTableView triggerPullToRefresh];
@@ -428,6 +441,7 @@
         UILabel *msg = [[UILabel alloc] initWithFrame:CGRectMake(50, 9, 100, 20)];
         [newNotify addSubview:msg];
         msg.textColor = [UIColor whiteColor];
+        msg.backgroundColor = [UIColor clearColor];
         msg.font = [UIFont boldSystemFontOfSize:13];
         msg.text = [NSString stringWithFormat:@"你有%d条新消息",notifyCount];
         
@@ -587,9 +601,10 @@
 //    }
     
     
-    self.loadStatus = TopicLoadStatusRefresh;
-    [[PalmUIManagement sharedInstance] getGroupTopic:[_currentGroup.groupid intValue] withTimeStamp:1 withOffset:0 withLimit:30];
+//    self.loadStatus = TopicLoadStatusRefresh;
+//    [[PalmUIManagement sharedInstance] getGroupTopic:[_currentGroup.groupid intValue] withTimeStamp:1 withOffset:0 withLimit:30];
     
+    [bjqTableView triggerPullToRefresh];
     
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     [def setInteger:index_ forKey:@"saved_topic_group_index"];
@@ -636,7 +651,7 @@
     CGRect imageRect = sender.frame;
     CGRect superViewRect = [cell convertRect:imageRect toView:nil];
     
-    NSString *url = model.imageList[0];
+    NSString *url = model.imageList[sender.tag];
     
     self.messagePictrueController = [[MessagePictrueViewController alloc] initWithPictrueURL:url withRect:superViewRect];
     self.messagePictrueController.delegate = self;
