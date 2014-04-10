@@ -238,7 +238,7 @@
     self.allTopicList = [[NSMutableArray alloc] init];
     
     
-    
+
     notifyCount = 0;
     
     hasNew = YES;
@@ -415,6 +415,7 @@
         UILabel *msg = [[UILabel alloc] initWithFrame:CGRectMake(50, 9, 100, 20)];
         [newNotify addSubview:msg];
         msg.textColor = [UIColor whiteColor];
+        msg.backgroundColor = [UIColor clearColor];
         msg.font = [UIFont boldSystemFontOfSize:13];
         msg.text = [NSString stringWithFormat:@"你有%d条新消息",notifyCount];
         

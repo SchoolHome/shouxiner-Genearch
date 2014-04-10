@@ -25,9 +25,11 @@
         title = [[UILabel alloc] initWithFrame:CGRectMake(K_LEFT_PADDING, 0, 225, 20)];
         [self addSubview:title];
         title.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
+        title.backgroundColor = [UIColor clearColor];
         
         content = [[UILabel alloc] init];
         [self addSubview:content];
+        content.backgroundColor = [UIColor clearColor];
         
         for (int i = 0; i<8; i++) {
             imageContent[i] = [[EGOImageButton alloc] init];
