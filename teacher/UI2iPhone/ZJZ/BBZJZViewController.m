@@ -114,8 +114,18 @@
     
     if ([keyPath isEqualToString:@"userMsgGroupListTag"]) {
         DDLogInfo(@"receive msgGroupList");
-        self.tableviewDisplayDataArray = [CPUIModelManagement sharedInstance].userMessageGroupList;
-        [self.messageListTableview reloadData];
+//        self.tableviewDisplayDataArray = [CPUIModelManagement sharedInstance].userMessageGroupList;
+        NSArray *array = [NSArray arrayWithArray:[CPUIModelManagement sharedInstance].userMessageGroupList];
+        NSMutableArray *arrayM = [[NSMutableArray alloc] initWithCapacity:10];
+        for (CPUIModelMessageGroup *g in array) {
+            if ([g.msgList count] != 0) {
+                [arrayM addObject:g];
+            }
+        }
+        self.tableviewDisplayDataArray = [NSArray arrayWithArray:arrayM];
+        if ([self.tableviewDisplayDataArray count] != 0) {
+            [self.messageListTableview reloadData];
+        }
     }
 }
 #pragma mark BBZJZViewControllerMethod

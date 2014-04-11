@@ -145,8 +145,8 @@
     [self.userName resignFirstResponder];
     [self.password resignFirstResponder];
     
-//    self.userName.text = @"13709832805";
-//    self.password.text = @"123456";
+    self.userName.text = @"13709832805";
+    self.password.text = @"123456";
     
     NSString *userName  = [self.userName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if ( nil == userName || [userName isEqualToString:@""] ) {
