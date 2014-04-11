@@ -642,18 +642,13 @@
     inputBar.data = cell.data;
     [inputBar beginEdit];
     
-//    //- (CGRect)rectForRowAtIndexPath:(NSIndexPath *)indexPath;
-//    
-//    NSIndexPath *indexPath = [bjqTableView indexPathForCell:cell];
-//    CGRect rect = [bjqTableView rectForRowAtIndexPath:indexPath];
-//    
-//    NSLog(@"%@",NSStringFromCGRect(rect));
-//    
-//    
-//    CGPoint p = CGPointMake(0, bjqTableView.contentOffset.y+(480-rect.size.height));
-//    
-//    [bjqTableView setContentOffset:p animated:YES];
+    NSIndexPath *indexPath = [bjqTableView indexPathForCell:cell];
+    CGRect r0 = [bjqTableView rectForRowAtIndexPath:indexPath];
+    CGRect r1 = [bjqTableView convertRect:r0 toView:nil];
+    int x = [UIScreen mainScreen].bounds.size.height-260-r1.origin.y-r1.size.height;
+    CGPoint p = CGPointMake(0, bjqTableView.contentOffset.y-x);
     
+    [bjqTableView setContentOffset:p animated:YES];
 }
 
 // 点击大图
