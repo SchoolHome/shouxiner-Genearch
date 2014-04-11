@@ -35,7 +35,14 @@
     [backButton addTarget:self action:@selector(backButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    yzsDetailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-20-44) style:UITableViewStylePlain];
+    int heightFix = 20;
+    if (self.screenHeight == 480.0f) {
+        heightFix = 20;
+    }else{
+        heightFix = 0;
+    }
+    
+    yzsDetailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-heightFix-44) style:UITableViewStylePlain];
     yzsDetailTableView.dataSource = self;
     yzsDetailTableView.delegate = self;
     [self.view addSubview:yzsDetailTableView];

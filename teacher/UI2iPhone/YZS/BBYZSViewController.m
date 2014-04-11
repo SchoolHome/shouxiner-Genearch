@@ -63,7 +63,14 @@
     
     self.navigationItem.title = @"有通知";
     
-    yzsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-20-49-44) style:UITableViewStylePlain];
+    int heightFix = 20;
+    if (self.screenHeight == 480.0f) {
+        heightFix = 20;
+    }else{
+        heightFix = 0;
+    }
+    
+    yzsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-heightFix-49-44) style:UITableViewStylePlain];
     yzsTableView.dataSource = self;
     yzsTableView.delegate = self;
     [self.view addSubview:yzsTableView];
