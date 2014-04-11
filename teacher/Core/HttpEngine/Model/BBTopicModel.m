@@ -62,6 +62,9 @@
                     [arr addObject:cm];
                     
                     NSUInteger len = [cm.username length]+2;
+                    
+                    DDLogCInfo(@"BBCommentModel");
+                    
                     NSString *text = [NSString stringWithFormat:@"%@: %@\n",cm.username,cm.comment];
                     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
                     [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4a7f9d"] range:NSMakeRange(0,len)];
@@ -78,7 +81,13 @@
         // 附件
         NSDictionary *attach = dict[@"attach"];
         if (attach) {
-            tp.imageList = attach[@"image"];
+            NSArray *list = attach[@"image"];
+            if ([list count]>=8) {  // 避免图片太多引起错误
+                tp.imageList = [list subarrayWithRange:NSMakeRange(0, 7)];
+            }else{
+                tp.imageList = list;
+            }
+            
             tp.fileList = attach[@"file"];
             tp.audioList = attach[@"audio"];
             tp.forword = [BBForwordModel fromJson:attach[@"forword"]];

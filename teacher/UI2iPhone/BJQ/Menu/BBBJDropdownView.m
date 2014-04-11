@@ -34,7 +34,7 @@
         _list.dataSource = self;
         _list.delegate = self;
         _list.scrollEnabled = NO;
-        _list.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.55];
+        _list.backgroundColor = [UIColor clearColor];//[UIColor colorWithRed:0 green:0 blue:0 alpha:0.55];
         _list.separatorColor = [UIColor darkGrayColor];//[UIColor colorWithHexString:@"515151"];
         
         [self addSubview:_list];
@@ -99,16 +99,17 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
         
-        cell.backgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 83, 44)];
+        cell.backgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kDropdownWidth, kDropdownCellHeight)];
         cell.backgroundView.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.7];
         
-        cell.selectedBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 83, 44)];
+        cell.selectedBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kDropdownWidth, kDropdownCellHeight)];
         cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:252/255.0 green:76/255.0 blue:9/255.0 alpha:1.0];
         
     }
     
     BBGroupModel *group = _listData[indexPath.row];
     
+    cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.textLabel.text = group.alias;
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     cell.textLabel.textAlignment = UITextAlignmentCenter;
