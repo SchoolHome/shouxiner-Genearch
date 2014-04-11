@@ -19,7 +19,12 @@
         nt.mid = dict[@"mid"];
         nt.sender = dict[@"sender"];
         nt.sender_name = dict[@"sender_name"];
-        nt.sender_avatar = dict[@"sender_avatar"];
+        
+        if ([dict[@"sender_avatar"] isKindOfClass:[NSNull class]]) {
+            nt.sender_avatar = nil;
+        }else{
+            nt.sender_avatar = dict[@"sender_avatar"];
+        }
         nt.topicid = dict[@"topicid"];
         nt.topic_title = dict[@"topic_title"];
         nt.type = dict[@"type"];

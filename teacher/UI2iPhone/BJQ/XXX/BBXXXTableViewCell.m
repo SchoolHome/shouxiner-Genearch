@@ -66,7 +66,12 @@
     //icon.image = [UIImage imageNamed:@"girl"];
     
     icon.image = nil;
-    icon.imageURL = [NSURL URLWithString:_data.sender_avatar];
+    
+    if (_data.sender_avatar) {
+        icon.imageURL = [NSURL URLWithString:_data.sender_avatar];
+    }
+    
+    //icon.imageURL = [NSURL URLWithString:_data.sender_avatar];
     
     title.text = _data.sender_name;
     content.text = data.topic_title;

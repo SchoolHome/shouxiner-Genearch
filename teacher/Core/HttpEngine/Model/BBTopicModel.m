@@ -13,6 +13,8 @@
 
 +(BBTopicModel *)fromJson:(NSDictionary *)dict{
     
+    NSLog(@"BBTopicModel start");
+    
     if (dict) {
         BBTopicModel *tp = [[BBTopicModel alloc] init];
         
@@ -21,7 +23,13 @@
         tp.content = dict[@"content"];
         tp.author_uid = dict[@"author_uid"];
         tp.author_username = dict[@"author_username"];
-        tp.author_avatar = dict[@"author_avatar"];
+        
+        if ([dict[@"author_avatar"] isKindOfClass:[NSNull class]]) {
+            tp.author_avatar = nil;
+        }else{
+            tp.author_avatar = dict[@"author_avatar"];
+        }
+        
         tp.ts = dict[@"ts"];
         tp.topictype = dict[@"topictype"];
         tp.subject = dict[@"subject"];
@@ -61,9 +69,12 @@
                 if (cm) {
                     [arr addObject:cm];
                     
+                    NSLog(@"cm.username  %@",cm.username);
+                    
                     NSUInteger len = [cm.username length]+2;
                     
-                    DDLogCInfo(@"BBCommentModel");
+                    NSLog(@"cm.username111  %@",cm.username);
+                    
                     
                     NSString *text = [NSString stringWithFormat:@"%@: %@\n",cm.username,cm.comment];
                     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
@@ -92,6 +103,9 @@
             tp.audioList = attach[@"audio"];
             tp.forword = [BBForwordModel fromJson:attach[@"forword"]];
         }
+        
+        
+        NSLog(@"BBTopicModel end");
         
         return tp;
     }
