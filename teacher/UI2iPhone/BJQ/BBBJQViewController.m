@@ -659,6 +659,8 @@
 // 点击大图
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell imageButtonTaped:(EGOImageButton *)sender{
 
+    [inputBar endEdit];
+    
     BBTopicModel *model = cell.data;
     
     float height = 0.0f;
@@ -701,7 +703,7 @@
 
 #pragma 展示图片的委托实现开始
 -(void)beganCloseImageAnimation{
-    [inputBar endEdit];
+    
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
 -(void)endCloseImageAnimation
