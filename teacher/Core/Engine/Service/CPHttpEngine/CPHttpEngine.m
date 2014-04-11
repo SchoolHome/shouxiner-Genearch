@@ -2647,7 +2647,7 @@ typedef enum httpEngineState HttpEngineState;
 #else
     NSAssert(NO, @"new feature must be used!\n");
 #endif
-    
+
     //if-modified-since ++
     if(timeStamp)
     {

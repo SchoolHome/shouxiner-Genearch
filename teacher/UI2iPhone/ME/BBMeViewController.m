@@ -263,6 +263,7 @@
 {
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"userProfile"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"userCredits"];
+    [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"uiPersonalInfoTag"];
 }
 
 @end

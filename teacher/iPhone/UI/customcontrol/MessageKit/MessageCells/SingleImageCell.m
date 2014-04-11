@@ -29,7 +29,11 @@
     if (self) {
         
         displayImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-
+//        displayImageView.userInteractionEnabled = YES;
+//        displayImageView.exclusiveTouch = YES;
+//        displayImageView addGestureRecognizer:[UITapGestureRecognizer
+//        [displayImageView addTarget:self action:@selector(backgroundTaped:) forControlEvents:UIControlEventTouchUpInside];
+        
         ellipticalBackground.exclusiveTouch = YES;
         [ellipticalBackground addTarget:self action:@selector(backgroundTaped:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -72,10 +76,9 @@
     }
     
     if (self.isBelongMe) {
-        ellipticalBackground.frame = CGRectMake(47.0f, kCellTopPadding, imageRect.size.width+2*kLeftAndRightPadding, imageRect.size.height+2*kTopAndButtomPadding);
-        
+        ellipticalBackground.frame = CGRectMake(47.0f, imageRect.origin.y, imageRect.size.width, imageRect.size.height);
     }else{
-        ellipticalBackground.frame = CGRectMake(320 - 47.0f, kCellTopPadding, imageRect.size.width+2*kLeftAndRightPadding, imageRect.size.height+2*kTopAndButtomPadding);
+        ellipticalBackground.frame = CGRectMake(320.0f - 47.0f - imageRect.size.width, imageRect.origin.y, imageRect.size.width, imageRect.size.height);
     }
     
 //    [self adaptEllipticalBackgroundImage];

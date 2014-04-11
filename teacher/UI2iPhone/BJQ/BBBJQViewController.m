@@ -220,7 +220,7 @@
     
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"praiseResult"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"commentResult"];
-//    [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"uiPersonalInfoTag"];
+
 }
 
 -(void)checkNotify{
@@ -700,5 +700,7 @@
 }
 
 
-
+-(void) dealloc{
+    [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"uiPersonalInfoTag"];
+}
 @end

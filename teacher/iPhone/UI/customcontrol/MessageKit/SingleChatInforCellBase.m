@@ -121,7 +121,7 @@
     self.avatar = avatar1;
     avatar1 = nil;
     [self addSubview:avatar];
-    [avatar addTarget:self action:@selector(avatarTaped:) forControlEvents:UIControlEventTouchUpInside];
+//    [avatar addTarget:self action:@selector(avatarTaped:) forControlEvents:UIControlEventTouchUpInside];
 //    avatar.layer.borderColor = [UIColor whiteColor].CGColor;
 //    avatar.layer.borderWidth = 2;
 //    avatar.layer.masksToBounds = YES;

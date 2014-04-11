@@ -967,6 +967,7 @@
             break;
         } 
     }
+    
     [self refreshSysUnReadedCount];
     [[CPUIModelManagement sharedInstance] setUserMessageGroupList:[oldUserMsgList sortedArrayUsingSelector:@selector(orderMsgGroupWithDate:)]];
     [[CPSystemEngine sharedInstance] updateTagByMsgGroupList];
@@ -1879,31 +1880,31 @@
             else 
             {
                 //create               
-//                CPDBModelMessageGroup *newMessageGroup = [[CPDBModelMessageGroup alloc] init];
-//                NSMutableArray *memberList = [[NSMutableArray alloc] init];
-//                CPDBModelMessageGroupMember *dbGroupMember = [[CPDBModelMessageGroupMember alloc] init];
-//                [dbGroupMember setUserName: dbUserInfo.name];
-//                [memberList addObject:dbGroupMember];
-//                [newMessageGroup setMemberList:memberList];//[memberList sortedArrayUsingSelector:@selector(orderNameWithGroupMember:)]];
-//                [newMessageGroup setRelationType:[NSNumber numberWithInt:newRelationType]];
-//                [newMessageGroup setType:[NSNumber numberWithInt:newMsgGroupType]];
-//                NSNumber *currentMsgGroupID = [[[CPSystemEngine sharedInstance] dbManagement] insertMessageGroupByMemberList:newMessageGroup];
-//                [[[CPSystemEngine sharedInstance] dbManagement] updateMessageWithGroupID:currentMsgGroupID
-//                                                                             andSendName:dbUserInfo.name];
-//                if (newRelationType==MSG_GROUP_RELATION_TYPE_COUPLE)
-//                {
-//                    CPDBModelMessageGroup *newInsertMsgGroup = [[[CPSystemEngine sharedInstance] dbManagement] getExistMsgGroupWithGroupID:currentMsgGroupID];
-//                    CPUIModelMessageGroup *coupleMsgGroup = [self uiMsgGroupConvertWithDbMsgGroup:newInsertMsgGroup];
-//                    [[CPUIModelManagement sharedInstance] setCoupleMsgGroup:coupleMsgGroup];
-//                    [[CPUIModelManagement sharedInstance] setCoupleModel:[ModelConvertUtils dbUserInfoToUi:dbUserInfo]];
-//                    [[CPSystemEngine sharedInstance] updateTagByCouple];
-//                    [[CPSystemEngine sharedInstance] updateTagByCoupleMsgGroup];
-//                }
-//                else 
-//                {
-//                    [self refreshMsgListWithMsgGroupID:currentMsgGroupID isCreated:NO ];
-//                }
-//                [updateMsgGroupArray addObject:currentMsgGroupID];
+                CPDBModelMessageGroup *newMessageGroup = [[CPDBModelMessageGroup alloc] init];
+                NSMutableArray *memberList = [[NSMutableArray alloc] init];
+                CPDBModelMessageGroupMember *dbGroupMember = [[CPDBModelMessageGroupMember alloc] init];
+                [dbGroupMember setUserName: dbUserInfo.name];
+                [memberList addObject:dbGroupMember];
+                [newMessageGroup setMemberList:memberList];//[memberList sortedArrayUsingSelector:@selector(orderNameWithGroupMember:)]];
+                [newMessageGroup setRelationType:[NSNumber numberWithInt:newRelationType]];
+                [newMessageGroup setType:[NSNumber numberWithInt:newMsgGroupType]];
+                NSNumber *currentMsgGroupID = [[[CPSystemEngine sharedInstance] dbManagement] insertMessageGroupByMemberList:newMessageGroup];
+                [[[CPSystemEngine sharedInstance] dbManagement] updateMessageWithGroupID:currentMsgGroupID
+                                                                             andSendName:dbUserInfo.name];
+                if (newRelationType==MSG_GROUP_RELATION_TYPE_COUPLE)
+                {
+                    CPDBModelMessageGroup *newInsertMsgGroup = [[[CPSystemEngine sharedInstance] dbManagement] getExistMsgGroupWithGroupID:currentMsgGroupID];
+                    CPUIModelMessageGroup *coupleMsgGroup = [self uiMsgGroupConvertWithDbMsgGroup:newInsertMsgGroup];
+                    [[CPUIModelManagement sharedInstance] setCoupleMsgGroup:coupleMsgGroup];
+                    [[CPUIModelManagement sharedInstance] setCoupleModel:[ModelConvertUtils dbUserInfoToUi:dbUserInfo]];
+                    [[CPSystemEngine sharedInstance] updateTagByCouple];
+                    [[CPSystemEngine sharedInstance] updateTagByCoupleMsgGroup];
+                }
+                else 
+                {
+                    [self refreshMsgListWithMsgGroupID:currentMsgGroupID isCreated:NO ];
+                }
+                [updateMsgGroupArray addObject:currentMsgGroupID];
             }
         }
     }
