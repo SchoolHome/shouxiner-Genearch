@@ -49,6 +49,11 @@
                     [str appendString:[NSString stringWithFormat:@"%@，",pr.username]];
                 }
             }];
+            
+            if ([str length]>0) {
+                [str deleteCharactersInRange:NSMakeRange([str length]-1, 1)];
+            }
+            
             tp.praises = arr;
             tp.praisesStr = str;
         }
