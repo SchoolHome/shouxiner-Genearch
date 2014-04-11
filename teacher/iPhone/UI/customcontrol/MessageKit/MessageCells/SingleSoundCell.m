@@ -121,7 +121,8 @@
     
     
     if (self.isBelongMe) {
-        
+        playButton.frame = CGRectMake(kAvatarWidth + 7.5f, kCellTopPadding, kWidthOfSound, kHeightOfSound);
+        playTimeLabel.frame = CGRectMake(playButton.frame.origin.x + 10.0f, 10, 35, kHeightOfSound -20);
     }else{
         playButton.frame = CGRectMake(320.0f - kWidthOfSound -kAvatarWidth- 7.5f, kCellTopPadding, kWidthOfSound, kHeightOfSound);
         playTimeLabel.frame = CGRectMake(-15.0f, 10.0f, 35.0f, kHeightOfSound -20);
