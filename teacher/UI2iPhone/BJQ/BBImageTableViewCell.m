@@ -97,7 +97,7 @@
     self.time.frame = CGRectMake(K_LEFT_PADDING, timeBegin+5, 60, 27);
     self.time.text = [self timeStringFromNumber:self.data.ts];
     
-    
+
     if ([self.data.praisesStr length]>0||[self.data.commentsStr length]>0) {
         //
         self.relpyContent.hidden = NO;

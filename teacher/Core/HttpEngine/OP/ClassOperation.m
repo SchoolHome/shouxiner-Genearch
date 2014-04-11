@@ -164,7 +164,7 @@
             NSArray *list = data[@"data"][@"list"];
             [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 BBTopicModel *model = [BBTopicModel fromJson:obj];
-                if (model&&(idx<8)) { // 最多8张图，避免测试数据错误
+                if (model) {
                     [arr addObject:model];
                 }
             }];

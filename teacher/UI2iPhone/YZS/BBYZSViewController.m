@@ -61,7 +61,7 @@
     
     self.dataSource = [PalmUIModelCoding deserializeModel:CacheName];
     
-    self.navigationItem.title = @"有指示";
+    self.navigationItem.title = @"有通知";
     
     yzsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-20-49-44) style:UITableViewStylePlain];
     yzsTableView.dataSource = self;
