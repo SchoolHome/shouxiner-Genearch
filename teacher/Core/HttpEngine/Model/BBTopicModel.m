@@ -13,8 +13,6 @@
 
 +(BBTopicModel *)fromJson:(NSDictionary *)dict{
     
-    NSLog(@"BBTopicModel start");
-    
     if (dict) {
         BBTopicModel *tp = [[BBTopicModel alloc] init];
         
@@ -68,14 +66,8 @@
                 BBCommentModel *cm = [BBCommentModel fromJson:obj];
                 if (cm) {
                     [arr addObject:cm];
-                    
-                    NSLog(@"cm.username  %@",cm.username);
-                    
                     NSUInteger len = [cm.username length]+2;
-                    
-                    NSLog(@"cm.username111  %@",cm.username);
-                    
-                    
+
                     NSString *text = [NSString stringWithFormat:@"%@: %@\n",cm.username,cm.comment];
                     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
                     [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4a7f9d"] range:NSMakeRange(0,len)];
@@ -103,9 +95,6 @@
             tp.audioList = attach[@"audio"];
             tp.forword = [BBForwordModel fromJson:attach[@"forword"]];
         }
-        
-        
-        NSLog(@"BBTopicModel end");
         
         return tp;
     }

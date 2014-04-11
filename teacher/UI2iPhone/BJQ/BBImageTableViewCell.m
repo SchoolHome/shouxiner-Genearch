@@ -63,9 +63,8 @@
     if ([self.data.imageList count]>0) {
         
         int cnt = [self.data.imageList count];
-        NSLog(@"%d",cnt);
         
-        for (int i = 0; i<[self.data.imageList count]; i++) {
+        for (int i = 0; i<cnt; i++) {
             
             if(i<8&&i>=6){
                 imageContent[i].frame = CGRectMake(K_LEFT_PADDING+(i-6)*80, kViewFoot(content)+5+80*2, 75, 75);
