@@ -580,6 +580,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [inputBar endEdit];
 }
 
 #pragma mark - BBFSDropdownViewDelegate
@@ -640,6 +641,19 @@
     [[UIApplication sharedApplication].keyWindow addSubview:inputBar];
     inputBar.data = cell.data;
     [inputBar beginEdit];
+    
+//    //- (CGRect)rectForRowAtIndexPath:(NSIndexPath *)indexPath;
+//    
+//    NSIndexPath *indexPath = [bjqTableView indexPathForCell:cell];
+//    CGRect rect = [bjqTableView rectForRowAtIndexPath:indexPath];
+//    
+//    NSLog(@"%@",NSStringFromCGRect(rect));
+//    
+//    
+//    CGPoint p = CGPointMake(0, bjqTableView.contentOffset.y+(480-rect.size.height));
+//    
+//    [bjqTableView setContentOffset:p animated:YES];
+    
 }
 
 // 点击大图
@@ -687,6 +701,7 @@
 
 #pragma 展示图片的委托实现开始
 -(void)beganCloseImageAnimation{
+    [inputBar endEdit];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
 -(void)endCloseImageAnimation

@@ -36,7 +36,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     int heightFix = 20;
-    if (self.screenHeight == 480.0f) {
+    if (IOS7) {
         heightFix = 20;
     }else{
         heightFix = 0;
