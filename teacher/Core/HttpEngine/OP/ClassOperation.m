@@ -19,7 +19,8 @@
 -(void) postComment;
 -(void) getNotiCount;
 -(void) getNewNotiList;
-
+-(void) getUnReadCount;
+-(void) getNotiSenderList;
 @end
 
 @implementation ClassOperation
@@ -101,6 +102,29 @@
     }
     return self;
 }
+
+
+// 有指示未读
+-(ClassOperation *) initUnReadNotiCount : (long long) timeStamp{
+    if ([self initOperation]) {
+        self.type = kGetNotiUnReadCount;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/OAListCount?ts=%lli",K_HOST_NAME_OF_PALM_SERVER,timeStamp];
+        [self setHttpRequestGetWithUrl:urlStr];
+    }
+    return self;
+}
+
+// 获取有指示列表
+-(ClassOperation *) initNotiListWithSender : (int) sender withOffset : (int) offset withLimit : (int) limit{
+    if ([self initOperation]) {
+        self.type = kGetNotiSenderList;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/OAListHistory?sender=%d&start=%d&size=%d",K_HOST_NAME_OF_PALM_SERVER,sender,offset,limit];
+        [self setHttpRequestGetWithUrl:urlStr];
+    }
+    return self;
+}
+
+
 
 -(void) getNotiList{
     self.request.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
@@ -255,6 +279,37 @@
     [self startAsynchronous];
 }
 
+-(void) getUnReadCount{
+    self.request.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
+#ifdef TEST
+    [self.request addRequestHeader:@"Host" value:@"www.shouxiner.com"];
+#endif
+    [self.request setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t t = ^{
+            DDLogCInfo(@"%@",data);
+            [PalmUIManagement sharedInstance].notiUnReadCount = data;
+        };
+        dispatch_async(dispatch_get_main_queue(), t);
+    }];
+    [self startAsynchronous];
+}
+
+-(void) getNotiSenderList{
+    self.request.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
+#ifdef TEST
+    [self.request addRequestHeader:@"Host" value:@"www.shouxiner.com"];
+#endif
+    [self.request setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t t = ^{
+            DDLogCInfo(@"%@",data);
+            [PalmUIManagement sharedInstance].notiWithSenderList = data;
+        };
+        dispatch_async(dispatch_get_main_queue(), t);
+    }];
+    [self startAsynchronous];
+
+}
+
 -(void) main{
     switch (self.type) {
         case kClassNotification:
@@ -277,6 +332,12 @@
             break;
         case kGetNotiList:
             [self getNewNotiList];
+            break;
+        case kGetNotiUnReadCount:
+            [self getUnReadCount];
+            break;
+        case kGetNotiSenderList:
+            [self getNotiSenderList];
             break;
         default:
             break;

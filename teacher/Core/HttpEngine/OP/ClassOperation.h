@@ -20,6 +20,8 @@ typedef enum{
     kGetNotiCount,
     kGetNotiList,
     kGetNotiWithTopicID,
+    kGetNotiUnReadCount,
+    kGetNotiSenderList,
 }ClassData;
 
 
@@ -29,6 +31,11 @@ typedef enum{
 // 有指示
 -(ClassOperation *) initNotiList : (int) timeStamp;
 -(ClassOperation *) initGroupTopic : (int) groupID withTimeStamp : (int) timeStamp withOffset : (int) offset withLimit : (int) limit;
+
+// 有指示未读
+-(ClassOperation *) initUnReadNotiCount : (long long) timeStamp;
+// 获取有指示列表
+-(ClassOperation *) initNotiListWithSender : (int) sender withOffset : (int) offset withLimit : (int) limit;
 
 // 点赞
 -(ClassOperation *) initPraise : (long long) topicID;

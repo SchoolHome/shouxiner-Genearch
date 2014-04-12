@@ -28,6 +28,12 @@
 @property(nonatomic,strong) NSDictionary *checkVersion;
 // 有指示
 @property(nonatomic,strong) NSDictionary *notiList;
+
+// 有指示未读数
+@property(nonatomic,strong) NSDictionary *notiUnReadCount;
+// 有指示根据分页获取数据
+@property(nonatomic,strong) NSDictionary *notiWithSenderList;
+
 // 班级列表
 @property(nonatomic,strong) NSDictionary *groupListResult;
 @property(nonatomic,strong) NSArray *groupList;
@@ -89,4 +95,10 @@
                             withContent : (NSString *) content withAttach : (NSString *) attach;
 
 -(void) postCheckVersion;
+
+// 有指示未读
+-(void) initUnReadNotiCount : (long long) timeStamp;
+// 获取有指示列表
+-(void) initNotiListWithSender : (int) sender withOffset : (int) offset withLimit : (int) limit;
+
 @end
