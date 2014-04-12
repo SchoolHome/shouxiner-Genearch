@@ -114,13 +114,13 @@ static PalmUIManagement *sharedInstance = nil;
 }
 
 // 有指示未读
--(void) initUnReadNotiCount : (long long) timeStamp{
+-(void) getUnReadNotiCount : (long long) timeStamp{
     ClassOperation *operation = [[ClassOperation alloc] initUnReadNotiCount:timeStamp];
     [[PalmNetWorkService sharedInstance] networkEngine:operation];
 }
 
 // 获取有指示列表
--(void) initNotiListWithSender : (int) sender withOffset : (int) offset withLimit : (int) limit{
+-(void) getNotiListWithSender : (int) sender withOffset : (int) offset withLimit : (int) limit{
     ClassOperation *operation = [[ClassOperation alloc] initNotiListWithSender:sender withOffset:offset withLimit:limit];
     [[PalmNetWorkService sharedInstance] networkEngine:operation];
 }
