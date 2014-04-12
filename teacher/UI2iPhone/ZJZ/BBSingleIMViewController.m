@@ -39,7 +39,17 @@
 {
     [super viewDidLoad];
 //    [self.navigationController setNavigationBarHidden:YES];
-    self.title = @"找家长";
+    
+//    self.modelMessageGroup.memberList
+    NSArray *array = [NSArray arrayWithArray:self.modelMessageGroup.memberList];;
+    NSString *title = @"";
+    for (CPUIModelUserInfo *user in array) {
+        if (![user.nickName isEqualToString:[CPUIModelManagement sharedInstance].uiPersonalInfo.nickName]) {
+            title = user.nickName;
+        }
+    }
+    
+    self.title = title;
     if (self.modelMessageGroup.memberList > 0) {
         CPUIModelMessageGroupMember *member = [self.modelMessageGroup.memberList objectAtIndex:0];
         CPUIModelUserInfo *userInfo = member.userInfo;

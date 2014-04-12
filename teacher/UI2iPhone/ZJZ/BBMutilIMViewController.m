@@ -58,7 +58,23 @@
 {
     [super viewDidLoad];
     
-    self.title = @"群聊";
+    NSArray *array = [NSArray arrayWithArray:self.modelMessageGroup.memberList];;
+    NSString *title = @"";
+    int i = 0;
+    for (CPUIModelUserInfo *user in array) {
+        if (![user.nickName isEqualToString:[CPUIModelManagement sharedInstance].uiPersonalInfo.nickName]) {
+            if (user.nickName == nil || [user.nickName isEqualToString:@""]) {
+                continue;
+            }
+            if (i == 2) {
+                break;
+            }
+            i++;
+            title = [NSString stringWithFormat:@"%@ %@",title,user.nickName];
+        }
+    }
+    
+    self.title = [NSString stringWithFormat:@"%@等",title];
 //    if (self.nickName) {
 //        [self.nickName removeFromSuperview];
 //    }

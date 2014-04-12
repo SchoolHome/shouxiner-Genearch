@@ -20,7 +20,7 @@
 #import "CPUIModelManagement.h"
 #import "CPUIModelPersonalInfo.h"
 
-@interface BBMeViewController ()
+@interface BBMeViewController ()<UIAlertViewDelegate>
 
 @end
 
@@ -254,9 +254,16 @@
 
 -(void)logoutApp:(UIButton *)btn
 {
-    [[CPUIModelManagement sharedInstance] logout];
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [appDelegate launchLogin];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"退出" message:@"是否确认退出登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        [[CPUIModelManagement sharedInstance] logout];
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        [appDelegate launchLogin];
+    }
 }
 
 -(void)dealloc
