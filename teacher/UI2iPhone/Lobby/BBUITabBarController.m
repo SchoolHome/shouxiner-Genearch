@@ -134,8 +134,6 @@
     mark.text = @"";
     mark.hidden = YES;
     
-
-    
     [self checkUnreadCount];
 }
 
@@ -148,6 +146,10 @@
             _subTabItem[i].image = nil;
         }
     }
+    
+    if (tabBarController.selectedIndex == 2) { // 点击消失
+        mark.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -156,11 +158,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 -(void)dealloc{
 
-   
-    
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notiUnReadCount"];
 }
 
