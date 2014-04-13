@@ -31,6 +31,8 @@
         
         mark = [[UILabel alloc] initWithFrame:CGRectMake(40, 3, 20, 20)];
         [self addSubview:mark];
+        mark.font = [UIFont systemFontOfSize:14];
+        mark.textColor = [UIColor whiteColor];
         mark.backgroundColor = [UIColor orangeColor];
         mark.textAlignment = NSTextAlignmentCenter;
         CALayer *roundedLayer1= [mark layer];
@@ -60,8 +62,9 @@
         time.font = [UIFont systemFontOfSize:14];
         content.font = [UIFont systemFontOfSize:14];
         
-        mark.font = [UIFont systemFontOfSize:9];
+        mark.font = [UIFont systemFontOfSize:12];
         self.backgroundColor = [UIColor clearColor];
+        
         
     }
     return self;
@@ -84,7 +87,16 @@
     int m = arc4random()%25+1;
     
     mark.text = [NSString stringWithFormat:@"%d",m];
-    [mark sizeThatFits:CGSizeMake(20, 20)];
+    CGFloat width = [mark.text sizeWithFont:[UIFont systemFontOfSize:12]
+                          constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].width;
+    if (width<17) {
+        width = 20;
+    }else{
+        width = width + 8;
+    }
+    mark.frame = CGRectMake(40, 3, width, 20);
+    
+//    [mark sizeThatFits:CGSizeMake(20, 20)];
     
     content.text = @"XX总局重要指示，！＃@¥％％……％&＊&¥％¥＃％…………&&＊";
     

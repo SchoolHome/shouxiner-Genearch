@@ -17,7 +17,7 @@
 @implementation BBYZSViewController
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([@"notiList" isEqualToString:keyPath])  // 班级列表
+    if ([@"notiWithSenderList" isEqualToString:keyPath])
     {
         NSDictionary *jsonData = [[PalmUIManagement sharedInstance].notiList objectForKey:ASI_REQUEST_DATA];
         jsonData = [jsonData objectForKey:@"list"];
@@ -33,12 +33,12 @@
 }
 
 -(void)addObservers{
-    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiList" options:0 context:NULL];
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiWithSenderList" options:0 context:NULL];
 }
 
 -(void)removeObservers{
 
-    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notiList"];
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notiWithSenderList"];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -79,8 +79,9 @@
     
     self.oalist = [[NSMutableArray alloc] init];
     
-    [[PalmUIManagement sharedInstance] getNotiData:1];
+    //[[PalmUIManagement sharedInstance] getNotiData:1];
     
+    [[PalmUIManagement sharedInstance] getNotiListWithSender:1 withOffset:0 withLimit:30];
 }
 
 
@@ -121,7 +122,6 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
 
 - (void)didReceiveMemoryWarning
 {

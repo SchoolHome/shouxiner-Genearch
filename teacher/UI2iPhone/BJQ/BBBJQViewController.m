@@ -1,6 +1,8 @@
 
 #import "BBBJQViewController.h"
 #import "BBXXXViewController.h"
+#import "BBJFViewController.h"
+
 #import "BBCellHeight.h"
 #import "BBBJQManager.h"
 #import "CoreUtils.h"
@@ -257,6 +259,13 @@
     }
 }
 
+-(void)pointTaped:(UITapGestureRecognizer *)gesture{
+    BBJFViewController *jf = [[BBJFViewController alloc] init];
+    jf.hidesBottomBarWhenPushed = YES;
+    jf.url = [NSURL URLWithString:@"http://baidu.com"];
+    [self.navigationController pushViewController:jf animated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -317,6 +326,7 @@
     UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 210+20)];
     //head.backgroundColor = [UIColor whiteColor];
     head.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
+    head.userInteractionEnabled = YES;
     
     UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 214)];
     //headImage.backgroundColor = [UIColor orangeColor];
@@ -330,6 +340,11 @@
     point.textAlignment = NSTextAlignmentCenter;
     point.font = [UIFont boldSystemFontOfSize:12];
     point.textColor = [UIColor whiteColor];
+    point.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer  alloc] initWithTarget:self action:@selector(pointTaped:)];
+    [point addGestureRecognizer:gesture];
+    
     
     avatar = [[EGOImageView alloc] initWithFrame:CGRectMake(22, 145, 80, 80)];
     avatar.backgroundColor = [UIColor grayColor];

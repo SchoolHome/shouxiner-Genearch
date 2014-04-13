@@ -1821,6 +1821,7 @@
 		7A6B776118ED2B330000DBFE /* BBOtherContent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6B775B18ED2B330000DBFE /* BBOtherContent@2x.png */; };
 		7A6B776418ED4DA20000DBFE /* BBNotifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6B776318ED4DA20000DBFE /* BBNotifyModel.m */; };
 		7A71E9AD18EBADBD00572E4D /* BBOAModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A71E9AC18EBADBD00572E4D /* BBOAModel.m */; };
+		7A74DBA618FAD9C400EBFA93 /* BBJFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A74DBA518FAD9C400EBFA93 /* BBJFViewController.m */; };
 		7A863C6C18EA894E0090C430 /* BBGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A863C6B18EA894E0090C430 /* BBGroupModel.m */; };
 		7A863C6F18EA9BC70090C430 /* BBTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A863C6E18EA9BC70090C430 /* BBTopicModel.m */; };
 		7A863C7618EB2C000090C430 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A863C7318EB2C000090C430 /* UIScrollView+SVInfiniteScrolling.m */; };
@@ -4301,6 +4302,8 @@
 		7A6B776318ED4DA20000DBFE /* BBNotifyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBNotifyModel.m; sourceTree = "<group>"; };
 		7A71E9AB18EBADBD00572E4D /* BBOAModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBOAModel.h; sourceTree = "<group>"; };
 		7A71E9AC18EBADBD00572E4D /* BBOAModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBOAModel.m; sourceTree = "<group>"; };
+		7A74DBA418FAD9C400EBFA93 /* BBJFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBJFViewController.h; sourceTree = "<group>"; };
+		7A74DBA518FAD9C400EBFA93 /* BBJFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBJFViewController.m; sourceTree = "<group>"; };
 		7A863C6A18EA894E0090C430 /* BBGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBGroupModel.h; sourceTree = "<group>"; };
 		7A863C6B18EA894E0090C430 /* BBGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBGroupModel.m; sourceTree = "<group>"; };
 		7A863C6D18EA9BC70090C430 /* BBTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBTopicModel.h; sourceTree = "<group>"; };
@@ -8949,6 +8952,8 @@
 				7AC51B9B18CDDA6900AD1A8C /* BBWorkTableViewCell.m */,
 				7AC51B9C18CDDA6900AD1A8C /* BBImageTableViewCell.h */,
 				7AC51B9D18CDDA6900AD1A8C /* BBImageTableViewCell.m */,
+				7A74DBA418FAD9C400EBFA93 /* BBJFViewController.h */,
+				7A74DBA518FAD9C400EBFA93 /* BBJFViewController.m */,
 				7A922F7A18E2CEFC00026C4A /* BBInputView.h */,
 				7A922F7B18E2CEFC00026C4A /* BBInputView.m */,
 				7AC51B9E18CDDA6900AD1A8C /* BBBJQViewController.h */,
@@ -10389,6 +10394,7 @@
 				332D839318C33F0B007A75D5 /* UIView+DebugRect.m in Sources */,
 				332D758718C33552007A75D5 /* CPPTModelMessageGroup.m in Sources */,
 				332D82F818C33F0B007A75D5 /* OverlayGuidView.m in Sources */,
+				7A74DBA618FAD9C400EBFA93 /* BBJFViewController.m in Sources */,
 				332D751F18C33552007A75D5 /* NSDate+RFC1123.m in Sources */,
 				332D752B18C33552007A75D5 /* XMPPIQ.m in Sources */,
 				332D751418C33552007A75D5 /* ASIDownloadCache.m in Sources */,

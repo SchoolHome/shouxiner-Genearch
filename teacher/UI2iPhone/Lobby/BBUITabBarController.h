@@ -19,5 +19,7 @@
     
     NSArray *_tapImages;
     
+    UILabel *mark;
 }
+
 @end

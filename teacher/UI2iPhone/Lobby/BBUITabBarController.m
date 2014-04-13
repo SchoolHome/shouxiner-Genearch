@@ -15,6 +15,45 @@
 @implementation BBUITabBarController
 
 
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"notiUnReadCount"]) {
+        NSDictionary *dict = [PalmUIManagement sharedInstance].notiUnReadCount;
+        NSLog(@"%@",dict);
+        
+        NSNumber *ct = dict[@"data"][@"count"];
+        
+        if ([ct intValue] == 0) {
+            mark.hidden = YES;
+        }else{
+            mark.hidden = NO;
+            mark.text = [NSString stringWithFormat:@"%d",[ct intValue]];
+            CGFloat width = [mark.text sizeWithFont:[UIFont systemFontOfSize:14]
+                                  constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].width;
+            if (width<17) {
+                width = 20;
+            }else{
+                width = width + 8;
+            }
+            mark.frame = CGRectMake(215, -5, width, 20);
+        }
+    }
+}
+
+
+-(id)init{
+    self = [super init];
+    if (self) {
+        //
+        [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiUnReadCount" options:0 context:NULL];
+    }
+    return self;
+}
+
+-(void)checkUnreadCount{
+    [[PalmUIManagement sharedInstance] getUnReadNotiCount:1];
+    [self performSelector:@selector(checkUnreadCount) withObject:nil afterDelay:5];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -80,6 +119,24 @@
             _subTabItem[i].image = nil;
         }
     }
+    
+    mark = [[UILabel alloc] initWithFrame:CGRectMake(215, -5, 20, 20)];
+    mark.font = [UIFont systemFontOfSize:14];
+    [_imageTabBar addSubview:mark];
+    mark.backgroundColor = [UIColor orangeColor];
+    mark.textAlignment = NSTextAlignmentCenter;
+    mark.textColor = [UIColor whiteColor];
+    CALayer *roundedLayer1= [mark layer];
+    //[roundedLayer setMasksToBounds:YES];
+    roundedLayer1.cornerRadius = 10.0;
+    roundedLayer1.borderWidth = 0.5;
+    roundedLayer1.borderColor = [[UIColor grayColor] CGColor];
+    mark.text = @"";
+    mark.hidden = YES;
+    
+
+    
+    [self checkUnreadCount];
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
@@ -97,6 +154,14 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(void)dealloc{
+
+   
+    
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notiUnReadCount"];
 }
 
 @end

@@ -29,7 +29,7 @@
         _list.dataSource = self;
         _list.delegate = self;
         _list.scrollEnabled = NO;
-        _list.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.55];
+        _list.backgroundColor = [UIColor clearColor];//[UIColor colorWithRed:0 green:0 blue:0 alpha:0.55];
         _list.separatorColor = [UIColor darkGrayColor];//[UIColor colorWithHexString:@"515151"];
         
         [self addSubview:_list];
