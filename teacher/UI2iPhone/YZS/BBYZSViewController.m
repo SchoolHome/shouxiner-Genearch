@@ -101,7 +101,7 @@
     BBIndicationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[BBIndicationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        //cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     [cell setData:nil];
