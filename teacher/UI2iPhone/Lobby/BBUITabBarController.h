@@ -19,7 +19,9 @@
     
     NSArray *_tapImages;
     
-    UILabel *mark;
+    
+    UILabel *markMessage;
+    UILabel *markYZS;
 }
 
 @end

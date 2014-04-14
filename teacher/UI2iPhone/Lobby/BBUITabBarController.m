@@ -7,6 +7,7 @@
 //
 
 #import "BBUITabBarController.h"
+#import "CPUIModelManagement.h"
 
 @interface BBUITabBarController ()
 
@@ -23,18 +24,37 @@
         NSNumber *ct = dict[@"data"][@"count"];
         
         if ([ct intValue] == 0) {
-            mark.hidden = YES;
+            markYZS.hidden = YES;
         }else{
-            mark.hidden = NO;
-            mark.text = [NSString stringWithFormat:@"%d",[ct intValue]];
-            CGFloat width = [mark.text sizeWithFont:[UIFont systemFontOfSize:14]
+            markYZS.hidden = NO;
+            markYZS.text = [NSString stringWithFormat:@"%d",[ct intValue]];
+            CGFloat width = [markYZS.text sizeWithFont:[UIFont systemFontOfSize:14]
                                   constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].width;
             if (width<17) {
                 width = 20;
             }else{
                 width = width + 8;
             }
-            mark.frame = CGRectMake(215, -5, width, 20);
+            markYZS.frame = CGRectMake(215, -5, width, 20);
+        }
+    }
+    
+    if ([keyPath isEqualToString:@"friendMsgUnReadedCount"]) {
+        int count = [CPUIModelManagement sharedInstance].friendMsgUnReadedCount;
+        
+        if (count <= 0) {
+            markMessage.hidden = YES;
+        }else{
+            markMessage.hidden = NO;
+            markMessage.text = [NSString stringWithFormat:@"%d",count];
+            CGFloat width = [markYZS.text sizeWithFont:[UIFont systemFontOfSize:14]
+                                     constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].width;
+            if (width<17) {
+                width = 20;
+            }else{
+                width = width + 8;
+            }
+            markMessage.frame = CGRectMake(136, -5, width, 20);
         }
     }
 }
@@ -44,6 +64,10 @@
     self = [super init];
     if (self) {
         //
+        
+        
+        [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"friendMsgUnReadedCount" options:0 context:NULL];
+        
         [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiUnReadCount" options:0 context:NULL];
     }
     return self;
@@ -120,21 +144,35 @@
         }
     }
     
-    mark = [[UILabel alloc] initWithFrame:CGRectMake(215, -5, 20, 20)];
-    mark.font = [UIFont systemFontOfSize:14];
-    [_imageTabBar addSubview:mark];
-    mark.backgroundColor = [UIColor orangeColor];
-    mark.textAlignment = NSTextAlignmentCenter;
-    mark.textColor = [UIColor whiteColor];
-    CALayer *roundedLayer1= [mark layer];
+    markYZS = [[UILabel alloc] initWithFrame:CGRectMake(215, -5, 20, 20)];
+    markYZS.font = [UIFont systemFontOfSize:14];
+    [_imageTabBar addSubview:markYZS];
+    markYZS.backgroundColor = [UIColor orangeColor];
+    markYZS.textAlignment = NSTextAlignmentCenter;
+    markYZS.textColor = [UIColor whiteColor];
+    CALayer *roundedLayer1= [markYZS layer];
     //[roundedLayer setMasksToBounds:YES];
     roundedLayer1.cornerRadius = 10.0;
     roundedLayer1.borderWidth = 0.5;
     roundedLayer1.borderColor = [[UIColor grayColor] CGColor];
-    mark.text = @"";
-    mark.hidden = YES;
+    markYZS.text = @"";
+    markYZS.hidden = YES;
     
     [self checkUnreadCount];
+    
+    markMessage = [[UILabel alloc] initWithFrame:CGRectMake(136, -5, 20, 20)];
+    markMessage.font = [UIFont systemFontOfSize:14];
+    [_imageTabBar addSubview:markMessage];
+    markMessage.backgroundColor = [UIColor orangeColor];
+    markMessage.textAlignment = NSTextAlignmentCenter;
+    markMessage.textColor = [UIColor whiteColor];
+    CALayer *roundedLayer2= [markMessage layer];
+    //[roundedLayer setMasksToBounds:YES];
+    roundedLayer2.cornerRadius = 10.0;
+    roundedLayer2.borderWidth = 0.5;
+    roundedLayer2.borderColor = [[UIColor grayColor] CGColor];
+    markMessage.text = @"";
+    markMessage.hidden = YES;
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
@@ -148,7 +186,7 @@
     }
     
     if (tabBarController.selectedIndex == 2) { // 点击消失
-        mark.hidden = YES;
+        markYZS.hidden = YES;
     }
 }
 
@@ -160,6 +198,7 @@
 
 -(void)dealloc{
 
+    [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"friendMsgUnReadedCount"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notiUnReadCount"];
 }
 
