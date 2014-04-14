@@ -201,7 +201,6 @@
 }
 
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
-//    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
@@ -211,6 +210,7 @@
     if (gap <=1000){
         [self.ground_nav_c popToRootViewControllerAnimated:YES]; //统一到首页
     }
+    application.applicationIconBadgeNumber += 1;
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{

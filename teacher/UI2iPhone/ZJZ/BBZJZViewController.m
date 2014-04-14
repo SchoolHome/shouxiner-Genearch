@@ -188,6 +188,15 @@
         mutilIM.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:mutilIM animated:YES];
     }
+    
+    __block NSInteger count = [CPUIModelManagement sharedInstance].friendMsgUnReadedCount;
+    count -= [messageGroup.unReadedCount intValue];
+    dispatch_block_t updateTagBlock = ^{
+        [[CPUIModelManagement sharedInstance] setFriendMsgUnReadedCount:count];
+    };
+    dispatch_async(dispatch_get_main_queue(), updateTagBlock);
+    
+    
 }
 #pragma mark UItableviewDatasouce
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

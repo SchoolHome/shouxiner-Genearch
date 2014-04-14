@@ -53,7 +53,7 @@
     self.navigationItem.title = @"我";
     
     listData = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"我的商城", @"我的通讯录", nil],
-                [NSArray arrayWithObjects:@"帮助中心", @"反馈和建议", nil], nil];
+                [NSArray arrayWithObjects:@"软件更新", @"帮助中心", @"反馈和建议", nil], nil];
     
     
     meTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.screenHeight-49-44-20)
@@ -211,7 +211,9 @@
             break;
         case 2:
         {
-            if (indexPath.row == 0) {//帮助
+            if (indexPath.row == 0) {//更新
+                [[PalmUIManagement sharedInstance] postCheckVersion];
+            }else if (indexPath.row == 1) {//帮助
                 BBHelpViewController *helpViewController = [[BBHelpViewController alloc] init];
                 helpViewController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:helpViewController animated:YES];
@@ -238,7 +240,7 @@
         //查询用户商城积分
         [[PalmUIManagement sharedInstance] getUserCredits];
     }
-    if ([keyPath isEqualToString:@"userCredits"]) {
+    if ([@"userCredits" isEqualToString:keyPath]) {
         userCredits = [[PalmUIManagement sharedInstance].userCredits objectForKey:ASI_REQUEST_DATA];
         if (![[userCredits objectForKey:@"error"] integerValue]) {
             if (meTableView) {
@@ -249,7 +251,6 @@
     if ([@"uiPersonalInfoTag" isEqualToString:keyPath]) {
         [meTableView reloadData];
     }
-
 }
 
 -(void)logoutApp:(UIButton *)btn
