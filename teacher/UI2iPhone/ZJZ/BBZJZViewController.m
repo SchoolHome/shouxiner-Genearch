@@ -97,7 +97,15 @@
 {
     
     if (!_tableviewDisplayDataArray) {
-        _tableviewDisplayDataArray = [[NSArray alloc] initWithArray:[CPUIModelManagement sharedInstance].userMessageGroupList];
+//        _tableviewDisplayDataArray = [[NSArray alloc] initWithArray:[CPUIModelManagement sharedInstance].userMessageGroupList];
+        NSArray *array = [NSArray arrayWithArray:[CPUIModelManagement sharedInstance].userMessageGroupList];
+        NSMutableArray *arrayM = [[NSMutableArray alloc] initWithCapacity:10];
+        for (CPUIModelMessageGroup *g in array) {
+            if ([g.msgList count] != 0) {
+                [arrayM addObject:g];
+            }
+        }
+        _tableviewDisplayDataArray = [NSArray arrayWithArray:arrayM];
     }
     return _tableviewDisplayDataArray;
 }
