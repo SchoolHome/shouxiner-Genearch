@@ -15,10 +15,11 @@
 #import "ContactsStartGroupChatViewController.h"
 //test
 #import "BBMembersInMsgGroupViewController.h"
-@interface ContactsViewController ()
+@interface ContactsViewController ()<UIAlertViewDelegate>
 @property (nonatomic , strong) BBMessageGroupBaseTableView *contactsListTableview;
 @property (nonatomic , strong) NSArray *contactsListDataArray;
 @property (nonatomic , strong) UISearchBar *contactsTableSearchBar;
+@property(nonatomic,strong) NSString *phoneNumber;
 @end
 
 @implementation ContactsViewController
@@ -257,6 +258,7 @@
     if ([mobileNumber isEqualToString:@"0"]) {
         return;
     }
+    
     NSString *mobileNumberUrlStr = [NSString stringWithFormat:@"sms://%@",mobileNumber];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mobileNumberUrlStr]];
 }
@@ -265,9 +267,24 @@
     if ([mobileNumber isEqualToString:@"0"]) {
         return;
     }
-    NSString *mobileNumberUrlStr = [NSString stringWithFormat:@"tel://%@",mobileNumber];
+    self.phoneNumber = mobileNumber;
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"电话" message:[NSString stringWithFormat: @"确认拨打%@",mobileNumber] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+//    [alert show];
+    NSString *mobileNumberUrlStr = [NSString stringWithFormat:@"telprompt://%@",mobileNumber];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mobileNumberUrlStr]];
+    
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != 0) {
+//        NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",self.phoneNumber]];
+//        UIWebView *phoneCallWebView = [[UIWebView alloc] initWithFrame:CGRectZero];
+//        [phoneCallWebView loadRequest:[NSURLRequest requestWithURL:phoneURL]];
+        NSString *mobileNumberUrlStr = [NSString stringWithFormat:@"telprompt://%@",self.phoneNumber];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mobileNumberUrlStr]];
+    }
+}
+
 #pragma mark SearchBarDelegate
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {

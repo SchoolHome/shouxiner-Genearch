@@ -20,12 +20,12 @@
     if ([@"notiList" isEqualToString:keyPath])
     {
         NSDictionary *jsonData = [[PalmUIManagement sharedInstance].notiList objectForKey:ASI_REQUEST_DATA];
-        jsonData = [jsonData objectForKey:@"list"];
+        NSArray *jsonArray = [jsonData objectForKey:@"list"];
         
-        NSArray *allvalues = [jsonData allValues];
-        for (int i =0; i<[allvalues count]; i++) {
+//        NSArray *allvalues = [jsonData allValues];
+        for (int i =0; i<[jsonArray count]; i++) {
             BBOAModel *oa = [[BBOAModel alloc] init];
-            [oa conver:allvalues[i]];
+            [oa conver:jsonArray[i]];
             [self.oalist addObject:oa];
         }
         [self.dataSource updateCacheArray:self.oalist];
