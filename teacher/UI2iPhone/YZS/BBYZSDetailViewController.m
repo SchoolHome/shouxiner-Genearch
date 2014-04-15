@@ -27,8 +27,7 @@
 //        
 //        NSLog(@"%@",  NSStringFromClass([dict[@"data"][@"list"] class]));
 //        
-//        
-//        NSArray *arr = [NSArray arrayWithArray:dict[@"data"][@"list"]];
+//        NSArray *arr = [NSArray arrayWithObjects:dict[@"data"][@"list"][@"0"],nil];
 //        if ([arr count]>0) {
 //            NSMutableArray *list = [[NSMutableArray alloc] init];
 //            [arr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -143,7 +142,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.detailList count];
+    return 20;//[self.detailList count];
 }
 
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -165,15 +164,15 @@
         cell.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
-    [cell setData:self.detailList[indexPath.row]];
+    //[cell setData:self.detailList[indexPath.row]];
+    [cell setData:nil];
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 400;
+    return 430;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -25,7 +25,6 @@ BBIndicationDetailTableViewCellDelegate>
 {
     UITableView *yzsDetailTableView;
 
-    
 }
 
 @property(nonatomic,strong) BBOAModel *oaModel;

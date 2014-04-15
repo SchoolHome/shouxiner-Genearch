@@ -13,6 +13,9 @@
 
 @interface BBIndicationDetailTableViewCell : UITableViewCell
 {
+    
+    UILabel *time;
+    
     UIImageView *back;
     
     UILabel *title;

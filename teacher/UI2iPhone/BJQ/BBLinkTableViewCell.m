@@ -61,7 +61,7 @@
     
     linkIcon.backgroundColor = [UIColor grayColor];
     
-    title.text = self.data.title;
+    title.text = self.data.author_username;
     title.font = [UIFont systemFontOfSize:14];
     
     content.text = self.data.content;
