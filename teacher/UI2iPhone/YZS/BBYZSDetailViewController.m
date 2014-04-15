@@ -15,15 +15,44 @@
 
 @implementation BBYZSDetailViewController
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([@"notiWithSenderList" isEqualToString:keyPath])
+    {
+
+       NSDictionary *dict = [PalmUIManagement sharedInstance].notiWithSenderList;
+        
+        NSLog(@"%@",dict);
+    }
+}
+
 -(void)backButtonTaped:(id)sender{
-    
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)addObservers{
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiWithSenderList" options:0 context:NULL];
+}
+
+-(void)removeObservers{
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notiWithSenderList"];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self addObservers];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self removeObservers];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    detailList = [[NSMutableArray alloc] init];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -48,6 +77,24 @@
     [self.view addSubview:yzsDetailTableView];
     
     yzsDetailTableView.backgroundColor = [UIColor whiteColor];
+    
+    __weak BBYZSDetailViewController *weakSelf = self;
+    // 刷新
+    [yzsDetailTableView addPullToRefreshWithActionHandler:^{
+        
+       
+    }];
+    
+    // 追加
+    [yzsDetailTableView addInfiniteScrollingWithActionHandler:^{
+        
+        
+        
+    }];
+    
+
+    [[PalmUIManagement sharedInstance] getNotiListWithSender:[_oaModel.sender_uid intValue] withOffset:0 withLimit:30];
+    
 }
 
 

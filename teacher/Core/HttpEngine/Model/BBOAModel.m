@@ -111,7 +111,10 @@
         self.oaid = json[@"oaid"];
         self.sender_uid = json[@"sender_uid"];
         self.sender_username = json[@"sender_username"];
-        self.sender_avatar = json[@"sender_avatar"];
+        
+        if (json[@"sender_avatar"]&&![json[@"sender_avatar"] isKindOfClass:[NSNull class]]) {
+            self.sender_avatar = json[@"sender_avatar"];
+        }
         self.title = json[@"title"];
         self.content = json[@"content"];
         self.ts = json[@"ts"];

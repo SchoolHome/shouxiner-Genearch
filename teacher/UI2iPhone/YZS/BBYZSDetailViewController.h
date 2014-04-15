@@ -9,11 +9,19 @@
 #import "PalmViewController.h"
 #import "BBIndicationDetailTableViewCell.h"
 
+#import "SVPullToRefresh.h"
+
+#import "BBOAModel.h"
+
 @interface BBYZSDetailViewController : PalmViewController
 <UITableViewDataSource,UITableViewDelegate,
 BBIndicationDetailTableViewCellDelegate>
 {
     UITableView *yzsDetailTableView;
 
+    NSMutableArray *detailList;
 }
+
+@property(nonatomic,strong) BBOAModel *oaModel;
+
 @end

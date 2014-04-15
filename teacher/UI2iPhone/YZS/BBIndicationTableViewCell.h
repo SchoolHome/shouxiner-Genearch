@@ -7,16 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EGOImageView.h"
+#import "BBOAModel.h"
 
 @interface BBIndicationTableViewCell : UITableViewCell
 {
-    UIImageView *icon;
+    EGOImageView *icon;
     UILabel *mark;
     UILabel *title;
     UILabel *content;
     UILabel *time;
 }
 
-@property(nonatomic,strong) id data;
+@property(nonatomic,strong) BBOAModel *data;
 
 @end

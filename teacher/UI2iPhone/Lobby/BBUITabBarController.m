@@ -126,7 +126,6 @@
                   nil];
     
     
-    
     for (int i = 0 ; i<[_tapImages count]; i++) {
         
         UIImageView *backItem = [[UIImageView alloc] initWithFrame:CGRectMake(320/4.0f*i, 0, 320/4.0f, 49)];

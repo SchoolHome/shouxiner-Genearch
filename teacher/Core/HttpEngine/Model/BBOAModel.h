@@ -27,7 +27,7 @@
 @property(nonatomic,strong) NSNumber *sender_uid;
 @property(nonatomic,strong) NSString *sender_username;
 @property(nonatomic,strong) NSString *sender_avatar;
-@property(nonatomic,strong) NSNumber *title;
+@property(nonatomic,strong) NSString *title;
 @property(nonatomic,strong) NSString *content;
 @property(nonatomic,strong) NSNumber *ts;
 @property(nonatomic,strong) NSNumber *attach_num;

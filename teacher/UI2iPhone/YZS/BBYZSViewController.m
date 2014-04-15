@@ -46,6 +46,8 @@
 
     [super viewWillAppear:animated];
     [self addObservers];
+    
+    [[PalmUIManagement sharedInstance] getNotiData:1];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -53,7 +55,6 @@
     [super viewWillDisappear:animated];
     [self removeObservers];
 }
-
 
 - (void)viewDidLoad
 {
@@ -64,7 +65,6 @@
     if (self.dataSource == nil) {
         self.dataSource = [[BBOASumModel alloc] init];
     }
-    
     
     self.navigationItem.title = @"有通知";
     
@@ -84,9 +84,7 @@
     
     self.oalist = [[NSMutableArray alloc] init];
     
-    [[PalmUIManagement sharedInstance] getNotiData:1];
     
-//    [[PalmUIManagement sharedInstance] getNotiListWithSender:1 withOffset:0 withLimit:30];
 }
 
 
@@ -122,6 +120,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     BBYZSDetailViewController *content = [[BBYZSDetailViewController alloc] init];
+    content.oaModel = self.dataSource.cacheArray[indexPath.row];
     content.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:content animated:YES];
     
