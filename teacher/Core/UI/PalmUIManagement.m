@@ -125,4 +125,10 @@ static PalmUIManagement *sharedInstance = nil;
     [[PalmNetWorkService sharedInstance] networkEngine:operation];
 }
 
+// 转发有指示
+-(void) postForwardNoti : (int) oaid withGroupID : (int) groupID withMessage : (NSString *) message{
+    ClassOperation *operation = [[ClassOperation alloc] initForwardNoti:oaid withGroupID:groupID withMessage:message];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
 @end

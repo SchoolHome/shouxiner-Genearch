@@ -21,6 +21,7 @@
 -(void) getNewNotiList;
 -(void) getUnReadCount;
 -(void) getNotiSenderList;
+-(void) postForwardNoti;
 @end
 
 @implementation ClassOperation
@@ -124,6 +125,17 @@
     return self;
 }
 
+// 转发有指示
+-(ClassOperation *) initForwardNoti : (int) oaid withGroupID : (int) groupID withMessage : (NSString *) message{
+    if ([self initOperation]) {
+        self.type = kPostForwardNoti;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/OAForward",K_HOST_NAME_OF_PALM_SERVER];
+        [self setHttpRequestPostWithUrl:urlStr params:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:oaid],@"oaid",
+                                                       [NSNumber numberWithInt:groupID],@"groupid",
+                                                       message,@"message",nil]];
+    }
+    return self;
+}
 
 
 -(void) getNotiList{
@@ -307,7 +319,21 @@
         dispatch_async(dispatch_get_main_queue(), t);
     }];
     [self startAsynchronous];
+}
 
+-(void) postForwardNoti{
+    self.dataRequest.requestCookies = [[NSMutableArray alloc] initWithObjects:[PalmUIManagement sharedInstance].php, nil];
+#ifdef TEST
+    [self.dataRequest addRequestHeader:@"Host" value:@"www.shouxiner.com"];
+#endif
+    [self.dataRequest setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t t = ^{
+            DDLogCInfo(@"%@",data);
+            [PalmUIManagement sharedInstance].postForwardResult = data;
+        };
+        dispatch_async(dispatch_get_main_queue(), t);
+    }];
+    [self startAsynchronous];
 }
 
 -(void) main{
@@ -338,6 +364,9 @@
             break;
         case kGetNotiSenderList:
             [self getNotiSenderList];
+            break;
+        case kPostForwardNoti:
+            [self postForwardNoti];
             break;
         default:
             break;

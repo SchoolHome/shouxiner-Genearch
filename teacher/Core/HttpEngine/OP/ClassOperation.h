@@ -22,6 +22,7 @@ typedef enum{
     kGetNotiWithTopicID,
     kGetNotiUnReadCount,
     kGetNotiSenderList,
+    kPostForwardNoti,
 }ClassData;
 
 
@@ -36,6 +37,8 @@ typedef enum{
 -(ClassOperation *) initUnReadNotiCount : (long long) timeStamp;
 // 获取有指示列表
 -(ClassOperation *) initNotiListWithSender : (int) sender withOffset : (int) offset withLimit : (int) limit;
+// 转发有指示
+-(ClassOperation *) initForwardNoti : (int) oaid withGroupID : (int) groupID withMessage : (NSString *) message;
 
 // 点赞
 -(ClassOperation *) initPraise : (long long) topicID;

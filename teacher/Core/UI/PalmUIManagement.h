@@ -33,6 +33,8 @@
 @property(nonatomic,strong) NSDictionary *notiUnReadCount;
 // 有指示根据分页获取数据
 @property(nonatomic,strong) NSDictionary *notiWithSenderList;
+// 转发有指示
+@property(nonatomic,strong) NSDictionary *postForwardResult;
 
 // 班级列表
 @property(nonatomic,strong) NSDictionary *groupListResult;
@@ -100,5 +102,6 @@
 -(void) getUnReadNotiCount : (long long) timeStamp;
 // 获取有指示列表
 -(void) getNotiListWithSender : (int) sender withOffset : (int) offset withLimit : (int) limit;
-
+// 转发有指示
+-(void) postForwardNoti : (int) oaid withGroupID : (int) groupID withMessage : (NSString *) message;
 @end
