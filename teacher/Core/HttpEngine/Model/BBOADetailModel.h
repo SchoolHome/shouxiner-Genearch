@@ -15,6 +15,7 @@
 
 @property(nonatomic,strong) NSNumber *attach_num;
 @property(nonatomic,strong) NSString *content;
+@property(nonatomic,strong) NSArray *images;
 @property(nonatomic,strong) NSNumber *oaid;
 @property(nonatomic,strong) NSString *sender_avatar;
 @property(nonatomic,strong) NSNumber *sender_uid;

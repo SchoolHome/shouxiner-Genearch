@@ -21,47 +21,66 @@
 @implementation BBYZSDetailViewController
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-//    if ([@"notiWithSenderList" isEqualToString:keyPath])
-//    {
-//        NSDictionary *dict = [PalmUIManagement sharedInstance].notiWithSenderList;
-//        
-//        NSLog(@"%@",  NSStringFromClass([dict[@"data"][@"list"] class]));
-//        
-//        NSArray *arr = [NSArray arrayWithObjects:dict[@"data"][@"list"][@"0"],nil];
-//        if ([arr count]>0) {
-//            NSMutableArray *list = [[NSMutableArray alloc] init];
-//            [arr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-//                BBOADetailModel *model = [BBOADetailModel fromJson:(NSDictionary *)obj];
-//                [list addObject:model];
-//            }];
-//            
-//            switch (self.loadStatus) {
-//                case OALoadStatusRefresh:
-//                    //
-//                {
-//                    [self.detailList removeAllObjects];
-//                    [self.detailList addObjectsFromArray:list];
-//                    [yzsDetailTableView.pullToRefreshView stopAnimating];
-//                    
-//                    NSDate *now = [CoreUtils convertDateToLocalTime:[NSDate date]];
-//                    NSString *date = [NSString stringWithFormat:@"最近更新: %@",[[now description] substringToIndex:16]];
-//                    [yzsDetailTableView.pullToRefreshView setSubtitle:date forState:SVPullToRefreshStateAll];
-//                }
-//                    break;
-//                case OALoadStatusAppend:
-//                    //
-//                {
-//                    [self.detailList addObjectsFromArray:list];
-//                    [yzsDetailTableView.infiniteScrollingView stopAnimating];
-//                }
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//        
-//        NSLog(@"%@",dict);
-//    }
+    if ([@"notiWithSenderList" isEqualToString:keyPath])
+    {
+        NSDictionary *dict = [PalmUIManagement sharedInstance].notiWithSenderList;
+        
+        NSLog(@"%@",  NSStringFromClass([dict[@"data"][@"list"] class]));
+        
+        NSArray *arr = [NSArray arrayWithArray:dict[@"data"][@"list"]];
+        if ([arr count]>0) {
+            NSMutableArray *list = [[NSMutableArray alloc] init];
+            [arr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                BBOADetailModel *model = [BBOADetailModel fromJson:(NSDictionary *)obj];
+                [list addObject:model];
+            }];
+            
+            switch (self.loadStatus) {
+                case OALoadStatusRefresh:
+                    //
+                {
+                    [self.detailList removeAllObjects];
+                    [self.detailList addObjectsFromArray:list];
+                    [yzsDetailTableView.pullToRefreshView stopAnimating];
+                    
+                    NSDate *now = [CoreUtils convertDateToLocalTime:[NSDate date]];
+                    NSString *date = [NSString stringWithFormat:@"最近更新: %@",[[now description] substringToIndex:16]];
+                    [yzsDetailTableView.pullToRefreshView setSubtitle:date forState:SVPullToRefreshStateAll];
+                }
+                    break;
+                case OALoadStatusAppend:
+                    //
+                {
+                    [self.detailList addObjectsFromArray:list];
+                    [yzsDetailTableView.infiniteScrollingView stopAnimating];
+                }
+                    break;
+                default:
+                    break;
+            }
+            [yzsDetailTableView reloadData];
+            
+        }else{
+        
+            switch (self.loadStatus) {
+                case OALoadStatusRefresh:
+                    //
+                {
+                    [yzsDetailTableView.pullToRefreshView stopAnimating];
+                }
+                    break;
+                case OALoadStatusAppend:
+                    //
+                {
+                    [yzsDetailTableView.infiniteScrollingView stopAnimating];
+                }
+                    break;
+                default:
+                    break;
+            }
+            [yzsDetailTableView reloadData];
+        }
+    }
 }
 
 -(void)backButtonTaped:(id)sender{
@@ -114,14 +133,15 @@
     yzsDetailTableView.dataSource = self;
     yzsDetailTableView.delegate = self;
     [self.view addSubview:yzsDetailTableView];
+    yzsDetailTableView.separatorColor = [UIColor clearColor];
     
-    yzsDetailTableView.backgroundColor = [UIColor whiteColor];
+    yzsDetailTableView.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];;
     
     __weak BBYZSDetailViewController *weakSelf = self;
     // 刷新
     [yzsDetailTableView addPullToRefreshWithActionHandler:^{
         weakSelf.loadStatus = OALoadStatusRefresh;
-        [[PalmUIManagement sharedInstance] getNotiListWithSender:[weakSelf.oaModel.sender_uid intValue] withOffset:0 withLimit:30];
+        [[PalmUIManagement sharedInstance] getNotiListWithSender:[weakSelf.oaModel.sender_uid intValue] withOffset:0 withLimit:3];
     }];
     
     // 追加
@@ -129,7 +149,7 @@
         
         weakSelf.loadStatus = OALoadStatusAppend;
         int offset = [weakSelf.detailList count];
-        [[PalmUIManagement sharedInstance] getNotiListWithSender:[weakSelf.oaModel.sender_uid intValue] withOffset:offset withLimit:30];
+        [[PalmUIManagement sharedInstance] getNotiListWithSender:[weakSelf.oaModel.sender_uid intValue] withOffset:offset withLimit:3];
     }];
     
     [yzsDetailTableView triggerPullToRefresh];
@@ -142,7 +162,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;//[self.detailList count];
+    return [self.detailList count];
 }
 
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -164,8 +184,7 @@
         cell.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    //[cell setData:self.detailList[indexPath.row]];
-    [cell setData:nil];
+    [cell setData:self.detailList[indexPath.row]];
     return cell;
 }
 
@@ -189,7 +208,9 @@
 -(void)bbIndicationDetailTableViewCell:(BBIndicationDetailTableViewCell *)cell shareTaped:(UIButton *)send{
 
     NSLog(@"send");
+    NSIndexPath *indexPath = [yzsDetailTableView indexPathForCell:cell];
     BBYZSShareViewController *share = [[BBYZSShareViewController alloc] init];
+    share.oaDetailModel = self.detailList[indexPath.row];
     [self.navigationController pushViewController:share animated:YES];
 }
 

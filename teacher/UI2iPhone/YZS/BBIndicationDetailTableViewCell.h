@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EGOImageView.h"
 #import "BBOADetailModel.h"
 
 @protocol BBIndicationDetailTableViewCellDelegate;
@@ -19,7 +20,7 @@
     UIImageView *back;
     
     UILabel *title;
-    UIImageView *thumbnail;
+    EGOImageView *thumbnail;
     UILabel *content;
     
     UIImageView *line;

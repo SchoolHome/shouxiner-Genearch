@@ -21,6 +21,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        self.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
+        
         back = [[UIImageView alloc] init];
         [self addSubview:back];
         CALayer *roundedLayer = [back layer];
@@ -38,13 +40,14 @@
         [self addSubview:title];
         title.backgroundColor = [UIColor clearColor];
         
-        thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50+30, 280, 200)];
+        thumbnail = [[EGOImageView alloc] initWithFrame:CGRectMake(20, 50+30, 280, 200)];
         [self addSubview:thumbnail];
+        thumbnail.contentMode = UIViewContentModeScaleAspectFit;
         
         content = [[UILabel alloc] init];
         content.textColor = [UIColor grayColor];
-        content.font = [UIFont systemFontOfSize:12];
-        content.numberOfLines = 0;
+        content.font = [UIFont systemFontOfSize:13];
+        content.numberOfLines = 4;
         [self addSubview:content];
         content.backgroundColor = [UIColor clearColor];
         
@@ -63,7 +66,7 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    back.frame = CGRectMake(10, 10+25, 300, self.bounds.size.height-20);
+    back.frame = CGRectMake(10, 10+25, 300, self.bounds.size.height-20-30);
 }
 
 -(void)setData:(BBOADetailModel *)data{
@@ -71,11 +74,15 @@
     
     time.text = @"2月13日 12:23";
     
-    title.text = @"教育局重要指示";
-    thumbnail.backgroundColor = [UIColor magentaColor];
+    title.text = _data.title;
+    thumbnail.backgroundColor = [UIColor clearColor];
+    
+    if ([_data.images count]>0) {
+        thumbnail.imageURL = [NSURL URLWithString:_data.images[0]];
+    }
     
     content.frame = CGRectMake(20, 255+30, 280, 60);
-    content.text = @"xxx同志指示：教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示";
+    content.text = _data.content;//@"xxx同志指示：教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示";
     [content sizeToFit];
     
     line.frame = CGRectMake(10, 330+30, 300, 1);

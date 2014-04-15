@@ -98,7 +98,15 @@
             
             tp.fileList = attach[@"file"];
             tp.audioList = attach[@"audio"];
-            tp.forword = [BBForwordModel fromJson:attach[@"forword"]];
+            
+            
+            NSArray *forwards = attach[@"forward"];
+            if ([forwards isKindOfClass:[NSArray class]]) {
+                
+                if ([forwards count]>0) {
+                    tp.forward = [BBForwardModel fromJson:forwards[0]];
+                }
+            }
         }
         
         return tp;
@@ -110,18 +118,23 @@
 @end
 
 
-@implementation BBForwordModel
+@implementation BBForwardModel
 
-+(BBForwordModel *)fromJson:(NSDictionary *)dict{
++(BBForwardModel *)fromJson:(NSDictionary *)dict{
 
     if (dict) {
-        BBForwordModel *fd = [[BBForwordModel alloc] init];
+        BBForwardModel *fd = [[BBForwardModel alloc] init];
         fd.type = dict[@"type"];
         fd.id = dict[@"id"];
         fd.title = dict[@"title"];
         fd.summary = dict[@"summary"];
         fd.author_name = dict[@"author_name"];
-        fd.author_avatar = dict[@"author_avatar"];
+        if ([dict[@"author_avatar"] isKindOfClass:[NSNull class]]) {
+            fd.author_avatar = nil;
+        }else{
+            fd.author_avatar = dict[@"author_avatar"];
+        }
+        
         fd.ts = dict[@"ts"];
         fd.url = dict[@"url"];
         return fd;

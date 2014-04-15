@@ -12,7 +12,7 @@
 /*
  * topic
  */
-@class BBForwordModel;
+@class BBForwardModel;
 @class BBPraiseModel;
 @class BBCommentModel;
 
@@ -37,7 +37,7 @@
 @property(nonatomic,strong) NSArray *imageList;
 @property(nonatomic,strong) NSArray *fileList;
 @property(nonatomic,strong) NSArray *audioList;
-@property(nonatomic,strong) BBForwordModel *forword;
+@property(nonatomic,strong) BBForwardModel *forward;
 
 
 // shortcut
@@ -52,7 +52,7 @@
 /*
  * BBForwordModel
  */
-@interface BBForwordModel : NSObject
+@interface BBForwardModel : NSObject
 {
     
 }
@@ -65,7 +65,7 @@
 @property(nonatomic,strong) NSNumber *ts;
 @property(nonatomic,strong) NSString *url;
 
-+(BBForwordModel *)fromJson:(NSDictionary *)dict;
++(BBForwardModel *)fromJson:(NSDictionary *)dict;
 
 @end
 

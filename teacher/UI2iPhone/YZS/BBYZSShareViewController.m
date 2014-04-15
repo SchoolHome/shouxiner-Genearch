@@ -7,6 +7,7 @@
 //
 
 #import "BBYZSShareViewController.h"
+#import "BBGroupModel.h"
 
 @interface BBYZSShareViewController ()
 
@@ -14,19 +15,86 @@
 
 @implementation BBYZSShareViewController
 
--(void)loading{
-    
-    sleep(3);
-    [self.navigationController popViewControllerAnimated:YES];
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([@"postForwardResult" isEqualToString:keyPath])
+    {
+        NSDictionary *dict=[PalmUIManagement sharedInstance].postForwardResult;
+        
+        NSLog(@"%@",dict);
+        
+        if ([dict[@"hasError"] boolValue]) {
+            [self showProgressWithText:@"转发失败" withDelayTime:0.1];
+        }else{
+            [self showProgressWithText:@"转发成功" withDelayTime:0.1];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
 }
 
+
 -(void)sendButtonTaped:(id)sender{
-    [self showWhileExecuting:@selector(loading) withText:@"发送" withDetailText:@"正在发送..."];
+
+//    groupid = 8;
+//    groupid = 1000666;
+//    groupid = 1000675;
+    // 转发有指示
+    
+    [thingsTextView resignFirstResponder];
+    
+    if ([thingsTextView.text length]>0) {
+        [self showProgressWithText:@"正在转发..."];
+        
+        
+        NSDictionary *result = [PalmUIManagement sharedInstance].groupListResult;
+        
+        NSArray *groupList = [NSArray arrayWithArray:result[@"data"]];
+        
+        
+        
+        NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+        int index = [def integerForKey:@"saved_topic_group_index"];  // 上次选中的班级
+        
+        BBGroupModel *group = nil;
+        if ([groupList count]>index) {
+            group = groupList[index];
+        }else{
+            group = groupList[0];
+        }
+        
+        [[PalmUIManagement sharedInstance] postForwardNoti:[_oaDetailModel.oaid intValue]
+                                               withGroupID:[group.groupid intValue]
+                                               withMessage:thingsTextView.text];
+    }else{
+        
+        [self showProgressWithText:@"请输入文字" withDelayTime:0.1];
+    }
 }
 
 -(void)backButtonTaped:(id)sender{
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)addObservers{
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"postForwardResult" options:0 context:NULL];
+}
+
+-(void)removeObservers{
+    
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"postForwardResult"];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [self addObservers];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    [self removeObservers];
 }
 
 - (void)viewDidLoad
@@ -66,8 +134,11 @@
     UIButton *link = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self.view addSubview:link];
     
-    UIImageView *linkIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 45, 45)];
+    EGOImageView *linkIcon = [[EGOImageView alloc] initWithFrame:CGRectMake(10, 10, 45, 45)];
     [link addSubview:linkIcon];
+    if ([_oaDetailModel.images count]>0) {
+        linkIcon.imageURL  = [NSURL URLWithString:_oaDetailModel.images[0]];
+    }
     
     UILabel *linkTitle = [[UILabel alloc] initWithFrame:CGRectMake(65, 5, 320-30-70, 20)];
     [link addSubview:linkTitle];
@@ -86,10 +157,10 @@
     
     linkIcon.backgroundColor = [UIColor grayColor];
     
-    linkTitle.text = @"教育局新指示";
+    linkTitle.text = _oaDetailModel.title;
     linkTitle.font = [UIFont systemFontOfSize:14];
     
-    linkContent.text = @"教育局新指示，发言人说XXXXX、教育局新指示，发言人说XXXXX、教育局新指示，";
+    linkContent.text = _oaDetailModel.content;//@"教育局新指示，发言人说XXXXX、教育局新指示，发言人说XXXXX、教育局新指示，";
     linkContent.font = [UIFont systemFontOfSize:12];
     linkContent.numberOfLines = 2;
 }

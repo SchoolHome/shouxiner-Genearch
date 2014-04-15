@@ -19,6 +19,11 @@
         
         dt.attach_num = dict[@"attach_num"];
         dt.content = dict[@"content"];
+        
+        if (dict[@"images"]&&[dict[@"images"] isKindOfClass:[NSArray class]]) {
+            dt.images = dict[@"images"];
+        }
+        
         dt.oaid = dict[@"oaid"];
         
         if (dict[@"sender_avatar"]&&![dict[@"sender_avatar"] isKindOfClass:[NSNull class]]) {

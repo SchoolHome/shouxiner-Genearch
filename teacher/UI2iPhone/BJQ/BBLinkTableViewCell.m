@@ -37,7 +37,7 @@
         [link addSubview:linkTitle];
         linkTitle.backgroundColor = [UIColor clearColor];
         
-        linkContent = [[UILabel alloc] initWithFrame:CGRectMake(65, 25, 160, 30)];
+        linkContent = [[UILabel alloc] initWithFrame:CGRectMake(65, 25, 155, 30)];
         [link addSubview:linkContent];
         linkContent.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
         linkContent.backgroundColor = [UIColor clearColor];
@@ -51,7 +51,7 @@
     
     content.frame = CGRectMake(K_LEFT_PADDING, 20, 225, 30);//
     
-    link.frame = CGRectMake(K_LEFT_PADDING, kViewFoot(content)+5, 222, 63);//
+    //
 //    link.backgroundColor = [UIColor whiteColor];
 //    CALayer *roundedLayer = [link layer];
 //    [roundedLayer setMasksToBounds:YES];
@@ -67,15 +67,20 @@
     content.text = self.data.content;
     content.font = [UIFont systemFontOfSize:14];
     content.numberOfLines = 0;
+    [content sizeToFit];
     
-    linkTitle.text = self.data.forword.title;
+    linkTitle.text = self.data.forward.title;
     linkTitle.font = [UIFont systemFontOfSize:14];
     
-    linkContent.text = self.data.forword.summary;
+    linkContent.text = self.data.forward.summary;
     linkContent.font = [UIFont systemFontOfSize:12];
     linkContent.numberOfLines = 2;
     
-    linkIcon.imageURL = [NSURL URLWithString:self.data.forword.author_avatar];
+    if (self.data.forward.author_avatar) {
+        linkIcon.imageURL = [NSURL URLWithString:self.data.forward.author_avatar];
+    }
+    
+    link.frame = CGRectMake(K_LEFT_PADDING, kViewFoot(content)+5, 222, 63);
     
     self.like.frame = CGRectMake(165, kViewFoot(link)+5, 62, 27);
     self.reply.frame = CGRectMake(165+70, kViewFoot(link)+5, 62, 27);

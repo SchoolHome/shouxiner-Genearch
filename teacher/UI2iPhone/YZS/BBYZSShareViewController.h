@@ -8,6 +8,7 @@
 
 #import "PalmViewController.h"
 #import "UIPlaceHolderTextView.h"
+#import "EGOImageView.h"
 
 #import "BBOADetailModel.h"
 
