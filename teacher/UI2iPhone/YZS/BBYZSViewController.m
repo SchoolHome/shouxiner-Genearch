@@ -17,7 +17,7 @@
 @implementation BBYZSViewController
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([@"notiWithSenderList" isEqualToString:keyPath])
+    if ([@"notiList" isEqualToString:keyPath])
     {
         NSDictionary *jsonData = [[PalmUIManagement sharedInstance].notiList objectForKey:ASI_REQUEST_DATA];
         jsonData = [jsonData objectForKey:@"list"];
@@ -29,16 +29,17 @@
             [self.oalist addObject:oa];
         }
         [self.dataSource updateCacheArray:self.oalist];
+        [yzsTableView reloadData];
     }
 }
 
 -(void)addObservers{
-    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiWithSenderList" options:0 context:NULL];
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiList" options:0 context:NULL];
 }
 
 -(void)removeObservers{
 
-    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notiWithSenderList"];
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notiList"];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -60,6 +61,10 @@
 	// Do any additional setup after loading the view.
     
     self.dataSource = [PalmUIModelCoding deserializeModel:CacheName];
+    if (self.dataSource == nil) {
+        self.dataSource = [[BBOASumModel alloc] init];
+    }
+    
     
     self.navigationItem.title = @"有通知";
     
@@ -79,9 +84,9 @@
     
     self.oalist = [[NSMutableArray alloc] init];
     
-    //[[PalmUIManagement sharedInstance] getNotiData:1];
+    [[PalmUIManagement sharedInstance] getNotiData:1];
     
-    [[PalmUIManagement sharedInstance] getNotiListWithSender:1 withOffset:0 withLimit:30];
+//    [[PalmUIManagement sharedInstance] getNotiListWithSender:1 withOffset:0 withLimit:30];
 }
 
 
@@ -92,7 +97,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return [self.dataSource.cacheArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -104,7 +109,7 @@
         //cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    [cell setData:nil];
+    [cell setData:self.dataSource.cacheArray[indexPath.row]];
     return cell;
 }
 

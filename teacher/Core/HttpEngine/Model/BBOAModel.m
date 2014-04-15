@@ -42,7 +42,7 @@
         }
         if (!isFound) {
             model.unReaded = [NSNumber numberWithInt:1];
-            [self.cacheArray addObject:[model mutableCopy]];
+            [self.cacheArray addObject:model];
         }
     }];
     [PalmUIModelCoding serializeModel:self.cacheArray withFileName:CacheName];
