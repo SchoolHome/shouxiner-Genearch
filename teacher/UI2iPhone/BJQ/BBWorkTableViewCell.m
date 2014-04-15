@@ -55,7 +55,7 @@
 -(void)setData:(BBTopicModel *)data{
     [super setData:data];
 
-    title.text = self.data.title;
+    title.text = self.data.author_username;
     title.font = [UIFont systemFontOfSize:14];
     
     content.frame = CGRectMake(K_LEFT_PADDING+43, 20+3, 175, 50);

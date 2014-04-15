@@ -9,9 +9,15 @@
 #import "PalmViewController.h"
 #import "UIPlaceHolderTextView.h"
 
+#import "BBOADetailModel.h"
+
+
 @interface BBYZSShareViewController : PalmViewController
 {
 
     UIPlaceHolderTextView *thingsTextView;
 }
+
+@property(nonatomic,strong) BBOADetailModel *oaDetailModel;
+
 @end

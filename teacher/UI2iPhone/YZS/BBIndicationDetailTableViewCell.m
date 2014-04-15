@@ -29,11 +29,16 @@
         roundedLayer.borderWidth = 1;
         roundedLayer.borderColor = [[UIColor lightGrayColor] CGColor];
         
-        title = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 280, 25)];
+        time = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 280, 30)];
+        [self addSubview:time];
+        time.backgroundColor = [UIColor clearColor];
+        time.textAlignment = NSTextAlignmentCenter;
+        
+        title = [[UILabel alloc] initWithFrame:CGRectMake(20, 20+30, 280, 25)];
         [self addSubview:title];
         title.backgroundColor = [UIColor clearColor];
         
-        thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, 280, 200)];
+        thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50+30, 280, 200)];
         [self addSubview:thumbnail];
         
         content = [[UILabel alloc] init];
@@ -58,21 +63,23 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    back.frame = CGRectMake(10, 10, 300, self.bounds.size.height-20);
+    back.frame = CGRectMake(10, 10+25, 300, self.bounds.size.height-20);
 }
 
 -(void)setData:(BBOADetailModel *)data{
     _data = data;
     
+    time.text = @"2月13日 12:23";
+    
     title.text = @"教育局重要指示";
     thumbnail.backgroundColor = [UIColor magentaColor];
     
-    content.frame = CGRectMake(20, 255, 280, 60);
+    content.frame = CGRectMake(20, 255+30, 280, 60);
     content.text = @"xxx同志指示：教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示";
     [content sizeToFit];
     
-    line.frame = CGRectMake(10, 330, 300, 1);
-    share.frame = CGRectMake(20, 350, 24, 24);
+    line.frame = CGRectMake(10, 330+30, 300, 1);
+    share.frame = CGRectMake(20, 350+30, 24, 24);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
