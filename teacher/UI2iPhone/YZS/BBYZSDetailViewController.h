@@ -12,6 +12,12 @@
 #import "SVPullToRefresh.h"
 
 #import "BBOAModel.h"
+#import "BBOADetailModel.h"
+
+typedef enum{
+    OALoadStatusRefresh, // 刷新
+    OALoadStatusAppend,  // 追加
+} OALoadStatus;
 
 @interface BBYZSDetailViewController : PalmViewController
 <UITableViewDataSource,UITableViewDelegate,
@@ -19,9 +25,11 @@ BBIndicationDetailTableViewCellDelegate>
 {
     UITableView *yzsDetailTableView;
 
-    NSMutableArray *detailList;
+    
 }
 
 @property(nonatomic,strong) BBOAModel *oaModel;
+
+@property(nonatomic) OALoadStatus loadStatus;
 
 @end

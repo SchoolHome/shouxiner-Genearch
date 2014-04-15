@@ -61,7 +61,7 @@
     back.frame = CGRectMake(10, 10, 300, self.bounds.size.height-20);
 }
 
--(void)setData:(id)data{
+-(void)setData:(BBOADetailModel *)data{
     _data = data;
     
     title.text = @"教育局重要指示";

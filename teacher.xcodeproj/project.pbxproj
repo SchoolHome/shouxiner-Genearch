@@ -1820,6 +1820,7 @@
 		7A6B776018ED2B330000DBFE /* BBOther@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6B775A18ED2B330000DBFE /* BBOther@2x.png */; };
 		7A6B776118ED2B330000DBFE /* BBOtherContent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A6B775B18ED2B330000DBFE /* BBOtherContent@2x.png */; };
 		7A6B776418ED4DA20000DBFE /* BBNotifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6B776318ED4DA20000DBFE /* BBNotifyModel.m */; };
+		7A6F983418FD032D0043E5A0 /* BBOADetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A6F983318FD032D0043E5A0 /* BBOADetailModel.m */; };
 		7A71E9AD18EBADBD00572E4D /* BBOAModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A71E9AC18EBADBD00572E4D /* BBOAModel.m */; };
 		7A74DBA618FAD9C400EBFA93 /* BBJFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A74DBA518FAD9C400EBFA93 /* BBJFViewController.m */; };
 		7A863C6C18EA894E0090C430 /* BBGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A863C6B18EA894E0090C430 /* BBGroupModel.m */; };
@@ -4300,6 +4301,8 @@
 		7A6B775B18ED2B330000DBFE /* BBOtherContent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBOtherContent@2x.png"; sourceTree = "<group>"; };
 		7A6B776218ED4DA20000DBFE /* BBNotifyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBNotifyModel.h; sourceTree = "<group>"; };
 		7A6B776318ED4DA20000DBFE /* BBNotifyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBNotifyModel.m; sourceTree = "<group>"; };
+		7A6F983218FD032D0043E5A0 /* BBOADetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBOADetailModel.h; sourceTree = "<group>"; };
+		7A6F983318FD032D0043E5A0 /* BBOADetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBOADetailModel.m; sourceTree = "<group>"; };
 		7A71E9AB18EBADBD00572E4D /* BBOAModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBOAModel.h; sourceTree = "<group>"; };
 		7A71E9AC18EBADBD00572E4D /* BBOAModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBOAModel.m; sourceTree = "<group>"; };
 		7A74DBA418FAD9C400EBFA93 /* BBJFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBJFViewController.h; sourceTree = "<group>"; };
@@ -8509,6 +8512,8 @@
 				33771E4418C9D20900FB5002 /* AsiGetRequestModel.m */,
 				33771E4618C9D28600FB5002 /* PalmUIModelCoding.h */,
 				33771E4718C9D28600FB5002 /* PalmUIModelCoding.m */,
+				7A6F983218FD032D0043E5A0 /* BBOADetailModel.h */,
+				7A6F983318FD032D0043E5A0 /* BBOADetailModel.m */,
 				7A71E9AB18EBADBD00572E4D /* BBOAModel.h */,
 				7A71E9AC18EBADBD00572E4D /* BBOAModel.m */,
 				7A6B776218ED4DA20000DBFE /* BBNotifyModel.h */,
@@ -10533,6 +10538,7 @@
 				332D832A18C33F0B007A75D5 /* KBPageControl.m in Sources */,
 				332D74F918C33552007A75D5 /* CPOperationConverMemberUpdate.m in Sources */,
 				332D757018C33552007A75D5 /* DDXMLNode.m in Sources */,
+				7A6F983418FD032D0043E5A0 /* BBOADetailModel.m in Sources */,
 				332D752F18C33552007A75D5 /* XMPPParser.m in Sources */,
 				332D837318C33F0B007A75D5 /* sp_enc.c in Sources */,
 				332D833E18C33F0B007A75D5 /* SingleImageCell.m in Sources */,

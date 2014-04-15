@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BBOADetailModel.h"
 
 @protocol BBIndicationDetailTableViewCellDelegate;
 
@@ -22,7 +23,7 @@
     UIButton *share;
 }
 @property(nonatomic,weak) id<BBIndicationDetailTableViewCellDelegate> delegate;
-@property(nonatomic,strong) id data;
+@property(nonatomic,strong) BBOADetailModel *data;
 @end
 
 ////////////////////////////////////////////////////////////////////////////////

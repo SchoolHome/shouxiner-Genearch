@@ -9,20 +9,60 @@
 #import "BBYZSDetailViewController.h"
 #import "BBYZSShareViewController.h"
 
+#import "CoreUtils.h"
+
+
 @interface BBYZSDetailViewController ()
+
+@property(nonatomic,strong) NSMutableArray *detailList;
 
 @end
 
 @implementation BBYZSDetailViewController
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([@"notiWithSenderList" isEqualToString:keyPath])
-    {
-
-       NSDictionary *dict = [PalmUIManagement sharedInstance].notiWithSenderList;
-        
-        NSLog(@"%@",dict);
-    }
+//    if ([@"notiWithSenderList" isEqualToString:keyPath])
+//    {
+//        NSDictionary *dict = [PalmUIManagement sharedInstance].notiWithSenderList;
+//        
+//        NSLog(@"%@",  NSStringFromClass([dict[@"data"][@"list"] class]));
+//        
+//        
+//        NSArray *arr = [NSArray arrayWithArray:dict[@"data"][@"list"]];
+//        if ([arr count]>0) {
+//            NSMutableArray *list = [[NSMutableArray alloc] init];
+//            [arr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//                BBOADetailModel *model = [BBOADetailModel fromJson:(NSDictionary *)obj];
+//                [list addObject:model];
+//            }];
+//            
+//            switch (self.loadStatus) {
+//                case OALoadStatusRefresh:
+//                    //
+//                {
+//                    [self.detailList removeAllObjects];
+//                    [self.detailList addObjectsFromArray:list];
+//                    [yzsDetailTableView.pullToRefreshView stopAnimating];
+//                    
+//                    NSDate *now = [CoreUtils convertDateToLocalTime:[NSDate date]];
+//                    NSString *date = [NSString stringWithFormat:@"最近更新: %@",[[now description] substringToIndex:16]];
+//                    [yzsDetailTableView.pullToRefreshView setSubtitle:date forState:SVPullToRefreshStateAll];
+//                }
+//                    break;
+//                case OALoadStatusAppend:
+//                    //
+//                {
+//                    [self.detailList addObjectsFromArray:list];
+//                    [yzsDetailTableView.infiniteScrollingView stopAnimating];
+//                }
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//        
+//        NSLog(@"%@",dict);
+//    }
 }
 
 -(void)backButtonTaped:(id)sender{
@@ -52,7 +92,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    detailList = [[NSMutableArray alloc] init];
+    self.detailList = [[NSMutableArray alloc] init];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -81,47 +121,40 @@
     __weak BBYZSDetailViewController *weakSelf = self;
     // 刷新
     [yzsDetailTableView addPullToRefreshWithActionHandler:^{
-        
-       
+        weakSelf.loadStatus = OALoadStatusRefresh;
+        [[PalmUIManagement sharedInstance] getNotiListWithSender:[weakSelf.oaModel.sender_uid intValue] withOffset:0 withLimit:30];
     }];
     
     // 追加
     [yzsDetailTableView addInfiniteScrollingWithActionHandler:^{
         
-        
-        
+        weakSelf.loadStatus = OALoadStatusAppend;
+        int offset = [weakSelf.detailList count];
+        [[PalmUIManagement sharedInstance] getNotiListWithSender:[weakSelf.oaModel.sender_uid intValue] withOffset:offset withLimit:30];
     }];
     
-
-    [[PalmUIManagement sharedInstance] getNotiListWithSender:[_oaModel.sender_uid intValue] withOffset:0 withLimit:30];
-    
+    [yzsDetailTableView triggerPullToRefresh];
 }
-
 
 #pragma mark - UITableViewDatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 20;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-
-    return 20;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.detailList count];
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = @"3月16日  12:21";
-    label.backgroundColor = [UIColor lightGrayColor];
-    
-    return label;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+//    label.textAlignment = NSTextAlignmentCenter;
+//    label.text = @"3月16日  12:21";
+//    label.backgroundColor = [UIColor lightGrayColor];
+//    
+//    return label;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"defCell";
@@ -133,7 +166,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    [cell setData:nil];
+    [cell setData:self.detailList[indexPath.row]];
     return cell;
 }
 
@@ -157,10 +190,8 @@
 -(void)bbIndicationDetailTableViewCell:(BBIndicationDetailTableViewCell *)cell shareTaped:(UIButton *)send{
 
     NSLog(@"send");
-    
     BBYZSShareViewController *share = [[BBYZSShareViewController alloc] init];
     [self.navigationController pushViewController:share animated:YES];
-    
 }
 
 - (void)didReceiveMemoryWarning
