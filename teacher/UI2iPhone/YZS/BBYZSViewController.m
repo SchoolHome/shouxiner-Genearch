@@ -34,7 +34,11 @@
         if (![[PalmUIManagement sharedInstance].notiList[@"hasError"] boolValue]) { // 加载成功，保存时间
             NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
             int time = [[NSDate date] timeIntervalSince1970];
-            [def setObject:[NSNumber numberWithInt:time] forKey:@"check_yzs_unread_time"];
+            
+            CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
+            NSString *key = [NSString stringWithFormat:@"check_yzs_unread_time_%@",account.uid];
+            
+            [def setObject:[NSNumber numberWithInt:time] forKey:key];
             [def synchronize];
         }
     }

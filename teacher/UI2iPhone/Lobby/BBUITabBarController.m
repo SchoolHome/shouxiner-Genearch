@@ -74,8 +74,13 @@
     
     int time = 0;
 
+    
+    
+    CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
+    NSString *key = [NSString stringWithFormat:@"check_yzs_unread_time_%@",account.uid];
+    
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    NSNumber *ts = [def objectForKey:@"check_yzs_unread_time"];
+    NSNumber *ts = [def objectForKey:key];
     if ([ts intValue]>0) {
         time = [ts intValue];
     }

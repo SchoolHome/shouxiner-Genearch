@@ -59,6 +59,32 @@
     return self;
 }
 
+-(NSString *)timeStringFromNumber:(NSNumber *) number{
+    
+    NSTimeInterval  t1 = [number longLongValue];
+    //NSTimeInterval  t2 = [[CoreUtils convertDateToLocalTime:[NSDate date]] timeIntervalSince1970];
+    NSTimeInterval  t2 = [[NSDate date] timeIntervalSince1970];
+    
+    int second = (t2 -t1);
+    NSString *final = @"刚刚";
+    
+    if (second<60) {
+        final = @"刚刚";
+    }else if(second<60*60){
+        int min = second/60;
+        final = [NSString stringWithFormat:@"%d分钟前",min];
+    }else if(second<60*60*24){
+        
+        int hour = second/(60*60);
+        final = [NSString stringWithFormat:@"%d小时前",hour];
+    }else{
+        
+        int day = second/(60*60*24);
+        final = [NSString stringWithFormat:@"%d天前",day];
+    }
+    return final;
+}
+
 -(void)setData:(BBNotifyModel *)data{
 
     _data = data;
@@ -75,7 +101,7 @@
     
     title.text = _data.sender_name;
     content.text = data.topic_title;
-    time.text = @"3小时前";
+    time.text = [self timeStringFromNumber:data.ts];
     
 //    tlike
 //    tcomment
