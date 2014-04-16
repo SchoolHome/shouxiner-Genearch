@@ -126,15 +126,19 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.imageView = [[EGOImageView alloc] initWithFrame:self.imageViewRect];
-    UIImage *image = [UIImage imageWithContentsOfFile:self.path];
+
     
-    CPLogInfo(@"图片的地址：%@",self.path);
-    CPLogInfo(@"图片的width：%f",image.size.width);
-    CPLogInfo(@"图片的height：%f",image.size.height);
-    self.imageView.image = image;
-    
-    if (self.url) {
+    if (self.url&&self.fromUrl) {
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         self.imageView.imageURL = [NSURL URLWithString:self.url];
+    }else{
+    
+        UIImage *image = [UIImage imageWithContentsOfFile:self.path];
+        
+        CPLogInfo(@"图片的地址：%@",self.path);
+        CPLogInfo(@"图片的width：%f",image.size.width);
+        CPLogInfo(@"图片的height：%f",image.size.height);
+        self.imageView.image = image;
     }
     
     
@@ -178,12 +182,13 @@
     [UIImageView setAnimationDelegate:self];
     [UIImageView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     
-    self.imageView.frame = [self calculateImageRect];
-    if (self.fromUrl) {
+    if (self.url&&self.fromUrl) {
         self.imageView.frame = CGRectMake(0, 0, 320, height);
-        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    }
+        
+    }else{
     
+        self.imageView.frame = [self calculateImageRect];
+    }
     
     self.view.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor blackColor];

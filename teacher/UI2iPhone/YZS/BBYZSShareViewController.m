@@ -50,8 +50,6 @@
         
         NSArray *groupList = [NSArray arrayWithArray:result[@"data"]];
         
-        
-        
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
         int index = [def integerForKey:@"saved_topic_group_index"];  // 上次选中的班级
         

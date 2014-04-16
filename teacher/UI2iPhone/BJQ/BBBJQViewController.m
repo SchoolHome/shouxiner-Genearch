@@ -143,7 +143,7 @@
             NSMutableArray *p = [[NSMutableArray alloc] initWithArray:self.tempTopModel.praises];
             [p addObject:praise];
             self.tempTopModel.praises = [NSArray arrayWithArray:p];
-            self.tempTopModel.praisesStr = [NSString stringWithFormat:@"%@%@,",self.tempTopModel.praisesStr,praise.username];
+            self.tempTopModel.praisesStr = [NSString stringWithFormat:@"%@,%@",self.tempTopModel.praisesStr,praise.username];
             [bjqTableView reloadData];
         }
     }
@@ -262,7 +262,7 @@
 -(void)pointTaped:(UITapGestureRecognizer *)gesture{
     BBJFViewController *jf = [[BBJFViewController alloc] init];
     jf.hidesBottomBarWhenPushed = YES;
-    jf.url = [NSURL URLWithString:@"http://baidu.com"];
+    jf.url = [NSURL URLWithString:@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"];
     [self.navigationController pushViewController:jf animated:YES];
 }
 
