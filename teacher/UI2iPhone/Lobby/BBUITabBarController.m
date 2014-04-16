@@ -35,6 +35,7 @@
                 width = width + 8;
             }
             markYZS.frame = CGRectMake(215, -5, width, 20);
+            [markYZS setNeedsDisplay];
         }
     }
     
@@ -54,16 +55,15 @@
                 width = width + 8;
             }
             markMessage.frame = CGRectMake(136, -5, width, 20);
+            [markMessage setNeedsDisplay];
         }
     }
 }
-
 
 -(id)init{
     self = [super init];
     if (self) {
         //
-        
         [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"friendMsgUnReadedCount" options:0 context:NULL];
         [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiUnReadCount" options:0 context:NULL];
     }
@@ -112,7 +112,7 @@
     
     _imageTabBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 49)];
     _imageTabBar.image = [UIImage imageNamed:@"BBBottomBG"];
-    _imageTabBar.backgroundColor = [UIColor redColor];
+    _imageTabBar.backgroundColor = [UIColor clearColor];
     
     [self.tabBar addSubview:_imageTabBar];
     [self.tabBar bringSubviewToFront:_imageTabBar];
@@ -151,11 +151,11 @@
     markYZS = [[UILabel alloc] initWithFrame:CGRectMake(215, -5, 20, 20)];
     markYZS.font = [UIFont systemFontOfSize:14];
     [_imageTabBar addSubview:markYZS];
-    markYZS.backgroundColor = [UIColor orangeColor];
+    markYZS.backgroundColor = [UIColor colorWithRed:252/255.0 green:79/255.0 blue:6/255.0 alpha:1.0];
     markYZS.textAlignment = NSTextAlignmentCenter;
     markYZS.textColor = [UIColor whiteColor];
     CALayer *roundedLayer1= [markYZS layer];
-    //[roundedLayer setMasksToBounds:YES];
+    [roundedLayer1 setMasksToBounds:YES];
     roundedLayer1.cornerRadius = 10.0;
     roundedLayer1.borderWidth = 0.5;
     roundedLayer1.borderColor = [[UIColor grayColor] CGColor];
@@ -167,11 +167,11 @@
     markMessage = [[UILabel alloc] initWithFrame:CGRectMake(136, -5, 20, 20)];
     markMessage.font = [UIFont systemFontOfSize:14];
     [_imageTabBar addSubview:markMessage];
-    markMessage.backgroundColor = [UIColor orangeColor];
+    markMessage.backgroundColor = [UIColor colorWithRed:252/255.0 green:79/255.0 blue:6/255.0 alpha:1.0];
     markMessage.textAlignment = NSTextAlignmentCenter;
     markMessage.textColor = [UIColor whiteColor];
     CALayer *roundedLayer2= [markMessage layer];
-    //[roundedLayer setMasksToBounds:YES];
+    [roundedLayer2 setMasksToBounds:YES];
     roundedLayer2.cornerRadius = 10.0;
     roundedLayer2.borderWidth = 0.5;
     roundedLayer2.borderColor = [[UIColor grayColor] CGColor];

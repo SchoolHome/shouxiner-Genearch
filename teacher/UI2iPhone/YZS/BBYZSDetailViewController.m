@@ -115,7 +115,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationItem.title = @"广电总局";
+    self.navigationItem.title = _oaModel.sender_username;
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
@@ -196,10 +196,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    BBYZSDetailViewController *content = [[BBYZSDetailViewController alloc] init];
-//    content.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:content animated:YES];
     
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     
