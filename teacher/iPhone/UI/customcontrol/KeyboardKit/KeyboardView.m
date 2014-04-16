@@ -25,7 +25,7 @@
 
 //#define kSuperViewHeight 460
 
-@interface KeyboardView()
+@interface KeyboardView()<UIActionSheetDelegate>
 
 -(void)sendText:(NSString *)text;
 
@@ -300,9 +300,20 @@
     if (self.delegate&&[self.delegate respondsToSelector:@selector(keyboardViewDidDisappear)]) {
         [self.delegate keyboardViewDidDisappear];
     }
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"相册" otherButtonTitles:@"拍照", nil];
+    [sheet showInView:[UIApplication sharedApplication].windows[0]];
     
-    [self photoSwitchTapedIndex:0];
 }
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        [self photoSwitchTapedIndex:0];
+    }else if(buttonIndex == 1){
+        [self photoSwitchTapedIndex:1];
+    }else{
+    }
+}
+
 
 -(void)photoSwitchTapedIndex:(NSInteger) index{
     
