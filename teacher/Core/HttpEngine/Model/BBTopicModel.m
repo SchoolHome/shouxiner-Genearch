@@ -46,7 +46,7 @@
                 BBPraiseModel *pr = [BBPraiseModel fromJson:obj];
                 if (pr) {
                     [arr addObject:pr];
-                    [str appendString:[NSString stringWithFormat:@"%@，",pr.username]];
+                    [str appendString:[NSString stringWithFormat:@"%@,",pr.username]];
                 }
             }];
             

@@ -144,7 +144,7 @@
             [p addObject:praise];
             self.tempTopModel.praises = [NSArray arrayWithArray:p];
             if ([self.tempTopModel.praisesStr length]>0) {
-                self.tempTopModel.praisesStr = [NSString stringWithFormat:@"%@，%@",self.tempTopModel.praisesStr,praise.username];
+                self.tempTopModel.praisesStr = [NSString stringWithFormat:@"%@,%@",self.tempTopModel.praisesStr,praise.username];
             }else{
             
                 self.tempTopModel.praisesStr = [NSString stringWithFormat:@"%@",praise.username];

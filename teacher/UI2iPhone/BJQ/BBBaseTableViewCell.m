@@ -26,19 +26,12 @@
 
 -(NSString *)timeStringFromNumber:(NSNumber *) number{
     
-//    NSDate *date =  [CoreUtils getDateFormatWithLong:number];
-//    date = [CoreUtils convertDateToLocalTime:date];
-//    long long  second = -[[NSDate date] timeIntervalSinceDate:date];
-    
     NSTimeInterval  t1 = [number longLongValue];
-    NSTimeInterval  t2 = [[CoreUtils convertDateToLocalTime:[NSDate date]] timeIntervalSince1970];
+    //NSTimeInterval  t2 = [[CoreUtils convertDateToLocalTime:[NSDate date]] timeIntervalSince1970];
+    NSTimeInterval  t2 = [[NSDate date] timeIntervalSince1970];
     
-    int second = (t2 -t1)/1000;
-    
+    int second = (t2 -t1);
     NSString *final = @"刚刚";
-    
-    
-    //NSNumber * mm = [CoreUtils getLongFormatWithNowDate];
     
     if (second<60) {
         final = @"刚刚";
