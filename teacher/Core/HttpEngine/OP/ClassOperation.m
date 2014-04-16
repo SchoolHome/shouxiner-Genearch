@@ -129,10 +129,13 @@
 -(ClassOperation *) initForwardNoti : (int) oaid withGroupID : (int) groupID withMessage : (NSString *) message{
     if ([self initOperation]) {
         self.type = kPostForwardNoti;
+        
+       NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:oaid],@"oaid",
+         [NSNumber numberWithInt:groupID],@"groupid",
+                             message,@"message",nil];
+        
         NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/OAForward",K_HOST_NAME_OF_PALM_SERVER];
-        [self setHttpRequestPostWithUrl:urlStr params:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:oaid],@"oaid",
-                                                       [NSNumber numberWithInt:groupID],@"groupid",
-                                                       message,@"message",nil]];
+        [self setHttpRequestPostWithUrl:urlStr params:params];
     }
     return self;
 }
