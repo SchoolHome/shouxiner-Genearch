@@ -164,7 +164,7 @@ messagePictrueController = _messagePictrueController;
 {
     
     [super viewDidAppear:animated];
-    
+    [self.keybordView showInView:self.view];
     
 //    BOOL isfirstViewd =[[[NSUserDefaults standardUserDefaults] objectForKey:@"isFirstViewd"] boolValue];
 //    if (!isfirstViewd) {
@@ -239,6 +239,10 @@ messagePictrueController = _messagePictrueController;
     [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"deleteFriendDic"];
     [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"responseActionDic"];
     [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"coupleMsgGroupTag"];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
     
     [self stopMusicPlayer];
     [self stopMessageDetailSound];
@@ -863,7 +867,7 @@ messagePictrueController = _messagePictrueController;
 //选取相册
 -(void)keyboardViewOpenPhotoLibrary
 {
-    [[HPStatusBarTipView shareInstance] setHidden:YES];
+//    [[HPStatusBarTipView shareInstance] setHidden:YES];
     self.detailViewController.canPlayMagic = NO;
     imagePicker = [[UIImagePickerController alloc] init];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
@@ -871,22 +875,21 @@ messagePictrueController = _messagePictrueController;
     }
     self.msgGroupNeedRemove = YES;
     imagePicker.delegate = self;
-    [self presentModalViewController: imagePicker
-                            animated: YES];
+    [self presentModalViewController: imagePicker animated: YES];
     [self reBoundByCurrentStatus];
 }
 //选取照相机
 -(void)keyboardViewOpenCamera
 {
-    [[HPStatusBarTipView shareInstance] setHidden:YES];
+//    [[HPStatusBarTipView shareInstance] setHidden:YES];
     self.detailViewController.canPlayMagic = NO;
     imagePicker = [[UIImagePickerController alloc] init];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         if (userInfoType != USER_MANAGER_FANXER) {
-            imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
-            imagePicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
-            imagePicker.videoMaximumDuration = 30;
+//            imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+//            imagePicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
+//            imagePicker.videoMaximumDuration = 30;
         }else {
             
         }
@@ -906,7 +909,7 @@ messagePictrueController = _messagePictrueController;
 //取消图片选择器
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [[HPStatusBarTipView shareInstance] setHidden:NO];
+//    [[HPStatusBarTipView shareInstance] setHidden:NO];
     [self dismissModalViewControllerAnimated:YES];
     self.detailViewController.canPlayMagic = YES;
 }
@@ -914,7 +917,7 @@ messagePictrueController = _messagePictrueController;
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [[HPStatusBarTipView shareInstance] setHidden:NO];
+//    [[HPStatusBarTipView shareInstance] setHidden:NO];
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if([mediaType isEqualToString:@"public.movie"])
     {
@@ -966,6 +969,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     [self dismissModalViewControllerAnimated:YES];
     self.detailViewController.canPlayMagic = YES;
+//    self.IMView.frame = CGRectMake(0, 0, self.IMView.frame.size.width, 200.0f);
 }
 
 
