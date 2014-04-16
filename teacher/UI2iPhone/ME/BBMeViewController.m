@@ -13,6 +13,7 @@
 #import "BBHelpViewController.h"
 #import "BBFeedbackViewController.h"
 #import "BBAddressBookViewController.h"
+#import "ContactsViewController.h"
 #import "EGOImageView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CPUIModelManagement.h"
@@ -66,7 +67,7 @@
     [tableBackView setBackgroundColor:[UIColor colorWithRed:0.961f green:0.941f blue:0.921f alpha:1.0f]];
     [meTableView setBackgroundView:tableBackView];
     
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, meTableView.frame.size.width, 50)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, meTableView.frame.size.width, 60)];
     UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [logoutBtn setFrame:CGRectMake(10, 10, meTableView.frame.size.width-20, 30)];
     [logoutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
@@ -155,26 +156,31 @@
         NSInteger section = indexPath.section - 1;
         [cell.textLabel setText:[[listData objectAtIndex:section] objectAtIndex:indexPath.row]];
         if (indexPath.section == 1 && indexPath.row == 0) {
-            UILabel *labelNum = [[UILabel alloc] init];
-            [labelNum.layer setCornerRadius:10];
-            [labelNum setTextAlignment:NSTextAlignmentCenter];
-            [labelNum setBackgroundColor:[UIColor whiteColor]];
-            [labelNum setTextColor:[UIColor colorWithRed:0.204f green:0.576f blue:0.871 alpha:1.0f]];
-            [labelNum setTag:1];
-            [labelNum setHidden:YES];
-            [cell.contentView addSubview:labelNum];
             if (userCredits) {
                 if ([[userCredits objectForKey:@"credits"] integerValue]) {
+                    UIImage *image = [UIImage imageNamed:@"user_credit_back.png"];
+                    UIImageView *creditImage = [[UIImageView alloc] init];
+                    
+                    UILabel *labelNum = [[UILabel alloc] init];
+                    [labelNum setTextAlignment:NSTextAlignmentCenter];
+                    [labelNum setBackgroundColor:[UIColor clearColor]];
+                    [labelNum setTextColor:[UIColor colorWithRed:0.204f green:0.576f blue:0.871 alpha:1.0f]];
+                    [cell.contentView addSubview:creditImage];
+                    [cell.contentView addSubview:labelNum];
+                    
                     NSString *strCredits = [NSString stringWithFormat:@"%@", [userCredits objectForKey:@"credits"]];
+                    strCredits = @"9999";
                     UIFont *font = [UIFont fontWithName:@"Arial" size:16];
                     CGSize size = [strCredits sizeWithFont:font constrainedToSize:CGSizeMake(150, 20.0f)];
                     if (size.width < 10) {
                         size.width = 10;
                     }
+                    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
                     [labelNum setFrame:CGRectMake(260-size.width-10, 12, size.width+10, 20)];
+                    [creditImage setFrame:labelNum.frame];
+                    [creditImage setImage:image];
                     [labelNum setFont:font];
                     [labelNum setText:strCredits];
-                    [labelNum setHidden:NO];
                 }
             }
         }
@@ -203,9 +209,14 @@
                 shopViewController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:shopViewController animated:YES];
             }else{//通讯录
+                ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
+                contactsViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:contactsViewController animated:YES];
+                /*
                 BBAddressBookViewController *addressBookViewController = [[BBAddressBookViewController alloc] init];
                 addressBookViewController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:addressBookViewController animated:YES];
+                 */
             }
         }
             break;
