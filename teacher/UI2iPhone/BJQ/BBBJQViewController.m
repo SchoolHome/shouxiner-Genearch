@@ -143,7 +143,13 @@
             NSMutableArray *p = [[NSMutableArray alloc] initWithArray:self.tempTopModel.praises];
             [p addObject:praise];
             self.tempTopModel.praises = [NSArray arrayWithArray:p];
-            self.tempTopModel.praisesStr = [NSString stringWithFormat:@"%@,%@",self.tempTopModel.praisesStr,praise.username];
+            if ([self.tempTopModel.praisesStr length]>0) {
+                self.tempTopModel.praisesStr = [NSString stringWithFormat:@"%@,%@",self.tempTopModel.praisesStr,praise.username];
+            }else{
+            
+                self.tempTopModel.praisesStr = [NSString stringWithFormat:@"%@",praise.username];
+            }
+            
             [bjqTableView reloadData];
         }
     }
