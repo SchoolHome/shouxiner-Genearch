@@ -15,7 +15,6 @@
 
 @implementation BBUITabBarController
 
-
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"notiUnReadCount"]) {
         NSDictionary *dict = [PalmUIManagement sharedInstance].notiUnReadCount;
@@ -65,16 +64,22 @@
     if (self) {
         //
         
-        
         [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"friendMsgUnReadedCount" options:0 context:NULL];
-        
         [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiUnReadCount" options:0 context:NULL];
     }
     return self;
 }
 
 -(void)checkUnreadCount{
-    [[PalmUIManagement sharedInstance] getUnReadNotiCount:1];
+    
+    int time = 0;
+
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSNumber *ts = [def objectForKey:@"check_yzs_unread_time"];
+    if ([ts intValue]>0) {
+        time = [ts intValue];
+    }
+    [[PalmUIManagement sharedInstance] getUnReadNotiCount:time];
     [self performSelector:@selector(checkUnreadCount) withObject:nil afterDelay:5];
 }
 

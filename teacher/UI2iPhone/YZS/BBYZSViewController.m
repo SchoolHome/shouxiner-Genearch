@@ -30,6 +30,13 @@
         }
         [self.dataSource updateCacheArray:self.oalist];
         [yzsTableView reloadData];
+        
+        if (![[PalmUIManagement sharedInstance].notiList[@"hasError"] boolValue]) { // 加载成功，保存时间
+            NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+            int time = [[NSDate date] timeIntervalSince1970];
+            [def setObject:[NSNumber numberWithInt:time] forKey:@"check_yzs_unread_time"];
+            [def synchronize];
+        }
     }
 }
 

@@ -73,12 +73,26 @@
     }
 }
 
+
+-(NSString *)dateString:(NSNumber *)dateNumber
+{
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[dateNumber longLongValue]];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    
+    return dateString;
+}
+
 -(void)setData:(BBOAModel *)data{
     _data = data;
     
     title.text = _data.title;
     
-    time.text = @"12:23";
+    time.text = [self dateString:_data.ts];
     
 //    int m = arc4random()%25+1;
 //    

@@ -69,10 +69,23 @@
     back.frame = CGRectMake(10, 10+25, 300, self.bounds.size.height-20-30);
 }
 
+-(NSString *)dateString:(NSNumber *)dateNumber
+{
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[dateNumber longLongValue]];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM月dd日 HH:mm"];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    
+    return dateString;
+}
+
 -(void)setData:(BBOADetailModel *)data{
     _data = data;
     
-    time.text = @"2月13日 12:23";
+    time.text = [self dateString:_data.ts];
     
     title.text = _data.title;
     thumbnail.backgroundColor = [UIColor clearColor];
@@ -82,7 +95,7 @@
     }
     
     content.frame = CGRectMake(20, 255+30, 280, 60);
-    content.text = _data.content;//@"xxx同志指示：教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示，教育局重要指示";
+    content.text = _data.content;
     [content sizeToFit];
     
     line.frame = CGRectMake(10, 330+30, 300, 1);
