@@ -99,7 +99,9 @@
     //[contactsGroupChat setAddMemberInExistMsgGroup:[NSMutableArray arrayWithArray:self.members]];
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     for (CPUIModelMessageGroupMember *member in self.members) {
-        [tempArray addObject:member.userInfo];
+        if (member.userInfo != nil) {
+            [tempArray addObject:member.userInfo];
+        }
     }
     contactsGroupChat.msgGroup = self.msgGroup;
     [contactsGroupChat filterExistUserInfo:YES WithSelectedArray:tempArray];

@@ -82,6 +82,21 @@
     }
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    int unReadCount = 0;
+    for (CPUIModelMessageGroup *messageGroup in _tableviewDisplayDataArray) {
+        unReadCount += [messageGroup.unReadedCount intValue];
+    }
+    
+    __block NSInteger count = unReadCount;
+    dispatch_block_t updateTagBlock = ^{
+        [[CPUIModelManagement sharedInstance] setFriendMsgUnReadedCount:count];
+    };
+    dispatch_async(dispatch_get_main_queue(), updateTagBlock);
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
