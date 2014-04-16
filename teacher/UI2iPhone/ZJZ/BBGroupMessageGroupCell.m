@@ -7,6 +7,8 @@
 //
 
 #import "BBGroupMessageGroupCell.h"
+#import "CPUIModelManagement.h"
+#import "CPUIModelPersonalInfo.h"
 
 @implementation BBGroupMessageGroupCell
 
@@ -31,8 +33,23 @@
     
     if (msgGroup) {
         if (msgGroup.memberList.count > 1) {
-            //群聊
-            self.userNameLabel.text = @"群聊";
+            NSArray *array = [NSArray arrayWithArray:msgGroup.memberList];;
+            NSString *title = @"";
+            int i = 0;
+            for (CPUIModelUserInfo *user in array) {
+                if (![user.nickName isEqualToString:[CPUIModelManagement sharedInstance].uiPersonalInfo.nickName]) {
+                    if (user.nickName == nil || [user.nickName isEqualToString:@""]) {
+                        continue;
+                    }
+                    if (i == 2) {
+                        break;
+                    }
+                    i++;
+                    title = [NSString stringWithFormat:@"%@ %@",title,user.nickName];
+                }
+            }
+            title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            self.userNameLabel.text = [NSString stringWithFormat:@"%@等",title];
         }
     }
     
