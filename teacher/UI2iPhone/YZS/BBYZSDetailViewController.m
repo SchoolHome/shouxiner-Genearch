@@ -11,6 +11,7 @@
 
 #import "CoreUtils.h"
 
+#import "BBJFViewController.h"
 
 @interface BBYZSDetailViewController ()
 
@@ -200,7 +201,13 @@
 //    content.hidesBottomBarWhenPushed = YES;
 //    [self.navigationController pushViewController:content animated:YES];
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    BBOADetailModel *model = self.detailList[indexPath.row];
+    BBJFViewController *jf = [[BBJFViewController alloc] init];
+    jf.hidesBottomBarWhenPushed = YES;
+    jf.url = [NSURL URLWithString:model.url];
+    [self.navigationController pushViewController:jf animated:YES];
 }
 
 #pragma mark - BBIndicationDetailTableViewCellDelegate

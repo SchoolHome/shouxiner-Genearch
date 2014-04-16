@@ -35,10 +35,6 @@
 
 @property int selectedIndex;
 
-
-
 @property (nonatomic,assign) int style;
-
-
 
 @end

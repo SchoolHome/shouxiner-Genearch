@@ -692,6 +692,16 @@
     [[UIApplication sharedApplication].keyWindow addSubview:self.messagePictrueController.view];
 }
 
+-(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell linkButtonTaped:(UIButton *)sender{
+
+    if (cell.data.forward.url) {
+        BBJFViewController *jf = [[BBJFViewController alloc] init];
+        jf.hidesBottomBarWhenPushed = YES;
+        jf.url = [NSURL URLWithString:cell.data.forward.url];
+        [self.navigationController pushViewController:jf animated:YES];
+    }
+}
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [inputBar endEdit];

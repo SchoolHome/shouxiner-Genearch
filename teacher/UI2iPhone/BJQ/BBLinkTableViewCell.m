@@ -10,6 +10,15 @@
 
 @implementation BBLinkTableViewCell
 
+
+-(void)linkButtonTaped:(id)sender{
+
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(bbBaseTableViewCell:linkButtonTaped:)]) {
+        [self.delegate bbBaseTableViewCell:self linkButtonTaped:sender];
+    }
+    
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -29,6 +38,7 @@
         [self addSubview:link];
         [link setBackgroundImage:[UIImage imageNamed:@"BBNotification"] forState:UIControlStateNormal];
         link.backgroundColor = [UIColor clearColor];
+        [link addTarget:self action:@selector(linkButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
         
         linkIcon = [[EGOImageView alloc] initWithFrame:CGRectMake(10, 10, 45, 45)];
         [link addSubview:linkIcon];

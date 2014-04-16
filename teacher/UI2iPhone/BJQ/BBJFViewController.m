@@ -28,7 +28,14 @@
     [backButton addTarget:self action:@selector(backButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    int heightFix = 20;
+    if (IOS7) {
+        heightFix = 20;
+    }else{
+        heightFix = 0;
+    }
+    
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-44-heightFix)];
     [self.view addSubview:webView];
     
     NSURLRequest *req = [[NSURLRequest alloc] initWithURL:_url];

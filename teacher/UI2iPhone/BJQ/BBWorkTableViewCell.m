@@ -120,9 +120,10 @@
         
     }else{  // 通知
     
+//        mark.image = [UIImage imageNamed:@"BBComentNotification"];
+//        backimage = [UIImage imageNamed:@"BBComentNotificationContent"];
         mark.image = [UIImage imageNamed:@"BBComentNotification"];
-        backimage = [UIImage imageNamed:@"BBComentNotificationContent"];
-        
+        backimage = [UIImage imageNamed:@"BBYuWenContent"];
     }
     
     backimage = [backimage resizableImageWithCapInsets:UIEdgeInsetsMake(20,20,20,30) resizingMode:UIImageResizingModeStretch];
