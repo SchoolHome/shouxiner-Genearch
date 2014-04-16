@@ -227,7 +227,7 @@
                                          withSubject:_selectedIndex
                                            withTitle:title
                                          withContent:thingsTextView.text
-                                          withAttach:nil];
+                                          withAttach:@""];
     }
     
     [thingsTextView resignFirstResponder];
