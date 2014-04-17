@@ -30,7 +30,7 @@
     self = [super init];
     if (self) {
         [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"userProfile" options:0 context:nil];
-        [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"userCredits" options:0 context:nil];
+     //   [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"userCredits" options:0 context:nil];
     }
     return self;
 }
@@ -53,7 +53,7 @@
 	// Do any additional setup after loading the view.
     self.navigationItem.title = @"我";
     
-    listData = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"我的商城", @"我的通讯录", nil],
+    listData = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"我的通讯录", nil],
                 [NSArray arrayWithObjects:@"软件更新", @"帮助中心", @"反馈和建议", nil], nil];
     
     
@@ -155,7 +155,7 @@
     }else{
         NSInteger section = indexPath.section - 1;
         [cell.textLabel setText:[[listData objectAtIndex:section] objectAtIndex:indexPath.row]];
-        if (indexPath.section == 1 && indexPath.row == 0) {
+        /*if (indexPath.section == 1 && indexPath.row == 0) {
             if (userCredits) {
                 if ([[userCredits objectForKey:@"credits"] integerValue]) {
                     UIImage *image = [UIImage imageNamed:@"user_credit_back.png"];
@@ -169,7 +169,6 @@
                     [cell.contentView addSubview:labelNum];
                     
                     NSString *strCredits = [NSString stringWithFormat:@"%@", [userCredits objectForKey:@"credits"]];
-                    strCredits = @"9999";
                     UIFont *font = [UIFont fontWithName:@"Arial" size:16];
                     CGSize size = [strCredits sizeWithFont:font constrainedToSize:CGSizeMake(150, 20.0f)];
                     if (size.width < 10) {
@@ -183,7 +182,7 @@
                     [labelNum setText:strCredits];
                 }
             }
-        }
+        }*/
     }
     [cell setNeedsDisplay];
     return cell;
@@ -204,6 +203,12 @@
             break;
         case 1:
         {
+            {
+                ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
+                contactsViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:contactsViewController animated:YES];
+            }
+            /*
             if (indexPath.row == 0) {//商城
                 BBShopViewController *shopViewController = [[BBShopViewController alloc] init];
                 shopViewController.hidesBottomBarWhenPushed = YES;
@@ -212,12 +217,8 @@
                 ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
                 contactsViewController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:contactsViewController animated:YES];
-                /*
-                BBAddressBookViewController *addressBookViewController = [[BBAddressBookViewController alloc] init];
-                addressBookViewController.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:addressBookViewController animated:YES];
-                 */
             }
+               */
         }
             break;
         case 2:
@@ -248,9 +249,13 @@
 {
     if ([@"userProfile" isEqualToString:keyPath]){
         userProfile = [[PalmUIManagement sharedInstance].userProfile objectForKey:ASI_REQUEST_DATA];
+        if (meTableView) {
+            [meTableView reloadData];
+        }
         //查询用户商城积分
-        [[PalmUIManagement sharedInstance] getUserCredits];
+       // [[PalmUIManagement sharedInstance] getUserCredits];
     }
+    /*
     if ([@"userCredits" isEqualToString:keyPath]) {
         userCredits = [[PalmUIManagement sharedInstance].userCredits objectForKey:ASI_REQUEST_DATA];
         if (![[userCredits objectForKey:@"error"] integerValue]) {
@@ -258,7 +263,7 @@
                 [meTableView reloadData];
             }
         }
-    }
+    }*/
     if ([@"uiPersonalInfoTag" isEqualToString:keyPath]) {
         [meTableView reloadData];
     }

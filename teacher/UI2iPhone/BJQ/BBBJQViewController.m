@@ -266,10 +266,20 @@
 }
 
 -(void)pointTaped:(UITapGestureRecognizer *)gesture{
-    BBJFViewController *jf = [[BBJFViewController alloc] init];
-    jf.hidesBottomBarWhenPushed = YES;
-    jf.url = [NSURL URLWithString:@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"];
-    [self.navigationController pushViewController:jf animated:YES];
+//    BBJFViewController *jf = [[BBJFViewController alloc] init];
+//    jf.hidesBottomBarWhenPushed = YES;
+//    jf.url = [NSURL URLWithString:@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"];
+//    [self.navigationController pushViewController:jf animated:YES];
+}
+
+-(void)shareTaped:(id)sender{
+
+    BBFZYViewController *fzy = [[BBFZYViewController alloc] init];
+    fzy.hidesBottomBarWhenPushed = YES;
+    fzy.style = 3;
+    fzy.currentGroup = _currentGroup;
+    [self.navigationController pushViewController:fzy animated:YES];
+    
 }
 
 - (void)viewDidLoad
@@ -371,13 +381,20 @@
     bjqTableView.tableHeaderView = head;
     
     
-    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
-    [addButton setBackgroundImage:[UIImage imageNamed:@"BBAdd"] forState:UIControlStateNormal];
-    [addButton addTarget:self action:@selector(addNewTaped:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
-//    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BBAdd"] style:UIBarButtonItemStylePlain  target:self action:@selector(addNewTaped:)];
+//    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [addButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+//    [addButton setBackgroundImage:[UIImage imageNamed:@"BBAdd"] forState:UIControlStateNormal];
+//    [addButton addTarget:self action:@selector(addNewTaped:) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
+
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shareButton setFrame:CGRectMake(0.f, 7.f, 40.f, 30.f)];
+    [shareButton setTitle:@"分享" forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(shareTaped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+
+    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分享"  style:UIBarButtonItemStyleBordered  target:self action:@selector(shareTaped:)];
     
     titleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 44)];
     [titleButton setTitle:@"班级" forState:UIControlStateNormal];
