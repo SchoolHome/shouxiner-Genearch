@@ -179,15 +179,18 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application{
     [self setLatestActiveTime:[CoreUtils getLongFormatWithNowDate]];
     [[CPUIModelManagement sharedInstance] sysActive];
+    [[PalmUIManagement sharedInstance] userLoginToken];
     
 //    [[PalmUIManagement sharedInstance] postCheckVersion];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application{
     [self setLatestActiveTime:[CoreUtils getLongFormatWithNowDate]];
+    
     // 还原播放控制
     [[MediaStatusManager sharedInstance] resetStatus];
     [[CPSystemEngine sharedInstance] xmppReconnect];
+    
     [[PalmUIManagement sharedInstance] postCheckVersion];
 }
 

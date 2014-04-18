@@ -13,11 +13,15 @@ typedef enum{
     kUpdateUserHeader,
     kUpdateUserImage,
     kPostTopic,
+    kUserLogin,
 }UserProfile;
 
 #import "PalmOperation.h"
 
 @interface UserProfileOperation : PalmOperation
+
+-(UserProfileOperation *) initUserLogin;
+
 -(UserProfileOperation *) initGetUser;
 
 -(UserProfileOperation *) initGetContacts;
