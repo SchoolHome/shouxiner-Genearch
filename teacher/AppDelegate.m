@@ -125,6 +125,7 @@
                 [self launchLogin];
             }
         }
+            
         break;
         default:{
             [self launchApp];
