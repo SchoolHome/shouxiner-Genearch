@@ -47,6 +47,10 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
+    if ([account isAutoLogin]){
+        [self showProgressWithText:@"正在登陆"];
+    }
 }
 
 -(void) viewDidDisappear:(BOOL)animated{
@@ -131,7 +135,7 @@
     [self.bgImage addSubview:self.LoginButton];
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = @"手心网 v1.0 家长版";
+    label.text = @"手心网 v1.0 教师版";
     label.textAlignment = NSTextAlignmentLeft;
     label.textColor = [UIColor whiteColor];
     label.alpha = 0.6f;
@@ -178,7 +182,6 @@
         NSInteger login_code_int = [CPUIModelManagement sharedInstance].loginCode;
         
         if(login_code_int == 0){
-#ifndef SYS_STATE_MIGR
             NSInteger sys_on_int = [CPUIModelManagement sharedInstance].sysOnlineStatus;
             if(sys_on_int == SYS_STATUS_NO_ACTIVE){
                 /*激活*/
@@ -190,18 +193,6 @@
                 AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
                 [appDelegate launchApp];
             }
-#else
-            NSInteger accState = [CPUIModelManagement sharedInstance].accountState;
-            if( ACCOUNT_STATE_INACTIVE == accState ){
-                NSLog(@"激活");
-            }else{
-                /*已经登录*/
-                NSLog(@"已经登录");
-                [self closeProgress];
-                AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-                [appDelegate launchApp];
-            }
-#endif
         }else{
             /*登录失败*/
             NSLog(@"登录失败");

@@ -77,6 +77,7 @@
     }
     [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
+    
     NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],UITextAttributeTextColor,[UIFont boldSystemFontOfSize:18],UITextAttributeFont, nil];
     [[UINavigationBar appearance] setTitleTextAttributes:attributes];
     
@@ -96,7 +97,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-#ifndef SYS_STATE_MIGR
     CPUIModelManagement * model_management = [CPUIModelManagement sharedInstance];
     NSInteger sys_status_int = [model_management sysOnlineStatus];
     if(sys_status_int == SYS_STATUS_NO_ACTIVE){
@@ -111,28 +111,6 @@
     }else{
         [self launchApp];
     }
-#else
-    NSInteger accState = [[CPUIModelManagement sharedInstance] accountState];
-    switch (accState){
-        case ACCOUNT_STATE_INACTIVE:{
-//            [self do_launch_verify];
-        }
-        break;
-        case ACCOUNT_STATE_NEVER_LOGIN:{
-            if ([[CPUIModelManagement sharedInstance] hasLoginUser]){
-                [self launchLogin]; // 非第一次登录
-            }else{
-                [self launchLogin];
-            }
-        }
-            
-        break;
-        default:{
-            [self launchApp];
-        }
-        break;
-    }
-#endif
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -181,18 +159,16 @@
     [self setLatestActiveTime:[CoreUtils getLongFormatWithNowDate]];
     [[CPUIModelManagement sharedInstance] sysActive];
     [[PalmUIManagement sharedInstance] userLoginToken];
-    
 //    [[PalmUIManagement sharedInstance] postCheckVersion];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application{
     [self setLatestActiveTime:[CoreUtils getLongFormatWithNowDate]];
-    
     // 还原播放控制
     [[MediaStatusManager sharedInstance] resetStatus];
     [[CPSystemEngine sharedInstance] xmppReconnect];
-    
     [[PalmUIManagement sharedInstance] postCheckVersion];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application{
@@ -214,7 +190,7 @@
     if (gap <=1000){
         [self.ground_nav_c popToRootViewControllerAnimated:YES]; //统一到首页
     }
-    application.applicationIconBadgeNumber += 1;
+    application.applicationIconBadgeNumber = [[[userInfo objectForKey:@"aps"] objectForKey:@"badge"] integerValue];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
