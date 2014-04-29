@@ -135,7 +135,7 @@
     [self.bgImage addSubview:self.LoginButton];
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = @"手心网 v1.0 教师版";
+    label.text = @"手心网 v1.0 家长版";
     label.textAlignment = NSTextAlignmentLeft;
     label.textColor = [UIColor whiteColor];
     label.alpha = 0.6f;
