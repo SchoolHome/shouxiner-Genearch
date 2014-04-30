@@ -350,8 +350,8 @@
     point.textColor = [UIColor whiteColor];
     point.userInteractionEnabled = YES;
     
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer  alloc] initWithTarget:self action:@selector(pointTaped:)];
-    [point addGestureRecognizer:gesture];
+//    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer  alloc] initWithTarget:self action:@selector(pointTaped:)];
+//    [point addGestureRecognizer:gesture];
     
     
     avatar = [[EGOImageView alloc] initWithFrame:CGRectMake(22, 145, 80, 80)];
@@ -373,11 +373,11 @@
     bjqTableView.tableHeaderView = head;
     
     
-    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
-    [addButton setBackgroundImage:[UIImage imageNamed:@"BBAdd"] forState:UIControlStateNormal];
-    [addButton addTarget:self action:@selector(addNewTaped:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shareButton setFrame:CGRectMake(0.f, 7.f, 40.f, 30.f)];
+    [shareButton setTitle:@"分享" forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(shareTaped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
 //    
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BBAdd"] style:UIBarButtonItemStylePlain  target:self action:@selector(addNewTaped:)];
     
@@ -641,6 +641,17 @@
     [def synchronize];
     
 }
+
+-(void)shareTaped:(id)sender{
+    
+    BBFZYViewController *fzy = [[BBFZYViewController alloc] init];
+    fzy.hidesBottomBarWhenPushed = YES;
+    fzy.style = 3;
+    fzy.currentGroup = _currentGroup;
+    [self.navigationController pushViewController:fzy animated:YES];
+    
+}
+
 
 -(void)bbBJDropdownViewTaped:(BBBJDropdownView *) dropdownView_{
 
