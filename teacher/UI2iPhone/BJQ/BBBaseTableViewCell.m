@@ -108,31 +108,31 @@
         [self addSubview:_time];
         _time.backgroundColor = [UIColor clearColor];
         
-//        _like = [[UIButton alloc] init];
-//        [self addSubview:_like];
-//        [_like setBackgroundImage:[UIImage imageNamed:@"BBZan"] forState:UIControlStateNormal];
-//        [_like setBackgroundImage:[UIImage imageNamed:@"BBZanPress"] forState:UIControlStateHighlighted];
-//        
-//        [_like addTarget:self action:@selector(likeTaped:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        _reply = [[UIButton alloc] init];
-//        [self addSubview:_reply];
-//        [_reply setBackgroundImage:[UIImage imageNamed:@"BBComment"] forState:UIControlStateNormal];
-//        [_reply setBackgroundImage:[UIImage imageNamed:@"BBCommentPress"] forState:UIControlStateHighlighted];
-//        
-//        [_reply addTarget:self action:@selector(replyTaped:) forControlEvents:UIControlEventTouchUpInside];
+        _like = [[UIButton alloc] init];
+        [self addSubview:_like];
+        [_like setBackgroundImage:[UIImage imageNamed:@"BBZan"] forState:UIControlStateNormal];
+        [_like setBackgroundImage:[UIImage imageNamed:@"BBZanPress"] forState:UIControlStateHighlighted];
         
-        self.moreButton = [[UIButton alloc] init];
-        [self addSubview:self.moreButton];
-        [self.moreButton setBackgroundImage:[UIImage imageNamed:@"BJQMoreButton"] forState:UIControlStateNormal];
-        [self.moreButton setBackgroundImage:[UIImage imageNamed:@"BJQMoreButton"] forState:UIControlStateHighlighted];
-        [self.moreButton addTarget:self action:@selector(moreTaped:) forControlEvents:UIControlEventTouchUpInside];
+        [_like addTarget:self action:@selector(likeTaped:) forControlEvents:UIControlEventTouchUpInside];
         
-        self.recommendButton = [[UIButton alloc] init];
-        [self addSubview:self.recommendButton];
-        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateNormal];
-        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateHighlighted];
-        [self.recommendButton addTarget:self action:@selector(recommendTaped:) forControlEvents:UIControlEventTouchUpInside];
+        _reply = [[UIButton alloc] init];
+        [self addSubview:_reply];
+        [_reply setBackgroundImage:[UIImage imageNamed:@"BBComment"] forState:UIControlStateNormal];
+        [_reply setBackgroundImage:[UIImage imageNamed:@"BBCommentPress"] forState:UIControlStateHighlighted];
+        
+        [_reply addTarget:self action:@selector(replyTaped:) forControlEvents:UIControlEventTouchUpInside];
+        
+//        self.moreButton = [[UIButton alloc] init];
+//        [self addSubview:self.moreButton];
+//        [self.moreButton setBackgroundImage:[UIImage imageNamed:@"BJQMoreButton"] forState:UIControlStateNormal];
+//        [self.moreButton setBackgroundImage:[UIImage imageNamed:@"BJQMoreButton"] forState:UIControlStateHighlighted];
+//        [self.moreButton addTarget:self action:@selector(moreTaped:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        self.recommendButton = [[UIButton alloc] init];
+//        [self addSubview:self.recommendButton];
+//        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateNormal];
+//        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateHighlighted];
+//        [self.recommendButton addTarget:self action:@selector(recommendTaped:) forControlEvents:UIControlEventTouchUpInside];
         
         _relpyContentBack = [[UIImageView alloc] init];
         [self addSubview:_relpyContentBack];

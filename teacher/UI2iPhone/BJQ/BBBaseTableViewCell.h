@@ -40,13 +40,14 @@
 @property(nonatomic,strong) UIImageView *line;
 
 @property(nonatomic,strong) UILabel *time;
-//@property(nonatomic,strong) UIButton *like;
-//@property(nonatomic,strong) UIButton *reply;
-@property(nonatomic,strong) UIButton *moreButton;
-@property(nonatomic,strong) UIButton *recommendButton;
+@property(nonatomic,strong) UIButton *like;
+@property(nonatomic,strong) UIButton *reply;
 
-@property(nonatomic,strong) UIImageView *TuiJianImage;
-@property(nonatomic,strong) UIImageView *RongYuImage;
+//@property(nonatomic,strong) UIButton *moreButton;
+//@property(nonatomic,strong) UIButton *recommendButton;
+//
+//@property(nonatomic,strong) UIImageView *TuiJianImage;
+//@property(nonatomic,strong) UIImageView *RongYuImage;
 
 @property(nonatomic,strong) UILabel *likeContent;
 //@property(nonatomic,strong) OHAttributedLabel *relpyContent;

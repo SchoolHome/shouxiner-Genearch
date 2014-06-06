@@ -22,7 +22,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         _listData = [[NSArray alloc] initWithObjects:
-                     @"BBPBX",@"BBFZY",@"BBFTZ",@"BBSBS", nil];
+                     @"BBPBX",@"BBSBS", nil];
         
         _list = [[UITableView alloc] initWithFrame:CGRectMake((self.frame.size.width-kDropdownWidth), 44+20, kDropdownWidth, 0) style:UITableViewStylePlain];
         _list.rowHeight = kDropdownCellHeight;

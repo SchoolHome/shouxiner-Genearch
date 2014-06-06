@@ -27,15 +27,15 @@
         title.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
         title.backgroundColor = [UIColor clearColor];
         
-        self.TuiJianImage = [[UIImageView alloc] initWithFrame:CGRectMake(title.frame.origin.x + title.frame.size.width, 2.0f, 15.0f, 15.0f)];
-        self.TuiJianImage.image = [UIImage imageNamed:@"BJQTuiJian"];
-        self.TuiJianImage.hidden = YES;
-        [self addSubview:self.TuiJianImage];
-        
-        self.RongYuImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f)];
-        self.RongYuImage.image = [UIImage imageNamed:@"BJQRongYun"];
-        self.RongYuImage.hidden = YES;
-        [self addSubview:self.RongYuImage];
+//        self.TuiJianImage = [[UIImageView alloc] initWithFrame:CGRectMake(title.frame.origin.x + title.frame.size.width, 2.0f, 15.0f, 15.0f)];
+//        self.TuiJianImage.image = [UIImage imageNamed:@"BJQTuiJian"];
+//        self.TuiJianImage.hidden = YES;
+//        [self addSubview:self.TuiJianImage];
+//        
+//        self.RongYuImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f)];
+//        self.RongYuImage.image = [UIImage imageNamed:@"BJQRongYun"];
+//        self.RongYuImage.hidden = YES;
+//        [self addSubview:self.RongYuImage];
         
         content = [[UILabel alloc] init];
         [self addSubview:content];
@@ -65,13 +65,13 @@
     title.lineBreakMode = NSLineBreakByTruncatingTail;
     [title sizeToFit];
     
-    if (data.recommended) {
-        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
-        self.TuiJianImage.hidden = NO;
-    }else{
-        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
-        self.TuiJianImage.hidden = YES;
-    }
+//    if (data.recommended) {
+//        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
+//        self.TuiJianImage.hidden = NO;
+//    }else{
+//        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
+//        self.TuiJianImage.hidden = YES;
+//    }
     
     content.text = self.data.content;
     content.font = [UIFont systemFontOfSize:14];
@@ -117,18 +117,19 @@
         timeBegin = kViewFoot(content);
     }
     
-    self.recommendButton.frame = CGRectMake(232.0f, timeBegin+10, 36.0, 16.0f);
-    if (self.data.recommendToGroups || self.data.recommendToHomepage || self.data.recommendToUpGroup) {
-        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHasTuiJian"] forState:UIControlStateNormal];
-        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHasTuiJian"] forState:UIControlStateHighlighted];
-        [self.recommendButton removeTarget:self action:@selector(recommendTaped:) forControlEvents:UIControlEventTouchUpInside];
-    }else{
-        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateNormal];
-        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateHighlighted];
-        [self.recommendButton addTarget:self action:@selector(recommendTaped:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    self.moreButton.frame = CGRectMake(280.0f, timeBegin+12, 22.0f, 15.0f);
-//    self.reply.frame = CGRectMake(165+70, timeBegin+5, 62, 27);
+//    self.recommendButton.frame = CGRectMake(232.0f, timeBegin+10, 36.0, 16.0f);
+//    if (self.data.recommendToGroups || self.data.recommendToHomepage || self.data.recommendToUpGroup) {
+//        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHasTuiJian"] forState:UIControlStateNormal];
+//        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHasTuiJian"] forState:UIControlStateHighlighted];
+//        [self.recommendButton removeTarget:self action:@selector(recommendTaped:) forControlEvents:UIControlEventTouchUpInside];
+//    }else{
+//        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateNormal];
+//        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateHighlighted];
+//        [self.recommendButton addTarget:self action:@selector(recommendTaped:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    self.moreButton.frame = CGRectMake(280.0f, timeBegin+12, 22.0f, 15.0f);
+    self.like.frame = CGRectMake(165, timeBegin+5, 62, 27);
+    self.reply.frame = CGRectMake(165+70, timeBegin+5, 62, 27);
     
     self.time.frame = CGRectMake(K_LEFT_PADDING, timeBegin+5, 60, 27);
     self.time.text = [self timeStringFromNumber:self.data.ts];

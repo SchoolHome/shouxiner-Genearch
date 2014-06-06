@@ -401,20 +401,20 @@
     
     bjqTableView.tableHeaderView = head;
     
-#ifdef IS_TEACHER
+//#ifdef IS_TEACHER
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
     [addButton setBackgroundImage:[UIImage imageNamed:@"BBAdd"] forState:UIControlStateNormal];
     [addButton addTarget:self action:@selector(addNewTaped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
-#else
-    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shareButton setFrame:CGRectMake(0.f, 7.f, 40.f, 30.f)];
-    [shareButton setTitle:@"分享" forState:UIControlStateNormal];
-    [shareButton addTarget:self action:@selector(shareTaped:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-#endif
-//    
+//#else
+//    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [shareButton setFrame:CGRectMake(0.f, 7.f, 40.f, 30.f)];
+//    [shareButton setTitle:@"分享" forState:UIControlStateNormal];
+//    [shareButton addTarget:self action:@selector(shareTaped:) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+//#endif
+//
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BBAdd"] style:UIBarButtonItemStylePlain  target:self action:@selector(addNewTaped:)];
     
     titleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 125, 44)];
@@ -572,27 +572,16 @@
         case 4:  // 拍表现4，随便说4
             //
         {
-            if ([model.subject integerValue] == 1) {
-                BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier4];
-                if (!cell) {
-                    cell = [[BBPBXTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier4];
-                    cell.delegate = self;
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                }
-                [cell setData:model];
+
+            BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
+            if (!cell) {
+                cell = [[BBImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier3];
                 cell.delegate = self;
-                return cell;
-            }else{
-                BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
-                if (!cell) {
-                    cell = [[BBImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier3];
-                    cell.delegate = self;
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                }
-                [cell setData:model];
-                cell.delegate = self;
-                return cell;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
+            [cell setData:model];
+            cell.delegate = self;
+            return cell;
         }
             break;
 
