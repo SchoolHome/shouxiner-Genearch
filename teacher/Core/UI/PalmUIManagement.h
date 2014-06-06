@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PalmNetWorkService.h"
+#import "CPPTModelLoginResult.h"
 
 #define TRANSFERVALUE @"TransferValue"
 #define TRANSFERVCFROMCLASS @"TransferFromVCClass"
@@ -16,6 +17,9 @@
 @interface PalmUIManagement : NSObject
 
 +(PalmUIManagement *) sharedInstance;
+// 登陆结果
+@property(nonatomic,strong) CPPTModelLoginResult *loginResult;
+
 // 客户端页面间传值KVO
 @property(nonatomic,strong) NSDictionary *transferDic;
 @property(nonatomic,strong) NSDictionary *userProfile;
@@ -45,7 +49,10 @@
 @property(nonatomic,strong) NSDictionary *praiseResult;
 // 发表评论
 @property(nonatomic,strong) NSDictionary *commentResult;
-
+// 学生列表
+@property(nonatomic,strong) NSDictionary *groupStudents;
+// 转发
+@property(nonatomic,strong) NSDictionary *recommendResult;
 // 新消息数量
 @property(nonatomic,strong) NSDictionary *notifyCount;
 // 新消息列表
@@ -61,6 +68,9 @@
 @property(nonatomic,strong) NSHTTPCookie *php;
 @property(nonatomic,strong) NSHTTPCookie *suid;
 @property(nonatomic,strong) NSString *imServerIP;
+
+// 激活
+@property(nonatomic,strong) NSDictionary *activateDic;
 
 // 获取用户信息
 -(void) getUserProfile;
@@ -105,5 +115,16 @@
 // 转发有指示
 -(void) postForwardNoti : (int) oaid withGroupID : (int) groupID withMessage : (NSString *) message;
 
+// 激活
+-(void) activate : (NSString *) userName withTelPhone : (NSString *) telPhone withEmail : (NSString *) email withPassWord : (NSString *) password;
+
 -(void) userLoginToken;
+// 获取学生列表
+-(void) getGroupStudents : (NSString *) groupids;
+
+// 推荐话题
+-(void) postRecommend : (long long) topicID withToHomePage : (BOOL) hasHomePage withToUpGroup : (BOOL) hasUpGroup;
+// 拍表现
+-(void) postPBX : (int) groupid withTitle : (NSString *) title withContent : (NSString *) content withAttach : (NSString *) attach
+      withAward : (NSString *) students withToHomePage : (BOOL) hasHomePage withToUpGroup : (BOOL) hasTopGroup;
 @end

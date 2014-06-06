@@ -17,17 +17,17 @@
 #import "Login.h"
 #import "RegistFirstViewController.h"
 #import "RegistViewController.h"
-#import "VerifyViewCodeController.h"
+//#import "VerifyViewCodeController.h"
 #import "Guid07ViewController.h"
 #import "FanxerHeader.h"
 
 #import "HomePageViewController.h"
-#import "TalkingData.h"
 #import "AudioRouteChange.h"
 #import "AlarmClockHelper.h"
 #import "HPStatusBarTipView.h"
 #import "MediaStatusManager.h"
 #import "CoreUtils.h"
+#import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate
 
@@ -68,7 +68,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     CPLogInfo(@"launchOptions %@",launchOptions);
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"checkVersion" options:0 context:nil];
-    
+    [Crashlytics startWithAPIKey:@"fb92e12c5ee94966ce5c9aaaa0376675d7f4ca07"];
     UIImage *image = nil;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
         image = [UIImage imageNamed:@"navbar_back"];

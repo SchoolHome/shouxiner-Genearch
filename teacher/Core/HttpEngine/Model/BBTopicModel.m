@@ -34,6 +34,11 @@
         tp.am_i_like = dict[@"am_i_like"];
         tp.num_praise = dict[@"num_praise"];
         tp.num_comment = dict[@"num_comment"];
+        tp.award = [dict[@"award"] boolValue];
+        tp.recommendToGroups = [dict[@"recommendToGroups"] boolValue];
+        tp.recommendToHomepage = [dict[@"recommendToHomepage"] boolValue];
+        tp.recommendToUpGroup = [dict[@"recommendToUpGroup"] boolValue];
+        tp.recommended = [dict[@"recommended"] boolValue];
         
         // 赞列表
         NSArray *praises = dict[@"praises"];
@@ -66,20 +71,33 @@
             NSMutableArray *arr = [[NSMutableArray alloc] init];
             
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] init];
+            tp.commentStr = [[NSMutableArray alloc] init];
             
             [comments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 BBCommentModel *cm = [BBCommentModel fromJson:obj];
                 if (cm) {
                     [arr addObject:cm];
-                    NSUInteger len = [cm.username length]+2;
-
-                    NSString *text = [NSString stringWithFormat:@"%@: %@\n",cm.username,cm.comment];
-                    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
-                    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 6) {
-                        [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4a7f9d"] range:NSMakeRange(0,len)];
+                    NSUInteger len = [cm.username length]+1;
+                    NSMutableAttributedString *attributedText;
+                    if ([cm.username isEqualToString:cm.replyto_username]) {
+                        NSString *text = [NSString stringWithFormat:@"%@: %@\n",cm.username,cm.comment];
+                        attributedText = [[NSMutableAttributedString alloc] initWithString:text];
+                        if ([[[UIDevice currentDevice] systemVersion] floatValue] > 6) {
+                            [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4a7f9d"] range:NSMakeRange(0,len)];
+                        }
+                    }else{
+                        NSString *text = [NSString stringWithFormat:@"%@ 回复 %@: %@\n",cm.username,cm.replyto_username,cm.comment];
+                        attributedText = [[NSMutableAttributedString alloc] initWithString:text];
+                        NSUInteger len1 = [cm.replyto_username length];
+                        NSUInteger temp = [[NSString stringWithFormat:@"%@ 回复 ",cm.username] length];
+                        if ([[[UIDevice currentDevice] systemVersion] floatValue] > 6) {
+                            [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4a7f9d"] range:NSMakeRange(0,len)];
+                            [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4a7f9d"] range:NSMakeRange(temp,len1)];
+                        }
                     }
                     
                     [str appendAttributedString:attributedText];
+                    [tp.commentStr addObject:attributedText];
                 }
                 
             }];

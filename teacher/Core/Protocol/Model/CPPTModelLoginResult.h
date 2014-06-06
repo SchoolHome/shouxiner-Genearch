@@ -20,6 +20,13 @@
 @property (strong, nonatomic) NSString *serverPort;
 @property (strong, nonatomic) NSString *suid;
 @property (strong ,nonatomic) NSString *uid;
+
+@property (nonatomic) BOOL activated;
+@property (nonatomic) BOOL force;
+@property (nonatomic) BOOL recommend;
+@property (strong,nonatomic) NSString *url;
+@property (strong,nonatomic) NSString *version;
+@property (nonatomic) BOOL needSetUserName;
 + (CPPTModelLoginResult *)fromJsonDict:(NSDictionary *)jsonDict;
 
 @end

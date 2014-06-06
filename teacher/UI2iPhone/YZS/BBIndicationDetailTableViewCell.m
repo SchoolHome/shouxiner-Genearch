@@ -51,15 +51,17 @@
         [self addSubview:content];
         content.backgroundColor = [UIColor clearColor];
         
-//        line = [[UIImageView alloc] init];
-//        line.backgroundColor = [UIColor lightGrayColor];
-//        [self addSubview:line];
-//        
-//        share = [UIButton buttonWithType:UIButtonTypeCustom];
-//        //share.backgroundColor = [UIColor grayColor];
-//        [share setBackgroundImage:[UIImage imageNamed:@"YZSShared"] forState:UIControlStateNormal];
-//        [self addSubview:share];
-//        [share addTarget:self action:@selector(shareTaped:) forControlEvents:UIControlEventTouchUpInside];
+        line = [[UIImageView alloc] init];
+        line.backgroundColor = [UIColor lightGrayColor];
+        [self addSubview:line];
+        
+#ifdef IS_TEACHER
+        share = [UIButton buttonWithType:UIButtonTypeCustom];
+        //share.backgroundColor = [UIColor grayColor];
+        [share setBackgroundImage:[UIImage imageNamed:@"YZSShared"] forState:UIControlStateNormal];
+        [self addSubview:share];
+        [share addTarget:self action:@selector(shareTaped:) forControlEvents:UIControlEventTouchUpInside];
+#endif
     }
     return self;
 }
@@ -80,6 +82,7 @@
     NSString *dateString = [dateFormatter stringFromDate:date];
     
     return dateString;
+    
 }
 
 -(void)setData:(BBOADetailModel *)data{
@@ -96,7 +99,7 @@
     
     content.frame = CGRectMake(20, 255+30, 280, 60);
     content.text = _data.content;
-    //[content sizeToFit];
+    [content sizeToFit];
     
     line.frame = CGRectMake(10, 330+30, 300, 1);
     share.frame = CGRectMake(20, 350+30, 24, 24);

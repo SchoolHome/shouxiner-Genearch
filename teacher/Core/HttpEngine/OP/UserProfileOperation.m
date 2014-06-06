@@ -26,6 +26,7 @@
 
 @implementation UserProfileOperation
 
+
 -(UserProfileOperation *) initGetUser{
     if ([self initOperation]) {
         self.type = kGetUserProfile;
@@ -101,6 +102,24 @@
     return self;
 }
 
+// 拍表现
+-(UserProfileOperation *) initPostPBX : (int) groupid withTitle : (NSString *) title withContent : (NSString *) content withAttach : (NSString *) attach withAward : (NSString *) students withToHomePage : (BOOL) hasHomePage withToUpGroup : (BOOL) hasTopGroup{
+    
+    if ([self initOperation]) {
+        self.type = kPostPBX;
+        
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:groupid],@"groupid",
+                                [NSNumber numberWithInt:4],@"topictype",
+                                [NSNumber numberWithInt:1],@"subject",
+                                title,@"title",content,@"content",attach,@"attach",
+                                students, @"award",[NSNumber numberWithBool:hasHomePage],@"toHomePage",
+                                [NSNumber numberWithBool:hasTopGroup],@"toUpGroup",nil];
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/createTopic",K_HOST_NAME_OF_PALM_SERVER];
+        [self setHttpRequestPostWithUrl:urlStr params:params];
+    }
+    return self;
+}
+
 -(UserProfileOperation *) initUserLogin{
     if ([self initOperation]) {
         self.type = kUserLogin;
@@ -111,15 +130,15 @@
         [loginInfoDict setObject:account.pwdMD5 forKey:@"password"];
         [loginInfoDict setObject:@"IOS" forKey:@"device_type"];
         [loginInfoDict setObject:[[UIDevice currentDevice] systemVersion] forKey:@"device_version"];
-        //    [loginInfoDict setObject:@"ios_v2_teacher" forKey:@"app_platform"];
-        [loginInfoDict setObject:@"ios_v2" forKey:@"app_platform"];
+        [loginInfoDict setObject:@"ios_v2_teacher" forKey:@"app_platform"];
+         //[loginInfoDict setObject:@"ios_v2" forKey:@"app_platform"];
         [loginInfoDict setObject:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] forKey:@"app_version"];
         [loginInfoDict setObject:[NSNumber numberWithInt:0] forKey:@"first_login"];
         NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/login",K_HOST_NAME_OF_PALM_SERVER];
         [self setHttpRequestPostWithUrl:urlStr params:loginInfoDict];
     }
     return self;
-
+    
 }
 
 -(void) userLogin{
@@ -136,7 +155,7 @@
                     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
                     
                 }else if([cookie.name isEqualToString:@"SUID"]){
-                   [PalmUIManagement sharedInstance].suid = cookie;
+                    [PalmUIManagement sharedInstance].suid = cookie;
                     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
                 }
             }
@@ -145,6 +164,7 @@
     }];
     [self startAsynchronous];
 }
+
 
 -(void) getUserProfile{
 #ifdef TEST
@@ -246,6 +266,7 @@
         case kUpdateUserImage:
             [self updateUserImageFile];
             break;
+        case kPostPBX:
         case kPostTopic:
             [self postTopic];
             break;

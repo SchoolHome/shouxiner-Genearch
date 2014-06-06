@@ -40,12 +40,18 @@
 @property(nonatomic,strong) UIImageView *line;
 
 @property(nonatomic,strong) UILabel *time;
-@property(nonatomic,strong) UIButton *like;
-@property(nonatomic,strong) UIButton *reply;
+//@property(nonatomic,strong) UIButton *like;
+//@property(nonatomic,strong) UIButton *reply;
+@property(nonatomic,strong) UIButton *moreButton;
+@property(nonatomic,strong) UIButton *recommendButton;
 
+@property(nonatomic,strong) UIImageView *TuiJianImage;
+@property(nonatomic,strong) UIImageView *RongYuImage;
 
 @property(nonatomic,strong) UILabel *likeContent;
-@property(nonatomic,strong) OHAttributedLabel *relpyContent;
+//@property(nonatomic,strong) OHAttributedLabel *relpyContent;
+@property(nonatomic,strong) NSMutableArray *labelArray;
+@property(nonatomic,strong) NSMutableArray *buttonArray;
 
 @property(nonatomic,strong) UIImageView *relpyContentBack;
 @property(nonatomic, strong) UIImageView *relpyContentLine;
@@ -55,9 +61,10 @@
 
 
 @property(nonatomic,strong) BBTopicModel *data;
-
+-(void) recommendTaped:(id)sender;
 -(NSString *)timeStringFromNumber:(NSNumber *) number;
-
+-(EGOImageButton *) imageContentWithIndex : (int) index;
+-(void) hEvent : (UIButton *) sender;
 @end
 
 @protocol BBBaseTableViewCellDelegate <NSObject>
@@ -67,7 +74,10 @@
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell imageButtonTaped:(EGOImageButton *)sender;
 
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell linkButtonTaped:(UIButton *)sender;
+-(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell commentButtonTaped:(UIButton *)sender;
 
+-(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell moreButtonTaped:(UIButton *)sender;
+-(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell recommendButtonTaped:(UIButton *)sender;
 @end
 
 

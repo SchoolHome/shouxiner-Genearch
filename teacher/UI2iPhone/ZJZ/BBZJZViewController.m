@@ -242,11 +242,13 @@
         cell = [tableView dequeueReusableCellWithIdentifier:messageSingleCellIdentifier];
         if (nil == cell) {
             cell = [[BBSingleMessageGroupCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:messageSingleCellIdentifier];
+            cell.backgroundColor = [UIColor clearColor];
         }
     }else{
         cell = [tableView dequeueReusableCellWithIdentifier:messageGroupCellIdentifier];
         if (nil ==cell) {
             cell = [[BBGroupMessageGroupCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:messageGroupCellIdentifier];
+            cell.backgroundColor = [UIColor clearColor];
         }
     }
     
@@ -257,6 +259,19 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 70.f;
+}
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CPUIModelMessageGroup *tempMsgGroup = [self.tableviewDisplayDataArray objectAtIndex:indexPath.row];
+    [[CPUIModelManagement sharedInstance] deleteMsgGroup:tempMsgGroup];
 }
 #pragma mark SearchBarDelegate
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText

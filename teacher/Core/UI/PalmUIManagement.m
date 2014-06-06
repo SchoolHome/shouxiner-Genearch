@@ -131,8 +131,34 @@ static PalmUIManagement *sharedInstance = nil;
     [[PalmNetWorkService sharedInstance] networkEngine:operation];
 }
 
+// 激活
+-(void) activate : (NSString *) userName withTelPhone : (NSString *) telPhone withEmail : (NSString *) email withPassWord : (NSString *) password{
+    MyOperation *operation = [[MyOperation alloc] initActivate:userName withTelPhone:telPhone withEmail:email withPassWord:password];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+// 获取学生列表
+-(void) getGroupStudents : (NSString *) groupids{
+    GroupOperation *operation = [[GroupOperation alloc] initGetGroupStudent:groupids];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+// 推荐话题
+-(void) postRecommend : (long long) topicID withToHomePage : (BOOL) hasHomePage withToUpGroup : (BOOL) hasUpGroup{
+    ClassOperation *operation = [[ClassOperation alloc] initPostRecommend:topicID withToHomePage:hasHomePage withToUpGroup:hasUpGroup];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
+// 拍表现
+-(void) postPBX : (int) groupid withTitle : (NSString *) title withContent : (NSString *) content withAttach : (NSString *) attach
+      withAward : (NSString *) students withToHomePage : (BOOL) hasHomePage withToUpGroup : (BOOL) hasTopGroup{
+    UserProfileOperation *operation =[[UserProfileOperation alloc] initPostPBX:groupid withTitle:title withContent:content withAttach:attach withAward:students withToHomePage:hasHomePage withToUpGroup:hasTopGroup];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+
 -(void) userLoginToken{
     UserProfileOperation *operation = [[UserProfileOperation alloc] initUserLogin];
     [[PalmNetWorkService sharedInstance] networkEngine:operation];
 }
+
 @end

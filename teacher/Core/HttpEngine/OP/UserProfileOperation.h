@@ -14,12 +14,12 @@ typedef enum{
     kUpdateUserImage,
     kPostTopic,
     kUserLogin,
+    kPostPBX,
 }UserProfile;
 
 #import "PalmOperation.h"
 
 @interface UserProfileOperation : PalmOperation
-
 -(UserProfileOperation *) initUserLogin;
 
 -(UserProfileOperation *) initGetUser;
@@ -34,4 +34,9 @@ typedef enum{
 
 -(UserProfileOperation *) initPostTopic : (int) groupid withTopicType : (int) topicType withSubject : (int) subject withTitle : (NSString *) title
                             withContent : (NSString *) content withAttach : (NSString *) attach;
+
+// 拍表现
+-(UserProfileOperation *) initPostPBX : (int) groupid withTitle : (NSString *) title withContent : (NSString *) content
+                            withAttach : (NSString *) attach withAward : (NSString *) students withToHomePage : (BOOL) hasHomePage
+                          withToUpGroup : (BOOL) hasTopGroup;
 @end

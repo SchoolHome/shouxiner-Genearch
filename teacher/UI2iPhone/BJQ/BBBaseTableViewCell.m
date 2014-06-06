@@ -9,6 +9,7 @@
 #import "BBBaseTableViewCell.h"
 #import "CoreUtils.h"
 
+
 @implementation BBBaseTableViewCell
 
 
@@ -23,6 +24,27 @@
         [_delegate bbBaseTableViewCell:self likeButtonTaped:sender];
     }
 }
+
+-(void) hEvent : (UIButton *) sender{
+    if (_delegate&&[_delegate respondsToSelector:@selector(bbBaseTableViewCell:commentButtonTaped:)]) {
+        [_delegate bbBaseTableViewCell:self commentButtonTaped:sender];
+    }
+}
+
+-(void) moreTaped:(id)sender{
+    if (_delegate && [_delegate respondsToSelector:@selector(bbBaseTableViewCell:moreButtonTaped:)]) {
+        [_delegate bbBaseTableViewCell:self moreButtonTaped:sender];
+    }
+}
+
+-(void) recommendTaped:(id)sender{
+    if (_delegate && [_delegate respondsToSelector:@selector(bbBaseTableViewCell:recommendButtonTaped:)]) {
+        [_delegate bbBaseTableViewCell:self recommendButtonTaped:sender];
+    }
+}
+
+
+
 
 -(NSString *)timeStringFromNumber:(NSNumber *) number{
     
@@ -86,20 +108,31 @@
         [self addSubview:_time];
         _time.backgroundColor = [UIColor clearColor];
         
-        _like = [[UIButton alloc] init];
-        [self addSubview:_like];
-        [_like setBackgroundImage:[UIImage imageNamed:@"BBZan"] forState:UIControlStateNormal];
-        [_like setBackgroundImage:[UIImage imageNamed:@"BBZanPress"] forState:UIControlStateHighlighted];
+//        _like = [[UIButton alloc] init];
+//        [self addSubview:_like];
+//        [_like setBackgroundImage:[UIImage imageNamed:@"BBZan"] forState:UIControlStateNormal];
+//        [_like setBackgroundImage:[UIImage imageNamed:@"BBZanPress"] forState:UIControlStateHighlighted];
+//        
+//        [_like addTarget:self action:@selector(likeTaped:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        _reply = [[UIButton alloc] init];
+//        [self addSubview:_reply];
+//        [_reply setBackgroundImage:[UIImage imageNamed:@"BBComment"] forState:UIControlStateNormal];
+//        [_reply setBackgroundImage:[UIImage imageNamed:@"BBCommentPress"] forState:UIControlStateHighlighted];
+//        
+//        [_reply addTarget:self action:@selector(replyTaped:) forControlEvents:UIControlEventTouchUpInside];
         
-        [_like addTarget:self action:@selector(likeTaped:) forControlEvents:UIControlEventTouchUpInside];
+        self.moreButton = [[UIButton alloc] init];
+        [self addSubview:self.moreButton];
+        [self.moreButton setBackgroundImage:[UIImage imageNamed:@"BJQMoreButton"] forState:UIControlStateNormal];
+        [self.moreButton setBackgroundImage:[UIImage imageNamed:@"BJQMoreButton"] forState:UIControlStateHighlighted];
+        [self.moreButton addTarget:self action:@selector(moreTaped:) forControlEvents:UIControlEventTouchUpInside];
         
-        _reply = [[UIButton alloc] init];
-        [self addSubview:_reply];
-        [_reply setBackgroundImage:[UIImage imageNamed:@"BBComment"] forState:UIControlStateNormal];
-        [_reply setBackgroundImage:[UIImage imageNamed:@"BBCommentPress"] forState:UIControlStateHighlighted];
-        
-        [_reply addTarget:self action:@selector(replyTaped:) forControlEvents:UIControlEventTouchUpInside];
-        
+        self.recommendButton = [[UIButton alloc] init];
+        [self addSubview:self.recommendButton];
+        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateNormal];
+        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateHighlighted];
+        [self.recommendButton addTarget:self action:@selector(recommendTaped:) forControlEvents:UIControlEventTouchUpInside];
         
         _relpyContentBack = [[UIImageView alloc] init];
         [self addSubview:_relpyContentBack];
@@ -119,9 +152,9 @@
         [self addSubview:_likeContent];
         _likeContent.backgroundColor = [UIColor clearColor];
         
-        _relpyContent = [[OHAttributedLabel alloc] init];
-        [self addSubview:_relpyContent];
-        _relpyContent.backgroundColor = [UIColor clearColor];
+//        _relpyContent = [[OHAttributedLabel alloc] init];
+//        [self addSubview:_relpyContent];
+//        _relpyContent.backgroundColor = [UIColor clearColor];
         
     }
     return self;
@@ -149,9 +182,9 @@
     
     
     if ([_data.am_i_like boolValue]) {
-        [_like setBackgroundImage:[UIImage imageNamed:@"BBAmILike"] forState:UIControlStateNormal];
+//        [_like setBackgroundImage:[UIImage imageNamed:@"BBAmILike"] forState:UIControlStateNormal];
     }else{
-        [_like setBackgroundImage:[UIImage imageNamed:@"BBZan"] forState:UIControlStateNormal];
+//        [_like setBackgroundImage:[UIImage imageNamed:@"BBZan"] forState:UIControlStateNormal];
     }
 }
 
