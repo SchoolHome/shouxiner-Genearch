@@ -113,7 +113,7 @@
         [loginInfoDict setObject:[[UIDevice currentDevice] systemVersion] forKey:@"device_version"];
         //    [loginInfoDict setObject:@"ios_v2_teacher" forKey:@"app_platform"];
         [loginInfoDict setObject:@"ios_v2" forKey:@"app_platform"];
-        [loginInfoDict setObject:@"1.0.0.0" forKey:@"app_version"];
+        [loginInfoDict setObject:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] forKey:@"app_version"];
         [loginInfoDict setObject:[NSNumber numberWithInt:0] forKey:@"first_login"];
         NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/login",K_HOST_NAME_OF_PALM_SERVER];
         [self setHttpRequestPostWithUrl:urlStr params:loginInfoDict];

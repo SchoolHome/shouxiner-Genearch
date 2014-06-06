@@ -263,7 +263,7 @@
 		332D757118C33552007A75D5 /* libidn-1.15.tar.gz in Resources */ = {isa = PBXBuildFile; fileRef = 332D742A18C33552007A75D5 /* libidn-1.15.tar.gz */; };
 		332D757218C33552007A75D5 /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 332D742B18C33552007A75D5 /* libidn.a */; };
 		332D757918C33552007A75D5 /* CPPTModelBabyInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 332D743E18C33552007A75D5 /* CPPTModelBabyInfoData.m */; };
-		332D757A18C33552007A75D5 /* CPPTModelBindCoupleResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 332D744018C33552007A75D5 /* CPPTModelBindCoupleResult.m */; };
+	332D757A18C33552007A75D5 /* CPPTModelBindCoupleResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 332D744018C33552007A75D5 /* CPPTModelBindCoupleResult.m */; };
 		332D757B18C33552007A75D5 /* CPPTModelContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 332D744218C33552007A75D5 /* CPPTModelContact.m */; };
 		332D757C18C33552007A75D5 /* CPPTModelContactInfos.m in Sources */ = {isa = PBXBuildFile; fileRef = 332D744418C33552007A75D5 /* CPPTModelContactInfos.m */; };
 		332D757D18C33552007A75D5 /* CPPTModelContactWay.m in Sources */ = {isa = PBXBuildFile; fileRef = 332D744618C33552007A75D5 /* CPPTModelContactWay.m */; };
@@ -8034,8 +8034,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: yuan gao (5PS549TGY5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yuan gao (5PS549TGY5)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -8053,7 +8053,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "32A41BCD-0DDC-4080-94EC-B04C8F54A4A0";
+				PROVISIONING_PROFILE = "99736D92-6F96-4D05-A3C3-A99ED1A68585";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -8099,8 +8099,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: yuan gao (5PS549TGY5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yuan gao (5PS549TGY5)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "teacher/teacher-Prefix.pch";
@@ -8120,6 +8120,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "99736D92-6F96-4D05-A3C3-A99ED1A68585";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
