@@ -373,13 +373,13 @@
     bjqTableView.tableHeaderView = head;
     
     
-    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shareButton setFrame:CGRectMake(0.f, 7.f, 40.f, 30.f)];
-    [shareButton setTitle:@"分享" forState:UIControlStateNormal];
-    [shareButton addTarget:self action:@selector(shareTaped:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-//    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BBAdd"] style:UIBarButtonItemStylePlain  target:self action:@selector(addNewTaped:)];
+//    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [shareButton setFrame:CGRectMake(0.f, 7.f, 40.f, 30.f)];
+//    [shareButton setTitle:@"分享" forState:UIControlStateNormal];
+//    [shareButton addTarget:self action:@selector(shareTaped:) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BBAdd"] style:UIBarButtonItemStylePlain  target:self action:@selector(addNewTaped:)];
     
     titleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, 44)];
     [titleButton setTitle:@"班级" forState:UIControlStateNormal];
