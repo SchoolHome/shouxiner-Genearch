@@ -28,7 +28,9 @@
         nt.topicid = dict[@"topicid"];
         nt.topic_title = dict[@"topic_title"];
         nt.type = dict[@"type"];
-        
+        nt.imageUrl = dict[@"image"];
+        nt.content = dict[@"content"];
+        nt.comment = dict[@"comment"];
         return nt;
     }
     
