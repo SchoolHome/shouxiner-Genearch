@@ -55,6 +55,13 @@
         thumbnail = [[EGOImageView alloc] initWithFrame:CGRectMake(240, 30, 60, 60)];
         [self addSubview:thumbnail];
         thumbnail.backgroundColor = [UIColor clearColor];
+        
+        contentPreView = [[UILabel alloc] initWithFrame:CGRectMake(240, 30, 60, 60)];
+        contentPreView.textColor = [UIColor blackColor];
+        contentPreView.font = [UIFont systemFontOfSize:12];
+        contentPreView.numberOfLines = 4;
+        [self addSubview:contentPreView];
+        contentPreView.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -112,6 +119,18 @@
     }else if([_data.type isEqualToString:@"tcomment"]){
         like.hidden = YES;
         content.hidden = NO;
+    }
+    
+    NSString *imageUrl = data.imageUrl;
+    if ([imageUrl isEqualToString:@""] || !imageUrl) {
+        contentPreView.hidden = NO;
+        thumbnail.hidden = YES;
+        contentPreView.text = data.content;
+    }else
+    {
+        thumbnail.hidden = NO;
+        contentPreView.hidden = YES;
+        [thumbnail  setImageURL:[NSURL URLWithString:imageUrl]];
     }
     //[self showDebugRect:YES];
 }

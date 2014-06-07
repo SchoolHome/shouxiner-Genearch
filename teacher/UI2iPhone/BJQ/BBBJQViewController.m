@@ -269,6 +269,7 @@
 
 -(void)addNewTaped:(id)sender{
 
+    
     [[UIApplication sharedApplication].keyWindow addSubview:fsDropdownView];
     [fsDropdownView show];
 }
