@@ -129,7 +129,8 @@
     {
         NSDictionary *dict = [PalmUIManagement sharedInstance].userCredits;
         NSNumber *credits = dict[@"data"][@"credits"];
-        point.text = [NSString stringWithFormat:@"           你已有%d积分可以兑换",[credits intValue]];
+        
+        point.text = [NSString stringWithFormat:@"宝贝荣誉:%d",[credits intValue]];
     }
     
     if ([@"praiseResult" isEqualToString:keyPath])  // 赞
@@ -296,12 +297,16 @@
 }
 
 -(void)pointTaped:(UITapGestureRecognizer *)gesture{
-#ifdef IS_TEACHER
+//#ifdef IS_TEACHER
     BBJFViewController *jf = [[BBJFViewController alloc] init];
     jf.hidesBottomBarWhenPushed = YES;
-    jf.url = [NSURL URLWithString:@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"];
+    //@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"
+    NSString *urlStr = [NSString stringWithFormat:@"http://www.shouxiner.com/webview/group_awards/%d",[self.currentGroup.groupid intValue]];
+   
+    jf.url = [NSURL URLWithString:urlStr];
+    
     [self.navigationController pushViewController:jf animated:YES];
-#endif
+//#endif
 }
 
 - (void)viewDidLoad
@@ -374,11 +379,21 @@
     point = [[UILabel alloc] initWithFrame:CGRectMake(0, 190, 320, 23)];
     point.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
     [head addSubview:point];
-    point.text = @"           你已有0积分可以兑换";
+    point.text = @"宝贝荣誉:0 ";
     point.textAlignment = NSTextAlignmentCenter;
     point.font = [UIFont boldSystemFontOfSize:12];
     point.textColor = [UIColor whiteColor];
     point.userInteractionEnabled = YES;
+    
+    UILabel *pointDetail = [[UILabel alloc] initWithFrame:CGRectMake(280, 0, 40, 23)];
+    pointDetail.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+    [point addSubview:pointDetail];
+    pointDetail.text = @"详情>";
+    pointDetail.textAlignment = NSTextAlignmentCenter;
+    pointDetail.font = [UIFont boldSystemFontOfSize:12];
+    pointDetail.textColor = [UIColor whiteColor];
+    pointDetail.userInteractionEnabled = YES;
+    
     
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer  alloc] initWithTarget:self action:@selector(pointTaped:)];
     [point addGestureRecognizer:gesture];
