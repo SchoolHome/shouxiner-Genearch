@@ -97,18 +97,20 @@
         self.scrollEnabled = NO;
         // 直接显示进度条
         [_photoLoadingView showLoading];
+        
         [self addSubview:_photoLoadingView];
         
         __unsafe_unretained MJPhotoView *photoView = self;
         __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
         [_imageView setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSUInteger receivedSize, long long expectedSize) {
-            if (receivedSize > kMinProgress) {
-                if (nil != loading) {
-                    loading.progress = (float)receivedSize/expectedSize;
-                }
-                
-            }
+            //            if (receivedSize > kMinProgress) {
+            //                if (nil != loading && [loading superview] != nil) {
+            ////                    loading.progress = (float)receivedSize/expectedSize;
+            //                }
+            //
+            //            }
         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [loading stop];
             [photoView photoDidFinishLoadWithImage:image];
         }];
     }
