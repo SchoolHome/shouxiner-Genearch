@@ -46,8 +46,8 @@
 //@property(nonatomic,strong) UIButton *moreButton;
 //@property(nonatomic,strong) UIButton *recommendButton;
 //
-//@property(nonatomic,strong) UIImageView *TuiJianImage;
-//@property(nonatomic,strong) UIImageView *RongYuImage;
+@property(nonatomic,strong) UIImageView *TuiJianImage;
+@property(nonatomic,strong) UIImageView *RongYuImage;
 
 @property(nonatomic,strong) UILabel *likeContent;
 //@property(nonatomic,strong) OHAttributedLabel *relpyContent;

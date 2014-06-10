@@ -31,15 +31,15 @@
         title.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
         title.backgroundColor = [UIColor clearColor];
         
-//        self.TuiJianImage = [[UIImageView alloc] initWithFrame:CGRectMake(title.frame.origin.x + title.frame.size.width, 2.0f, 15.0f, 15.0f)];
-//        self.TuiJianImage.image = [UIImage imageNamed:@"BJQTuiJian"];
-//        self.TuiJianImage.hidden = YES;
-//        [self addSubview:self.TuiJianImage];
-//        
-//        self.RongYuImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f)];
-//        self.RongYuImage.image = [UIImage imageNamed:@"BJQRongYun"];
-//        self.RongYuImage.hidden = YES;
-//        [self addSubview:self.RongYuImage];
+        self.TuiJianImage = [[UIImageView alloc] initWithFrame:CGRectMake(title.frame.origin.x + title.frame.size.width, 2.0f, 15.0f, 15.0f)];
+        self.TuiJianImage.image = [UIImage imageNamed:@"BJQTuiJian"];
+        self.TuiJianImage.hidden = YES;
+        [self addSubview:self.TuiJianImage];
+        
+        self.RongYuImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f)];
+        self.RongYuImage.image = [UIImage imageNamed:@"BJQRongYun"];
+        self.RongYuImage.hidden = YES;
+        [self addSubview:self.RongYuImage];
         
         mark = [[UIImageView alloc] initWithFrame:CGRectMake(K_LEFT_PADDING, 20, 41, 41)];
         [self addSubview:mark];
@@ -73,13 +73,13 @@
     title.lineBreakMode = NSLineBreakByTruncatingTail;
     [title sizeToFit];
     
-//    if (data.recommended) {
-//        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
-//        self.TuiJianImage.hidden = NO;
-//    }else{
-//        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
-//        self.TuiJianImage.hidden = YES;
-//    }
+    if (data.recommended) {
+        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
+        self.TuiJianImage.hidden = NO;
+    }else{
+        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
+        self.TuiJianImage.hidden = YES;
+    }
     
     content.frame = CGRectMake(K_LEFT_PADDING+43, 20+3, 175, 50);
     content.text = self.data.content;
