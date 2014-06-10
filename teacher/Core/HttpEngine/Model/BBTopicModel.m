@@ -34,7 +34,7 @@
         tp.am_i_like = dict[@"am_i_like"];
         tp.num_praise = dict[@"num_praise"];
         tp.num_comment = dict[@"num_comment"];
-        tp.award = [dict[@"award"] boolValue];
+        tp.award = YES;//[dict[@"award"] boolValue];
         tp.recommendToGroups = [dict[@"recommendToGroups"] boolValue];
         tp.recommendToHomepage = [dict[@"recommendToHomepage"] boolValue];
         tp.recommendToUpGroup = [dict[@"recommendToUpGroup"] boolValue];

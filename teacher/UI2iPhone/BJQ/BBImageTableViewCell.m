@@ -73,6 +73,20 @@
         self.TuiJianImage.hidden = YES;
     }
     
+    
+    if ([data.topictype intValue] == 4 && [data.subject intValue] == 1) {
+        if (data.award) {
+            self.RongYuImage.frame = CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f);
+            self.RongYuImage.hidden = NO;
+        }else{
+            self.RongYuImage.frame = CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f);
+            self.RongYuImage.hidden = YES;
+        }
+    }else{
+        self.RongYuImage.frame = CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f);
+        self.RongYuImage.hidden = YES;
+    }
+    
     content.text = self.data.content;
     content.font = [UIFont systemFontOfSize:14];
     content.numberOfLines = 0;
