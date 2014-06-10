@@ -27,15 +27,15 @@
         title.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
         title.backgroundColor = [UIColor clearColor];
         
-//        self.TuiJianImage = [[UIImageView alloc] initWithFrame:CGRectMake(title.frame.origin.x + title.frame.size.width, 2.0f, 15.0f, 15.0f)];
-//        self.TuiJianImage.image = [UIImage imageNamed:@"BJQTuiJian"];
-//        self.TuiJianImage.hidden = YES;
-//        [self addSubview:self.TuiJianImage];
-//        
-//        self.RongYuImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f)];
-//        self.RongYuImage.image = [UIImage imageNamed:@"BJQRongYun"];
-//        self.RongYuImage.hidden = YES;
-//        [self addSubview:self.RongYuImage];
+        self.TuiJianImage = [[UIImageView alloc] initWithFrame:CGRectMake(title.frame.origin.x + title.frame.size.width, 2.0f, 15.0f, 15.0f)];
+        self.TuiJianImage.image = [UIImage imageNamed:@"BJQTuiJian"];
+        self.TuiJianImage.hidden = YES;
+        [self addSubview:self.TuiJianImage];
+        
+        self.RongYuImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f)];
+        self.RongYuImage.image = [UIImage imageNamed:@"BJQRongYun"];
+        self.RongYuImage.hidden = YES;
+        [self addSubview:self.RongYuImage];
         
         newLine = [[UILabel alloc] initWithFrame:CGRectMake(K_LEFT_PADDING, 20.0f, 60.0f, 20.0f)];
         newLine.text = @"新的表现";
@@ -76,21 +76,21 @@
     title.lineBreakMode = NSLineBreakByTruncatingTail;
     [title sizeToFit];
     
-//    if (data.recommended) {
-//        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
-//        self.TuiJianImage.hidden = NO;
-//    }else{
-//        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
-//        self.TuiJianImage.hidden = YES;
-//    }
-//    
-//    if (data.award) {
-//        self.RongYuImage.frame = CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f);
-//        self.RongYuImage.hidden = NO;
-//    }else{
-//        self.RongYuImage.frame = CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f);
-//        self.RongYuImage.hidden = YES;
-//    }
+    if (data.recommended) {
+        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
+        self.TuiJianImage.hidden = NO;
+    }else{
+        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
+        self.TuiJianImage.hidden = YES;
+    }
+    
+    if (data.award) {
+        self.RongYuImage.frame = CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f);
+        self.RongYuImage.hidden = NO;
+    }else{
+        self.RongYuImage.frame = CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15.0f, 15.0f);
+        self.RongYuImage.hidden = YES;
+    }
     
     content.frame = CGRectMake(K_LEFT_PADDING+43, 40+3, 175, 50);
     content.text = self.data.content;
@@ -213,6 +213,8 @@
 //    }
 //    self.moreButton.frame = CGRectMake(280.0f, timeBegin+12, 22.0f, 15.0f);
     
+    self.like.frame = CGRectMake(165, timeBegin+5, 62, 27);
+    self.reply.frame = CGRectMake(165+70, timeBegin+5, 62, 27);
     
     self.time.frame = CGRectMake(K_LEFT_PADDING, timeBegin+5, 60, 27);
     self.time.text = [self timeStringFromNumber:self.data.ts];
