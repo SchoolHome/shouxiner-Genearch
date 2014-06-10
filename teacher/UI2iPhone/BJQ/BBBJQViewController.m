@@ -85,6 +85,17 @@
                     
                     [bjqTableView.pullToRefreshView stopAnimating];
                     
+                    if (self.allTopicList.count > 0) {
+                        BBTopicModel *model = [self.allTopicList objectAtIndex:0];
+                        if (![model.awards isEqual:[NSNull null]]) {
+                            point.text = [NSString stringWithFormat:@"宝贝荣誉:%@",model.awards];
+                        }else
+                        {
+                            point.text = [NSString stringWithFormat:@"宝贝荣誉:0"];
+                        }
+                        
+                    }
+                    
                     NSDate *now = [CoreUtils convertDateToLocalTime:[NSDate date]];
                     NSString *date = [NSString stringWithFormat:@"最近更新: %@",[[now description] substringToIndex:16]];
                     [bjqTableView.pullToRefreshView setSubtitle:date forState:SVPullToRefreshStateAll];
@@ -127,10 +138,10 @@
     
     if ([@"userCredits" isEqualToString:keyPath])  // 刷新积分
     {
-        NSDictionary *dict = [PalmUIManagement sharedInstance].userCredits;
-        NSNumber *credits = dict[@"data"][@"credits"];
-        
-        point.text = [NSString stringWithFormat:@"宝贝荣誉:%d",[credits intValue]];
+//        NSDictionary *dict = [PalmUIManagement sharedInstance].userCredits;
+//        NSNumber *credits = dict[@"data"][@"credits"];
+//        
+//        point.text = [NSString stringWithFormat:@"宝贝荣誉:%d",[credits intValue]];
     }
     
     if ([@"praiseResult" isEqualToString:keyPath])  // 赞
