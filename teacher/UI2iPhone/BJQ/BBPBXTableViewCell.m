@@ -213,6 +213,8 @@
 //    }
 //    self.moreButton.frame = CGRectMake(280.0f, timeBegin+12, 22.0f, 15.0f);
     
+    self.like.frame = CGRectMake(165, timeBegin+5, 62, 27);
+    self.reply.frame = CGRectMake(165+70, timeBegin+5, 62, 27);
     
     self.time.frame = CGRectMake(K_LEFT_PADDING, timeBegin+5, 60, 27);
     self.time.text = [self timeStringFromNumber:self.data.ts];

@@ -589,15 +589,27 @@
             //
         {
 
-            BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
-            if (!cell) {
-                cell = [[BBImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier3];
+            if ([model.subject integerValue] == 1) {
+                BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier4];
+                if (!cell) {
+                    cell = [[BBPBXTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier4];
+                    cell.delegate = self;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                }
+                [cell setData:model];
                 cell.delegate = self;
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                return cell;
+            }else{
+                BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
+                if (!cell) {
+                    cell = [[BBImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier3];
+                    cell.delegate = self;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                }
+                [cell setData:model];
+                cell.delegate = self;
+                return cell;
             }
-            [cell setData:model];
-            cell.delegate = self;
-            return cell;
         }
             break;
 

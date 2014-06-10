@@ -25,7 +25,7 @@
             }
             
             if ([attachList count]==imageCount) {  // 所有都上传完毕
-                
+                int subjectID = 0;
                 NSString *title = nil;
                 switch (_style) {
                     case 0:
@@ -39,7 +39,7 @@
                     case 2:
                         //
                         title = @"拍表现";
-
+                        subjectID = 1;
                         break;
                     case 3:
                         //
@@ -52,7 +52,7 @@
                 NSString *attach = [attachList componentsJoinedByString:@"***"];
                 [[PalmUIManagement sharedInstance] postTopic:[_currentGroup.groupid intValue]
                                                withTopicType:_topicType
-                                                 withSubject:_selectedIndex
+                                                 withSubject:subjectID
                                                    withTitle:title
                                                  withContent:thingsTextView.text
                                                   withAttach:attach];
@@ -259,7 +259,7 @@
     
     if (imageCount == 0) {  // 没有图片
         //
-        
+        int subjectID = 0;
         NSString *title = nil;
         switch (_style) {
             case 0:
@@ -273,7 +273,7 @@
             case 2:
                 //
                 title = @"拍表现";
-                
+                subjectID = 1;
                 break;
             case 3:
                 //
@@ -285,7 +285,7 @@
         
         [[PalmUIManagement sharedInstance] postTopic:[_currentGroup.groupid intValue]
                                        withTopicType:_topicType
-                                         withSubject:_selectedIndex
+                                         withSubject:subjectID
                                            withTitle:title
                                          withContent:thingsTextView.text
                                           withAttach:@""];
