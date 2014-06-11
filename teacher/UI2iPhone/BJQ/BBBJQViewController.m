@@ -287,7 +287,7 @@
 }
 
 -(void)newNotifyTaped:(id)sender{
-
+    notifyCount = 0;
     BBXXXViewController *xxx = [[BBXXXViewController alloc] init];
     xxx.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:xxx animated:YES];
