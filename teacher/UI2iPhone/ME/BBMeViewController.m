@@ -13,6 +13,7 @@
 #import "BBHelpViewController.h"
 #import "BBFeedbackViewController.h"
 #import "BBAddressBookViewController.h"
+#import "BBJFViewController.h"
 #import "ContactsViewController.h"
 #import "EGOImageView.h"
 #import <QuartzCore/QuartzCore.h>
@@ -30,7 +31,7 @@
     self = [super init];
     if (self) {
         [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"userProfile" options:0 context:nil];
-        [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"userCredits" options:0 context:nil];
+      //  [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"userCredits" options:0 context:nil];
     }
     return self;
 }
@@ -53,7 +54,7 @@
 	// Do any additional setup after loading the view.
     self.navigationItem.title = @"我";
     
-    listData = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"我的商城", @"我的通讯录", nil],
+    listData = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:@"学生荣誉", @"我的通讯录", nil],
                 [NSArray arrayWithObjects:@"软件更新", @"帮助中心", @"反馈和建议", nil], nil];
     
     
@@ -155,7 +156,7 @@
     }else{
         NSInteger section = indexPath.section - 1;
         [cell.textLabel setText:[[listData objectAtIndex:section] objectAtIndex:indexPath.row]];
-        if (indexPath.section == 1 && indexPath.row == 0) {
+      /*  if (indexPath.section == 1 && indexPath.row == 0) {
             [[cell.contentView viewWithTag:501] removeFromSuperview];
             [[cell.contentView viewWithTag:502] removeFromSuperview];
             if (userCredits) {
@@ -186,7 +187,7 @@
                     [labelNum setText:strCredits];
                 }
             }
-        }
+        }*/
     }
     [cell setNeedsDisplay];
     return cell;
@@ -207,10 +208,19 @@
             break;
         case 1:
         {
-            if (indexPath.row == 0) {//商城
+            if (indexPath.row == 0) {//荣誉
+                /*
                 BBShopViewController *shopViewController = [[BBShopViewController alloc] init];
                 shopViewController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:shopViewController animated:YES];
+                 */
+                BBJFViewController *jf = [[BBJFViewController alloc] init];
+                jf.hidesBottomBarWhenPushed = YES;
+                NSString *urlStr = [NSString stringWithFormat:@"http://www.shouxiner.com/webview/group_awards"];
+                
+                jf.url = [NSURL URLWithString:urlStr];
+                
+                [self.navigationController pushViewController:jf animated:YES];
             }else{//通讯录
                 ContactsViewController *contactsViewController = [[ContactsViewController alloc] init];
                 contactsViewController.hidesBottomBarWhenPushed = YES;
@@ -252,7 +262,10 @@
     if ([@"userProfile" isEqualToString:keyPath]){
         userProfile = [[PalmUIManagement sharedInstance].userProfile objectForKey:ASI_REQUEST_DATA];
         //查询用户商城积分
-        [[PalmUIManagement sharedInstance] getUserCredits];
+      //  [[PalmUIManagement sharedInstance] getUserCredits];
+        if (meTableView) {
+            [meTableView reloadData];
+        }
     }
     if ([@"userCredits" isEqualToString:keyPath]) {
         userCredits = [[PalmUIManagement sharedInstance].userCredits objectForKey:ASI_REQUEST_DATA];

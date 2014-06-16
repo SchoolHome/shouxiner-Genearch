@@ -28,6 +28,9 @@
             tp.author_avatar = dict[@"author_avatar"];
         }
         
+        tp.awards = dict[@"award"];
+        
+        
         tp.ts = dict[@"ts"];
         tp.topictype = dict[@"topictype"];
         tp.subject = dict[@"subject"];

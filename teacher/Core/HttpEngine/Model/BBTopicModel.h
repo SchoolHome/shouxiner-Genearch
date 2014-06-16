@@ -24,6 +24,7 @@
 @property(nonatomic,strong) NSNumber *author_uid;
 @property(nonatomic,strong) NSString *author_username;
 @property(nonatomic,strong) NSString *author_avatar;
+@property(nonatomic,strong) NSString *awards;
 @property(nonatomic,strong) NSNumber *ts;
 @property(nonatomic,strong) NSNumber *topictype;
 @property(nonatomic,strong) NSNumber *subject;
@@ -33,6 +34,7 @@
 @property(nonatomic,strong) NSArray *praises;
 @property(nonatomic,strong) NSArray *comments;
 @property(nonatomic,strong) NSMutableArray *commentStr;
+
 @property(nonatomic) BOOL award;
 @property(nonatomic) BOOL recommended;
 @property(nonatomic) BOOL recommendToGroups;

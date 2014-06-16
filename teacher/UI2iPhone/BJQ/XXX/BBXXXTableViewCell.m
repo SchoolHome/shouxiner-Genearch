@@ -122,10 +122,11 @@
     }
     
     NSString *imageUrl = data.imageUrl;
-    if ([imageUrl isEqual:[NSNull null]] || [imageUrl isEqualToString:@""] ) {
+    if (imageUrl == [NSNull null]  || !imageUrl || [imageUrl isEqualToString:@""] ) {
         contentPreView.hidden = NO;
         thumbnail.hidden = YES;
-        contentPreView.text = data.content;
+    if (data.content != [NSNull null]) contentPreView.text = data.content;
+        
     }else
     {
         thumbnail.hidden = NO;
