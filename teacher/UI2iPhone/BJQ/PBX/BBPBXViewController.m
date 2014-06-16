@@ -1,12 +1,12 @@
 
 
 #import "BBPBXViewController.h"
-#import "CTAssetsPickerController.h"
+#import "ZYQAssetPickerController.h"
 #import "ViewImageViewController.h"
 #import "UIPlaceHolderTextView.h"
 #import "BBStudentsListViewController.h"
 #import "BBStudentModel.h"
-@interface BBPBXViewController ()<CTAssetsPickerControllerDelegate,viewImageDeletedDelegate>
+@interface BBPBXViewController ()<ZYQAssetPickerControllerDelegate,viewImageDeletedDelegate>
 {
     UIPlaceHolderTextView *thingsTextView;
     UIButton *imageButton[8];
@@ -318,12 +318,19 @@
                 return;
             }
 
-            CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
-            picker.assetsFilter = [ALAssetsFilter allPhotos];
-
+            ZYQAssetPickerController *picker = [[ZYQAssetPickerController alloc] init];
             picker.maximumNumberOfSelection = 7 - selectCount;
-
-            picker.delegate = self;
+            picker.assetsFilter = [ALAssetsFilter allPhotos];
+            picker.showEmptyGroups=NO;
+            picker.delegate=self;
+            picker.selectionFilter = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+                if ([[(ALAsset*)evaluatedObject valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypeVideo]) {
+                    NSTimeInterval duration = [[(ALAsset*)evaluatedObject valueForProperty:ALAssetPropertyDuration] doubleValue];
+                    return duration >= 5;
+                } else {
+                    return YES;
+                }
+            }];
             
             [self presentViewController:picker animated:YES completion:NULL];
 
@@ -363,17 +370,13 @@
 
 
 #pragma mark - Assets Picker Delegate
-
-- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets{
-
-    
+-(void)assetPickerController:(ZYQAssetPickerController *)picker didFinishPickingAssets:(NSArray *)assets{
     for (int i = 0; i<[assets count]; i++) {
         ALAsset *asset = [assets objectAtIndex:i];
         [imageButton[selectCount] setBackgroundImage:[UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]] forState:UIControlStateNormal];
         selectCount++;
     }
 }
-
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
