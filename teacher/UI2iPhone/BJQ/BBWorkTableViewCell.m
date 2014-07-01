@@ -86,6 +86,9 @@
     content.font = [UIFont systemFontOfSize:14];
     content.numberOfLines = 0;
     [content sizeToFit];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    [content addGestureRecognizer:longPress];
+    content.userInteractionEnabled = YES;
     
     if (content.frame.size.height>=(41-6)) {
         contentBack.frame = CGRectMake(K_LEFT_PADDING+41, 20, 180, kViewHeight(content)+6); //content.frame;

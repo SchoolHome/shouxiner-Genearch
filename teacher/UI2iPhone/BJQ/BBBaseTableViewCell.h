@@ -66,6 +66,7 @@
 -(NSString *)timeStringFromNumber:(NSNumber *) number;
 -(EGOImageButton *) imageContentWithIndex : (int) index;
 -(void) hEvent : (UIButton *) sender;
+-(void) longPress : (UILongPressGestureRecognizer *) gesture;
 @end
 
 @protocol BBBaseTableViewCellDelegate <NSObject>
@@ -79,6 +80,8 @@
 
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell moreButtonTaped:(UIButton *)sender;
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell recommendButtonTaped:(UIButton *)sender;
+
+-(void) bbBaseTableViewCell:(BBBaseTableViewCell *)cell touchPoint:(CGPoint)touchPoint longPressText : (NSString *) text;
 @end
 
 

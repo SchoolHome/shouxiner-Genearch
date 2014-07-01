@@ -91,7 +91,9 @@
     content.font = [UIFont systemFontOfSize:14];
     content.numberOfLines = 0;
     [content sizeToFit];
-    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    [content addGestureRecognizer:longPress];
+    content.userInteractionEnabled = YES;
     
     for (int i = 0; i<8; i++) {
         imageContent[i].hidden = YES;

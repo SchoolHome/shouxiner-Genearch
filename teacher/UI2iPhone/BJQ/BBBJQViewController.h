@@ -46,7 +46,7 @@ UserMessageImageDelegate>
     BOOL hasNew;
     
     int notifyCount;
-    
+    UIButton *copyContentButton;
 }
 
 @property(nonatomic,strong) BBGroupModel *currentGroup;

@@ -43,6 +43,12 @@
     }
 }
 
+-(void) longPress : (UILongPressGestureRecognizer *) gesture{
+    if (_delegate && [_delegate respondsToSelector:@selector(bbBaseTableViewCell:touchPoint:longPressText:)]) {
+        CGPoint point = [gesture locationInView:self];
+        [_delegate bbBaseTableViewCell:self touchPoint:point longPressText:_data.content];
+    }
+}
 
 
 
