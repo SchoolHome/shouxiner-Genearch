@@ -1053,9 +1053,6 @@
 		741EBBC218D4C05A00F21085 /* BBMessageGroupBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EBBC118D4C05A00F21085 /* BBMessageGroupBaseCell.m */; };
 		741EBBC518D4CC7B00F21085 /* BBSingleMessageGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EBBC418D4CC7B00F21085 /* BBSingleMessageGroupCell.m */; };
 		741EBBC818D4CCA900F21085 /* BBGroupMessageGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EBBC718D4CCA900F21085 /* BBGroupMessageGroupCell.m */; };
-		74233BB118D6C3DE0086C1BD /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74233BB018D6C3DE0086C1BD /* ContactsViewController.m */; };
-		743E85F618D74B850024D371 /* ContactsTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743E85F518D74B850024D371 /* ContactsTableviewCell.m */; };
-		743E85F918D74CEF0024D371 /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 743E85F818D74CEF0024D371 /* ContactsModel.m */; };
 		74421CD818DF467A000D2F1B /* DisplaySelectedMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74421CD718DF467A000D2F1B /* DisplaySelectedMemberView.m */; };
 		745D7684193F685600AF666E /* BBStudentsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D7683193F685600AF666E /* BBStudentsListViewController.m */; };
 		745D7687193F68A200AF666E /* BBRecommendedRangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D7686193F68A200AF666E /* BBRecommendedRangeViewController.m */; };
@@ -1092,6 +1089,11 @@
 		74A4E5F718DFE8B8000F79E6 /* ZJZUnCheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5DF18DFE8B8000F79E6 /* ZJZUnCheck.png */; };
 		74A4E5F818DFE8B8000F79E6 /* ZJZUnCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5E018DFE8B8000F79E6 /* ZJZUnCheck@2x.png */; };
 		74E85D8D18D0445A00F1F1D5 /* BBZJZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E85D8C18D0445A00F1F1D5 /* BBZJZViewController.m */; };
+		74EF7E071962C2BC00DCD5A3 /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EF7E021962C2BC00DCD5A3 /* ContactsModel.m */; };
+		74EF7E081962C2BC00DCD5A3 /* ContactsTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EF7E041962C2BC00DCD5A3 /* ContactsTableviewCell.m */; };
+		74EF7E091962C2BC00DCD5A3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EF7E061962C2BC00DCD5A3 /* ContactsViewController.m */; };
+		74EF7E0C1962C2E800DCD5A3 /* ZJZ_Seg_Parent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74EF7E0A1962C2E800DCD5A3 /* ZJZ_Seg_Parent@2x.png */; };
+		74EF7E0D1962C2E800DCD5A3 /* ZJZ_Seg_Teacher@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74EF7E0B1962C2E800DCD5A3 /* ZJZ_Seg_Teacher@2x.png */; };
 		7A076A9518DFFF1B00911291 /* BBComentBottomBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A076A9318DFFF1B00911291 /* BBComentBottomBG.png */; };
 		7A076A9618DFFF1B00911291 /* BBComentBottomBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A076A9418DFFF1B00911291 /* BBComentBottomBG@2x.png */; };
 		7A076AB318E14F9800911291 /* BBXXXTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A076AB018E14F9800911291 /* BBXXXTableViewCell.m */; };
@@ -2895,12 +2897,6 @@
 		741EBBC418D4CC7B00F21085 /* BBSingleMessageGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSingleMessageGroupCell.m; sourceTree = "<group>"; };
 		741EBBC618D4CCA900F21085 /* BBGroupMessageGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBGroupMessageGroupCell.h; sourceTree = "<group>"; };
 		741EBBC718D4CCA900F21085 /* BBGroupMessageGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBGroupMessageGroupCell.m; sourceTree = "<group>"; };
-		74233BAF18D6C3DE0086C1BD /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
-		74233BB018D6C3DE0086C1BD /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
-		743E85F418D74B850024D371 /* ContactsTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTableviewCell.h; sourceTree = "<group>"; };
-		743E85F518D74B850024D371 /* ContactsTableviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTableviewCell.m; sourceTree = "<group>"; };
-		743E85F718D74CEF0024D371 /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
-		743E85F818D74CEF0024D371 /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
 		74421CD618DF467A000D2F1B /* DisplaySelectedMemberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplaySelectedMemberView.h; sourceTree = "<group>"; };
 		74421CD718DF467A000D2F1B /* DisplaySelectedMemberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplaySelectedMemberView.m; sourceTree = "<group>"; };
 		745D7682193F685600AF666E /* BBStudentsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBStudentsListViewController.h; sourceTree = "<group>"; };
@@ -2949,6 +2945,14 @@
 		74A4E5E018DFE8B8000F79E6 /* ZJZUnCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZUnCheck@2x.png"; sourceTree = "<group>"; };
 		74E85D8B18D0445A00F1F1D5 /* BBZJZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBZJZViewController.h; sourceTree = "<group>"; };
 		74E85D8C18D0445A00F1F1D5 /* BBZJZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBZJZViewController.m; sourceTree = "<group>"; };
+		74EF7E011962C2BC00DCD5A3 /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
+		74EF7E021962C2BC00DCD5A3 /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
+		74EF7E031962C2BC00DCD5A3 /* ContactsTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTableviewCell.h; sourceTree = "<group>"; };
+		74EF7E041962C2BC00DCD5A3 /* ContactsTableviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTableviewCell.m; sourceTree = "<group>"; };
+		74EF7E051962C2BC00DCD5A3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		74EF7E061962C2BC00DCD5A3 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		74EF7E0A1962C2E800DCD5A3 /* ZJZ_Seg_Parent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZ_Seg_Parent@2x.png"; sourceTree = "<group>"; };
+		74EF7E0B1962C2E800DCD5A3 /* ZJZ_Seg_Teacher@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZ_Seg_Teacher@2x.png"; sourceTree = "<group>"; };
 		7A076A9318DFFF1B00911291 /* BBComentBottomBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBComentBottomBG.png; sourceTree = "<group>"; };
 		7A076A9418DFFF1B00911291 /* BBComentBottomBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBComentBottomBG@2x.png"; sourceTree = "<group>"; };
 		7A076AAF18E14F9800911291 /* BBXXXTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBXXXTableViewCell.h; sourceTree = "<group>"; };
@@ -6177,12 +6181,12 @@
 		74233BAE18D6C3CA0086C1BD /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
-				74233BAF18D6C3DE0086C1BD /* ContactsViewController.h */,
-				74233BB018D6C3DE0086C1BD /* ContactsViewController.m */,
-				743E85F418D74B850024D371 /* ContactsTableviewCell.h */,
-				743E85F518D74B850024D371 /* ContactsTableviewCell.m */,
-				743E85F718D74CEF0024D371 /* ContactsModel.h */,
-				743E85F818D74CEF0024D371 /* ContactsModel.m */,
+				74EF7E011962C2BC00DCD5A3 /* ContactsModel.h */,
+				74EF7E021962C2BC00DCD5A3 /* ContactsModel.m */,
+				74EF7E031962C2BC00DCD5A3 /* ContactsTableviewCell.h */,
+				74EF7E041962C2BC00DCD5A3 /* ContactsTableviewCell.m */,
+				74EF7E051962C2BC00DCD5A3 /* ContactsViewController.h */,
+				74EF7E061962C2BC00DCD5A3 /* ContactsViewController.m */,
 				7478550318DB545C0070DF87 /* ContactsStartGroupChatViewController.h */,
 				7478550418DB545C0070DF87 /* ContactsStartGroupChatViewController.m */,
 				7478550618DB548C0070DF87 /* StartGroupChatTableviewCell.h */,
@@ -6196,6 +6200,8 @@
 		74A4E5C818DFE8A9000F79E6 /* ZJZ */ = {
 			isa = PBXGroup;
 			children = (
+				74EF7E0A1962C2E800DCD5A3 /* ZJZ_Seg_Parent@2x.png */,
+				74EF7E0B1962C2E800DCD5A3 /* ZJZ_Seg_Teacher@2x.png */,
 				195B1A9718E5997D00B3F9A7 /* ZJZAddPeople.png */,
 				195B1A9818E5997D00B3F9A7 /* ZJZAddPeople@2x.png */,
 				195B1A9318E5982800B3F9A7 /* ZJZBack.png */,
@@ -6782,6 +6788,7 @@
 				332D7FB218C33F0A007A75D5 /* mask_im@2x.png in Resources */,
 				0433AD1218E53A8800BDF9D5 /* keyboard_keyboard@2x.png in Resources */,
 				332D823918C33F0A007A75D5 /* bt_im_profile_speak@2x.png in Resources */,
+				74EF7E0C1962C2E800DCD5A3 /* ZJZ_Seg_Parent@2x.png in Resources */,
 				332D7E6118C33F0A007A75D5 /* alarm_im_icon_done@2x.png in Resources */,
 				332D7F5E18C33F0A007A75D5 /* bg_im_talk_gray_press@2x.png in Resources */,
 				332D7F5518C33F0A007A75D5 /* add_like@2x.jpg in Resources */,
@@ -7147,6 +7154,7 @@
 				332D7F8A18C33F0A007A75D5 /* btn_video_talkpress@2x.png in Resources */,
 				19E1A0F0194EB557009C06F7 /* 4s@2x.png in Resources */,
 				332D7EFD18C33F0A007A75D5 /* bg_close@2x.png in Resources */,
+				74EF7E0D1962C2E800DCD5A3 /* ZJZ_Seg_Teacher@2x.png in Resources */,
 				332D7FDD18C33F0A007A75D5 /* item_step2_textbg@2x.png in Resources */,
 				332D822B18C33F0A007A75D5 /* bt_im_profile_inputsth@2x.png in Resources */,
 				332D7FDC18C33F0A007A75D5 /* icon_step2_key@2x.png in Resources */,
@@ -7495,6 +7503,7 @@
 				7478550818DB548C0070DF87 /* StartGroupChatTableviewCell.m in Sources */,
 				7AC51BA018CDDA6900AD1A8C /* BBCellHeight.m in Sources */,
 				332D829C18C33F0A007A75D5 /* CoupleCompletedView.m in Sources */,
+				74EF7E081962C2BC00DCD5A3 /* ContactsTableviewCell.m in Sources */,
 				332D74D918C33552007A75D5 /* FMDatabase.m in Sources */,
 				332D74CF18C33552007A75D5 /* CPDAOMessageGroupMember.m in Sources */,
 				332D82BC18C33F0A007A75D5 /* HomeCloseFriendTableViewCell.m in Sources */,
@@ -7601,7 +7610,6 @@
 				332D754118C33552007A75D5 /* XMPPRoomHybrid.xcdatamodeld in Sources */,
 				7A47062618D967F2006449F3 /* NSTextCheckingResult+ExtendedURL.m in Sources */,
 				332D838718C33F0B007A75D5 /* CubicBezierCurve.m in Sources */,
-				743E85F618D74B850024D371 /* ContactsTableviewCell.m in Sources */,
 				332D82E818C33F0A007A75D5 /* AnimationInformation.m in Sources */,
 				332D82D518C33F0A007A75D5 /* LoginViewController.m in Sources */,
 				332D838818C33F0B007A75D5 /* ImageFilter.m in Sources */,
@@ -7755,6 +7763,7 @@
 				332D834218C33F0B007A75D5 /* SingleSoundAlarmCell.m in Sources */,
 				332D752618C33552007A75D5 /* NSData+XMPP.m in Sources */,
 				332D759918C33552007A75D5 /* CPUIModelBabyInfoData.m in Sources */,
+				74EF7E071962C2BC00DCD5A3 /* ContactsModel.m in Sources */,
 				332D756818C33552007A75D5 /* DDLog.m in Sources */,
 				7A47062818D967F2006449F3 /* OHParagraphStyle.m in Sources */,
 				332D82C818C33F0A007A75D5 /* HomePageAvatarView.m in Sources */,
@@ -7767,7 +7776,6 @@
 				332D82FA18C33F0B007A75D5 /* PetProgressView.m in Sources */,
 				332D832418C33F0B007A75D5 /* FanxerIndicatorControl.m in Sources */,
 				332D82EC18C33F0A007A75D5 /* MessageAlarmExpressionViewController.m in Sources */,
-				74233BB118D6C3DE0086C1BD /* ContactsViewController.m in Sources */,
 				332D757E18C33552007A75D5 /* CPPTModelContactWayList.m in Sources */,
 				332D834E18C33F0B007A75D5 /* AlarmDatePickerView.m in Sources */,
 				332D74F518C33552007A75D5 /* CPLGModelAccount.m in Sources */,
@@ -7811,7 +7819,6 @@
 				332D829718C33F0A007A75D5 /* ChineseToPinyin.m in Sources */,
 				332D758218C33552007A75D5 /* CPPTModelGroupInfoList.m in Sources */,
 				332D752D18C33552007A75D5 /* XMPPMessage.m in Sources */,
-				743E85F918D74CEF0024D371 /* ContactsModel.m in Sources */,
 				332D837518C33F0B007A75D5 /* AAFilter.cpp in Sources */,
 				332D830B18C33F0B007A75D5 /* FXBlockViewAlert.m in Sources */,
 				332D82E418C33F0A007A75D5 /* SingleProfileView.m in Sources */,
@@ -7874,6 +7881,7 @@
 				332D74E818C33552007A75D5 /* CPDBModelPetInfo.m in Sources */,
 				19145F57191CDF3B008CE18C /* SDWebImageDownloaderOperation.m in Sources */,
 				332D750D18C33552007A75D5 /* CPOperationUpdateUserRelation.m in Sources */,
+				74EF7E091962C2BC00DCD5A3 /* ContactsViewController.m in Sources */,
 				7AC51BA118CDDA6900AD1A8C /* BBBaseTableViewCell.m in Sources */,
 				332D754018C33552007A75D5 /* XMPPRoom.xcdatamodeld in Sources */,
 				332D835A18C33F0B007A75D5 /* TimeDetector.m in Sources */,
