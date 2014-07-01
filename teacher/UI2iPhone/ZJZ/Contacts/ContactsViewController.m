@@ -138,13 +138,18 @@
 -(void)setTeachersListSection:(NSMutableArray *)teachersListSection
 {
     _teachersListSection = teachersListSection;
-    [self.contactsListTableview reloadData];
+    if (type == CONTACT_TYPE_TEACHER) {
+        [self.contactsListTableview reloadData];
+    }
+    
 }
 
 -(void)setParentsListSection:(NSMutableArray *)parentsListSection
 {
     _parentsListSection = parentsListSection;
-    [self.contactsListTableview reloadData];
+    if (type == CONTACT_TYPE_PARENT) {
+        [self.contactsListTableview reloadData];
+    }
 }
 
 -(void)setTeachers:(NSArray *)teachers
