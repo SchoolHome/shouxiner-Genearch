@@ -200,7 +200,7 @@
         }
         
         //[_messageListTableSearchBar setScopeBarBackgroundImage:[UIImage imageNamed:@"ZJZSearch"]];
-    }
+    }else studentListTableview.sectionIndexBackgroundColor = [UIColor clearColor];
     
     
     // Do any additional setup after loading the view.

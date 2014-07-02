@@ -55,10 +55,15 @@
 
         UISegmentedControl *segement =  [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"",@"", nil]];
         segement.tintColor = [UIColor clearColor];
+        [segement setWidth:0.1 forSegmentAtIndex:0];
+        [segement setWidth:0.1 forSegmentAtIndex:1];
+        segement.segmentedControlStyle = UISegmentedControlStyleBar;
         segement.selectedSegmentIndex = 0;
         [segement addTarget:self action:@selector(segementValueChanged:) forControlEvents:UIControlEventValueChanged];
         [segement setDividerImage:[UIImage imageNamed:@"ZJZ_Seg_Teacher"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+        [segement setDividerImage:[UIImage imageNamed:@"ZJZ_Seg_Teacher"] forLeftSegmentState:UIControlStateHighlighted rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
         [segement setDividerImage:[UIImage imageNamed:@"ZJZ_Seg_Parent"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+        [segement setDividerImage:[UIImage imageNamed:@"ZJZ_Seg_Parent"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
         self.navigationItem.titleView = segement;
         
         searchResultList = [[NSMutableArray alloc] init];
@@ -85,7 +90,7 @@
     _contactsListTableview.delegate = self;
     _contactsListTableview.dataSource = self;
     _contactsListTableview.messageGroupBaseTableViewdelegate = self;
-    _contactsListTableview.sectionIndexBackgroundColor = [UIColor clearColor];
+    //_contactsListTableview.sectionIndexBackgroundColor = [UIColor clearColor];
     _contactsListTableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:_contactsListTableview];
     
@@ -115,7 +120,7 @@
                 break;
             }
         }
-    }
+    }else _contactsListTableview.sectionIndexBackgroundColor = [UIColor clearColor];
      [self classifyData];
 }
 
