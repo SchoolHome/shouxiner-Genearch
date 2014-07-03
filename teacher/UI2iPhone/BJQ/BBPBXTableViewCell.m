@@ -42,6 +42,7 @@
         newLine.textAlignment = NSTextAlignmentLeft;
         newLine.textColor = [UIColor blackColor];
         newLine.font = [UIFont boldSystemFontOfSize:14.0f];
+        newLine.backgroundColor = [UIColor clearColor];
         [self addSubview:newLine];
         
         mark = [[UIImageView alloc] initWithFrame:CGRectMake(K_LEFT_PADDING, 40, 41, 41)];
@@ -266,6 +267,7 @@
             OHAttributedLabel *replay = [[OHAttributedLabel alloc] init];
             replay.frame = CGRectMake(per.width, per.height, 210, temp.height);
             replay.attributedText = str;
+            [replay setBackgroundColor:[UIColor clearColor]];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.backgroundColor = [UIColor clearColor];
             button.frame = replay.frame;
@@ -289,7 +291,7 @@
             imageHeight = 60;
         }
         self.userInteractionEnabled = YES;
-        self.relpyContentBack.frame = CGRectMake(K_LEFT_PADDING, kViewFoot(self.time)+10, 210+10, imageHeight);
+        self.relpyContentBack.frame = CGRectMake(K_LEFT_PADDING, kViewFoot(self.time)+10, 210+10, imageHeight+ [self.data.commentStr count] *1.3f);
         self.relpyContentBack.image = image2;
         self.relpyContentBack.userInteractionEnabled = YES;
     }else{

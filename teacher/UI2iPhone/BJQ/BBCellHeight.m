@@ -76,7 +76,7 @@
                 if (commentHeight < 60) {
                     commentHeight = 60;
                 }
-                commentHeight = commentHeight + [data.commentsStr sizeConstrainedToSize:CGSizeMake(210, CGFLOAT_MAX)].height+10;
+                commentHeight = commentHeight + [data.commentsStr sizeConstrainedToSize:CGSizeMake(210, CGFLOAT_MAX)].height+10 + [data.commentStr count] *1.3f;
             }
             
             if (commentHeight > 0 && commentHeight < 75) {
@@ -136,7 +136,7 @@
                 if (commentHeight < 60) {
                     commentHeight = 60;
                 }
-                commentHeight = commentHeight + [data.commentsStr sizeConstrainedToSize:CGSizeMake(210, CGFLOAT_MAX)].height+10;
+                commentHeight = commentHeight + [data.commentsStr sizeConstrainedToSize:CGSizeMake(210, CGFLOAT_MAX)].height+10 + [data.commentStr count] *1.3f;
             }
             
             if (commentHeight > 0 && commentHeight < 75) {
@@ -174,7 +174,7 @@
                 if (commentHeight < 60) {
                     commentHeight = 60;
                 }
-                commentHeight = commentHeight + [data.commentsStr sizeConstrainedToSize:CGSizeMake(210, CGFLOAT_MAX)].height+10;
+                commentHeight = commentHeight + [data.commentsStr sizeConstrainedToSize:CGSizeMake(210, CGFLOAT_MAX)].height+10 + [data.commentStr count] *1.3f;
             }
             
             if (commentHeight > 0 && commentHeight < 75) {
@@ -237,7 +237,7 @@
                     if (commentHeight < 60) {
                         commentHeight = 60;
                     }
-                    commentHeight = commentHeight + [data.commentsStr sizeConstrainedToSize:CGSizeMake(210, CGFLOAT_MAX)].height+10;
+                    commentHeight = commentHeight + [data.commentsStr sizeConstrainedToSize:CGSizeMake(210, CGFLOAT_MAX)].height+10 + [data.commentStr count] *1.3f;
                 }
                 
                 if (commentHeight > 0 && commentHeight < 75) {
