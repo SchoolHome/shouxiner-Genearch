@@ -546,6 +546,8 @@
                 picker.recipients = [NSArray arrayWithObject:self.phoneNumber];
                 picker.messageComposeDelegate =self;
                 
+                
+                
                 picker.body=[NSString stringWithFormat:@"'%@'邀请您下载手心网客户端，app.shouxiner.com",[CPUIModelManagement sharedInstance].uiPersonalInfo.nickName];
                 [self presentModalViewController:picker animated:YES];
             }else [self showProgressWithText:@"当前设备不支持短信" withDelayTime:2.5f];
