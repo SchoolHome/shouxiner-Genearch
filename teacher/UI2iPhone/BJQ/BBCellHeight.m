@@ -72,6 +72,9 @@
                 commentHeight = [data.praisesStr sizeWithFont:[UIFont systemFontOfSize:12]
                                             constrainedToSize:CGSizeMake(180.f, CGFLOAT_MAX)].height; // 固定高度
             }
+            if (commentHeight > 14.0f){
+                commentHeight += commentHeight/2.0f - 14.0f;
+            }
             if([data.commentsStr length]>0){
                 if (commentHeight < 60) {
                     commentHeight = 60;
@@ -132,6 +135,9 @@
                 commentHeight = [data.praisesStr sizeWithFont:[UIFont systemFontOfSize:12]
                                             constrainedToSize:CGSizeMake(180.f, CGFLOAT_MAX)].height; // 固定高度
             }
+            if (commentHeight > 14.0f){
+                commentHeight += commentHeight/2.0f - 14.0f;
+            }
             if([data.commentsStr length]>0){
                 if (commentHeight < 60) {
                     commentHeight = 60;
@@ -169,6 +175,9 @@
             if ([data.praisesStr length]>0) {
                 commentHeight = [data.praisesStr sizeWithFont:[UIFont systemFontOfSize:12]
                                             constrainedToSize:CGSizeMake(180.f, CGFLOAT_MAX)].height; // 固定高度
+            }
+            if (commentHeight > 14.0f){
+                commentHeight += commentHeight/2.0f - 14.0f;
             }
             if([data.commentsStr length]>0){
                 if (commentHeight < 60) {
@@ -232,6 +241,9 @@
                 if ([data.praisesStr length]>0) {
                     commentHeight = [data.praisesStr sizeWithFont:[UIFont systemFontOfSize:12]
                                                 constrainedToSize:CGSizeMake(180.f, CGFLOAT_MAX)].height; // 固定高度
+                }
+                if (commentHeight > 14.0f){
+                    commentHeight += commentHeight/2.0f - 14.0f;
                 }
                 if([data.commentsStr length]>0){
                     if (commentHeight < 60) {
