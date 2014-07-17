@@ -73,7 +73,7 @@
                                             constrainedToSize:CGSizeMake(180.f, CGFLOAT_MAX)].height; // 固定高度
             }
             if (commentHeight > 14.0f && commentHeight < 60.0f){
-                commentHeight += commentHeight - 14.0f;
+                commentHeight += commentHeight - 10.0f;
             }else if(commentHeight > 60.0f) {
                 commentHeight += 44.0f;
             }
@@ -138,7 +138,7 @@
                                             constrainedToSize:CGSizeMake(180.f, CGFLOAT_MAX)].height; // 固定高度
             }
             if (commentHeight > 14.0f && commentHeight < 60.0f){
-                commentHeight += commentHeight - 14.0f;
+                commentHeight += commentHeight - 10.0f;
             }else if(commentHeight > 60.0f) {
                 commentHeight += 44.0f;
             }
@@ -181,7 +181,7 @@
                                             constrainedToSize:CGSizeMake(180.f, CGFLOAT_MAX)].height; // 固定高度
             }
             if (commentHeight > 14.0f && commentHeight < 60.0f){
-                commentHeight += commentHeight - 14.0f;
+                commentHeight += commentHeight - 10.0f;
             }else if(commentHeight > 60.0f) {
                 commentHeight += 44.0f;
             }
@@ -249,7 +249,7 @@
                                                 constrainedToSize:CGSizeMake(180.f, CGFLOAT_MAX)].height; // 固定高度
                 }
                 if (commentHeight > 14.0f && commentHeight < 60.0f){
-                    commentHeight += commentHeight - 14.0f;
+                    commentHeight += commentHeight - 10.0f;
                 }else if(commentHeight > 60.0f) {
                     commentHeight += 44.0f;
                 }
