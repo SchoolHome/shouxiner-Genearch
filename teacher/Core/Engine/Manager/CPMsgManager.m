@@ -26,6 +26,7 @@
 
 #import "XMPPUserMessage.h"
 #import "XMPPGroupMessage.h"
+#import "XMPPNoticeMessage.h"
 #import "XMPPGroupMemberChangeMessage.h"
 #import "CPXmppEngine.h"
 #import "CPHttpEngine.h"
@@ -1567,6 +1568,11 @@
 {
     [[CPSystemEngine sharedInstance] receiveMsgByOperationWithMsgs:[NSArray arrayWithObject:msg]];
 }
+
+//2014-7
+-(void)receiveNoticeWithMsg:(NSObject *)notice{
+    [[CPSystemEngine sharedInstance] receiveNoticeMsgByOperationWithNotices:[NSArray arrayWithObject:notice]];
+}
 -(void)receiveGroupMsgWithmsg:(NSObject *)msg
 {
     [[CPSystemEngine sharedInstance] receiveMsgByOperationWithMsgs:[NSArray arrayWithObject:msg]];
@@ -2488,6 +2494,13 @@
     if (userMessage&&[userMessage isKindOfClass:[XMPPUserMessage class]])
     {
         [self receiveMsgWithmsg:userMessage];
+    }
+}
+
+//2014-7
+-(void) handleNoticeMessageReceived:(NSObject *)noticeMessage{
+    if (noticeMessage&&[noticeMessage isKindOfClass:[XMPPNoticeMessage class]]){
+        [self receiveNoticeWithMsg:noticeMessage];
     }
 }
 - (void)handleGroupMessageReceived:(NSObject *)groupMessage

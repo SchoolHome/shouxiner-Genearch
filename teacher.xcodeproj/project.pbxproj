@@ -96,6 +96,7 @@
 		193E594118D990A300DB1FF4 /* BBIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193E594018D990A300DB1FF4 /* BBIMViewController.m */; };
 		193E594418D990C300DB1FF4 /* BBSingleIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193E594318D990C300DB1FF4 /* BBSingleIMViewController.m */; };
 		193E594718D9A39B00DB1FF4 /* BBMutilIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193E594618D9A39B00DB1FF4 /* BBMutilIMViewController.m */; };
+		194EB5E7198F61FA005F7587 /* XMPPNoticeMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 194EB5E6198F61FA005F7587 /* XMPPNoticeMessage.m */; };
 		1950ADAF18D2B293002120C4 /* Login568.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1950ADAC18D2B293002120C4 /* Login568.jpg */; };
 		1950ADB318D2B72A002120C4 /* Login.png in Resources */ = {isa = PBXBuildFile; fileRef = 1950ADB118D2B72A002120C4 /* Login.png */; };
 		1950ADB418D2B72A002120C4 /* Login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1950ADB218D2B72A002120C4 /* Login@2x.png */; };
@@ -1392,6 +1393,8 @@
 		193E594318D990C300DB1FF4 /* BBSingleIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSingleIMViewController.m; sourceTree = "<group>"; };
 		193E594518D9A39B00DB1FF4 /* BBMutilIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMutilIMViewController.h; sourceTree = "<group>"; };
 		193E594618D9A39B00DB1FF4 /* BBMutilIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMutilIMViewController.m; sourceTree = "<group>"; };
+		194EB5E5198F61FA005F7587 /* XMPPNoticeMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPNoticeMessage.h; sourceTree = "<group>"; };
+		194EB5E6198F61FA005F7587 /* XMPPNoticeMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPNoticeMessage.m; sourceTree = "<group>"; };
 		1950ADAC18D2B293002120C4 /* Login568.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Login568.jpg; sourceTree = "<group>"; };
 		1950ADB118D2B72A002120C4 /* Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login.png; sourceTree = "<group>"; };
 		1950ADB218D2B72A002120C4 /* Login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Login@2x.png"; sourceTree = "<group>"; };
@@ -4062,6 +4065,8 @@
 		332D738418C33551007A75D5 /* CPExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				194EB5E5198F61FA005F7587 /* XMPPNoticeMessage.h */,
+				194EB5E6198F61FA005F7587 /* XMPPNoticeMessage.m */,
 				332D738518C33551007A75D5 /* XMPPBaseMessage.h */,
 				332D738618C33551007A75D5 /* XMPPBaseMessage.m */,
 				332D738718C33551007A75D5 /* XMPPGroupMemberChangeMessage.h */,
@@ -7403,6 +7408,7 @@
 				332D74FA18C33552007A75D5 /* CPOperationConverUpdate.m in Sources */,
 				7AC51BA318CDDA6900AD1A8C /* BBWorkTableViewCell.m in Sources */,
 				33771E3E18C9CD6900FB5002 /* PalmHTTPRequest.m in Sources */,
+				194EB5E7198F61FA005F7587 /* XMPPNoticeMessage.m in Sources */,
 				332D833F18C33F0B007A75D5 /* SingleLoveExpressionCell.m in Sources */,
 				332D74CC18C33552007A75D5 /* CPDAOContactWay.m in Sources */,
 				332D834118C33F0B007A75D5 /* SingleSmallExpressionCell.m in Sources */,
