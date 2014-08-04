@@ -194,6 +194,9 @@ typedef enum
 -(void)createConversationWithUsers:(NSArray *)userArray andMsgGroups:(NSArray *)msgGroups andType:(NSInteger)type;
 -(void)updateConversationWithPtModels:(NSArray *)ptModels;
 -(void)receiveMsgByOperationWithMsgs:(NSArray *)msgs;
+//2014-7
+-(void)receiveNoticeMsgByOperationWithNotices:(NSArray *)notices;
+//
 -(void)updateMsgSendResponseByOperationWithID:(NSNumber *)msgID andStatus:(NSNumber *)status;
 -(void)removeWillSendMsgsByOperationWithIDs:(NSArray *)msgIDs;
 -(void)createConversationByOperationWithObj:(NSObject *)obj;
@@ -273,7 +276,11 @@ typedef enum
 -(void)updateTagByResetPwdPostWithDic:(NSDictionary *)dicData;
 -(void)updateTagByTipsNewMsgWithDic:(NSDictionary *)dicData;
 -(void)updateTagByCheckUpdateWithDic:(NSDictionary *)dicData;
-
+//2014-7
+-(void)updateTagByNoticeMsg;
+-(void)updateTagByFriendMsgUnReadedCount;
+-(void)deleteNotifyMessageGroupByOperationWithObj:(NSObject *)obj;
+-(void)updateUnreadedMessageStatusChanged:(NSObject *)obj;
 -(void)updateTagForPetDataChange:(NSDictionary *)dict;
 /********************add relationDel KVO by wang shuo*************************/
 -(void)updateTagByUserRelationDel;

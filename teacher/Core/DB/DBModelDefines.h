@@ -24,5 +24,5 @@
 #import "CPDBModelContactWay.h"
 #import "CPDBModelPetInfo.h"
 #import "CPDBModelPetData.h"
-
+#import "CPDBModelNotifyMessage.h"
 #endif

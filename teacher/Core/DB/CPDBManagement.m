@@ -51,7 +51,9 @@
     userDAO = [[CPDAOUserInfo alloc] initWithStatusCode:initDbStatusCode];
     userInfoDAO = [[CPDAOUserInfoData alloc] initWithStatusCode:initDbStatusCode];
     userAdditionDAO = [[CPDAOUserInfoDataAddition alloc] initWithStatusCode:initDbStatusCode];
-    
+    //notifyMessage change
+    notifyMsgDAO = [[CPDAONotifyMessage alloc] initWithStatusCode:initDbStatusCode];
+    //
     petInfoDAO = [[CPDAOPetInfo alloc] initWithStatusCode:initDbStatusCode];
     
     [[[CPSystemEngine sharedInstance] dbManagement] findAllUserInfos];
@@ -1534,6 +1536,73 @@
     //temp++
     [self.petDatas setObject:dbPetData forKey:dbPetData.dataID];
     //temp--
+}
+//notifyMessage change
+-(NSNumber *)insertNotifyMessage:(CPDBModelNotifyMessage *)dbMessage
+{
+    CPLogInfo(@"-8- %@",dbMessage);
+    [self dbBeginTransaction];
+    CPLogInfo(@"-9- %@",dbMessage);
+    NSNumber *objID = [notifyMsgDAO insertMessage:dbMessage];
+    [self dbCommit];
+    
+    //insert urls
+    for (NSString *url in dbMessage.imageUrl) {
+        [self insertUrl:url andNotifyMessageID:objID];
+    }
+    //CPDBModelNotifyMessage *dbMsg = [notifyMsgDAO findMessageWithID:objID];
+    /*
+     if ([dbMessage.isReaded integerValue]==MSG_STATUS_IS_NOT_READ)
+     {
+     [self updateNewestMsgWithGroupID:dbMessage.msgGroupID andNewstTime:dbMsg.date];
+     }
+     if ([dbMessage.flag integerValue]==1)
+     {
+     [self updateUpdateTimeWithGroupID:dbMessage.msgGroupID andNewstTime:dbMsg.date];
+     }
+     //add db msg to cached
+     CPDBModelMessageGroup *dbMsgGroup = [self getExistMsgGroupWithGroupID:dbMsg.msgGroupID];
+     if (dbMsgGroup)
+     {
+     NSMutableArray *newMsgList = [NSMutableArray arrayWithArray:dbMsgGroup.msgList];
+     [newMsgList addObject:dbMsg];
+     [dbMsgGroup setMsgList:newMsgList];
+     }
+     */
+    return objID;
+}
+-(NSNumber *)insertUrl:(NSString *)url andNotifyMessageID : (NSNumber *)notifyMsgID
+{
+    [self dbBeginTransaction];
+    NSNumber *objID = [notifyMsgDAO insertUrlsWithUrl:url andNotifyMessageID:notifyMsgID];
+    [self dbCommit];
+    
+    return objID;
+}
+-(NSArray *)findAllNewNotiyfMessages
+{
+    NSLog(@"%@",[notifyMsgDAO findAllNewMessages]);
+    return   [notifyMsgDAO findAllNewMessages];
+}
+-(NSArray *)findNotifyMessagesOfCurrentFromJID:(NSString *)currentFromJID
+{
+    return [notifyMsgDAO findAllMessagesOfFromJID:currentFromJID];
+}
+-(NSInteger)allNotiUnreadedMessageCount
+{
+    return [notifyMsgDAO getAllNotiUnreadedMessageCount];
+}
+-(void)updateMessageReadedWithID:(NSString *)fromJID  obj:(NSNumber *)msgReaded
+{
+    [self dbBeginTransaction];
+    [notifyMsgDAO updateMessageReadedWithID:fromJID obj:msgReaded];
+    [self dbCommit];
+}
+-(void)deleteMsgGroupByFrom:(NSString *)fromJID
+{
+    [self dbBeginTransaction];
+    [notifyMsgDAO deleteMsgGroupByFrom:fromJID];
+    [self dbCommit];
 }
 
 @end

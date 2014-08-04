@@ -30,7 +30,9 @@
     CPDAOContact                    *contactDAO;
     CPDAOContactWay                 *contactWayDAO;
     CPDAOPetInfo                    *petInfoDAO;
-    
+    //notifyMessage change
+    CPDAONotifyMessage      *notifyMsgDAO;
+    //
     CPDataBaseManager               *dbManager;
     
     NSArray                         *contactArray_;
@@ -224,5 +226,13 @@
 - (void)updatePetDataWithID:(NSNumber *)objID obj:(CPDBModelPetData *)dbPetData;
 
 -(CPDBModelMessage *)findMessageWithResID:(NSNumber *)objID;
+//notifyMessage change
+-(NSNumber *)insertNotifyMessage:(CPDBModelNotifyMessage *)dbMessage;
 
+-(NSArray *)findAllNewNotiyfMessages;
+
+-(NSArray *)findNotifyMessagesOfCurrentFromJID:(NSString *)currentFromJID;
+-(NSInteger)allNotiUnreadedMessageCount;
+-(void)updateMessageReadedWithID:(NSString *)fromJID  obj:(NSNumber *)msgReaded;
+-(void)deleteMsgGroupByFrom:(NSString *)fromJID;
 @end
