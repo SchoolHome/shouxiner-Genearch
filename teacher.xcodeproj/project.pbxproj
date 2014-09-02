@@ -135,6 +135,11 @@
 		19A88A131917C9DE001AC9B0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A88A121917C9DE001AC9B0 /* Crashlytics.framework */; };
 		19AD08AF18F67F7900E8AA55 /* user_credit_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AD08AD18F67F7900E8AA55 /* user_credit_back.png */; };
 		19AD08B018F67F7900E8AA55 /* user_credit_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AD08AE18F67F7900E8AA55 /* user_credit_back@2x.png */; };
+		19B39C9A19AE3ADC00E8B186 /* SystemOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B39C9919AE3ADC00E8B186 /* SystemOperation.m */; };
+		19B39CA319AE3AEE00E8B186 /* ADDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B39C9C19AE3AEE00E8B186 /* ADDetailViewController.m */; };
+		19B39CA419AE3AEE00E8B186 /* ADImageview.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B39C9E19AE3AEE00E8B186 /* ADImageview.m */; };
+		19B39CA519AE3AEE00E8B186 /* BBScrollViewInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B39CA019AE3AEE00E8B186 /* BBScrollViewInfoModel.m */; };
+		19B39CA619AE3AEE00E8B186 /* BBScrollViewWithPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B39CA219AE3AEE00E8B186 /* BBScrollViewWithPageControl.m */; };
 		19C08C2A193F1BAA00C548CD /* BJQBiaoXian.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C12193F1BAA00C548CD /* BJQBiaoXian.png */; };
 		19C08C2B193F1BAA00C548CD /* BJQBiaoXian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C13193F1BAA00C548CD /* BJQBiaoXian@2x.png */; };
 		19C08C2C193F1BAA00C548CD /* BJQBiaoXianRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C14193F1BAA00C548CD /* BJQBiaoXianRight.png */; };
@@ -1447,6 +1452,16 @@
 		19A88A121917C9DE001AC9B0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		19AD08AD18F67F7900E8AA55 /* user_credit_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_credit_back.png; sourceTree = "<group>"; };
 		19AD08AE18F67F7900E8AA55 /* user_credit_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_credit_back@2x.png"; sourceTree = "<group>"; };
+		19B39C9819AE3ADC00E8B186 /* SystemOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemOperation.h; sourceTree = "<group>"; };
+		19B39C9919AE3ADC00E8B186 /* SystemOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemOperation.m; sourceTree = "<group>"; };
+		19B39C9B19AE3AEE00E8B186 /* ADDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDetailViewController.h; sourceTree = "<group>"; };
+		19B39C9C19AE3AEE00E8B186 /* ADDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADDetailViewController.m; sourceTree = "<group>"; };
+		19B39C9D19AE3AEE00E8B186 /* ADImageview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADImageview.h; sourceTree = "<group>"; };
+		19B39C9E19AE3AEE00E8B186 /* ADImageview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADImageview.m; sourceTree = "<group>"; };
+		19B39C9F19AE3AEE00E8B186 /* BBScrollViewInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBScrollViewInfoModel.h; sourceTree = "<group>"; };
+		19B39CA019AE3AEE00E8B186 /* BBScrollViewInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBScrollViewInfoModel.m; sourceTree = "<group>"; };
+		19B39CA119AE3AEE00E8B186 /* BBScrollViewWithPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBScrollViewWithPageControl.h; sourceTree = "<group>"; };
+		19B39CA219AE3AEE00E8B186 /* BBScrollViewWithPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBScrollViewWithPageControl.m; sourceTree = "<group>"; };
 		19C08C12193F1BAA00C548CD /* BJQBiaoXian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BJQBiaoXian.png; path = BJQ2/BJQBiaoXian.png; sourceTree = "<group>"; };
 		19C08C13193F1BAA00C548CD /* BJQBiaoXian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BJQBiaoXian@2x.png"; path = "BJQ2/BJQBiaoXian@2x.png"; sourceTree = "<group>"; };
 		19C08C14193F1BAA00C548CD /* BJQBiaoXianRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BJQBiaoXianRight.png; path = BJQ2/BJQBiaoXianRight.png; sourceTree = "<group>"; };
@@ -3356,6 +3371,14 @@
 		1924473B1941EFEC0077D5DB /* Guid */ = {
 			isa = PBXGroup;
 			children = (
+				19B39C9B19AE3AEE00E8B186 /* ADDetailViewController.h */,
+				19B39C9C19AE3AEE00E8B186 /* ADDetailViewController.m */,
+				19B39C9D19AE3AEE00E8B186 /* ADImageview.h */,
+				19B39C9E19AE3AEE00E8B186 /* ADImageview.m */,
+				19B39C9F19AE3AEE00E8B186 /* BBScrollViewInfoModel.h */,
+				19B39CA019AE3AEE00E8B186 /* BBScrollViewInfoModel.m */,
+				19B39CA119AE3AEE00E8B186 /* BBScrollViewWithPageControl.h */,
+				19B39CA219AE3AEE00E8B186 /* BBScrollViewWithPageControl.m */,
 				1924473C1941EFEC0077D5DB /* GuidViewController.h */,
 				1924473D1941EFEC0077D5DB /* GuidViewController.m */,
 			);
@@ -6155,6 +6178,8 @@
 		33771E2F18C9CC9D00FB5002 /* OP */ = {
 			isa = PBXGroup;
 			children = (
+				19B39C9819AE3ADC00E8B186 /* SystemOperation.h */,
+				19B39C9919AE3ADC00E8B186 /* SystemOperation.m */,
 				1915BAEF18D5C04A00098CBF /* UserProfileOperation.h */,
 				1915BAF018D5C04A00098CBF /* UserProfileOperation.m */,
 				33771E3918C9CD0400FB5002 /* PalmOperation.h */,
@@ -7547,6 +7572,7 @@
 				332D75AE18C33552007A75D5 /* CoreUtils.m in Sources */,
 				332D753718C33552007A75D5 /* XMPPMessage+SYS.m in Sources */,
 				332D82C418C33F0A007A75D5 /* SVGeocoder.m in Sources */,
+				19B39CA519AE3AEE00E8B186 /* BBScrollViewInfoModel.m in Sources */,
 				332D835918C33F0B007A75D5 /* TaggingYear.m in Sources */,
 				1915BAF118D5C04A00098CBF /* UserProfileOperation.m in Sources */,
 				332D838B18C33F0B007A75D5 /* QuadraticBezierCurve.m in Sources */,
@@ -7680,6 +7706,7 @@
 				332D836618C33F0B007A75D5 /* CocosDenshion.m in Sources */,
 				332D836918C33F0B007A75D5 /* ColorUtil.m in Sources */,
 				332D74D718C33552007A75D5 /* CPDAOUserInfoDataAddition.m in Sources */,
+				19B39CA319AE3AEE00E8B186 /* ADDetailViewController.m in Sources */,
 				332D756918C33552007A75D5 /* DDTTYLogger.m in Sources */,
 				745D7687193F68A200AF666E /* BBRecommendedRangeViewController.m in Sources */,
 				332D834D18C33F0B007A75D5 /* AlarmClockHelper.m in Sources */,
@@ -7710,6 +7737,7 @@
 				332D758418C33552007A75D5 /* CPPTModelInviteFriendResult.m in Sources */,
 				332D759E18C33552007A75D5 /* CPUIModelMessageGroupMember.m in Sources */,
 				19145F52191CDF3B008CE18C /* NSData+GIF.m in Sources */,
+				19B39CA419AE3AEE00E8B186 /* ADImageview.m in Sources */,
 				19145F5E191CDF3B008CE18C /* UIImage+WebP.m in Sources */,
 				332D831C18C33F0B007A75D5 /* FXShakePanel.m in Sources */,
 				332D755218C33552007A75D5 /* XMPPTransports.m in Sources */,
@@ -7918,6 +7946,7 @@
 				332D753318C33552007A75D5 /* XMPPGroupMemberChangeMessage.m in Sources */,
 				7A59194C18D6BDA500C03DED /* BBSBSViewController.m in Sources */,
 				332D82E018C33F0A007A75D5 /* RecentView.m in Sources */,
+				19B39CA619AE3AEE00E8B186 /* BBScrollViewWithPageControl.m in Sources */,
 				332D836B18C33F0B007A75D5 /* FXStringUtil.m in Sources */,
 				332D74F818C33552007A75D5 /* CPOperationConverInit.m in Sources */,
 				7A6B776418ED4DA20000DBFE /* BBNotifyModel.m in Sources */,
@@ -7941,6 +7970,7 @@
 				7A863C7618EB2C000090C430 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				745F0AB4198F58A1004BC9D4 /* BBZJZViewController.m in Sources */,
 				332D835818C33F0B007A75D5 /* TaggingWeekDay.m in Sources */,
+				19B39C9A19AE3ADC00E8B186 /* SystemOperation.m in Sources */,
 				332D756F18C33552007A75D5 /* DDXMLElement.m in Sources */,
 				332D82AA18C33F0A007A75D5 /* AFHeadItem.m in Sources */,
 				332D750218C33552007A75D5 /* CPOperationMsgSendResponse.m in Sources */,
@@ -8116,8 +8146,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -8139,7 +8169,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "99736D92-6F96-4D05-A3C3-A99ED1A68585";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -8151,8 +8181,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/teacher/UI2iPhone",
@@ -8174,7 +8204,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "99736D92-6F96-4D05-A3C3-A99ED1A68585";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
