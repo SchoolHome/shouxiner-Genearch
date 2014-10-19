@@ -91,6 +91,12 @@
                         BBTopicModel *model = [self.allTopicList objectAtIndex:0];
                         if (![model.awards isEqual:[NSNull null]]) {
                             point.text = [NSString stringWithFormat:@"宝贝荣誉:%@",model.awards];
+                            NSString *txt = [NSString stringWithFormat:@"您有 %@ 积分",model.awards];
+                            NSMutableAttributedString* attrStr = [NSMutableAttributedString attributedStringWithString:txt];
+                            [attrStr setTextColor:[UIColor grayColor]];
+                            [attrStr setTextColor:[UIColor orangeColor] range:[txt rangeOfString:[NSString stringWithFormat:@"%@",model.awards]]];
+                            [attrStr setTextAlignment:kCTTextAlignmentCenter lineBreakMode:kCTLineBreakByWordWrapping range:NSMakeRange(0, txt.length)];
+                            point.attributedText = attrStr;
                         }else
                         {
                             point.text = [NSString stringWithFormat:@"宝贝荣誉:0"];
@@ -359,7 +365,7 @@
     
     self.view.backgroundColor = [UIColor brownColor];
 
-    bjqTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -64, 320, self.view.bounds.size.height-20) style:UITableViewStylePlain];
+    bjqTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0.0f, 320, self.screenHeight-64.0f-48.0f) style:UITableViewStylePlain];
     bjqTableView.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
     //bjqTableView.separatorColor = [UIColor clearColor];
     //bjqTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -398,40 +404,35 @@
     }];
     
     
-    UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 210+20)];
+    UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
     //head.backgroundColor = [UIColor whiteColor];
     head.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
     head.userInteractionEnabled = YES;
     
-    UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 214)];
+    UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
     //headImage.backgroundColor = [UIColor orangeColor];
     headImage.image = [UIImage imageNamed:@"BBTopBGNew"];
     [head addSubview:headImage];
     
-    point = [[UILabel alloc] initWithFrame:CGRectMake(0, 190, 320, 23)];
-    point.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
-    [head addSubview:point];
-    point.text = @"宝贝荣誉:0 ";
+    UIImageView *scoreImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BBScoreBG"]];
+    scoreImageView.frame = CGRectMake(320.0f - 108.0f, 24.0f, 108.0f, 35.0f);
+    scoreImageView.userInteractionEnabled = YES;
+    [head addSubview:scoreImageView];
+    
+    point = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(0, 9, 108, 35)];
+    point.backgroundColor = [UIColor clearColor];
+    [scoreImageView addSubview:point];
+    point.text = @"宝贝荣誉:0";
     point.textAlignment = NSTextAlignmentCenter;
-    point.font = [UIFont boldSystemFontOfSize:12];
-    point.textColor = [UIColor whiteColor];
+    point.font = [UIFont boldSystemFontOfSize:11];
+    point.textColor = [UIColor grayColor];
     point.userInteractionEnabled = YES;
-    
-    UILabel *pointDetail = [[UILabel alloc] initWithFrame:CGRectMake(280, 0, 40, 23)];
-    pointDetail.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
-    [point addSubview:pointDetail];
-    pointDetail.text = @"详情>";
-    pointDetail.textAlignment = NSTextAlignmentCenter;
-    pointDetail.font = [UIFont boldSystemFontOfSize:12];
-    pointDetail.textColor = [UIColor whiteColor];
-    pointDetail.userInteractionEnabled = YES;
-    
     
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer  alloc] initWithTarget:self action:@selector(pointTaped:)];
     [point addGestureRecognizer:gesture];
     
     
-    avatar = [[EGOImageView alloc] initWithFrame:CGRectMake(22, 145, 80, 80)];
+    avatar = [[EGOImageView alloc] initWithFrame:CGRectMake(18, 80, 80, 80)];
     avatar.backgroundColor = [UIColor grayColor];
     //avatar.image = [UIImage imageNamed:@"girl"];
     

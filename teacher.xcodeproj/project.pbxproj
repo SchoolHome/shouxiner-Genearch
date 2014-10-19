@@ -236,6 +236,10 @@
 		197FCF9F18F41D5000EE751B /* navBarBg44.png in Resources */ = {isa = PBXBuildFile; fileRef = 197FCF9D18F41D5000EE751B /* navBarBg44.png */; };
 		197FCFA018F41D5000EE751B /* navBarBg44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197FCF9E18F41D5000EE751B /* navBarBg44@2x.png */; };
 		1997CF6318D6A87800A839F7 /* GroupOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1997CF6218D6A87800A839F7 /* GroupOperation.m */; };
+		19A3E55319F3AD2500AFD251 /* BBScoreBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A3E54F19F3AD2500AFD251 /* BBScoreBG.png */; };
+		19A3E55419F3AD2500AFD251 /* BBScoreBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A3E55019F3AD2500AFD251 /* BBScoreBG@2x.png */; };
+		19A3E55519F3AD2500AFD251 /* BBTopBGNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A3E55119F3AD2500AFD251 /* BBTopBGNew.png */; };
+		19A3E55619F3AD2500AFD251 /* BBTopBGNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A3E55219F3AD2500AFD251 /* BBTopBGNew@2x.png */; };
 		19A83D4618D34C8900441FDE /* LoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A83D4218D34C8900441FDE /* LoginButton.png */; };
 		19A83D4718D34C8900441FDE /* LoginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A83D4318D34C8900441FDE /* LoginButton@2x.png */; };
 		19A83D4818D34C8900441FDE /* LoginButtonPress.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A83D4418D34C8900441FDE /* LoginButtonPress.png */; };
@@ -1661,6 +1665,10 @@
 		198F307818FE551E0091D550 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		1997CF6118D6A87800A839F7 /* GroupOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupOperation.h; sourceTree = "<group>"; };
 		1997CF6218D6A87800A839F7 /* GroupOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupOperation.m; sourceTree = "<group>"; };
+		19A3E54F19F3AD2500AFD251 /* BBScoreBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBScoreBG.png; sourceTree = "<group>"; };
+		19A3E55019F3AD2500AFD251 /* BBScoreBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBScoreBG@2x.png"; sourceTree = "<group>"; };
+		19A3E55119F3AD2500AFD251 /* BBTopBGNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBTopBGNew.png; sourceTree = "<group>"; };
+		19A3E55219F3AD2500AFD251 /* BBTopBGNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBTopBGNew@2x.png"; sourceTree = "<group>"; };
 		19A83D4218D34C8900441FDE /* LoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButton.png; sourceTree = "<group>"; };
 		19A83D4318D34C8900441FDE /* LoginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginButton@2x.png"; sourceTree = "<group>"; };
 		19A83D4418D34C8900441FDE /* LoginButtonPress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButtonPress.png; sourceTree = "<group>"; };
@@ -3660,6 +3668,10 @@
 		193FA7BD19F0A2E600874F1E /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				19A3E54F19F3AD2500AFD251 /* BBScoreBG.png */,
+				19A3E55019F3AD2500AFD251 /* BBScoreBG@2x.png */,
+				19A3E55119F3AD2500AFD251 /* BBTopBGNew.png */,
+				19A3E55219F3AD2500AFD251 /* BBTopBGNew@2x.png */,
 				193FA7BE19F0A2E600874F1E /* 中间内容 */,
 				193FA7E519F0A2E600874F1E /* 底部 */,
 				193FA7FC19F0A2E600874F1E /* 标题栏 */,
@@ -7237,6 +7249,7 @@
 				332D7F3718C33F0A007A75D5 /* btn_on_close_hover@2x.png in Resources */,
 				332D824018C33F0A007A75D5 /* btn_index_about_press@2x.png in Resources */,
 				332D825318C33F0A007A75D5 /* profile_icon_arrow@2x.png in Resources */,
+				19A3E55319F3AD2500AFD251 /* BBScoreBG.png in Resources */,
 				19C08C2C193F1BAA00C548CD /* BJQBiaoXianRight.png in Resources */,
 				7AA5002618DF168600FC59C4 /* BBPoint.png in Resources */,
 				332D82B018C33F0A007A75D5 /* topredbar_btn_01_nor@2x.png in Resources */,
@@ -7382,6 +7395,7 @@
 				332D7EC618C33F0A007A75D5 /* addressbook_titlebar@2x.png in Resources */,
 				332D7ED318C33F0A007A75D5 /* btn_small_hover.png in Resources */,
 				332D7ECD18C33F0A007A75D5 /* btn_add_pink.png in Resources */,
+				19A3E55519F3AD2500AFD251 /* BBTopBGNew.png in Resources */,
 				19C08C34193F1BAA00C548CD /* BJQHaveNotZanButton.png in Resources */,
 				193FA86019F0A2E600874F1E /* me_gray.png in Resources */,
 				19C08C37193F1BAA00C548CD /* BJQMoreBg@2x.png in Resources */,
@@ -7491,6 +7505,7 @@
 				332D825018C33F0A007A75D5 /* profile_btn_red_nor@2x.png in Resources */,
 				0433AD1718E53A8800BDF9D5 /* keyboard_sound_hover.png in Resources */,
 				19C08C38193F1BAA00C548CD /* BJQMoreButton.png in Resources */,
+				19A3E55419F3AD2500AFD251 /* BBScoreBG@2x.png in Resources */,
 				193FA88B19F0A2E600874F1E /* enter@2x.png in Resources */,
 				332D7F8C18C33F0A007A75D5 /* btn_xxpress_pet@2x.png in Resources */,
 				332D7F7118C33F0A007A75D5 /* btn_im_mofabiaoqing_white@2x.png in Resources */,
@@ -7518,6 +7533,7 @@
 				19C08C3A193F1BAA00C548CD /* BJQPingLunButton.png in Resources */,
 				332D7F9B18C33F0A007A75D5 /* headpic_38_38@2x.png in Resources */,
 				332D7F7E18C33F0A007A75D5 /* btn_login_sign_okpress@2x.png in Resources */,
+				19A3E55619F3AD2500AFD251 /* BBTopBGNew@2x.png in Resources */,
 				332D822718C33F0A007A75D5 /* bt_im_profile_backpress@2x.png in Resources */,
 				74A4E5F618DFE8B8000F79E6 /* ZJZSendSMS@2x.png in Resources */,
 				332D822918C33F0A007A75D5 /* bt_im_profile_changebackgroundpress@2x.png in Resources */,
@@ -8642,8 +8658,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yuan gao (5PS549TGY5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yuan gao (5PS549TGY5)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -8665,7 +8681,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8ADA4211-F5E2-4B2C-BD42-E4012B0B901C";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -8677,8 +8693,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yuan gao (5PS549TGY5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yuan gao (5PS549TGY5)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/teacher/UI2iPhone",
@@ -8700,7 +8716,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8ADA4211-F5E2-4B2C-BD42-E4012B0B901C";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
