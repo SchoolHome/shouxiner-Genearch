@@ -9,6 +9,9 @@
 #import "BBBaseTableViewCell.h"
 #import "CoreUtils.h"
 
+@interface BBBaseTableViewCell ()
+
+@end
 
 @implementation BBBaseTableViewCell
 
@@ -51,7 +54,6 @@
 }
 
 
-
 -(NSString *)timeStringFromNumber:(NSNumber *) number{
     
     NSTimeInterval  t1 = [number longLongValue];
@@ -84,7 +86,6 @@
     if (self) {
         // Initialization code
         
-        
         self.contentView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
         
         _icon = [[EGOImageView alloc] initWithFrame:CGRectMake(5, 10, 50, 50)];
@@ -97,16 +98,13 @@
         roundedLayer.borderWidth = 0;
         roundedLayer.borderColor = [[UIColor grayColor] CGColor];
         
-        _line = [[UIImageView alloc] initWithFrame:CGRectMake(60, 0, 8, self.bounds.size.height)];
-        //_line.backgroundColor = [UIColor lightGrayColor];
-        _line.image = [UIImage imageNamed:@"BBLine"];
-        //_line.alpha = 0.5;
-        [self addSubview:_line];
-        
-        UIImageView *point = [[UIImageView alloc] initWithFrame:CGRectMake(60-3.5, 35, 15, 13)];
-        point.image = [UIImage imageNamed:@"BBPoint"];
-        [self addSubview:point];
-        //point.backgroundColor = [UIColor grayColor];
+//        _line = [[UIImageView alloc] initWithFrame:CGRectMake(60, 0, 8, self.bounds.size.height)];
+//        _line.image = [UIImage imageNamed:@"BBLine"];
+//        [self addSubview:_line];
+//        
+//        UIImageView *point = [[UIImageView alloc] initWithFrame:CGRectMake(60-3.5, 35, 15, 13)];
+//        point.image = [UIImage imageNamed:@"BBPoint"];
+//        [self addSubview:point];
         
         _time = [[UILabel alloc] init];
         _time.textColor = [UIColor lightGrayColor];
@@ -114,31 +112,17 @@
         [self addSubview:_time];
         _time.backgroundColor = [UIColor clearColor];
         
-        _like = [[UIButton alloc] init];
-        [self addSubview:_like];
-        [_like setBackgroundImage:[UIImage imageNamed:@"BBZan"] forState:UIControlStateNormal];
-        [_like setBackgroundImage:[UIImage imageNamed:@"BBZanPress"] forState:UIControlStateHighlighted];
+        self.moreButton = [[UIButton alloc] init];
+        [self addSubview:self.moreButton];
+        [self.moreButton setBackgroundImage:[UIImage imageNamed:@"BJQMoreButton"] forState:UIControlStateNormal];
+        [self.moreButton setBackgroundImage:[UIImage imageNamed:@"BJQMoreButton"] forState:UIControlStateHighlighted];
+        [self.moreButton addTarget:self action:@selector(moreTaped:) forControlEvents:UIControlEventTouchUpInside];
         
-        [_like addTarget:self action:@selector(likeTaped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        _reply = [[UIButton alloc] init];
-        [self addSubview:_reply];
-        [_reply setBackgroundImage:[UIImage imageNamed:@"BBComment"] forState:UIControlStateNormal];
-        [_reply setBackgroundImage:[UIImage imageNamed:@"BBCommentPress"] forState:UIControlStateHighlighted];
-        
-        [_reply addTarget:self action:@selector(replyTaped:) forControlEvents:UIControlEventTouchUpInside];
-        
-//        self.moreButton = [[UIButton alloc] init];
-//        [self addSubview:self.moreButton];
-//        [self.moreButton setBackgroundImage:[UIImage imageNamed:@"BJQMoreButton"] forState:UIControlStateNormal];
-//        [self.moreButton setBackgroundImage:[UIImage imageNamed:@"BJQMoreButton"] forState:UIControlStateHighlighted];
-//        [self.moreButton addTarget:self action:@selector(moreTaped:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        self.recommendButton = [[UIButton alloc] init];
-//        [self addSubview:self.recommendButton];
-//        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateNormal];
-//        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateHighlighted];
-//        [self.recommendButton addTarget:self action:@selector(recommendTaped:) forControlEvents:UIControlEventTouchUpInside];
+        self.recommendButton = [[UIButton alloc] init];
+        [self addSubview:self.recommendButton];
+        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateNormal];
+        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateHighlighted];
+        [self.recommendButton addTarget:self action:@selector(recommendTaped:) forControlEvents:UIControlEventTouchUpInside];
         
         _relpyContentBack = [[UIImageView alloc] init];
         [self addSubview:_relpyContentBack];
@@ -156,20 +140,14 @@
         _likeContent.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
         _likeContent.font = [UIFont systemFontOfSize:12];
         _likeContent.numberOfLines = 0;
-        [self addSubview:_likeContent];
         _likeContent.backgroundColor = [UIColor clearColor];
-        
-//        _relpyContent = [[OHAttributedLabel alloc] init];
-//        [self addSubview:_relpyContent];
-//        _relpyContent.backgroundColor = [UIColor clearColor];
-        
     }
     return self;
 }
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    _line.frame = CGRectMake(60, 0, 8, self.bounds.size.height);
+//    _line.frame = CGRectMake(60, 0, 8, self.bounds.size.height);
 
 }
 
@@ -181,7 +159,6 @@
 
 -(void)setData:(BBTopicModel *)data{
     _data = data;
-    //_icon.image = [UIImage imageNamed:@"girl"];
     
     if (_data.author_avatar) {
         _icon.imageURL = [NSURL URLWithString:_data.author_avatar];

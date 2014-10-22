@@ -4,6 +4,7 @@
 #import "BBWorkTableViewCell.h"
 #import "BBImageTableViewCell.h"
 #import "BBFZYViewController.h"
+#import "BBNoticeTableViewCell.h"
 
 #import "BBBJDropdownView.h"
 #import "BBFSDropdownView.h"
@@ -31,7 +32,9 @@ BBBJDropdownViewDelegate,
 BBFSDropdownViewDelegate,
 BBBaseTableViewCellDelegate,
 BBInputViewDelegate,
-UserMessageImageDelegate>
+UserMessageImageDelegate,
+UIImagePickerControllerDelegate,
+UINavigationControllerDelegate>
 {
     UIButton *titleButton;
     EGOImageView *avatar;
@@ -52,9 +55,7 @@ UserMessageImageDelegate>
 @property(nonatomic,strong) BBGroupModel *currentGroup;
 @property(nonatomic) TopicLoadStatus loadStatus;
 @property(nonatomic,strong) NSMutableArray *allTopicList;
-
 @property BOOL isLoading;
-
 @property (nonatomic,strong) NSString *webUrl;
 @property (nonatomic,strong) NSString *imageUrl;
 @end

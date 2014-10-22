@@ -2,6 +2,7 @@
 #import "BBBJQViewController.h"
 #import "BBXXXViewController.h"
 #import "BBJFViewController.h"
+#import "BBRecommendedRangeViewController.h"
 
 #import "BBCellHeight.h"
 #import "BBBJQManager.h"
@@ -18,7 +19,12 @@
 #import "ADDetailViewController.h"
 #import "ColorUtil.h"
 
+#import "VideoConfirmViewController.h"
+@class BBWSPViewController;
 @interface BBBJQViewController ()<ADImageviewDelegate>
+{
+    VIDEO_CHOOSEN_TYPE chooseType;
+}
 @property (nonatomic,strong) BBTopicModel *tempTopModel;
 @property (nonatomic,strong) BBTopicModel *tempTopModelInput;
 @property (nonatomic,copy) NSString *inputText;
@@ -26,8 +32,9 @@
 @property (nonatomic,strong) MessagePictrueViewController *messagePictrueController;
 @property (nonatomic,strong) BBCommentModel *model;
 @property (nonatomic,strong) BBBaseTableViewCell *tempCell;
-@property (nonatomic,strong) NSString *contentText;
 @property (nonatomic,strong) UIImageView *tempMoreImage;
+@property (nonatomic,strong) NSString *contentText;
+@property (nonatomic,strong) BBTopicModel *recommendUsed;
 @end
 
 @implementation BBBJQViewController
@@ -88,22 +95,6 @@
                     
                     [bjqTableView.pullToRefreshView stopAnimating];
                     
-                    if (self.allTopicList.count > 0) {
-                        BBTopicModel *model = [self.allTopicList objectAtIndex:0];
-                        if (![model.awards isEqual:[NSNull null]]) {
-                            NSString *txt = [NSString stringWithFormat:@"您有 %@ 手心币",model.awards];
-                            NSMutableAttributedString* attrStr = [NSMutableAttributedString attributedStringWithString:txt];
-                            [attrStr setTextColor:[UIColor grayColor]];
-                            [attrStr setTextColor:[UIColor orangeColor] range:[txt rangeOfString:[NSString stringWithFormat:@"%@",model.awards]]];
-                            [attrStr setTextAlignment:kCTTextAlignmentCenter lineBreakMode:kCTLineBreakByWordWrapping range:NSMakeRange(0, txt.length)];
-                            point.attributedText = attrStr;
-                        }else
-                        {
-                            point.text = [NSString stringWithFormat:@"您有 0 手心币"];
-                        }
-                        
-                    }
-                    
                     NSDate *now = [CoreUtils convertDateToLocalTime:[NSDate date]];
                     NSString *date = [NSString stringWithFormat:@"最近更新: %@",[[now description] substringToIndex:16]];
                     [bjqTableView.pullToRefreshView setSubtitle:date forState:SVPullToRefreshStateAll];
@@ -148,10 +139,14 @@
     
     if ([@"userCredits" isEqualToString:keyPath])  // 刷新积分
     {
-//        NSDictionary *dict = [PalmUIManagement sharedInstance].userCredits;
-//        NSNumber *credits = dict[@"data"][@"credits"];
-//        
-//        point.text = [NSString stringWithFormat:@"宝贝荣誉:%d",[credits intValue]];
+        NSDictionary *dict = [PalmUIManagement sharedInstance].userCredits;
+        NSNumber *credits = dict[@"data"][@"credits"];
+        NSString *txt = [NSString stringWithFormat:@"您有 %d 积分",[credits intValue]];
+        NSMutableAttributedString* attrStr = [NSMutableAttributedString attributedStringWithString:txt];
+        [attrStr setTextColor:[UIColor grayColor]];
+        [attrStr setTextColor:[UIColor orangeColor] range:[txt rangeOfString:[NSString stringWithFormat:@"%d",[credits intValue]]]];
+        [attrStr setTextAlignment:kCTTextAlignmentCenter lineBreakMode:kCTLineBreakByWordWrapping range:NSMakeRange(0, txt.length)];
+        point.attributedText = attrStr;
     }
     
     if ([@"praiseResult" isEqualToString:keyPath])  // 赞
@@ -284,8 +279,10 @@
     
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"praiseResult" options:0 context:NULL];
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"commentResult" options:0 context:NULL];
+    
     // 广告
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"advWithGroupResult" options:0 context:NULL];
+    
 }
 
 -(void)removeObservers{
@@ -311,8 +308,6 @@
 }
 
 -(void)addNewTaped:(id)sender{
-
-    
     [[UIApplication sharedApplication].keyWindow addSubview:fsDropdownView];
     [fsDropdownView show];
 }
@@ -339,15 +334,12 @@
 }
 
 -(void)pointTaped:(UITapGestureRecognizer *)gesture{
-//#ifdef IS_TEACHER
+#ifdef IS_TEACHER
     BBJFViewController *jf = [[BBJFViewController alloc] init];
     jf.hidesBottomBarWhenPushed = YES;
-    NSString *urlStr = [NSString stringWithFormat:@"http://www.shouxiner.com/webview/group_awards/%d",[self.currentGroup.groupid intValue]];
-   
-    jf.url = [NSURL URLWithString:urlStr];
-    
+    jf.url = [NSURL URLWithString:@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"];
     [self.navigationController pushViewController:jf animated:YES];
-//#endif
+#endif
 }
 
 - (void)viewDidLoad
@@ -359,7 +351,6 @@
     // 不要移除，用户其他页面更新头像后，此页面同步更新
     [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"uiPersonalInfoTag" options:0 context:NULL];
     
-
     notifyCount = 0;
     
     hasNew = YES;
@@ -373,8 +364,10 @@
     [bjqTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     bjqTableView.dataSource = self;
     bjqTableView.delegate = self;
+
     [self.view addSubview:bjqTableView];
     [bjqTableView reloadData];
+    
     
     __weak BBBJQViewController *weakSelf = self;
     // 刷新
@@ -420,10 +413,11 @@
     scoreImageView.userInteractionEnabled = YES;
     [head addSubview:scoreImageView];
     
+    
     point = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(0, 9, 108, 35)];
     point.backgroundColor = [UIColor clearColor];
     [scoreImageView addSubview:point];
-    point.text = @"您有 0 手心币";
+    point.text = @"您有 0 积分";
     point.textAlignment = NSTextAlignmentCenter;
     point.font = [UIFont boldSystemFontOfSize:11];
     point.textColor = [UIColor grayColor];
@@ -431,23 +425,22 @@
     
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer  alloc] initWithTarget:self action:@selector(pointTaped:)];
     [point addGestureRecognizer:gesture];
-    
     bjqTableView.tableHeaderView = head;
     
-//#ifdef IS_TEACHER
+#ifdef IS_TEACHER
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addButton setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
     [addButton setBackgroundImage:[UIImage imageNamed:@"BBAdd"] forState:UIControlStateNormal];
     [addButton addTarget:self action:@selector(addNewTaped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
-//#else
-//    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [shareButton setFrame:CGRectMake(0.f, 7.f, 40.f, 30.f)];
-//    [shareButton setTitle:@"分享" forState:UIControlStateNormal];
-//    [shareButton addTarget:self action:@selector(shareTaped:) forControlEvents:UIControlEventTouchUpInside];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-//#endif
-//
+#else
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shareButton setFrame:CGRectMake(0.f, 7.f, 40.f, 30.f)];
+    [shareButton setTitle:@"分享" forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(shareTaped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+#endif
+//    
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BBAdd"] style:UIBarButtonItemStylePlain  target:self action:@selector(addNewTaped:)];
     
     titleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 125, 44)];
@@ -474,7 +467,17 @@
     
     [[PalmUIManagement sharedInstance] getUserCredits];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveSeletedRangeList:) name:@"SeletedRangeList" object:nil];
+    
     [self checkNotify];
+    
+    //Test
+    UIButton *videoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [videoBtn setBackgroundColor:[UIColor blackColor]];
+    [videoBtn setTitle:@"微视频" forState:UIControlStateNormal];
+    [videoBtn addTarget:self action:@selector(chooseVideo) forControlEvents:UIControlEventTouchUpInside];
+    [videoBtn setFrame:CGRectMake(150.f, 50.f, 100.f, 100.f)];
+    [self.view addSubview:videoBtn];
     
     avatar = [[EGOImageView alloc] initWithFrame:CGRectMake(18, 65, 80, 80)];
     avatar.backgroundColor = [UIColor grayColor];
@@ -507,6 +510,96 @@
     [self removeObservers];
 }
 
+-(void)receiveSeletedRangeList:(NSNotification *)noti
+{
+    NSArray *selectedRanges = (NSArray *)[noti object];
+    
+    BOOL hasHomePage = NO;
+    BOOL hasTopGroup = NO;
+    for (NSString *tempRange in selectedRanges) {
+        if ([tempRange isEqualToString:@"校园圈"]) {
+            hasTopGroup = YES;
+        }else if ([tempRange isEqualToString:@"手心网"])
+        {
+            hasHomePage = YES;
+        }
+    }
+    
+    if (hasHomePage || hasTopGroup) {
+        if (self.recommendUsed != nil) {
+            [[PalmUIManagement sharedInstance] postRecommend:[self.recommendUsed.topicid longLongValue] withToHomePage:hasHomePage withToUpGroup:hasTopGroup];
+            self.recommendUsed.recommendToHomepage = hasHomePage;
+            self.recommendUsed.recommendToGroups = hasTopGroup;
+            [bjqTableView reloadData];
+            [bjqTableView bringSubviewToFront:avatar];
+        }
+    }else{
+        self.recommendUsed = nil;
+    }
+}
+#pragma mark - Video
+-(void)chooseVideo
+{
+    UIActionSheet *actionsheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍摄",@"选取", nil];
+    [actionsheet showInView:self.view];
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 2) return;
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    [imagePicker setMediaTypes:@[(NSString *)kUTTypeMovie]];
+
+    imagePicker.delegate = self;
+    switch (buttonIndex) {
+        case 0:
+        {
+            chooseType = VIDEO_TYPE_CARMER;
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+            //拍摄视频
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePicker.videoMaximumDuration = 15.f;
+            }
+        }
+            break;
+        case 1:
+        {
+            chooseType = VIDEO_TYPE_PHOTO;
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]){
+            //选取视频
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            }
+        }
+            break;
+        default:
+            break;
+    }
+
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    if([mediaType isEqualToString:@"public.movie"])
+    {
+        NSURL *videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
+//        NSLog(@"found a video");
+//        NSData *videoData = nil;
+//        videoData = [NSData dataWithContentsOfURL:videoURL];
+//        NSMutableData *webData = [[NSMutableData alloc] init];
+//        [webData appendData:videoData];
+//        if (webData != nil) {
+//            NSLog(@"SUCCESS!");
+//        }
+        VideoConfirmViewController *videoConfirm = [[VideoConfirmViewController alloc] initWithVideoUrl:videoURL andType:chooseType andGroupModel:_currentGroup];
+        videoConfirm.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:videoConfirm animated:YES];
+    }
+    
+    
+}
+
 #pragma mark - UITableViewDatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -524,11 +617,11 @@
         //backView.backgroundColor = [UIColor whiteColor];
         backView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
         
-//        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(60, 0, 8, backView.bounds.size.height)];
-//        //line.backgroundColor = [UIColor lightGrayColor];
-//        line.image = [UIImage imageNamed:@"BBLine"];
-//        //line.alpha = 0.5;
-//        [backView addSubview:line];
+        //        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(60, 0, 8, backView.bounds.size.height)];
+        //        //line.backgroundColor = [UIColor lightGrayColor];
+        //        line.image = [UIImage imageNamed:@"BBLine"];
+        //        //line.alpha = 0.5;
+        //        [backView addSubview:line];
         
         UIButton *newNotify = [UIButton buttonWithType:UIButtonTypeCustom];
         newNotify.frame = CGRectMake(75, 36, 172, 38);
@@ -537,19 +630,19 @@
         [backView addSubview:newNotify];
         [newNotify addTarget:self action:@selector(newNotifyTaped:) forControlEvents:UIControlEventTouchUpInside];
         
-//        UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 30, 30)];
-//        [newNotify addSubview:icon];
-//        CALayer *roundedLayer = [icon layer];
-//        [roundedLayer setMasksToBounds:YES];
-//        roundedLayer.cornerRadius = 15.0;
-//        roundedLayer.borderWidth = 1;
-//        roundedLayer.borderColor = [[UIColor whiteColor] CGColor];
-//        icon.image = [UIImage imageNamed:@"girl"];
-//        
-//        NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];
-//        if (path) {
-//            icon.image = [UIImage imageWithContentsOfFile:path];
-//        }
+        //        UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 30, 30)];
+        //        [newNotify addSubview:icon];
+        //        CALayer *roundedLayer = [icon layer];
+        //        [roundedLayer setMasksToBounds:YES];
+        //        roundedLayer.cornerRadius = 15.0;
+        //        roundedLayer.borderWidth = 1;
+        //        roundedLayer.borderColor = [[UIColor whiteColor] CGColor];
+        //        icon.image = [UIImage imageNamed:@"girl"];
+        //
+        //        NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];
+        //        if (path) {
+        //            icon.image = [UIImage imageWithContentsOfFile:path];
+        //        }
         
         UILabel *msg = [[UILabel alloc] initWithFrame:CGRectMake(0, 9, 170, 20)];
         [newNotify addSubview:msg];
@@ -567,11 +660,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"defCell";
     static NSString *cellIdentifier1 = @"linkCell";
     static NSString *cellIdentifier2 = @"replyCell";
     static NSString *cellIdentifier3 = @"imageCell";
     static NSString *cellIdentifier4 = @"pbxCell";
+    static NSString *cellIdentifier5 = @"noticeCell";
     BBTopicModel *model = self.allTopicList[indexPath.row];
     /*
     1 班级通知
@@ -589,9 +682,9 @@
             //
         {
         
-            BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
+            BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier5];
             if (!cell) {
-                cell = [[BBWorkTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier2];
+                cell = [[BBNoticeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier5];
                 cell.delegate = self;
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
@@ -620,7 +713,6 @@
         case 4:  // 拍表现4，随便说4
             //
         {
-
             if ([model.subject integerValue] == 1) {
                 BBBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier4];
                 if (!cell) {
@@ -678,7 +770,6 @@
             
             break;
     }
-
     return nil;
 }
 
@@ -715,15 +806,25 @@
 //    fzy.style = index_;
 //    fzy.currentGroup = _currentGroup;
 //    [self.navigationController pushViewController:fzy animated:YES];
-    BBFZYViewController *fzy = [[BBFZYViewController alloc] init];
-    fzy.hidesBottomBarWhenPushed = YES;
     if (index_ == 0) {
-        fzy.style = 2;
-    }else if (index_ == 1){
-        fzy.style = 3;
+        BBPBXViewController *pbx = [[BBPBXViewController alloc] init];
+        pbx.hidesBottomBarWhenPushed = YES;
+        pbx.currentGroup = _currentGroup;
+        [self.navigationController pushViewController:pbx animated:YES];
+    }else
+    {
+        BBFZYViewController *fzy = [[BBFZYViewController alloc] init];
+        fzy.hidesBottomBarWhenPushed = YES;
+        if (index_ == 1) {
+            fzy.style = 0;
+        }else if (index_ == 2){
+            fzy.style = 1;
+        }else{
+            fzy.style = 3;
+        }
+        fzy.currentGroup = _currentGroup;
+        [self.navigationController pushViewController:fzy animated:YES];
     }
-    fzy.currentGroup = _currentGroup;
-    [self.navigationController pushViewController:fzy animated:YES];
 }
 
 -(void)bbFSDropdownViewTaped:(BBFSDropdownView *) dropdownView_{
@@ -837,7 +938,7 @@
         [self.tempMoreImage removeFromSuperview];
         self.tempMoreImage = nil;
     }
-    
+
     CGPoint superPointaa = [cell convertPoint:touchPoint toView:self.view];
     copyContentButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [copyContentButton setBackgroundImage:[UIImage imageNamed:@"BBCopyContent"] forState:UIControlStateNormal];
@@ -860,7 +961,10 @@
 
 // 推荐
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell recommendButtonTaped:(UIButton *)sender{
-    NSLog(@"1111111111111");
+    self.recommendUsed = cell.data;
+    BBRecommendedRangeViewController *recommendedRangeVC = [[BBRecommendedRangeViewController alloc] initWithRanges:nil];
+    recommendedRangeVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:recommendedRangeVC animated:YES];
 }
 
 -(void)replyTaped:(id)sender{
