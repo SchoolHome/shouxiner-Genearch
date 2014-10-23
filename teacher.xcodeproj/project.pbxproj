@@ -1182,7 +1182,6 @@
 		7441DF3E1969823E00D9928A /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7441DF3D1969823E00D9928A /* CustomNavigationController.m */; };
 		74421CD818DF467A000D2F1B /* DisplaySelectedMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74421CD718DF467A000D2F1B /* DisplaySelectedMemberView.m */; };
 		745D7684193F685600AF666E /* BBStudentsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D7683193F685600AF666E /* BBStudentsListViewController.m */; };
-		745D7687193F68A200AF666E /* BBRecommendedRangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D7686193F68A200AF666E /* BBRecommendedRangeViewController.m */; };
 		745D768A193F6A6000AF666E /* BBStudentListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D7689193F6A6000AF666E /* BBStudentListTableViewCell.m */; };
 		745D768D193F6E9D00AF666E /* BBDisplaySelectedStudentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D768C193F6E9D00AF666E /* BBDisplaySelectedStudentsView.m */; };
 		745D7690193F821700AF666E /* BBStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D768F193F821700AF666E /* BBStudentModel.m */; };
@@ -1194,6 +1193,7 @@
 		745F0ABD198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0ABC198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m */; };
 		7478550518DB545C0070DF87 /* ContactsStartGroupChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478550418DB545C0070DF87 /* ContactsStartGroupChatViewController.m */; };
 		7478550818DB548C0070DF87 /* StartGroupChatTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478550718DB548C0070DF87 /* StartGroupChatTableviewCell.m */; };
+		747D154C19F8DFB400304F27 /* BBRecommendedRangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 747D154B19F8DFB400304F27 /* BBRecommendedRangeViewController.m */; };
 		749D72AE18D6147200936D5E /* BBMessageGroupBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 749D72AD18D6147200936D5E /* BBMessageGroupBaseTableView.m */; };
 		74A4E5C418DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A4E5C318DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.m */; };
 		74A4E5C718DFE4B6000F79E6 /* BBMemberInMsgGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A4E5C618DFE4B6000F79E6 /* BBMemberInMsgGroupTableViewCell.m */; };
@@ -3169,8 +3169,6 @@
 		74421CD718DF467A000D2F1B /* DisplaySelectedMemberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplaySelectedMemberView.m; sourceTree = "<group>"; };
 		745D7682193F685600AF666E /* BBStudentsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBStudentsListViewController.h; sourceTree = "<group>"; };
 		745D7683193F685600AF666E /* BBStudentsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBStudentsListViewController.m; sourceTree = "<group>"; };
-		745D7685193F68A200AF666E /* BBRecommendedRangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecommendedRangeViewController.h; sourceTree = "<group>"; };
-		745D7686193F68A200AF666E /* BBRecommendedRangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecommendedRangeViewController.m; sourceTree = "<group>"; };
 		745D7688193F6A6000AF666E /* BBStudentListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBStudentListTableViewCell.h; sourceTree = "<group>"; };
 		745D7689193F6A6000AF666E /* BBStudentListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBStudentListTableViewCell.m; sourceTree = "<group>"; };
 		745D768B193F6E9D00AF666E /* BBDisplaySelectedStudentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBDisplaySelectedStudentsView.h; sourceTree = "<group>"; };
@@ -3193,6 +3191,8 @@
 		7478550418DB545C0070DF87 /* ContactsStartGroupChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsStartGroupChatViewController.m; sourceTree = "<group>"; };
 		7478550618DB548C0070DF87 /* StartGroupChatTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartGroupChatTableviewCell.h; sourceTree = "<group>"; };
 		7478550718DB548C0070DF87 /* StartGroupChatTableviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartGroupChatTableviewCell.m; sourceTree = "<group>"; };
+		747D154A19F8DFB400304F27 /* BBRecommendedRangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecommendedRangeViewController.h; sourceTree = "<group>"; };
+		747D154B19F8DFB400304F27 /* BBRecommendedRangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecommendedRangeViewController.m; sourceTree = "<group>"; };
 		749D72AC18D6147200936D5E /* BBMessageGroupBaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMessageGroupBaseTableView.h; sourceTree = "<group>"; };
 		749D72AD18D6147200936D5E /* BBMessageGroupBaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMessageGroupBaseTableView.m; sourceTree = "<group>"; };
 		74A4E5C218DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMembersInMsgGroupViewController.h; sourceTree = "<group>"; };
@@ -6897,8 +6897,8 @@
 				745D7689193F6A6000AF666E /* BBStudentListTableViewCell.m */,
 				745D768B193F6E9D00AF666E /* BBDisplaySelectedStudentsView.h */,
 				745D768C193F6E9D00AF666E /* BBDisplaySelectedStudentsView.m */,
-				745D7685193F68A200AF666E /* BBRecommendedRangeViewController.h */,
-				745D7686193F68A200AF666E /* BBRecommendedRangeViewController.m */,
+				747D154A19F8DFB400304F27 /* BBRecommendedRangeViewController.h */,
+				747D154B19F8DFB400304F27 /* BBRecommendedRangeViewController.m */,
 			);
 			path = PBX;
 			sourceTree = "<group>";
@@ -8018,6 +8018,7 @@
 				332D756618C33552007A75D5 /* DDASLLogger.m in Sources */,
 				332D829F18C33F0A007A75D5 /* pinyin.c in Sources */,
 				332D833918C33F0B007A75D5 /* GroupSystemTextActionCell.m in Sources */,
+				747D154C19F8DFB400304F27 /* BBRecommendedRangeViewController.m in Sources */,
 				7ABA6A9B18D6DC820019AFEF /* BBFSDropdownView.m in Sources */,
 				7AC51BA218CDDA6900AD1A8C /* BBLinkTableViewCell.m in Sources */,
 				332D82D318C33F0A007A75D5 /* HPSwitch.m in Sources */,
@@ -8250,7 +8251,6 @@
 				19451C7E19F78E5800E4D92B /* BBNoticeTableViewCell.m in Sources */,
 				19B39CA319AE3AEE00E8B186 /* ADDetailViewController.m in Sources */,
 				332D756918C33552007A75D5 /* DDTTYLogger.m in Sources */,
-				745D7687193F68A200AF666E /* BBRecommendedRangeViewController.m in Sources */,
 				332D834D18C33F0B007A75D5 /* AlarmClockHelper.m in Sources */,
 				7A47062C18D967F2006449F3 /* OHASBasicMarkupParser.m in Sources */,
 				332D82A018C33F0A007A75D5 /* SectionModel.m in Sources */,

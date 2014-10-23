@@ -19,11 +19,11 @@
 #import "ADDetailViewController.h"
 #import "ColorUtil.h"
 
-#import "VideoConfirmViewController.h"
+
 @class BBWSPViewController;
 @interface BBBJQViewController ()<ADImageviewDelegate>
 {
-    VIDEO_CHOOSEN_TYPE chooseType;
+
 }
 @property (nonatomic,strong) BBTopicModel *tempTopModel;
 @property (nonatomic,strong) BBTopicModel *tempTopModelInput;
@@ -538,6 +538,7 @@
     }
 }
 #pragma mark - Video
+/*
 -(void)chooseVideo
 {
     UIActionSheet *actionsheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍摄",@"选取", nil];
@@ -599,7 +600,7 @@
     
     
 }
-
+*/
 #pragma mark - UITableViewDatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
