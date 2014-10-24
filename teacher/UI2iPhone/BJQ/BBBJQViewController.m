@@ -35,6 +35,7 @@
 @property (nonatomic,strong) UIImageView *tempMoreImage;
 @property (nonatomic,strong) NSString *contentText;
 @property (nonatomic,strong) BBTopicModel *recommendUsed;
+@property (nonatomic,strong) UIButton *notifyButton;
 @end
 
 @implementation BBBJQViewController
@@ -127,13 +128,33 @@
     {
         NSDictionary *dict = [PalmUIManagement sharedInstance].notifyCount;
         int count = [dict[@"data"][@"count"] intValue];
-        
-        count = 3;
-        
-        if (notifyCount != count) {
-            notifyCount = count;
-            [bjqTableView reloadData];
-            [bjqTableView bringSubviewToFront:avatar];
+        notifyCount = count;
+        if (count > 0) {
+            if (self.notifyButton != nil) {
+                self.notifyButton.titleLabel.text = [NSString stringWithFormat:@"您有%d条新消息",notifyCount];
+                [bjqTableView reloadData];
+            }else{
+                self.notifyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                self.notifyButton.frame = CGRectMake(75, 156, 172, 38);
+                [self.notifyButton setBackgroundImage:[UIImage imageNamed:@"BBNewMessage"] forState:UIControlStateNormal];
+                self.notifyButton.backgroundColor = [UIColor clearColor];
+                self.notifyButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+                self.notifyButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+                [self.notifyButton setTitle:[NSString stringWithFormat:@"您有%d条新消息",notifyCount] forState:UIControlStateNormal];
+                [self.notifyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                bjqTableView.tableHeaderView.frame = CGRectMake(0, 0, 320, 188);
+                [bjqTableView.tableHeaderView addSubview:self.notifyButton];
+                [self.notifyButton addTarget:self action:@selector(newNotifyTaped:) forControlEvents:UIControlEventTouchUpInside];
+                [bjqTableView reloadData];
+            }
+        }else{
+            if (self.notifyButton != nil) {
+                [self.notifyButton removeTarget:self action:@selector(newNotifyTaped:) forControlEvents:UIControlEventTouchUpInside];
+                [self.notifyButton removeFromSuperview];
+                self.notifyButton = nil;
+                bjqTableView.tableHeaderView.frame = CGRectMake(0, 0, 320, 147);
+                [bjqTableView reloadData];
+            }
         }
     }
     
@@ -398,9 +419,8 @@
     }];
     
     
-    UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
-    //head.backgroundColor = [UIColor whiteColor];
-    head.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
+    UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 147)];
+    head.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];//[UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
     head.userInteractionEnabled = YES;
     
     UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
@@ -612,49 +632,49 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    if (notifyCount>0) {
-        
-        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 76)];
-        //backView.backgroundColor = [UIColor whiteColor];
-        backView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
-        
-        //        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(60, 0, 8, backView.bounds.size.height)];
-        //        //line.backgroundColor = [UIColor lightGrayColor];
-        //        line.image = [UIImage imageNamed:@"BBLine"];
-        //        //line.alpha = 0.5;
-        //        [backView addSubview:line];
-        
-        UIButton *newNotify = [UIButton buttonWithType:UIButtonTypeCustom];
-        newNotify.frame = CGRectMake(75, 36, 172, 38);
-        [newNotify setBackgroundImage:[UIImage imageNamed:@"BBNewMessage"] forState:UIControlStateNormal];
-        newNotify.backgroundColor = [UIColor clearColor];
-        [backView addSubview:newNotify];
-        [newNotify addTarget:self action:@selector(newNotifyTaped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        //        UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 30, 30)];
-        //        [newNotify addSubview:icon];
-        //        CALayer *roundedLayer = [icon layer];
-        //        [roundedLayer setMasksToBounds:YES];
-        //        roundedLayer.cornerRadius = 15.0;
-        //        roundedLayer.borderWidth = 1;
-        //        roundedLayer.borderColor = [[UIColor whiteColor] CGColor];
-        //        icon.image = [UIImage imageNamed:@"girl"];
-        //
-        //        NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];
-        //        if (path) {
-        //            icon.image = [UIImage imageWithContentsOfFile:path];
-        //        }
-        
-        UILabel *msg = [[UILabel alloc] initWithFrame:CGRectMake(0, 9, 170, 20)];
-        [newNotify addSubview:msg];
-        msg.textColor = [UIColor whiteColor];
-        msg.backgroundColor = [UIColor clearColor];
-        msg.font = [UIFont boldSystemFontOfSize:14];
-        msg.textAlignment = NSTextAlignmentCenter;
-        msg.text = [NSString stringWithFormat:@"您有%d条新消息",notifyCount];
-        
-        return backView;
-    }
+//    if (notifyCount>0) {
+//        
+//        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 76)];
+//        //backView.backgroundColor = [UIColor whiteColor];
+//        backView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
+//        
+//        //        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(60, 0, 8, backView.bounds.size.height)];
+//        //        //line.backgroundColor = [UIColor lightGrayColor];
+//        //        line.image = [UIImage imageNamed:@"BBLine"];
+//        //        //line.alpha = 0.5;
+//        //        [backView addSubview:line];
+//        
+//        UIButton *newNotify = [UIButton buttonWithType:UIButtonTypeCustom];
+//        newNotify.frame = CGRectMake(75, 36, 172, 38);
+//        [newNotify setBackgroundImage:[UIImage imageNamed:@"BBNewMessage"] forState:UIControlStateNormal];
+//        newNotify.backgroundColor = [UIColor clearColor];
+//        [backView addSubview:newNotify];
+//        [newNotify addTarget:self action:@selector(newNotifyTaped:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        //        UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 30, 30)];
+//        //        [newNotify addSubview:icon];
+//        //        CALayer *roundedLayer = [icon layer];
+//        //        [roundedLayer setMasksToBounds:YES];
+//        //        roundedLayer.cornerRadius = 15.0;
+//        //        roundedLayer.borderWidth = 1;
+//        //        roundedLayer.borderColor = [[UIColor whiteColor] CGColor];
+//        //        icon.image = [UIImage imageNamed:@"girl"];
+//        //
+//        //        NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];
+//        //        if (path) {
+//        //            icon.image = [UIImage imageWithContentsOfFile:path];
+//        //        }
+//        
+//        UILabel *msg = [[UILabel alloc] initWithFrame:CGRectMake(0, 9, 170, 20)];
+//        [newNotify addSubview:msg];
+//        msg.textColor = [UIColor whiteColor];
+//        msg.backgroundColor = [UIColor clearColor];
+//        msg.font = [UIFont boldSystemFontOfSize:14];
+//        msg.textAlignment = NSTextAlignmentCenter;
+//        msg.text = [NSString stringWithFormat:@"您有%d条新消息",notifyCount];
+//        
+//        return backView;
+//    }
     
     return nil;
     
