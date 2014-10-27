@@ -64,6 +64,8 @@
 @property(nonatomic,strong) NSDictionary *updateImageResult;
 // 发表Topic结果
 @property(nonatomic,strong) NSDictionary *topicResult;
+// 删除Topic
+@property(nonatomic,strong) NSDictionary *deleteTopicResult;
 
 @property(nonatomic,strong) NSHTTPCookie *php;
 @property(nonatomic,strong) NSHTTPCookie *suid;
@@ -142,4 +144,7 @@
 
 //获取班级圈广告
 -(void) getAdvWithGroupID : (int) groupID;
+
+// 删除topic
+-(void) deleteTopic : (long long) topicID;
 @end
