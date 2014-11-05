@@ -19,6 +19,7 @@
 #import "ADDetailViewController.h"
 #import "ColorUtil.h"
 #import "BBVideoTableViewCell.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @class BBWSPViewController;
 @interface BBBJQViewController ()<ADImageviewDelegate>
@@ -38,6 +39,8 @@
 @property (nonatomic,strong) UIButton *notifyButton;
 //如果为2则获取作业类型，否则取全部类型数据
 @property (nonatomic) int type;
+
+-(void) playVideo : (NSString *) videoPath;
 @end
 
 @implementation BBBJQViewController
@@ -291,6 +294,16 @@
             }
         }
         [bjqTableView reloadData];
+    }
+    
+    if ([keyPath isEqualToString:@"downloadVideoResult"]){
+        NSDictionary *dic = [PalmUIManagement sharedInstance].downloadVideoResult;
+        if (![dic objectForKey:ASI_REQUEST_HAS_ERROR]) {
+            [self showProgressWithText:[dic objectForKey:ASI_REQUEST_ERROR_MESSAGE] withDelayTime:3];
+        }else{
+            [self closeProgress];
+            [self playVideo:[PalmUIManagement sharedInstance].downloadVideoPath];
+        }
     }
 }
 
@@ -1110,6 +1123,36 @@
 
 -(void) bbBaseTableViewCell:(BBBaseTableViewCell *)cell deleteButtonTaped:(UIButton *)sender{
     [[PalmUIManagement sharedInstance] deleteTopic:[cell.data.topicid longLongValue]];
+}
+
+-(void) bbBaseTableViewCell:(BBBaseTableViewCell *)cell playVideoTaped:(EGOImageButton *)sender{
+    NSArray *array = [cell.data.videoList[0] componentsSeparatedByString:@","];
+    NSString *url = array[0];
+    url = [url substringToIndex:url.length - 1];
+    NSString *key = [[url componentsSeparatedByString:@"/"] lastObject];
+    url = [NSString stringWithFormat:@"%@/mp4",url];
+    
+    CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
+    NSString *writeFileName = [NSString stringWithFormat:@"%@.%@",key,@".mp4"];
+    NSString *fileDir = [NSString stringWithFormat:@"%@/Video/",account.loginName];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@%@",[CoreUtils getDocumentPath],fileDir,writeFileName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:filePath]) {
+        [self playVideo:filePath];
+    }else{
+        [self showProgressWithText:@"正在下载"];
+        [[PalmUIManagement sharedInstance] downLoadUserVideoFile:url withKey:key];
+    }
+}
+
+-(void) playVideo:(NSString *)videoPath{
+    NSURL*videoPathURL=[[NSURL alloc] initFileURLWithPath:videoPath];
+    MPMoviePlayerViewController *playViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:videoPathURL];
+    MPMoviePlayerController *player = [playViewController moviePlayer];
+    player.scalingMode = MPMovieScalingModeFill;
+    player.controlStyle = MPMovieControlStyleFullscreen;
+    [player play];
+    [self.navigationController presentViewController:playViewController animated:NO completion:nil];
 }
 
 #pragma mark - UIScrollViewDelegate

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PalmNetWorkService.h"
 #import "CPPTModelLoginResult.h"
+#import "CropVideo.h"
 
 #define TRANSFERVALUE @"TransferValue"
 #define TRANSFERVCFROMCLASS @"TransferFromVCClass"
@@ -83,6 +84,15 @@
 @property(nonatomic,strong) NSNumber *noticeArrayTag;
 @property(nonatomic,strong) NSArray *noticeArray;
 
+// 裁剪video状态
+@property(nonatomic,strong) CropVideoModel *videoState;
+// 压缩video状态
+@property(nonatomic,strong) CropVideoModel *videoCompressionState;
+// 上传视频结果
+@property(nonatomic,strong) NSDictionary *uploadVideoResult;
+// 下载视频结果
+@property(nonatomic,strong) NSDictionary *downloadVideoResult;
+@property(nonatomic,strong) NSString *downloadVideoPath;
 // 获取用户信息
 -(void) getUserProfile;
 // 获取用户通讯录
@@ -144,6 +154,11 @@
 
 //获取班级圈广告
 -(void) getAdvWithGroupID : (int) groupID;
+
+// 上传视频
+-(void) updateUserVideoFile : (NSURL *) videoUrl withGroupID : (int) groupID;
+// 下载视频
+-(void) downLoadUserVideoFile : (NSString *) videoUrl withKey : (NSString *) key;
 
 // 删除topic
 -(void) deleteTopic : (long long) topicID;
