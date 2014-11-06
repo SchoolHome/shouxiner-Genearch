@@ -243,6 +243,7 @@
 		19A3E55419F3AD2500AFD251 /* BBScoreBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A3E55019F3AD2500AFD251 /* BBScoreBG@2x.png */; };
 		19A3E55519F3AD2500AFD251 /* BBTopBGNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A3E55119F3AD2500AFD251 /* BBTopBGNew.png */; };
 		19A3E55619F3AD2500AFD251 /* BBTopBGNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A3E55219F3AD2500AFD251 /* BBTopBGNew@2x.png */; };
+		19A5E2A21A0B1FDF000C3A7A /* DiscoverOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A5E2A11A0B1FDF000C3A7A /* DiscoverOperation.m */; };
 		19A83D4618D34C8900441FDE /* LoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A83D4218D34C8900441FDE /* LoginButton.png */; };
 		19A83D4718D34C8900441FDE /* LoginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A83D4318D34C8900441FDE /* LoginButton@2x.png */; };
 		19A83D4818D34C8900441FDE /* LoginButtonPress.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A83D4418D34C8900441FDE /* LoginButtonPress.png */; };
@@ -1695,6 +1696,8 @@
 		19A3E55019F3AD2500AFD251 /* BBScoreBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBScoreBG@2x.png"; sourceTree = "<group>"; };
 		19A3E55119F3AD2500AFD251 /* BBTopBGNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBTopBGNew.png; sourceTree = "<group>"; };
 		19A3E55219F3AD2500AFD251 /* BBTopBGNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBTopBGNew@2x.png"; sourceTree = "<group>"; };
+		19A5E2A01A0B1FDF000C3A7A /* DiscoverOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverOperation.h; sourceTree = "<group>"; };
+		19A5E2A11A0B1FDF000C3A7A /* DiscoverOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverOperation.m; sourceTree = "<group>"; };
 		19A83D4218D34C8900441FDE /* LoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButton.png; sourceTree = "<group>"; };
 		19A83D4318D34C8900441FDE /* LoginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginButton@2x.png"; sourceTree = "<group>"; };
 		19A83D4418D34C8900441FDE /* LoginButtonPress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButtonPress.png; sourceTree = "<group>"; };
@@ -6653,6 +6656,8 @@
 		33771E2F18C9CC9D00FB5002 /* OP */ = {
 			isa = PBXGroup;
 			children = (
+				19A5E2A01A0B1FDF000C3A7A /* DiscoverOperation.h */,
+				19A5E2A11A0B1FDF000C3A7A /* DiscoverOperation.m */,
 				19CEFABC1A09F4780044A651 /* UpAndDownLoadOperation.h */,
 				19CEFABD1A09F4780044A651 /* UpAndDownLoadOperation.m */,
 				19B39C9819AE3ADC00E8B186 /* SystemOperation.h */,
@@ -8451,6 +8456,7 @@
 				332D834218C33F0B007A75D5 /* SingleSoundAlarmCell.m in Sources */,
 				332D752618C33552007A75D5 /* NSData+XMPP.m in Sources */,
 				332D759918C33552007A75D5 /* CPUIModelBabyInfoData.m in Sources */,
+				19A5E2A21A0B1FDF000C3A7A /* DiscoverOperation.m in Sources */,
 				74EF7E071962C2BC00DCD5A3 /* ContactsModel.m in Sources */,
 				332D756818C33552007A75D5 /* DDLog.m in Sources */,
 				7A47062818D967F2006449F3 /* OHParagraphStyle.m in Sources */,

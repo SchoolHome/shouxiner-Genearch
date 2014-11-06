@@ -93,6 +93,10 @@
 // 下载视频结果
 @property(nonatomic,strong) NSDictionary *downloadVideoResult;
 @property(nonatomic,strong) NSString *downloadVideoPath;
+
+// 发现
+@property(nonatomic,strong) NSDictionary *discoverResult;
+
 // 获取用户信息
 -(void) getUserProfile;
 // 获取用户通讯录
@@ -162,4 +166,7 @@
 
 // 删除topic
 -(void) deleteTopic : (long long) topicID;
+
+// 获取发现数据
+-(void) getDiscoverData;
 @end
