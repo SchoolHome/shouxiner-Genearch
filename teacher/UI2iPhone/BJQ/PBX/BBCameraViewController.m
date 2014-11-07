@@ -1,0 +1,254 @@
+//
+//  BBCameraViewController.m
+//  teacher
+//
+//  Created by ZhangQing on 14-10-31.
+//  Copyright (c) 2014年 ws. All rights reserved.
+//
+
+#import "BBCameraViewController.h"
+
+#import "ZYQAssetPickerController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+
+#import "BBRecordViewController.h"
+#import "BBPostPBXViewController.h"
+#import "ViewImageViewController.h"
+#import "BBImagePreviewVIewController.h"
+
+@interface BBCameraViewController ()<ZYQAssetPickerControllerDelegate>
+{
+     UIButton *takePictureButton;
+     UIButton *cancelButton;
+    UIButton *recordButton;
+    UIButton *flashBtn;
+    UIButton *camerControl;
+    UIButton *albumBtn;
+    
+    NSInteger flashStatus;
+}
+@end
+
+@implementation BBCameraViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    flashStatus = 0;
+    
+    //self.view.backgroundColor = [UIColor clearColor];
+    
+    UIView *overlayView = [[UIView alloc] initWithFrame:self.view.frame];
+    
+    UIView *toolBarBG = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, 52.f)];
+    toolBarBG.backgroundColor = [UIColor blackColor];
+    toolBarBG.alpha = 0.5f;
+    [overlayView addSubview:toolBarBG];
+    
+    UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
+    [close setFrame:CGRectMake(20.f, 10.f, 44.f, 32.f)];
+    [close setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    [close setImageEdgeInsets:UIEdgeInsetsMake(5.f, 10.f, 5.f, 10.f)];
+    [close addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+    [overlayView addSubview:close];
+    
+    flashBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [flashBtn setFrame:CGRectMake(self.screenWidth-100.f, 10.f, 44.f, 32.f)];
+    [flashBtn setImage:[UIImage imageNamed:@"lamp_auto"] forState:UIControlStateNormal];
+    [flashBtn setImageEdgeInsets:UIEdgeInsetsMake(5, 10, 5, 10)];
+    [flashBtn addTarget:self action:@selector(cameraTorchOn:) forControlEvents:UIControlEventTouchUpInside];
+    [overlayView addSubview:flashBtn];
+    
+    camerControl = [UIButton buttonWithType:UIButtonTypeCustom];
+    [camerControl setFrame:CGRectMake(self.screenWidth-50.f, 10.f, 44.f, 32.f)];
+    [camerControl setImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
+    [camerControl setImageEdgeInsets:UIEdgeInsetsMake(5.f, 10.f, 5.f, 10.f)];
+    [camerControl addTarget:self action:@selector(swapFrontAndBackCameras:) forControlEvents:UIControlEventTouchUpInside];
+    [overlayView addSubview:camerControl];
+    
+    UIView *bottomBarBG = [[UIView alloc] initWithFrame:CGRectMake(0.f, self.screenHeight-94.f, self.screenWidth, 94.f)];
+    bottomBarBG.backgroundColor = [UIColor blackColor];
+    [overlayView addSubview:bottomBarBG];
+    
+    takePictureButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [takePictureButton setFrame:CGRectMake(self.screenWidth/2-33, self.screenHeight-80.f,66.f , 66.f)];
+    [takePictureButton setBackgroundImage:[UIImage imageNamed:@"camera"] forState:UIControlStateNormal];
+    [takePictureButton addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
+    [overlayView addSubview:takePictureButton];
+
+    recordButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [recordButton setFrame:CGRectMake(30.f, CGRectGetMinY(takePictureButton.frame)+(CGRectGetHeight(takePictureButton.frame)-29)/2,40.f , 29.f)];
+    [recordButton setBackgroundImage:[UIImage imageNamed:@"small_record"] forState:UIControlStateNormal];
+    [recordButton addTarget:self action:@selector(record) forControlEvents:UIControlEventTouchUpInside];
+    [recordButton setBackgroundColor:[UIColor blackColor]];
+    [overlayView addSubview:recordButton];
+    
+    albumBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [albumBtn setFrame:CGRectMake(self.screenWidth-60.f, CGRectGetMinY(bottomBarBG.frame)+(CGRectGetHeight(bottomBarBG.frame)-40)/2,40.f , 40.f)];
+    [albumBtn addTarget:self action:@selector(enterPhotoAlbum:) forControlEvents:UIControlEventTouchUpInside];
+    [albumBtn setBackgroundColor:[UIColor blackColor]];
+    [overlayView addSubview:albumBtn];
+
+    [self getFirstImageInAlbum];
+    
+    self.imagePickerController = [[UIImagePickerController alloc] init];
+    self.imagePickerController.delegate = self;
+    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.imagePickerController.showsCameraControls = NO;
+    self.imagePickerController.navigationBarHidden = YES;
+    
+    CGRect overlayViewFrame = self.imagePickerController.cameraOverlayView.frame;
+    CGRect newFrame = CGRectMake(0.0,
+                                 CGRectGetHeight(overlayViewFrame) -
+                                 self.view.frame.size.height ,
+                                 CGRectGetWidth(overlayViewFrame),
+                                 self.view.frame.size.height);
+    self.view.frame = newFrame;
+    self.imagePickerController.cameraOverlayView = overlayView;
+
+    [self.view addSubview:self.imagePickerController.view];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
+- (void )getFirstImageInAlbum
+{
+    ALAssetsLibrary *assetsLibrary;
+    NSMutableArray *imageArray = [[NSMutableArray alloc] initWithCapacity:1];
+    assetsLibrary = [[ALAssetsLibrary alloc] init];
+    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        if (group) {
+            [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                if (result && index == group.numberOfAssets-1) {
+                    NSLog(@"%@",result);
+                    [imageArray addObject:[UIImage imageWithCGImage: result.thumbnail]];
+                    *stop = YES;
+                }
+            }];
+            if (imageArray.count) {
+                *stop = YES;
+                [albumBtn setBackgroundImage:imageArray[0] forState:UIControlStateNormal];
+            }
+            
+        }
+    } failureBlock:^(NSError *error) {
+        NSLog(@"Group not found!\n");
+    }];
+    
+}
+
+#pragma mark -
+#pragma mark Camera Actions
+- (void)record
+{
+    BBRecordViewController *record = [[BBRecordViewController alloc] init];
+    [self.navigationController pushViewController:record animated:NO];
+}
+
+//闪光灯
+-(IBAction)cameraTorchOn:(id)sender{
+    if (flashStatus != 1) {
+        flashStatus++;
+    }else flashStatus = -1;
+
+    self.imagePickerController.cameraFlashMode = flashStatus;
+    
+    switch (flashStatus) {
+        case -1:
+            [flashBtn setImage:[UIImage imageNamed:@"lamp_off"] forState:UIControlStateNormal];
+            break;
+        case 0:
+            [flashBtn setImage:[UIImage imageNamed:@"lamp_auto"] forState:UIControlStateNormal];
+            break;
+        case 1:
+            [flashBtn setImage:[UIImage imageNamed:@"lamp"] forState:UIControlStateNormal];
+            break;
+        default:
+            break;
+    }
+}
+
+//前后摄像头
+- (void)swapFrontAndBackCameras:(id)sender {
+    if (self.imagePickerController.cameraDevice ==UIImagePickerControllerCameraDeviceRear ) {
+        self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    }else {
+        self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+    }
+}
+
+
+- (void)takePhoto:(id)sender
+{
+    [self.imagePickerController takePicture];
+}
+
+- (void)enterPhotoAlbum:(id)sender {
+    ZYQAssetPickerController *picker = [[ZYQAssetPickerController alloc] init];
+    picker.maximumNumberOfSelection = 7;
+    picker.assetsFilter = [ALAssetsFilter allPhotos];
+    picker.showEmptyGroups=NO;
+    picker.delegate=self;
+    picker.selectionFilter = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        if ([[(ALAsset*)evaluatedObject valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypeVideo]) {
+            NSTimeInterval duration = [[(ALAsset*)evaluatedObject valueForProperty:ALAssetPropertyDuration] doubleValue];
+            return duration >= 5;
+        } else {
+            return YES;
+        }
+    }];
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+
+-(void)close
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+#pragma mark -
+#pragma mark - ZYQAssetPickerController Delegate
+-(void)assetPickerController:(ZYQAssetPickerController *)picker didFinishPickingAssets:(NSArray *)assets{
+    NSMutableArray *tempImages = [[NSMutableArray alloc] initWithCapacity:7];
+    for (int i = 0; i<[assets count]; i++) {
+        ALAsset *asset = [assets objectAtIndex:i];
+        UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
+        [tempImages addObject:image];
+    }
+    
+    if (tempImages.count > 0) {
+        BBPostPBXViewController  *postPBX = [[BBPostPBXViewController alloc] initWithImages:tempImages];
+        [self.navigationController pushViewController:postPBX animated:YES];
+    }
+}
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    UIImage *image = nil;
+    if ([mediaType isEqualToString:@"public.image"]){
+        image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    }
+    [self dismissModalViewControllerAnimated:YES];
+    
+    BBImagePreviewVIewController *imagePreview = [[BBImagePreviewVIewController  alloc] initWithPreviewImage:image];
+    [self.navigationController pushViewController:imagePreview animated:YES];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [self dismissModalViewControllerAnimated:YES];
+    
+}
+
+
+@end

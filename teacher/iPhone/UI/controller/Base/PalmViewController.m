@@ -97,6 +97,8 @@
     }else{
         _screenTop = 0.0f;
     }
+    
+    self.screenWidth = 320;
 }
 
 /*! @brief 初始化导航栏左侧按钮

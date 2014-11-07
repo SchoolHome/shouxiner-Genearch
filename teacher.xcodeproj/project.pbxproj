@@ -1261,7 +1261,6 @@
 		741EBBC818D4CCA900F21085 /* BBGroupMessageGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EBBC718D4CCA900F21085 /* BBGroupMessageGroupCell.m */; };
 		7441DF3E1969823E00D9928A /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7441DF3D1969823E00D9928A /* CustomNavigationController.m */; };
 		74421CD818DF467A000D2F1B /* DisplaySelectedMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74421CD718DF467A000D2F1B /* DisplaySelectedMemberView.m */; };
-		745D7684193F685600AF666E /* BBStudentsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D7683193F685600AF666E /* BBStudentsListViewController.m */; };
 		745D768A193F6A6000AF666E /* BBStudentListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D7689193F6A6000AF666E /* BBStudentListTableViewCell.m */; };
 		745D768D193F6E9D00AF666E /* BBDisplaySelectedStudentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D768C193F6E9D00AF666E /* BBDisplaySelectedStudentsView.m */; };
 		745D7690193F821700AF666E /* BBStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D768F193F821700AF666E /* BBStudentModel.m */; };
@@ -1273,6 +1272,16 @@
 		745F0ABD198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0ABC198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m */; };
 		7478550518DB545C0070DF87 /* ContactsStartGroupChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478550418DB545C0070DF87 /* ContactsStartGroupChatViewController.m */; };
 		7478550818DB548C0070DF87 /* StartGroupChatTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478550718DB548C0070DF87 /* StartGroupChatTableviewCell.m */; };
+		7478F4551A0D37D200CEB85D /* BBBasePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F44E1A0D37D200CEB85D /* BBBasePostViewController.m */; };
+		7478F4561A0D37D200CEB85D /* BBPostHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F4501A0D37D200CEB85D /* BBPostHomeworkViewController.m */; };
+		7478F4571A0D37D200CEB85D /* BBPostPBXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F4521A0D37D200CEB85D /* BBPostPBXViewController.m */; };
+		7478F4581A0D37D200CEB85D /* ChooseClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F4541A0D37D200CEB85D /* ChooseClassViewController.m */; };
+		7478F4611A0D385500CEB85D /* BBCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F45A1A0D385500CEB85D /* BBCameraViewController.m */; };
+		7478F4621A0D385500CEB85D /* BBChooseClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F45C1A0D385500CEB85D /* BBChooseClassViewController.m */; };
+		7478F4631A0D385500CEB85D /* BBImagePreviewVIewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F45E1A0D385500CEB85D /* BBImagePreviewVIewController.m */; };
+		7478F4641A0D385500CEB85D /* BBRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F4601A0D385500CEB85D /* BBRecordViewController.m */; };
+		7478F4671A0D38EB00CEB85D /* BBChooseImgViewInPostPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F4661A0D38EB00CEB85D /* BBChooseImgViewInPostPage.m */; };
+		7478F46D1A0D39EB00CEB85D /* BBStudentsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F46C1A0D39EB00CEB85D /* BBStudentsListViewController.m */; };
 		747D154C19F8DFB400304F27 /* BBRecommendedRangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 747D154B19F8DFB400304F27 /* BBRecommendedRangeViewController.m */; };
 		749D72AE18D6147200936D5E /* BBMessageGroupBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 749D72AD18D6147200936D5E /* BBMessageGroupBaseTableView.m */; };
 		74A4E5C418DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A4E5C318DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.m */; };
@@ -3329,8 +3338,6 @@
 		7441DF3D1969823E00D9928A /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
 		74421CD618DF467A000D2F1B /* DisplaySelectedMemberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplaySelectedMemberView.h; sourceTree = "<group>"; };
 		74421CD718DF467A000D2F1B /* DisplaySelectedMemberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplaySelectedMemberView.m; sourceTree = "<group>"; };
-		745D7682193F685600AF666E /* BBStudentsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBStudentsListViewController.h; sourceTree = "<group>"; };
-		745D7683193F685600AF666E /* BBStudentsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBStudentsListViewController.m; sourceTree = "<group>"; };
 		745D7688193F6A6000AF666E /* BBStudentListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBStudentListTableViewCell.h; sourceTree = "<group>"; };
 		745D7689193F6A6000AF666E /* BBStudentListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBStudentListTableViewCell.m; sourceTree = "<group>"; };
 		745D768B193F6E9D00AF666E /* BBDisplaySelectedStudentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBDisplaySelectedStudentsView.h; sourceTree = "<group>"; };
@@ -3353,6 +3360,26 @@
 		7478550418DB545C0070DF87 /* ContactsStartGroupChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsStartGroupChatViewController.m; sourceTree = "<group>"; };
 		7478550618DB548C0070DF87 /* StartGroupChatTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartGroupChatTableviewCell.h; sourceTree = "<group>"; };
 		7478550718DB548C0070DF87 /* StartGroupChatTableviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartGroupChatTableviewCell.m; sourceTree = "<group>"; };
+		7478F44D1A0D37D200CEB85D /* BBBasePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBasePostViewController.h; sourceTree = "<group>"; };
+		7478F44E1A0D37D200CEB85D /* BBBasePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBasePostViewController.m; sourceTree = "<group>"; };
+		7478F44F1A0D37D200CEB85D /* BBPostHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPostHomeworkViewController.h; sourceTree = "<group>"; };
+		7478F4501A0D37D200CEB85D /* BBPostHomeworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPostHomeworkViewController.m; sourceTree = "<group>"; };
+		7478F4511A0D37D200CEB85D /* BBPostPBXViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPostPBXViewController.h; sourceTree = "<group>"; };
+		7478F4521A0D37D200CEB85D /* BBPostPBXViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPostPBXViewController.m; sourceTree = "<group>"; };
+		7478F4531A0D37D200CEB85D /* ChooseClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseClassViewController.h; sourceTree = "<group>"; };
+		7478F4541A0D37D200CEB85D /* ChooseClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseClassViewController.m; sourceTree = "<group>"; };
+		7478F4591A0D385500CEB85D /* BBCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCameraViewController.h; sourceTree = "<group>"; };
+		7478F45A1A0D385500CEB85D /* BBCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBCameraViewController.m; sourceTree = "<group>"; };
+		7478F45B1A0D385500CEB85D /* BBChooseClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBChooseClassViewController.h; sourceTree = "<group>"; };
+		7478F45C1A0D385500CEB85D /* BBChooseClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBChooseClassViewController.m; sourceTree = "<group>"; };
+		7478F45D1A0D385500CEB85D /* BBImagePreviewVIewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBImagePreviewVIewController.h; sourceTree = "<group>"; };
+		7478F45E1A0D385500CEB85D /* BBImagePreviewVIewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBImagePreviewVIewController.m; sourceTree = "<group>"; };
+		7478F45F1A0D385500CEB85D /* BBRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecordViewController.h; sourceTree = "<group>"; };
+		7478F4601A0D385500CEB85D /* BBRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecordViewController.m; sourceTree = "<group>"; };
+		7478F4651A0D38EB00CEB85D /* BBChooseImgViewInPostPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBChooseImgViewInPostPage.h; sourceTree = "<group>"; };
+		7478F4661A0D38EB00CEB85D /* BBChooseImgViewInPostPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBChooseImgViewInPostPage.m; sourceTree = "<group>"; };
+		7478F46B1A0D39EB00CEB85D /* BBStudentsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBStudentsListViewController.h; sourceTree = "<group>"; };
+		7478F46C1A0D39EB00CEB85D /* BBStudentsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBStudentsListViewController.m; sourceTree = "<group>"; };
 		747D154A19F8DFB400304F27 /* BBRecommendedRangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecommendedRangeViewController.h; sourceTree = "<group>"; };
 		747D154B19F8DFB400304F27 /* BBRecommendedRangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecommendedRangeViewController.m; sourceTree = "<group>"; };
 		749D72AC18D6147200936D5E /* BBMessageGroupBaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMessageGroupBaseTableView.h; sourceTree = "<group>"; };
@@ -6952,6 +6979,23 @@
 			path = Contacts;
 			sourceTree = "<group>";
 		};
+		7478F44C1A0D37D200CEB85D /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				7478F44D1A0D37D200CEB85D /* BBBasePostViewController.h */,
+				7478F44E1A0D37D200CEB85D /* BBBasePostViewController.m */,
+				7478F44F1A0D37D200CEB85D /* BBPostHomeworkViewController.h */,
+				7478F4501A0D37D200CEB85D /* BBPostHomeworkViewController.m */,
+				7478F4511A0D37D200CEB85D /* BBPostPBXViewController.h */,
+				7478F4521A0D37D200CEB85D /* BBPostPBXViewController.m */,
+				7478F4531A0D37D200CEB85D /* ChooseClassViewController.h */,
+				7478F4541A0D37D200CEB85D /* ChooseClassViewController.m */,
+				7478F4651A0D38EB00CEB85D /* BBChooseImgViewInPostPage.h */,
+				7478F4661A0D38EB00CEB85D /* BBChooseImgViewInPostPage.m */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
 		74A4E5C818DFE8A9000F79E6 /* ZJZ */ = {
 			isa = PBXGroup;
 			children = (
@@ -7156,16 +7200,24 @@
 			children = (
 				7A59194118D6BDA500C03DED /* BBPBXViewController.h */,
 				7A59194218D6BDA500C03DED /* BBPBXViewController.m */,
-				745D7682193F685600AF666E /* BBStudentsListViewController.h */,
-				745D7683193F685600AF666E /* BBStudentsListViewController.m */,
 				745D768E193F821700AF666E /* BBStudentModel.h */,
 				745D768F193F821700AF666E /* BBStudentModel.m */,
+				7478F46B1A0D39EB00CEB85D /* BBStudentsListViewController.h */,
+				7478F46C1A0D39EB00CEB85D /* BBStudentsListViewController.m */,
 				745D7688193F6A6000AF666E /* BBStudentListTableViewCell.h */,
 				745D7689193F6A6000AF666E /* BBStudentListTableViewCell.m */,
 				745D768B193F6E9D00AF666E /* BBDisplaySelectedStudentsView.h */,
 				745D768C193F6E9D00AF666E /* BBDisplaySelectedStudentsView.m */,
 				747D154A19F8DFB400304F27 /* BBRecommendedRangeViewController.h */,
 				747D154B19F8DFB400304F27 /* BBRecommendedRangeViewController.m */,
+				7478F4591A0D385500CEB85D /* BBCameraViewController.h */,
+				7478F45A1A0D385500CEB85D /* BBCameraViewController.m */,
+				7478F45B1A0D385500CEB85D /* BBChooseClassViewController.h */,
+				7478F45C1A0D385500CEB85D /* BBChooseClassViewController.m */,
+				7478F45D1A0D385500CEB85D /* BBImagePreviewVIewController.h */,
+				7478F45E1A0D385500CEB85D /* BBImagePreviewVIewController.m */,
+				7478F45F1A0D385500CEB85D /* BBRecordViewController.h */,
+				7478F4601A0D385500CEB85D /* BBRecordViewController.m */,
 			);
 			path = PBX;
 			sourceTree = "<group>";
@@ -7316,6 +7368,7 @@
 				7A076AE118E1E2E100911291 /* navbar_back@2x.png */,
 				7AC51BA818CDDA8000AD1A8C /* like.png */,
 				7AC51B8218CDD9AB00AD1A8C /* Lobby */,
+				7478F44C1A0D37D200CEB85D /* Post */,
 				7AC51B8718CDDA2C00AD1A8C /* BJQ */,
 				74E85D8A18D0443000F1F1D5 /* ZJZ */,
 				7AC51B8618CDDA0700AD1A8C /* YZS */,
@@ -8447,6 +8500,7 @@
 				1975B76318E940F300587B80 /* EGOImageLoader.m in Sources */,
 				332D759318C33552007A75D5 /* CPPTModelUserRegisterInfo.m in Sources */,
 				74421CD818DF467A000D2F1B /* DisplaySelectedMemberView.m in Sources */,
+				7478F4611A0D385500CEB85D /* BBCameraViewController.m in Sources */,
 				332D833B18C33F0B007A75D5 /* GroupSystemUnknowCell.m in Sources */,
 				332D74F418C33552007A75D5 /* CPUserManager.m in Sources */,
 				193E594718D9A39B00DB1FF4 /* BBMutilIMViewController.m in Sources */,
@@ -8505,6 +8559,7 @@
 				332D82AD18C33F0A007A75D5 /* AFTableViewCell.m in Sources */,
 				332D836518C33F0B007A75D5 /* CDOpenALSupport.m in Sources */,
 				332D831318C33F0B007A75D5 /* FXCountDown.m in Sources */,
+				7478F46D1A0D39EB00CEB85D /* BBStudentsListViewController.m in Sources */,
 				1924473E1941EFEC0077D5DB /* GuidViewController.m in Sources */,
 				332D82A218C33F0A007A75D5 /* StrangerHeaderImage.m in Sources */,
 				332D75A018C33552007A75D5 /* CPUIModelPersonalInfoData.m in Sources */,
@@ -8530,11 +8585,13 @@
 				332D82C618C33F0A007A75D5 /* HomePageAnimView.m in Sources */,
 				7A47062918D967F2006449F3 /* OHTouchesGestureRecognizer.m in Sources */,
 				332D74D218C33552007A75D5 /* CPDAOPersonalInfoDataAddition.m in Sources */,
+				7478F4671A0D38EB00CEB85D /* BBChooseImgViewInPostPage.m in Sources */,
 				332D835618C33F0B007A75D5 /* TaggingMonthDay.m in Sources */,
 				332D82BF18C33F0A007A75D5 /* HomeFriendsView.m in Sources */,
 				332D75B518C33552007A75D5 /* zip.c in Sources */,
 				332D82DE18C33F0A007A75D5 /* MutilIMViewController.m in Sources */,
 				332D82E718C33F0A007A75D5 /* XiaoShuangIMViewController.m in Sources */,
+				7478F4571A0D37D200CEB85D /* BBPostPBXViewController.m in Sources */,
 				332D759218C33552007A75D5 /* CPPTModelUserProfile.m in Sources */,
 				19145F5C191CDF3B008CE18C /* UIImage+GIF.m in Sources */,
 				332D751718C33552007A75D5 /* ASIInputStream.m in Sources */,
@@ -8542,6 +8599,7 @@
 				339ECB0918CAF93C0062C5ED /* MBProgressHUD.m in Sources */,
 				332D74F718C33552007A75D5 /* CPOperation.m in Sources */,
 				332D753518C33552007A75D5 /* XMPPMessage+EXT.m in Sources */,
+				7478F4581A0D37D200CEB85D /* ChooseClassViewController.m in Sources */,
 				332D838618C33F0B007A75D5 /* CatmullRomSpline.m in Sources */,
 				332D751E18C33552007A75D5 /* NSData+Base64.m in Sources */,
 				0420E12518E13FEB003997ED /* BBFeedbackViewController.m in Sources */,
@@ -8551,6 +8609,7 @@
 				19145F4A191CDF3B008CE18C /* MJPhoto.m in Sources */,
 				7ABA6A9818D6D4DC0019AFEF /* BBBJDropdownView.m in Sources */,
 				332D831D18C33F0B007A75D5 /* FxProcessFixed.m in Sources */,
+				7478F4561A0D37D200CEB85D /* BBPostHomeworkViewController.m in Sources */,
 				19145F60191CDF3B008CE18C /* UIImageView+WebCache.m in Sources */,
 				332D758618C33552007A75D5 /* CPPTModelMessage.m in Sources */,
 				7A076AD118E1D67E00911291 /* UIPlaceholderTextView.m in Sources */,
@@ -8678,6 +8737,7 @@
 				332D829D18C33F0A007A75D5 /* EventTableViewCell.m in Sources */,
 				332D82DC18C33F0A007A75D5 /* messageMainViewController.m in Sources */,
 				193E593E18D9908200DB1FF4 /* BBmessageMainViewController.m in Sources */,
+				7478F4631A0D385500CEB85D /* BBImagePreviewVIewController.m in Sources */,
 				332D82CE18C33F0A007A75D5 /* HomePageViewController.m in Sources */,
 				332D74C918C33552007A75D5 /* BaseDAO.m in Sources */,
 				196421A51928A8D200944016 /* ViewImageViewController.m in Sources */,
@@ -8773,7 +8833,6 @@
 				332D82DB18C33F0A007A75D5 /* IndependentProfileViewController.m in Sources */,
 				332D838A18C33F0B007A75D5 /* NSArray_PointArray.m in Sources */,
 				332D833418C33F0B007A75D5 /* GroupLoveExpressionCell.m in Sources */,
-				745D7684193F685600AF666E /* BBStudentsListViewController.m in Sources */,
 				332D830C18C33F0B007A75D5 /* FXBlockViewCheckBox.m in Sources */,
 				1975B75F18E940F300587B80 /* CircleImageButton.m in Sources */,
 				332D82E518C33F0A007A75D5 /* SystemIMViewController.m in Sources */,
@@ -8791,6 +8850,7 @@
 				332D837518C33F0B007A75D5 /* AAFilter.cpp in Sources */,
 				332D830B18C33F0B007A75D5 /* FXBlockViewAlert.m in Sources */,
 				332D82E418C33F0A007A75D5 /* SingleProfileView.m in Sources */,
+				7478F4621A0D385500CEB85D /* BBChooseClassViewController.m in Sources */,
 				332D753A18C33552007A75D5 /* XMPPReconnect.m in Sources */,
 				332D830A18C33F0B007A75D5 /* CBlockView.m in Sources */,
 				332D757918C33552007A75D5 /* CPPTModelBabyInfoData.m in Sources */,
@@ -8842,6 +8902,7 @@
 				7A6B776418ED4DA20000DBFE /* BBNotifyModel.m in Sources */,
 				332D74D818C33552007A75D5 /* CPDataBaseManager.m in Sources */,
 				04F6E98818E00085007D24DF /* BBShopViewController.m in Sources */,
+				7478F4641A0D385500CEB85D /* BBRecordViewController.m in Sources */,
 				332D74EB18C33552007A75D5 /* CPDBModelUserInfoData.m in Sources */,
 				332D753218C33552007A75D5 /* XMPPBaseMessage.m in Sources */,
 				332D74C518C33552007A75D5 /* AbDataManagement.m in Sources */,
@@ -8851,6 +8912,7 @@
 				332D74E818C33552007A75D5 /* CPDBModelPetInfo.m in Sources */,
 				19145F57191CDF3B008CE18C /* SDWebImageDownloaderOperation.m in Sources */,
 				332D750D18C33552007A75D5 /* CPOperationUpdateUserRelation.m in Sources */,
+				7478F4551A0D37D200CEB85D /* BBBasePostViewController.m in Sources */,
 				74EF7E091962C2BC00DCD5A3 /* ContactsViewController.m in Sources */,
 				7AC51BA118CDDA6900AD1A8C /* BBBaseTableViewCell.m in Sources */,
 				332D754018C33552007A75D5 /* XMPPRoom.xcdatamodeld in Sources */,

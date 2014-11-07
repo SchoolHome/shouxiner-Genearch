@@ -12,6 +12,11 @@
 #import "CPDBManagement.h"
 #import "BBMenuView.h"
 
+#import "BBBasePostViewController.h"
+#import "BBPostHomeworkViewController.h"
+#import "BBPostPBXViewController.h"
+#import "BBCameraViewController.h"
+
 @interface BBUITabBarController ()<MenuDelegate>
 
 @end
@@ -123,7 +128,7 @@
     self.delegate = (id<UITabBarControllerDelegate>)self;
     
     _imageTabBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 49)];
-    _imageTabBar.image = [UIImage imageNamed:@"BBBottomBG"];
+    _imageTabBar.image = [UIImage imageNamed:@"label_bg"];
     _imageTabBar.backgroundColor = [UIColor clearColor];
     
     [self.tabBar addSubview:_imageTabBar];
@@ -204,8 +209,25 @@
     return YES;
 }
 
--(void) clickItemIndex : (ClickMenuItem) item{
+- (void) clickItemIndex : (ClickMenuItem) item{
     NSLog(@"%d",item);
+    if (item == kPBXItem) {
+        //        BBPostPBXViewController *postPBX = [[BBPostPBXViewController alloc] initWithPostType:POST_TYPE_PBX];
+        BBCameraViewController *camera = [[BBCameraViewController alloc] init];
+        camera.hidesBottomBarWhenPushed = YES;
+        [(UINavigationController *)self.selectedViewController pushViewController:camera animated:YES];
+    }else
+    {
+        if (item == kHomeWorkItem) {
+            BBPostHomeworkViewController *postHomeWork = [[BBPostHomeworkViewController alloc] initWithPostType:POST_TYPE_FZY];
+            postHomeWork.hidesBottomBarWhenPushed = YES;
+            [(UINavigationController *)self.selectedViewController pushViewController:postHomeWork animated:YES];
+        }else{
+            BBBasePostViewController *post = [[BBBasePostViewController alloc] initWithPostType:item == kNoticeItem ? POST_TYPE_FTZ : POST_TYPE_SBS];
+            post.hidesBottomBarWhenPushed = YES;
+            [(UINavigationController *)self.selectedViewController pushViewController:post animated:YES];
+        }
+    }
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
