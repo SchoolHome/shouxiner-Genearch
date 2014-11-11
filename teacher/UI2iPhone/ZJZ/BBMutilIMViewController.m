@@ -93,14 +93,14 @@
     [self.imageviewHeadImg setBackImage:[self returnCircleHeadImg]];
     
     UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
-    [back setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
-    [back setBackgroundImage:[UIImage imageNamed:@"ZJZBack"] forState:UIControlStateNormal];
+    [back setFrame:CGRectMake(0.f, 7.f, 22.f, 22.f)];
+    [back setBackgroundImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     [back addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     
     UIButton *add = [UIButton buttonWithType:UIButtonTypeCustom];
-    [add setFrame:CGRectMake(0.0f, 7.0f, 30.0f, 30.0f)];
-    [add setBackgroundImage:[UIImage imageNamed:@"ZJZAddPeople"] forState:UIControlStateNormal];
+    [add setFrame:CGRectMake(0.0f, 7.0f, 22.0f, 22.0f)];
+    [add setBackgroundImage:[UIImage imageNamed:@"user_alt"] forState:UIControlStateNormal];
     [add addTarget:self action:@selector(add) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:add];
 }
@@ -113,6 +113,7 @@
 -(void) add{
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"群成员",@"退出该群", nil];
     [actionSheet showInView:self.view];
+
 }
 
 - (void)viewDidUnload
@@ -269,7 +270,11 @@
         if ([[[CPUIModelManagement sharedInstance].quitGroupDic objectForKey:group_manage_dic_res_code]integerValue]== RESPONSE_CODE_SUCESS) {
             
             [[HPTopTipView shareInstance] showMessage:@"操作成功" duration:2.0f];
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            quitGroupFlag = NO;
         }else {
+            NSLog(@"%@",[[CPUIModelManagement sharedInstance].quitGroupDic objectForKey:group_manage_dic_res_desc]);
             [[HPTopTipView shareInstance] showMessage:[[CPUIModelManagement sharedInstance].quitGroupDic objectForKey:group_manage_dic_res_desc] duration:3.5f];
         }
     }
