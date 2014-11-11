@@ -22,6 +22,8 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     UITableView *tableview = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, self.screenHeight-44.f) style:UITableViewStylePlain];
     tableview.delegate = self;
     tableview.dataSource = self;
