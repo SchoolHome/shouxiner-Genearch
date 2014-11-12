@@ -513,14 +513,7 @@
     
     [self checkNotify];
     
-    //Test
-    UIButton *videoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [videoBtn setBackgroundColor:[UIColor blackColor]];
-    [videoBtn setTitle:@"微视频" forState:UIControlStateNormal];
-    [videoBtn addTarget:self action:@selector(chooseVideo) forControlEvents:UIControlEventTouchUpInside];
-    [videoBtn setFrame:CGRectMake(150.f, 50.f, 100.f, 100.f)];
-    [self.view addSubview:videoBtn];
-    
+
     avatar = [[EGOImageView alloc] initWithFrame:CGRectMake(18, 65, 80, 80)];
     avatar.backgroundColor = [UIColor grayColor];
     NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];

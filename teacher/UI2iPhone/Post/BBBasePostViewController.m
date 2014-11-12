@@ -265,7 +265,7 @@ ZYQAssetPickerControllerDelegate>
                 cell.textLabel.text = @"当前班级";
                 cell.textLabel.backgroundColor = [UIColor blackColor];
                 cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
                 break;
             case 1:
@@ -310,7 +310,7 @@ ZYQAssetPickerControllerDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
+    /*
     if (indexPath.section == 1) {
         return;
     }else
@@ -325,6 +325,7 @@ ZYQAssetPickerControllerDelegate>
         }
 
     }
+     */
 }
 
 #pragma mark - ViewControllerMethod

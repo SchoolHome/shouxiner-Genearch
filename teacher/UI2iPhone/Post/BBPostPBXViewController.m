@@ -416,10 +416,6 @@
 }
 
 #pragma mark - UITableview
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return TABLEVIEW_SECTION_COUNT+1;
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
