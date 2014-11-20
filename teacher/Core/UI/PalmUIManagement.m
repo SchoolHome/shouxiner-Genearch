@@ -14,6 +14,7 @@
 #import "SystemOperation.h"
 #import "UpAndDownLoadOperation.h"
 #import "DiscoverOperation.h"
+#import "PublicOperation.h"
 
 @implementation PalmUIManagement
 static PalmUIManagement *sharedInstance = nil;
@@ -219,4 +220,14 @@ static PalmUIManagement *sharedInstance = nil;
     [[PalmNetWorkService sharedInstance] networkEngine:operation];
 }
 
+// 获取公共账号消息
+-(void) getPublicMessage : (NSString *) mid{
+    PublicOperation *operation = [[PublicOperation alloc] initGetPublicMessage:mid];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
+// 转发公共账号消息
+-(void) postPublicMessageForward : (NSString *) mid withGroupID : (int) groupID withMessage : (NSString *) message{
+    PublicOperation *operation = [[PublicOperation alloc] initPostPublicMessageForward:mid withGroupID:groupID withMessage:message];
+    [[PalmNetWorkService sharedInstance] networkEngine:operation];
+}
 @end
