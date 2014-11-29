@@ -13,6 +13,7 @@
 #import "CPUIModelManagement.h"
 #import "BBSingleIMViewController.h"
 #import "ContactsStartGroupChatViewController.h"
+#import "BBContactPersonDetailViewController.h"
 //test
 #import "BBMembersInMsgGroupViewController.h"
 #import <MessageUI/MessageUI.h>
@@ -23,13 +24,11 @@
     
     NSMutableArray *searchResultList;
     
-    CONTACT_TYPE type;
+
 }
 @property (nonatomic , strong) BBMessageGroupBaseTableView *contactsListTableview;
-@property (nonatomic , strong) NSMutableArray *teachersListSection;
-@property (nonatomic , strong) NSMutableArray *parentsListSection;
-@property (nonatomic , strong) NSArray *teachers;
-@property (nonatomic , strong) NSArray *parents;
+@property (nonatomic, strong) NSArray *contacts;
+@property (nonatomic, strong) NSArray *contactsListSection;
 @property(nonatomic,strong) NSString *phoneNumber;
 
 @end
@@ -41,48 +40,57 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        UIButton *btnGroupChat = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnGroupChat setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
-        [btnGroupChat setBackgroundImage:[UIImage imageNamed:@"ZJZChat"] forState:UIControlStateNormal];
-        [btnGroupChat addTarget:self action:@selector(groupChatMode) forControlEvents:UIControlEventTouchUpInside];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnGroupChat];
-        
-
-        UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
-        [back setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
-        [back setBackgroundImage:[UIImage imageNamed:@"ZJZBack"] forState:UIControlStateNormal];
-        [back addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
+//        UIButton *btnGroupChat = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [btnGroupChat setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+//        [btnGroupChat setBackgroundImage:[UIImage imageNamed:@"ZJZChat"] forState:UIControlStateNormal];
+//        [btnGroupChat addTarget:self action:@selector(groupChatMode) forControlEvents:UIControlEventTouchUpInside];
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnGroupChat];
 
 //        UISegmentedControl *segement =  [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"",@"", nil]];
-//        segement.tintColor = [UIColor clearColor];
+//
 //        [segement setWidth:0.1 forSegmentAtIndex:0];
 //        [segement setWidth:0.1 forSegmentAtIndex:1];
+//        segement.tintColor = [UIColor clearColor];
 //        segement.segmentedControlStyle = UISegmentedControlStyleBar;
 //        segement.selectedSegmentIndex = 0;
 //        [segement addTarget:self action:@selector(segementValueChanged:) forControlEvents:UIControlEventValueChanged];
+//        
 //        [segement setDividerImage:[UIImage imageNamed:@"ZJZ_Seg_Teacher"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 //        [segement setDividerImage:[UIImage imageNamed:@"ZJZ_Seg_Teacher"] forLeftSegmentState:UIControlStateHighlighted rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 //        [segement setDividerImage:[UIImage imageNamed:@"ZJZ_Seg_Parent"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
 //        [segement setDividerImage:[UIImage imageNamed:@"ZJZ_Seg_Parent"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+//
 //        self.navigationItem.titleView = segement;
         
-        UIButton *segementBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [segementBtn setFrame:CGRectMake(0.f, 0.f, 128.f, 27.f)];
-        [segementBtn setBackgroundImage:[UIImage imageNamed:@"ZJZ_Seg_Teacher"] forState:UIControlStateNormal];
-        [segementBtn setBackgroundImage:[UIImage imageNamed:@"ZJZ_Seg_Parent"] forState:UIControlStateSelected];
-        [segementBtn addTarget:self action:@selector(segeValueChanged:) forControlEvents:UIControlEventTouchUpInside];
-        self.navigationItem.titleView = segementBtn;
+//        UIButton *segementBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [segementBtn setFrame:CGRectMake(0.f, 0.f, 128.f, 27.f)];
+//        [segementBtn setBackgroundImage:[UIImage imageNamed:@"ZJZ_Seg_Teacher"] forState:UIControlStateNormal];
+//        [segementBtn setBackgroundImage:[UIImage imageNamed:@"ZJZ_Seg_Parent"] forState:UIControlStateSelected];
+//        [segementBtn addTarget:self action:@selector(segeValueChanged:) forControlEvents:UIControlEventTouchUpInside];
+//        self.navigationItem.titleView = segementBtn;
         
-        searchResultList = [[NSMutableArray alloc] init];
+        
     }
     return self;
 }
--(void)viewWillAppear:(BOOL)animated
+
+- (id)initWithContactsArray:(NSArray *)contact
+{
+    
+    self = [super init];
+    if (self) {
+        self.contacts = [[NSArray alloc] initWithArray:contact];
+        searchResultList = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
 {
     [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"createMsgGroupTag" options:0 context:nil];
 }
--(void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"createMsgGroupTag"];
 }
@@ -92,13 +100,21 @@
     if (IOS7) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    //self.title = @"通讯录";
+
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(0.f, 7.f, 24.f, 24.f)];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    
+    
     _contactsListTableview = [[BBMessageGroupBaseTableView alloc] initWithFrame:CGRectMake(0.f, 40.f, 320.f, [UIScreen mainScreen].bounds.size.height-102.f ) style:UITableViewStylePlain];
     _contactsListTableview.backgroundColor = [UIColor clearColor];
     _contactsListTableview.delegate = self;
     _contactsListTableview.dataSource = self;
     _contactsListTableview.messageGroupBaseTableViewdelegate = self;
-    //_contactsListTableview.sectionIndexBackgroundColor = [UIColor clearColor];
+    
     _contactsListTableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:_contactsListTableview];
     
@@ -112,14 +128,16 @@
     _contactsSearchDisplay.delegate = self;
     _contactsSearchDisplay.searchResultsDelegate = self;
     _contactsSearchDisplay.searchResultsDataSource = self;
+    _contactsSearchDisplay.searchResultsTableView.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
     _contactsSearchDisplay.searchResultsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
 
     
-    self.view.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
+    //self.view.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
     //[[PalmUIManagement sharedInstance] getuserContacts];
 	// Do any additional setup after loading the view.
     if (!IOS7) {
+        
         for (UIView *subview in _contactsTableSearchBar.subviews)
         {
             if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")])
@@ -129,53 +147,13 @@
             }
         }
     }else _contactsListTableview.sectionIndexBackgroundColor = [UIColor clearColor];
-     [self classifyData];
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark Getter&&Setter
-//-(NSArray *)contactsListDataArray
-//{
-//    if (!_contactsListDataArray) {
-//        _contactsListDataArray = [[NSArray alloc] initWithArray:[CPUIModelManagement sharedInstance].friendArray];
-//    }
-//    NSLog(@"%@",_contactsListDataArray);
-//    return _contactsListDataArray;
-//}
-
--(void)setTeachersListSection:(NSMutableArray *)teachersListSection
-{
-    _teachersListSection = teachersListSection;
-    if (type == CONTACT_TYPE_TEACHER) {
-        [self.contactsListTableview reloadData];
-    }
-    
-}
-
--(void)setParentsListSection:(NSMutableArray *)parentsListSection
-{
-    _parentsListSection = parentsListSection;
-    if (type == CONTACT_TYPE_PARENT) {
-        [self.contactsListTableview reloadData];
-    }
-}
-
--(void)setTeachers:(NSArray *)teachers
-{
-    _teachers = teachers;
-    [self setTeachersListSection:[self sortDataByModels:teachers]];
-    
-}
-
--(void)setParents:(NSArray *)parents
-{
-    _parents = parents;
-    [self setParentsListSection:[self sortDataByModels:parents]];
 }
 #pragma mark Observer
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -191,6 +169,7 @@
      }
      */
     if ([keyPath isEqualToString:@"createMsgGroupTag"]) {
+        [self closeProgress];
         NSInteger resultCodeInt = [CPUIModelManagement sharedInstance].createMsgGroupTag;
         // 成功
         if(resultCodeInt == RESPONSE_CODE_SUCESS){
@@ -203,76 +182,14 @@
         }
     }
 }
+
+#pragma mark setter&getter
+- (void)setContacts:(NSArray *)contacts
+{
+    _contacts = contacts;
+    [self setContactsListSection:[self sortDataByModels:contacts]];
+}
 #pragma mark ContactsViewController
--(void)segeValueChanged :(UIButton *)sender
-{
-    sender.selected = !sender.selected;
-    
-    if (sender.selected) {
-        type = CONTACT_TYPE_PARENT;
-    }else
-    {
-        type = CONTACT_TYPE_TEACHER;
-    }
-    [self.contactsListTableview reloadData];
-}
--(void)segementValueChanged:(UISegmentedControl *)seg
-{
-    if (seg.selectedSegmentIndex == 0) {
-
-        type = CONTACT_TYPE_TEACHER;
-    }else if (seg.selectedSegmentIndex == 1)
-    {
-
-        type = CONTACT_TYPE_PARENT;
-    }
-    [self.contactsListTableview reloadData];
-}
--(void)classifyData
-{
-    NSMutableArray *teacherArray = [[NSMutableArray alloc] init];
-    NSMutableArray *parentArray = [[NSMutableArray alloc] init];
-    for (CPUIModelUserInfo *model in [CPUIModelManagement sharedInstance].friendArray) {
-        ContactsModel *tempModel = [[ContactsModel alloc] init];
-        tempModel.modelID = [model.userInfoID integerValue];
-        tempModel.avatarPath = model.headerPath;
-
-        //tempModel.jid = model.
-        tempModel.mobile = model.mobileNumber;
-        //tempModel.uid = [infoDic objectForKey:@"uid"];
-        tempModel.userName = model.nickName;
-        //是否激活
-        tempModel.isActive = [model.sex integerValue] == 0 ? NO : YES;
-        //是否是家长   //是否是老师
-        if ([model.coupleAccount isEqualToString:@"Teacher"]) {
-            tempModel.isTeacher = YES;
-            tempModel.isParent  = NO;
-            
-            [teacherArray addObject:tempModel];
-        }else if ([model.coupleAccount isEqualToString:@"Parent"])
-        {
-            tempModel.isTeacher = NO;
-            tempModel.isParent  = YES;
-            
-            [parentArray addObject:tempModel];
-        }else if ([model.coupleAccount isEqualToString:@"TeacherAndParent"])
-        {
-            tempModel.isTeacher = YES;
-            tempModel.isParent  = YES;
-            
-            [teacherArray addObject:tempModel];
-            [parentArray addObject:tempModel];
-        }else
-        {
-            tempModel.isTeacher = NO;
-            tempModel.isParent  = NO;
-        }
-        
-        
-    }
-    [self setTeachers:teacherArray];
-    [self setParents:parentArray];
-}
 -(void)backAction
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -281,16 +198,13 @@
 {
     ContactsStartGroupChatViewController *groupChat = [[ContactsStartGroupChatViewController alloc] init];
     [self.navigationController pushViewController:groupChat animated:YES];
-    
-//    BBMembersInMsgGroupViewController *member = [[BBMembersInMsgGroupViewController alloc] init];
-//    [self.navigationController pushViewController:member animated:YES];
 }
--(NSMutableArray *)sortDataByModels:(NSArray *)studentModels
+-(NSMutableArray *)sortDataByModels:(NSArray *)contactModels
 {
     
     // Sort data
     UILocalizedIndexedCollation *theCollation = [UILocalizedIndexedCollation currentCollation];
-    for (ContactsModel *tempModel in studentModels) {
+    for (ContactsModel *tempModel in contactModels) {
         NSInteger sect = [theCollation sectionForObject:tempModel
                                 collationStringSelector:@selector(userName)];
         NSLog(@"%d",sect);
@@ -304,7 +218,7 @@
         [sectionArrays addObject:sectionArray];
     }
     
-    for (ContactsModel *tempModel in studentModels) {
+    for (ContactsModel *tempModel in contactModels) {
         if (![tempModel.userName isEqualToString:@""]) {
             [(NSMutableArray *)[sectionArrays objectAtIndex:tempModel.sectionNumber] addObject:tempModel];
         }
@@ -319,15 +233,15 @@
         //}
         
     }
-    
     return tempSectionArray;
+
     
     // [selectedView setStudentNames:selectedStu];
     
     
     
 }
--(CPUIModelUserInfo *)getUserInfoByModelID:(NSInteger)modelID
+- (CPUIModelUserInfo *)getUserInfoByModelID:(NSInteger)modelID
 {
     for (CPUIModelUserInfo *userInfo in [CPUIModelManagement sharedInstance].friendArray) {
         if ([userInfo.userInfoID integerValue] == modelID) {
@@ -336,6 +250,8 @@
     }
     return nil;
 }
+
+
 #pragma mark Data
 -(NSMutableArray *)searchResultListByKeyWord:(NSString *)keyword
 {
@@ -355,7 +271,7 @@
     //        }
     //  }
 
-        for (ContactsModel  *tempModel in type == CONTACT_TYPE_PARENT ? self.parents : self.teachers){
+        for (ContactsModel  *tempModel in self.contacts){
             NSRange containStrRange = [tempModel.userName rangeOfString:keyword options:NSCaseInsensitiveSearch];
             if (containStrRange.length > 0) {
                 //有当前关键字结果
@@ -402,7 +318,21 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ContactsModel *model = self.contactsListSection[indexPath.section][indexPath.row];
+    CPUIModelUserInfo *userInfo = [self getUserInfoByModelID:model.modelID];
+    if (!userInfo) {
+        [self showProgressWithText:@"未获取到信息" withDelayTime:3];
+        return;
+    }
+    
+    if ([userInfo.sex integerValue] == 0) {
+        [self showProgressWithText:@"当前用户没有激活,请先邀请他加入手心" withDelayTime:3];
+        return;
+    }
+    
+    BBContactPersonDetailViewController *personDetail = [[BBContactPersonDetailViewController alloc] initWithUserInfo:userInfo];
+    [self.navigationController pushViewController:personDetail animated:YES];
 }
 #pragma mark UItableviewDatasouce
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -410,10 +340,7 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return 0;
     } else {
-        if (type == CONTACT_TYPE_PARENT) return  [[self.parentsListSection objectAtIndex:section] count] ? 30 : 0;
-        
-        else  return  [[self.teachersListSection objectAtIndex:section] count] ? 30 : 0;
-        
+        return  [[self.contactsListSection objectAtIndex:section] count] ? 30 : 0;
     }
     
 }
@@ -425,16 +352,14 @@
         
         
         UIView *sectionView = [[UIView alloc] initWithFrame:CGRectZero];
-        sectionView.backgroundColor = [UIColor colorWithRed:128/255.f green:143/255.f blue:155/255.f alpha:1.f];
+        sectionView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        //sectionView.backgroundColor = [UIColor colorWithRed:128/255.f green:143/255.f blue:155/255.f alpha:1.f];
         
         UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 6.f, 200.f, 20.f)];
         title.backgroundColor = [UIColor clearColor];
         title.font = [UIFont boldSystemFontOfSize:14.f];
-        title.textColor = [UIColor whiteColor];
-        if (type == CONTACT_TYPE_PARENT)    title.text = [[self.parentsListSection objectAtIndex:section] count] ? [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section] : nil;
-        
-        else  title.text = [[self.teachersListSection objectAtIndex:section] count] ? [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section] : nil;
- 
+        title.textColor = [UIColor lightGrayColor];
+        title.text = [[self.contactsListSection objectAtIndex:section] count] ? [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section] : nil;
         [sectionView addSubview:title];
         return sectionView;
     }
@@ -470,22 +395,19 @@
 	if (tableView == self.searchDisplayController.searchResultsTableView) {
         return 1;
 	} else {
-        return type == CONTACT_TYPE_PARENT ? self.parentsListSection.count : self.teachersListSection.count;
+        return self.contactsListSection.count;
     }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
+        NSLog(@"%@",self.searchDisplayController.searchResultsTableView);
         return searchResultList.count;
     }else
     {
-        return type == CONTACT_TYPE_PARENT ? [[self.parentsListSection objectAtIndex:section] count] :
-        [[self.teachersListSection objectAtIndex:section] count];
+        return [[self.contactsListSection objectAtIndex:section] count];
     }
-
-
-    
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -501,13 +423,8 @@
         [cell setModel:[searchResultList objectAtIndex:indexPath.row]];
     }else
     {
-            [cell setModel:type == CONTACT_TYPE_PARENT ?
-             [[self.parentsListSection objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] :
-            [[self.teachersListSection objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
-
+            [cell setModel:[[self.contactsListSection objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
     }
-    
-
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -522,19 +439,23 @@
         [self showProgressWithText:@"未获取到信息" withDelayTime:3];
         return;
     }
+    
+    [self showProgressWithText:@"正在发起聊天..."];
     [[CPUIModelManagement sharedInstance] createConversationWithUsers:[NSArray arrayWithObject:userInfo] andMsgGroups:nil andType:CREATE_CONVER_TYPE_COMMON];
 }
 -(void)sendMessage:(NSString *)mobileNumber
 {
     if ([mobileNumber isEqualToString:@"0"]) {
         [self showProgressWithText:@"对方未绑定电话号码" withDelayTime:3];
-        //return;
+        return;
     }
-    NSLog(@"mobileNumber === %@",mobileNumber);
     self.phoneNumber = mobileNumber;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"确认要给%@发送短信吗?",mobileNumber] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",@"取消", nil];
     alert.tag = 2;
     [alert show];
+    
+//    NSString *mobileNumberUrlStr = [NSString stringWithFormat:@"sms://%@",mobileNumber];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mobileNumberUrlStr]];
 }
 -(void)makeCall:(NSString *)mobileNumber
 {
@@ -546,15 +467,14 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"电话" message:[NSString stringWithFormat: @"确认拨打%@",mobileNumber] delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认",@"取消", nil];
     alert.tag = 1;
     [alert show];
+//    NSString *mobileNumberUrlStr = [NSString stringWithFormat:@"telprompt://%@",mobileNumber];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mobileNumberUrlStr]];
     
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if (buttonIndex == 0) {
-        //        NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",self.phoneNumber]];
-        //        UIWebView *phoneCallWebView = [[UIWebView alloc] initWithFrame:CGRectZero];
-        //        [phoneCallWebView loadRequest:[NSURLRequest requestWithURL:phoneURL]];
         if (alertView.tag == 1) {
             NSString *mobileNumberUrlStr = [NSString stringWithFormat:@"telprompt://%@",self.phoneNumber];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mobileNumberUrlStr]];
@@ -565,13 +485,14 @@
                 picker.recipients = [NSArray arrayWithObject:self.phoneNumber];
                 picker.messageComposeDelegate =self;
                 
-                
-                
                 picker.body=[NSString stringWithFormat:@"'%@'邀请您下载手心网客户端，app.shouxiner.com",[CPUIModelManagement sharedInstance].uiPersonalInfo.nickName];
                 [self presentModalViewController:picker animated:YES];
+                
             }else [self showProgressWithText:@"当前设备不支持短信" withDelayTime:2.5f];
+
+
         }
-        
+
     }
 }
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller
