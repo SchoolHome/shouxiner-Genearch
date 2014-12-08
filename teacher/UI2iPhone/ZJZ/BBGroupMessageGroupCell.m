@@ -7,8 +7,11 @@
 //
 
 #import "BBGroupMessageGroupCell.h"
+
 #import "CPUIModelManagement.h"
 #import "CPUIModelPersonalInfo.h"
+
+#import "ImageUtil.h"
 
 @implementation BBGroupMessageGroupCell
 
@@ -26,40 +29,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
--(void)setMsgGroup:(CPUIModelMessageGroup *)msgGroup
-{
-    [super setMsgGroup:msgGroup];
-    
-    if (msgGroup) {
-        if (msgGroup.memberList.count > 1) {
-            NSArray *array = [NSArray arrayWithArray:msgGroup.memberList];;
-            NSString *title = @"";
-            int i = 0;
-            for (CPUIModelUserInfo *user in array) {
-                if (![user.nickName isEqualToString:[CPUIModelManagement sharedInstance].uiPersonalInfo.nickName]) {
-                    if (user.nickName == nil || [user.nickName isEqualToString:@""]) {
-                        continue;
-                    }
-                    if (i == 2) {
-                        break;
-                    }
-                    i++;
-                    title = [NSString stringWithFormat:@"%@ %@",title,user.nickName];
-                }
-            }
-            title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            self.userNameLabel.text = [NSString stringWithFormat:@"%@等",title];
-        }
-    }
-    
-    self.userHeadImageView.image = [UIImage imageNamed:@"girl.png"];
-    [self.userHeadImageView.layer setMasksToBounds:YES];
-    self.userHeadImageView.layer.borderWidth = 0;
-    self.userHeadImageView.layer.cornerRadius = 25.0;
-    self.userHeadImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
-    
-    
 }
 //notifyMessage change
 -(void)setUIModelMsgGroup:(CPUIModelMessageGroup *)msgGroup
@@ -86,13 +55,14 @@
             title = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             self.userNameLabel.text = [NSString stringWithFormat:@"%@等",title];
         }
+        self.userHeadImageView.image = [UIImage groupHeader:msgGroup];
     }
     
-    self.userHeadImageView.image = [UIImage imageNamed:@"girl.png"];
-    [self.userHeadImageView.layer setMasksToBounds:YES];
-    self.userHeadImageView.layer.borderWidth = 0;
-    self.userHeadImageView.layer.cornerRadius = 25.0;
-    self.userHeadImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
+//    self.userHeadImageView.image = [UIImage imageNamed:@"girl.png"];
+//    [self.userHeadImageView.layer setMasksToBounds:YES];
+//    self.userHeadImageView.layer.borderWidth = 0;
+//    self.userHeadImageView.layer.cornerRadius = 25.0;
+//    self.userHeadImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
     
     
 }

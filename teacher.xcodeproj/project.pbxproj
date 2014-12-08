@@ -93,10 +93,6 @@
 		1927E4C218E5544E0079EA53 /* ZJZSenderText@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1927E4BA18E5544E0079EA53 /* ZJZSenderText@2x.png */; };
 		193617FC1926764000548F7E /* ActivateSmallFrom2.png in Resources */ = {isa = PBXBuildFile; fileRef = 193617FA1926764000548F7E /* ActivateSmallFrom2.png */; };
 		193617FD1926764000548F7E /* ActivateSmallFrom2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193617FB1926764000548F7E /* ActivateSmallFrom2@2x.png */; };
-		193E593E18D9908200DB1FF4 /* BBmessageMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193E593D18D9908200DB1FF4 /* BBmessageMainViewController.m */; };
-		193E594118D990A300DB1FF4 /* BBIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193E594018D990A300DB1FF4 /* BBIMViewController.m */; };
-		193E594418D990C300DB1FF4 /* BBSingleIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193E594318D990C300DB1FF4 /* BBSingleIMViewController.m */; };
-		193E594718D9A39B00DB1FF4 /* BBMutilIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193E594618D9A39B00DB1FF4 /* BBMutilIMViewController.m */; };
 		193FA82019F0A2E600874F1E /* f_hwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA7AE19F0A2E500874F1E /* f_hwork.png */; };
 		193FA82119F0A2E600874F1E /* f_hwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA7AF19F0A2E500874F1E /* f_hwork@2x.png */; };
 		193FA82219F0A2E600874F1E /* f_notice.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA7B019F0A2E500874F1E /* f_notice.png */; };
@@ -175,8 +171,8 @@
 		193FA88519F0A2E600874F1E /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81919F0A2E600874F1E /* add@2x.png */; };
 		193FA88619F0A2E600874F1E /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81A19F0A2E600874F1E /* back.png */; };
 		193FA88719F0A2E600874F1E /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81B19F0A2E600874F1E /* back@2x.png */; };
-		193FA88819F0A2E600874F1E /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81C19F0A2E600874F1E /* close.png */; };
-		193FA88919F0A2E600874F1E /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81D19F0A2E600874F1E /* close@2x.png */; };
+		193FA88819F0A2E600874F1E /* imageClose.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81C19F0A2E600874F1E /* imageClose.png */; };
+		193FA88919F0A2E600874F1E /* imageClose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81D19F0A2E600874F1E /* imageClose@2x.png */; };
 		193FA88A19F0A2E600874F1E /* enter.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81E19F0A2E600874F1E /* enter.png */; };
 		193FA88B19F0A2E600874F1E /* enter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81F19F0A2E600874F1E /* enter@2x.png */; };
 		19451C7E19F78E5800E4D92B /* BBNoticeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19451C7D19F78E5800E4D92B /* BBNoticeTableViewCell.m */; };
@@ -1256,21 +1252,12 @@
 		33771E4818C9D28600FB5002 /* PalmUIModelCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 33771E4718C9D28600FB5002 /* PalmUIModelCoding.m */; };
 		339ECB0318CAF76F0062C5ED /* PalmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339ECB0218CAF76F0062C5ED /* PalmViewController.m */; };
 		339ECB0918CAF93C0062C5ED /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 339ECB0818CAF93C0062C5ED /* MBProgressHUD.m */; };
-		741EBBC518D4CC7B00F21085 /* BBSingleMessageGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EBBC418D4CC7B00F21085 /* BBSingleMessageGroupCell.m */; };
-		741EBBC818D4CCA900F21085 /* BBGroupMessageGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 741EBBC718D4CCA900F21085 /* BBGroupMessageGroupCell.m */; };
 		7441DF3E1969823E00D9928A /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7441DF3D1969823E00D9928A /* CustomNavigationController.m */; };
-		74421CD818DF467A000D2F1B /* DisplaySelectedMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74421CD718DF467A000D2F1B /* DisplaySelectedMemberView.m */; };
 		745D768A193F6A6000AF666E /* BBStudentListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D7689193F6A6000AF666E /* BBStudentListTableViewCell.m */; };
 		745D768D193F6E9D00AF666E /* BBDisplaySelectedStudentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D768C193F6E9D00AF666E /* BBDisplaySelectedStudentsView.m */; };
 		745D7690193F821700AF666E /* BBStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D768F193F821700AF666E /* BBStudentModel.m */; };
-		745F0AAE198F587A004BC9D4 /* BBMessageGroupBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0AAD198F587A004BC9D4 /* BBMessageGroupBaseCell.m */; };
-		745F0AB1198F5899004BC9D4 /* BBNotifyMessageGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0AB0198F5899004BC9D4 /* BBNotifyMessageGroupCell.m */; };
-		745F0AB4198F58A1004BC9D4 /* BBZJZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0AB3198F58A1004BC9D4 /* BBZJZViewController.m */; };
-		745F0AB7198F58C7004BC9D4 /* CPDAONotifyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0AB6198F58C7004BC9D4 /* CPDAONotifyMessage.m */; };
 		745F0ABA198F5923004BC9D4 /* CPDBModelNotifyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0AB9198F5923004BC9D4 /* CPDBModelNotifyMessage.m */; };
 		745F0ABD198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0ABC198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m */; };
-		7478550518DB545C0070DF87 /* ContactsStartGroupChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478550418DB545C0070DF87 /* ContactsStartGroupChatViewController.m */; };
-		7478550818DB548C0070DF87 /* StartGroupChatTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478550718DB548C0070DF87 /* StartGroupChatTableviewCell.m */; };
 		7478F4551A0D37D200CEB85D /* BBBasePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F44E1A0D37D200CEB85D /* BBBasePostViewController.m */; };
 		7478F4561A0D37D200CEB85D /* BBPostHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F4501A0D37D200CEB85D /* BBPostHomeworkViewController.m */; };
 		7478F4571A0D37D200CEB85D /* BBPostPBXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F4521A0D37D200CEB85D /* BBPostPBXViewController.m */; };
@@ -1282,9 +1269,6 @@
 		7478F4671A0D38EB00CEB85D /* BBChooseImgViewInPostPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F4661A0D38EB00CEB85D /* BBChooseImgViewInPostPage.m */; };
 		7478F46D1A0D39EB00CEB85D /* BBStudentsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478F46C1A0D39EB00CEB85D /* BBStudentsListViewController.m */; };
 		747D154C19F8DFB400304F27 /* BBRecommendedRangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 747D154B19F8DFB400304F27 /* BBRecommendedRangeViewController.m */; };
-		749D72AE18D6147200936D5E /* BBMessageGroupBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 749D72AD18D6147200936D5E /* BBMessageGroupBaseTableView.m */; };
-		74A4E5C418DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A4E5C318DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.m */; };
-		74A4E5C718DFE4B6000F79E6 /* BBMemberInMsgGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A4E5C618DFE4B6000F79E6 /* BBMemberInMsgGroupTableViewCell.m */; };
 		74A4E5E118DFE8B8000F79E6 /* ZJZAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5C918DFE8B7000F79E6 /* ZJZAdd.png */; };
 		74A4E5E218DFE8B8000F79E6 /* ZJZAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5CA18DFE8B7000F79E6 /* ZJZAdd@2x.png */; };
 		74A4E5E318DFE8B8000F79E6 /* ZJZAdress.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5CB18DFE8B7000F79E6 /* ZJZAdress.png */; };
@@ -1305,15 +1289,41 @@
 		74A4E5F618DFE8B8000F79E6 /* ZJZSendSMS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5DE18DFE8B8000F79E6 /* ZJZSendSMS@2x.png */; };
 		74A4E5F718DFE8B8000F79E6 /* ZJZUnCheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5DF18DFE8B8000F79E6 /* ZJZUnCheck.png */; };
 		74A4E5F818DFE8B8000F79E6 /* ZJZUnCheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5E018DFE8B8000F79E6 /* ZJZUnCheck@2x.png */; };
+		74ADDE091A2A063C0055B86E /* BBGroupMessageGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDD11A2A063C0055B86E /* BBGroupMessageGroupCell.m */; };
+		74ADDE0A1A2A063C0055B86E /* BBIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDD31A2A063C0055B86E /* BBIMViewController.m */; };
+		74ADDE0B1A2A063C0055B86E /* BBMemberInMsgGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDD51A2A063C0055B86E /* BBMemberInMsgGroupTableViewCell.m */; };
+		74ADDE0C1A2A063C0055B86E /* BBMembersInMsgGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDD71A2A063C0055B86E /* BBMembersInMsgGroupViewController.m */; };
+		74ADDE0D1A2A063C0055B86E /* BBMessageGroupBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDD91A2A063C0055B86E /* BBMessageGroupBaseCell.m */; };
+		74ADDE0E1A2A063C0055B86E /* BBMessageGroupBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDDB1A2A063C0055B86E /* BBMessageGroupBaseTableView.m */; };
+		74ADDE0F1A2A063C0055B86E /* BBmessageMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDDD1A2A063C0055B86E /* BBmessageMainViewController.m */; };
+		74ADDE101A2A063C0055B86E /* BBMutilIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDDF1A2A063C0055B86E /* BBMutilIMViewController.m */; };
+		74ADDE111A2A063C0055B86E /* BBNotifyMessageGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDE11A2A063C0055B86E /* BBNotifyMessageGroupCell.m */; };
+		74ADDE121A2A063C0055B86E /* BBSingleIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDE31A2A063C0055B86E /* BBSingleIMViewController.m */; };
+		74ADDE131A2A063C0055B86E /* BBSingleMessageGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDE51A2A063C0055B86E /* BBSingleMessageGroupCell.m */; };
+		74ADDE141A2A063C0055B86E /* BBZJZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDE71A2A063C0055B86E /* BBZJZViewController.m */; };
+		74ADDE151A2A063C0055B86E /* BBContactPersonDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDEA1A2A063C0055B86E /* BBContactPersonDetailViewController.m */; };
+		74ADDE161A2A063C0055B86E /* BBServiceAccountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDEC1A2A063C0055B86E /* BBServiceAccountDetailViewController.m */; };
+		74ADDE171A2A063C0055B86E /* BBServiceAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDEE1A2A063C0055B86E /* BBServiceAccountViewController.m */; };
+		74ADDE181A2A063C0055B86E /* BBServiceMessageDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDF01A2A063C0055B86E /* BBServiceMessageDetailModel.m */; };
+		74ADDE191A2A063C0055B86E /* BBServiceMessageDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDF21A2A063C0055B86E /* BBServiceMessageDetailView.m */; };
+		74ADDE1A1A2A063C0055B86E /* BBServiceMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDF41A2A063C0055B86E /* BBServiceMessageDetailViewController.m */; };
+		74ADDE1B1A2A063C0055B86E /* BBServiceMessageShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDF61A2A063C0055B86E /* BBServiceMessageShareViewController.m */; };
+		74ADDE1C1A2A063C0055B86E /* BBServiceMessageWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDF81A2A063C0055B86E /* BBServiceMessageWebViewController.m */; };
+		74ADDE1D1A2A063C0055B86E /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDFA1A2A063C0055B86E /* ContactsModel.m */; };
+		74ADDE1E1A2A063C0055B86E /* ContactsStartGroupChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDFC1A2A063C0055B86E /* ContactsStartGroupChatViewController.m */; };
+		74ADDE1F1A2A063C0055B86E /* ContactsTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDDFE1A2A063C0055B86E /* ContactsTableviewCell.m */; };
+		74ADDE201A2A063C0055B86E /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDE001A2A063C0055B86E /* ContactsViewController.m */; };
+		74ADDE211A2A063C0055B86E /* DisplaySelectedMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDE021A2A063C0055B86E /* DisplaySelectedMemberView.m */; };
+		74ADDE221A2A063C0055B86E /* MutilGroupDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDE041A2A063C0055B86E /* MutilGroupDetailViewController.m */; };
+		74ADDE231A2A063C0055B86E /* MutilMsgGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDE061A2A063C0055B86E /* MutilMsgGroupViewController.m */; };
+		74ADDE241A2A063C0055B86E /* StartGroupChatTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDE081A2A063C0055B86E /* StartGroupChatTableviewCell.m */; };
+		74ADDE271A2A07E10055B86E /* CPDAONotifyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ADDE261A2A07E10055B86E /* CPDAONotifyMessage.m */; };
 		74AF37131963A494008EA251 /* ZJZCallPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AF370F1963A494008EA251 /* ZJZCallPhone.png */; };
 		74AF37141963A494008EA251 /* ZJZCallPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AF37101963A494008EA251 /* ZJZCallPhone@2x.png */; };
 		74AF37151963A494008EA251 /* ZJZCellChat.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AF37111963A494008EA251 /* ZJZCellChat.png */; };
 		74AF37161963A494008EA251 /* ZJZCellChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AF37121963A494008EA251 /* ZJZCellChat@2x.png */; };
 		74AF371D1963A4F0008EA251 /* BBAddContacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AF371B1963A4F0008EA251 /* BBAddContacts.png */; };
 		74AF371E1963A4F0008EA251 /* BBAddContacts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AF371C1963A4F0008EA251 /* BBAddContacts@2x.png */; };
-		74EF7E071962C2BC00DCD5A3 /* ContactsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EF7E021962C2BC00DCD5A3 /* ContactsModel.m */; };
-		74EF7E081962C2BC00DCD5A3 /* ContactsTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EF7E041962C2BC00DCD5A3 /* ContactsTableviewCell.m */; };
-		74EF7E091962C2BC00DCD5A3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74EF7E061962C2BC00DCD5A3 /* ContactsViewController.m */; };
 		74EF7E0C1962C2E800DCD5A3 /* ZJZ_Seg_Parent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74EF7E0A1962C2E800DCD5A3 /* ZJZ_Seg_Parent@2x.png */; };
 		74EF7E0D1962C2E800DCD5A3 /* ZJZ_Seg_Teacher@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74EF7E0B1962C2E800DCD5A3 /* ZJZ_Seg_Teacher@2x.png */; };
 		7A076A9518DFFF1B00911291 /* BBComentBottomBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A076A9318DFFF1B00911291 /* BBComentBottomBG.png */; };
@@ -1595,14 +1605,6 @@
 		1927E4BA18E5544E0079EA53 /* ZJZSenderText@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZSenderText@2x.png"; sourceTree = "<group>"; };
 		193617FA1926764000548F7E /* ActivateSmallFrom2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActivateSmallFrom2.png; sourceTree = "<group>"; };
 		193617FB1926764000548F7E /* ActivateSmallFrom2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActivateSmallFrom2@2x.png"; sourceTree = "<group>"; };
-		193E593C18D9908200DB1FF4 /* BBmessageMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBmessageMainViewController.h; sourceTree = "<group>"; };
-		193E593D18D9908200DB1FF4 /* BBmessageMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBmessageMainViewController.m; sourceTree = "<group>"; };
-		193E593F18D990A300DB1FF4 /* BBIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBIMViewController.h; sourceTree = "<group>"; };
-		193E594018D990A300DB1FF4 /* BBIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBIMViewController.m; sourceTree = "<group>"; };
-		193E594218D990C300DB1FF4 /* BBSingleIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSingleIMViewController.h; sourceTree = "<group>"; };
-		193E594318D990C300DB1FF4 /* BBSingleIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSingleIMViewController.m; sourceTree = "<group>"; };
-		193E594518D9A39B00DB1FF4 /* BBMutilIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMutilIMViewController.h; sourceTree = "<group>"; };
-		193E594618D9A39B00DB1FF4 /* BBMutilIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMutilIMViewController.m; sourceTree = "<group>"; };
 		193FA7AE19F0A2E500874F1E /* f_hwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f_hwork.png; sourceTree = "<group>"; };
 		193FA7AF19F0A2E500874F1E /* f_hwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "f_hwork@2x.png"; sourceTree = "<group>"; };
 		193FA7B019F0A2E500874F1E /* f_notice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f_notice.png; sourceTree = "<group>"; };
@@ -1681,8 +1683,8 @@
 		193FA81919F0A2E600874F1E /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
 		193FA81A19F0A2E600874F1E /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		193FA81B19F0A2E600874F1E /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
-		193FA81C19F0A2E600874F1E /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
-		193FA81D19F0A2E600874F1E /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
+		193FA81C19F0A2E600874F1E /* imageClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageClose.png; sourceTree = "<group>"; };
+		193FA81D19F0A2E600874F1E /* imageClose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imageClose@2x.png"; sourceTree = "<group>"; };
 		193FA81E19F0A2E600874F1E /* enter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter.png; sourceTree = "<group>"; };
 		193FA81F19F0A2E600874F1E /* enter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enter@2x.png"; sourceTree = "<group>"; };
 		19451C7C19F78E5800E4D92B /* BBNoticeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBNoticeTableViewCell.h; sourceTree = "<group>"; };
@@ -3329,36 +3331,18 @@
 		339ECB0518CAF8450062C5ED /* PalmVCBaseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PalmVCBaseProtocol.h; sourceTree = "<group>"; };
 		339ECB0718CAF93C0062C5ED /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		339ECB0818CAF93C0062C5ED /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		741EBBC318D4CC7B00F21085 /* BBSingleMessageGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSingleMessageGroupCell.h; sourceTree = "<group>"; };
-		741EBBC418D4CC7B00F21085 /* BBSingleMessageGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSingleMessageGroupCell.m; sourceTree = "<group>"; };
-		741EBBC618D4CCA900F21085 /* BBGroupMessageGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBGroupMessageGroupCell.h; sourceTree = "<group>"; };
-		741EBBC718D4CCA900F21085 /* BBGroupMessageGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBGroupMessageGroupCell.m; sourceTree = "<group>"; };
 		7441DF3C1969823E00D9928A /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		7441DF3D1969823E00D9928A /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
-		74421CD618DF467A000D2F1B /* DisplaySelectedMemberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplaySelectedMemberView.h; sourceTree = "<group>"; };
-		74421CD718DF467A000D2F1B /* DisplaySelectedMemberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplaySelectedMemberView.m; sourceTree = "<group>"; };
 		745D7688193F6A6000AF666E /* BBStudentListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBStudentListTableViewCell.h; sourceTree = "<group>"; };
 		745D7689193F6A6000AF666E /* BBStudentListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBStudentListTableViewCell.m; sourceTree = "<group>"; };
 		745D768B193F6E9D00AF666E /* BBDisplaySelectedStudentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBDisplaySelectedStudentsView.h; sourceTree = "<group>"; };
 		745D768C193F6E9D00AF666E /* BBDisplaySelectedStudentsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBDisplaySelectedStudentsView.m; sourceTree = "<group>"; };
 		745D768E193F821700AF666E /* BBStudentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBStudentModel.h; sourceTree = "<group>"; };
 		745D768F193F821700AF666E /* BBStudentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBStudentModel.m; sourceTree = "<group>"; };
-		745F0AAC198F587A004BC9D4 /* BBMessageGroupBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMessageGroupBaseCell.h; sourceTree = "<group>"; };
-		745F0AAD198F587A004BC9D4 /* BBMessageGroupBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMessageGroupBaseCell.m; sourceTree = "<group>"; };
-		745F0AAF198F5899004BC9D4 /* BBNotifyMessageGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBNotifyMessageGroupCell.h; sourceTree = "<group>"; };
-		745F0AB0198F5899004BC9D4 /* BBNotifyMessageGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBNotifyMessageGroupCell.m; sourceTree = "<group>"; };
-		745F0AB2198F58A1004BC9D4 /* BBZJZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBZJZViewController.h; sourceTree = "<group>"; };
-		745F0AB3198F58A1004BC9D4 /* BBZJZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBZJZViewController.m; sourceTree = "<group>"; };
-		745F0AB5198F58C7004BC9D4 /* CPDAONotifyMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDAONotifyMessage.h; sourceTree = "<group>"; };
-		745F0AB6198F58C7004BC9D4 /* CPDAONotifyMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDAONotifyMessage.m; sourceTree = "<group>"; };
 		745F0AB8198F5923004BC9D4 /* CPDBModelNotifyMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDBModelNotifyMessage.h; sourceTree = "<group>"; };
 		745F0AB9198F5923004BC9D4 /* CPDBModelNotifyMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDBModelNotifyMessage.m; sourceTree = "<group>"; };
 		745F0ABB198F594C004BC9D4 /* CPOperationReceiveYTZMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPOperationReceiveYTZMessage.h; sourceTree = "<group>"; };
 		745F0ABC198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPOperationReceiveYTZMessage.m; sourceTree = "<group>"; };
-		7478550318DB545C0070DF87 /* ContactsStartGroupChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsStartGroupChatViewController.h; sourceTree = "<group>"; };
-		7478550418DB545C0070DF87 /* ContactsStartGroupChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsStartGroupChatViewController.m; sourceTree = "<group>"; };
-		7478550618DB548C0070DF87 /* StartGroupChatTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartGroupChatTableviewCell.h; sourceTree = "<group>"; };
-		7478550718DB548C0070DF87 /* StartGroupChatTableviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartGroupChatTableviewCell.m; sourceTree = "<group>"; };
 		7478F44D1A0D37D200CEB85D /* BBBasePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBasePostViewController.h; sourceTree = "<group>"; };
 		7478F44E1A0D37D200CEB85D /* BBBasePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBasePostViewController.m; sourceTree = "<group>"; };
 		7478F44F1A0D37D200CEB85D /* BBPostHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPostHomeworkViewController.h; sourceTree = "<group>"; };
@@ -3381,12 +3365,6 @@
 		7478F46C1A0D39EB00CEB85D /* BBStudentsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBStudentsListViewController.m; sourceTree = "<group>"; };
 		747D154A19F8DFB400304F27 /* BBRecommendedRangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecommendedRangeViewController.h; sourceTree = "<group>"; };
 		747D154B19F8DFB400304F27 /* BBRecommendedRangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecommendedRangeViewController.m; sourceTree = "<group>"; };
-		749D72AC18D6147200936D5E /* BBMessageGroupBaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMessageGroupBaseTableView.h; sourceTree = "<group>"; };
-		749D72AD18D6147200936D5E /* BBMessageGroupBaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMessageGroupBaseTableView.m; sourceTree = "<group>"; };
-		74A4E5C218DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMembersInMsgGroupViewController.h; sourceTree = "<group>"; };
-		74A4E5C318DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMembersInMsgGroupViewController.m; sourceTree = "<group>"; };
-		74A4E5C518DFE4B6000F79E6 /* BBMemberInMsgGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMemberInMsgGroupTableViewCell.h; sourceTree = "<group>"; };
-		74A4E5C618DFE4B6000F79E6 /* BBMemberInMsgGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMemberInMsgGroupTableViewCell.m; sourceTree = "<group>"; };
 		74A4E5C918DFE8B7000F79E6 /* ZJZAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZJZAdd.png; sourceTree = "<group>"; };
 		74A4E5CA18DFE8B7000F79E6 /* ZJZAdd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZAdd@2x.png"; sourceTree = "<group>"; };
 		74A4E5CB18DFE8B7000F79E6 /* ZJZAdress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZJZAdress.png; sourceTree = "<group>"; };
@@ -3407,18 +3385,70 @@
 		74A4E5DE18DFE8B8000F79E6 /* ZJZSendSMS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZSendSMS@2x.png"; sourceTree = "<group>"; };
 		74A4E5DF18DFE8B8000F79E6 /* ZJZUnCheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZJZUnCheck.png; sourceTree = "<group>"; };
 		74A4E5E018DFE8B8000F79E6 /* ZJZUnCheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZUnCheck@2x.png"; sourceTree = "<group>"; };
+		74ADDDD01A2A063C0055B86E /* BBGroupMessageGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBGroupMessageGroupCell.h; sourceTree = "<group>"; };
+		74ADDDD11A2A063C0055B86E /* BBGroupMessageGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBGroupMessageGroupCell.m; sourceTree = "<group>"; };
+		74ADDDD21A2A063C0055B86E /* BBIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBIMViewController.h; sourceTree = "<group>"; };
+		74ADDDD31A2A063C0055B86E /* BBIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBIMViewController.m; sourceTree = "<group>"; };
+		74ADDDD41A2A063C0055B86E /* BBMemberInMsgGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMemberInMsgGroupTableViewCell.h; sourceTree = "<group>"; };
+		74ADDDD51A2A063C0055B86E /* BBMemberInMsgGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMemberInMsgGroupTableViewCell.m; sourceTree = "<group>"; };
+		74ADDDD61A2A063C0055B86E /* BBMembersInMsgGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMembersInMsgGroupViewController.h; sourceTree = "<group>"; };
+		74ADDDD71A2A063C0055B86E /* BBMembersInMsgGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMembersInMsgGroupViewController.m; sourceTree = "<group>"; };
+		74ADDDD81A2A063C0055B86E /* BBMessageGroupBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMessageGroupBaseCell.h; sourceTree = "<group>"; };
+		74ADDDD91A2A063C0055B86E /* BBMessageGroupBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMessageGroupBaseCell.m; sourceTree = "<group>"; };
+		74ADDDDA1A2A063C0055B86E /* BBMessageGroupBaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMessageGroupBaseTableView.h; sourceTree = "<group>"; };
+		74ADDDDB1A2A063C0055B86E /* BBMessageGroupBaseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMessageGroupBaseTableView.m; sourceTree = "<group>"; };
+		74ADDDDC1A2A063C0055B86E /* BBmessageMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBmessageMainViewController.h; sourceTree = "<group>"; };
+		74ADDDDD1A2A063C0055B86E /* BBmessageMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBmessageMainViewController.m; sourceTree = "<group>"; };
+		74ADDDDE1A2A063C0055B86E /* BBMutilIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMutilIMViewController.h; sourceTree = "<group>"; };
+		74ADDDDF1A2A063C0055B86E /* BBMutilIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMutilIMViewController.m; sourceTree = "<group>"; };
+		74ADDDE01A2A063C0055B86E /* BBNotifyMessageGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBNotifyMessageGroupCell.h; sourceTree = "<group>"; };
+		74ADDDE11A2A063C0055B86E /* BBNotifyMessageGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBNotifyMessageGroupCell.m; sourceTree = "<group>"; };
+		74ADDDE21A2A063C0055B86E /* BBSingleIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSingleIMViewController.h; sourceTree = "<group>"; };
+		74ADDDE31A2A063C0055B86E /* BBSingleIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSingleIMViewController.m; sourceTree = "<group>"; };
+		74ADDDE41A2A063C0055B86E /* BBSingleMessageGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSingleMessageGroupCell.h; sourceTree = "<group>"; };
+		74ADDDE51A2A063C0055B86E /* BBSingleMessageGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSingleMessageGroupCell.m; sourceTree = "<group>"; };
+		74ADDDE61A2A063C0055B86E /* BBZJZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBZJZViewController.h; sourceTree = "<group>"; };
+		74ADDDE71A2A063C0055B86E /* BBZJZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBZJZViewController.m; sourceTree = "<group>"; };
+		74ADDDE91A2A063C0055B86E /* BBContactPersonDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBContactPersonDetailViewController.h; sourceTree = "<group>"; };
+		74ADDDEA1A2A063C0055B86E /* BBContactPersonDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBContactPersonDetailViewController.m; sourceTree = "<group>"; };
+		74ADDDEB1A2A063C0055B86E /* BBServiceAccountDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceAccountDetailViewController.h; sourceTree = "<group>"; };
+		74ADDDEC1A2A063C0055B86E /* BBServiceAccountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceAccountDetailViewController.m; sourceTree = "<group>"; };
+		74ADDDED1A2A063C0055B86E /* BBServiceAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceAccountViewController.h; sourceTree = "<group>"; };
+		74ADDDEE1A2A063C0055B86E /* BBServiceAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceAccountViewController.m; sourceTree = "<group>"; };
+		74ADDDEF1A2A063C0055B86E /* BBServiceMessageDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageDetailModel.h; sourceTree = "<group>"; };
+		74ADDDF01A2A063C0055B86E /* BBServiceMessageDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageDetailModel.m; sourceTree = "<group>"; };
+		74ADDDF11A2A063C0055B86E /* BBServiceMessageDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageDetailView.h; sourceTree = "<group>"; };
+		74ADDDF21A2A063C0055B86E /* BBServiceMessageDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageDetailView.m; sourceTree = "<group>"; };
+		74ADDDF31A2A063C0055B86E /* BBServiceMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageDetailViewController.h; sourceTree = "<group>"; };
+		74ADDDF41A2A063C0055B86E /* BBServiceMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageDetailViewController.m; sourceTree = "<group>"; };
+		74ADDDF51A2A063C0055B86E /* BBServiceMessageShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageShareViewController.h; sourceTree = "<group>"; };
+		74ADDDF61A2A063C0055B86E /* BBServiceMessageShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageShareViewController.m; sourceTree = "<group>"; };
+		74ADDDF71A2A063C0055B86E /* BBServiceMessageWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageWebViewController.h; sourceTree = "<group>"; };
+		74ADDDF81A2A063C0055B86E /* BBServiceMessageWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageWebViewController.m; sourceTree = "<group>"; };
+		74ADDDF91A2A063C0055B86E /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
+		74ADDDFA1A2A063C0055B86E /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
+		74ADDDFB1A2A063C0055B86E /* ContactsStartGroupChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsStartGroupChatViewController.h; sourceTree = "<group>"; };
+		74ADDDFC1A2A063C0055B86E /* ContactsStartGroupChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsStartGroupChatViewController.m; sourceTree = "<group>"; };
+		74ADDDFD1A2A063C0055B86E /* ContactsTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTableviewCell.h; sourceTree = "<group>"; };
+		74ADDDFE1A2A063C0055B86E /* ContactsTableviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTableviewCell.m; sourceTree = "<group>"; };
+		74ADDDFF1A2A063C0055B86E /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		74ADDE001A2A063C0055B86E /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		74ADDE011A2A063C0055B86E /* DisplaySelectedMemberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplaySelectedMemberView.h; sourceTree = "<group>"; };
+		74ADDE021A2A063C0055B86E /* DisplaySelectedMemberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplaySelectedMemberView.m; sourceTree = "<group>"; };
+		74ADDE031A2A063C0055B86E /* MutilGroupDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutilGroupDetailViewController.h; sourceTree = "<group>"; };
+		74ADDE041A2A063C0055B86E /* MutilGroupDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutilGroupDetailViewController.m; sourceTree = "<group>"; };
+		74ADDE051A2A063C0055B86E /* MutilMsgGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutilMsgGroupViewController.h; sourceTree = "<group>"; };
+		74ADDE061A2A063C0055B86E /* MutilMsgGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutilMsgGroupViewController.m; sourceTree = "<group>"; };
+		74ADDE071A2A063C0055B86E /* StartGroupChatTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartGroupChatTableviewCell.h; sourceTree = "<group>"; };
+		74ADDE081A2A063C0055B86E /* StartGroupChatTableviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartGroupChatTableviewCell.m; sourceTree = "<group>"; };
+		74ADDE251A2A07E10055B86E /* CPDAONotifyMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDAONotifyMessage.h; sourceTree = "<group>"; };
+		74ADDE261A2A07E10055B86E /* CPDAONotifyMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDAONotifyMessage.m; sourceTree = "<group>"; };
 		74AF370F1963A494008EA251 /* ZJZCallPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZJZCallPhone.png; sourceTree = "<group>"; };
 		74AF37101963A494008EA251 /* ZJZCallPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZCallPhone@2x.png"; sourceTree = "<group>"; };
 		74AF37111963A494008EA251 /* ZJZCellChat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZJZCellChat.png; sourceTree = "<group>"; };
 		74AF37121963A494008EA251 /* ZJZCellChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZCellChat@2x.png"; sourceTree = "<group>"; };
 		74AF371B1963A4F0008EA251 /* BBAddContacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBAddContacts.png; sourceTree = "<group>"; };
 		74AF371C1963A4F0008EA251 /* BBAddContacts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBAddContacts@2x.png"; sourceTree = "<group>"; };
-		74EF7E011962C2BC00DCD5A3 /* ContactsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsModel.h; sourceTree = "<group>"; };
-		74EF7E021962C2BC00DCD5A3 /* ContactsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsModel.m; sourceTree = "<group>"; };
-		74EF7E031962C2BC00DCD5A3 /* ContactsTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTableviewCell.h; sourceTree = "<group>"; };
-		74EF7E041962C2BC00DCD5A3 /* ContactsTableviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTableviewCell.m; sourceTree = "<group>"; };
-		74EF7E051962C2BC00DCD5A3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
-		74EF7E061962C2BC00DCD5A3 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		74EF7E0A1962C2E800DCD5A3 /* ZJZ_Seg_Parent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZ_Seg_Parent@2x.png"; sourceTree = "<group>"; };
 		74EF7E0B1962C2E800DCD5A3 /* ZJZ_Seg_Teacher@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZ_Seg_Teacher@2x.png"; sourceTree = "<group>"; };
 		7A076A9318DFFF1B00911291 /* BBComentBottomBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBComentBottomBG.png; sourceTree = "<group>"; };
@@ -4014,8 +4044,8 @@
 				193FA81919F0A2E600874F1E /* add@2x.png */,
 				193FA81A19F0A2E600874F1E /* back.png */,
 				193FA81B19F0A2E600874F1E /* back@2x.png */,
-				193FA81C19F0A2E600874F1E /* close.png */,
-				193FA81D19F0A2E600874F1E /* close@2x.png */,
+				193FA81C19F0A2E600874F1E /* imageClose.png */,
+				193FA81D19F0A2E600874F1E /* imageClose@2x.png */,
 				193FA81E19F0A2E600874F1E /* enter.png */,
 				193FA81F19F0A2E600874F1E /* enter@2x.png */,
 			);
@@ -4428,8 +4458,8 @@
 			children = (
 				332D729218C33551007A75D5 /* BaseDAO.h */,
 				332D729318C33551007A75D5 /* BaseDAO.m */,
-				745F0AB5198F58C7004BC9D4 /* CPDAONotifyMessage.h */,
-				745F0AB6198F58C7004BC9D4 /* CPDAONotifyMessage.m */,
+				74ADDE251A2A07E10055B86E /* CPDAONotifyMessage.h */,
+				74ADDE261A2A07E10055B86E /* CPDAONotifyMessage.m */,
 				332D729418C33551007A75D5 /* CPDAOBabyInfoData.h */,
 				332D729518C33551007A75D5 /* CPDAOBabyInfoData.m */,
 				332D729618C33551007A75D5 /* CPDAOContact.h */,
@@ -6959,25 +6989,6 @@
 			path = MBProgress;
 			sourceTree = "<group>";
 		};
-		74233BAE18D6C3CA0086C1BD /* Contacts */ = {
-			isa = PBXGroup;
-			children = (
-				74EF7E011962C2BC00DCD5A3 /* ContactsModel.h */,
-				74EF7E021962C2BC00DCD5A3 /* ContactsModel.m */,
-				74EF7E031962C2BC00DCD5A3 /* ContactsTableviewCell.h */,
-				74EF7E041962C2BC00DCD5A3 /* ContactsTableviewCell.m */,
-				74EF7E051962C2BC00DCD5A3 /* ContactsViewController.h */,
-				74EF7E061962C2BC00DCD5A3 /* ContactsViewController.m */,
-				7478550318DB545C0070DF87 /* ContactsStartGroupChatViewController.h */,
-				7478550418DB545C0070DF87 /* ContactsStartGroupChatViewController.m */,
-				7478550618DB548C0070DF87 /* StartGroupChatTableviewCell.h */,
-				7478550718DB548C0070DF87 /* StartGroupChatTableviewCell.m */,
-				74421CD618DF467A000D2F1B /* DisplaySelectedMemberView.h */,
-				74421CD718DF467A000D2F1B /* DisplaySelectedMemberView.m */,
-			);
-			path = Contacts;
-			sourceTree = "<group>";
-		};
 		7478F44C1A0D37D200CEB85D /* Post */ = {
 			isa = PBXGroup;
 			children = (
@@ -7034,36 +7045,75 @@
 			path = ZJZ;
 			sourceTree = "<group>";
 		};
-		74E85D8A18D0443000F1F1D5 /* ZJZ */ = {
+		74ADDDCF1A2A063C0055B86E /* ZJZ */ = {
 			isa = PBXGroup;
 			children = (
-				745F0AB2198F58A1004BC9D4 /* BBZJZViewController.h */,
-				745F0AB3198F58A1004BC9D4 /* BBZJZViewController.m */,
-				749D72AC18D6147200936D5E /* BBMessageGroupBaseTableView.h */,
-				749D72AD18D6147200936D5E /* BBMessageGroupBaseTableView.m */,
-				745F0AAC198F587A004BC9D4 /* BBMessageGroupBaseCell.h */,
-				745F0AAD198F587A004BC9D4 /* BBMessageGroupBaseCell.m */,
-				741EBBC318D4CC7B00F21085 /* BBSingleMessageGroupCell.h */,
-				741EBBC418D4CC7B00F21085 /* BBSingleMessageGroupCell.m */,
-				741EBBC618D4CCA900F21085 /* BBGroupMessageGroupCell.h */,
-				741EBBC718D4CCA900F21085 /* BBGroupMessageGroupCell.m */,
-				745F0AAF198F5899004BC9D4 /* BBNotifyMessageGroupCell.h */,
-				745F0AB0198F5899004BC9D4 /* BBNotifyMessageGroupCell.m */,
-				74233BAE18D6C3CA0086C1BD /* Contacts */,
-				193E593C18D9908200DB1FF4 /* BBmessageMainViewController.h */,
-				193E593D18D9908200DB1FF4 /* BBmessageMainViewController.m */,
-				193E593F18D990A300DB1FF4 /* BBIMViewController.h */,
-				193E594018D990A300DB1FF4 /* BBIMViewController.m */,
-				193E594218D990C300DB1FF4 /* BBSingleIMViewController.h */,
-				193E594318D990C300DB1FF4 /* BBSingleIMViewController.m */,
-				193E594518D9A39B00DB1FF4 /* BBMutilIMViewController.h */,
-				193E594618D9A39B00DB1FF4 /* BBMutilIMViewController.m */,
-				74A4E5C218DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.h */,
-				74A4E5C318DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.m */,
-				74A4E5C518DFE4B6000F79E6 /* BBMemberInMsgGroupTableViewCell.h */,
-				74A4E5C618DFE4B6000F79E6 /* BBMemberInMsgGroupTableViewCell.m */,
+				74ADDDD01A2A063C0055B86E /* BBGroupMessageGroupCell.h */,
+				74ADDDD11A2A063C0055B86E /* BBGroupMessageGroupCell.m */,
+				74ADDDD21A2A063C0055B86E /* BBIMViewController.h */,
+				74ADDDD31A2A063C0055B86E /* BBIMViewController.m */,
+				74ADDDD41A2A063C0055B86E /* BBMemberInMsgGroupTableViewCell.h */,
+				74ADDDD51A2A063C0055B86E /* BBMemberInMsgGroupTableViewCell.m */,
+				74ADDDD61A2A063C0055B86E /* BBMembersInMsgGroupViewController.h */,
+				74ADDDD71A2A063C0055B86E /* BBMembersInMsgGroupViewController.m */,
+				74ADDDD81A2A063C0055B86E /* BBMessageGroupBaseCell.h */,
+				74ADDDD91A2A063C0055B86E /* BBMessageGroupBaseCell.m */,
+				74ADDDDA1A2A063C0055B86E /* BBMessageGroupBaseTableView.h */,
+				74ADDDDB1A2A063C0055B86E /* BBMessageGroupBaseTableView.m */,
+				74ADDDDC1A2A063C0055B86E /* BBmessageMainViewController.h */,
+				74ADDDDD1A2A063C0055B86E /* BBmessageMainViewController.m */,
+				74ADDDDE1A2A063C0055B86E /* BBMutilIMViewController.h */,
+				74ADDDDF1A2A063C0055B86E /* BBMutilIMViewController.m */,
+				74ADDDE01A2A063C0055B86E /* BBNotifyMessageGroupCell.h */,
+				74ADDDE11A2A063C0055B86E /* BBNotifyMessageGroupCell.m */,
+				74ADDDE21A2A063C0055B86E /* BBSingleIMViewController.h */,
+				74ADDDE31A2A063C0055B86E /* BBSingleIMViewController.m */,
+				74ADDDE41A2A063C0055B86E /* BBSingleMessageGroupCell.h */,
+				74ADDDE51A2A063C0055B86E /* BBSingleMessageGroupCell.m */,
+				74ADDDE61A2A063C0055B86E /* BBZJZViewController.h */,
+				74ADDDE71A2A063C0055B86E /* BBZJZViewController.m */,
+				74ADDDE81A2A063C0055B86E /* Contacts */,
 			);
 			path = ZJZ;
+			sourceTree = "<group>";
+		};
+		74ADDDE81A2A063C0055B86E /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				74ADDDE91A2A063C0055B86E /* BBContactPersonDetailViewController.h */,
+				74ADDDEA1A2A063C0055B86E /* BBContactPersonDetailViewController.m */,
+				74ADDDEB1A2A063C0055B86E /* BBServiceAccountDetailViewController.h */,
+				74ADDDEC1A2A063C0055B86E /* BBServiceAccountDetailViewController.m */,
+				74ADDDED1A2A063C0055B86E /* BBServiceAccountViewController.h */,
+				74ADDDEE1A2A063C0055B86E /* BBServiceAccountViewController.m */,
+				74ADDDEF1A2A063C0055B86E /* BBServiceMessageDetailModel.h */,
+				74ADDDF01A2A063C0055B86E /* BBServiceMessageDetailModel.m */,
+				74ADDDF11A2A063C0055B86E /* BBServiceMessageDetailView.h */,
+				74ADDDF21A2A063C0055B86E /* BBServiceMessageDetailView.m */,
+				74ADDDF31A2A063C0055B86E /* BBServiceMessageDetailViewController.h */,
+				74ADDDF41A2A063C0055B86E /* BBServiceMessageDetailViewController.m */,
+				74ADDDF51A2A063C0055B86E /* BBServiceMessageShareViewController.h */,
+				74ADDDF61A2A063C0055B86E /* BBServiceMessageShareViewController.m */,
+				74ADDDF71A2A063C0055B86E /* BBServiceMessageWebViewController.h */,
+				74ADDDF81A2A063C0055B86E /* BBServiceMessageWebViewController.m */,
+				74ADDDF91A2A063C0055B86E /* ContactsModel.h */,
+				74ADDDFA1A2A063C0055B86E /* ContactsModel.m */,
+				74ADDDFB1A2A063C0055B86E /* ContactsStartGroupChatViewController.h */,
+				74ADDDFC1A2A063C0055B86E /* ContactsStartGroupChatViewController.m */,
+				74ADDDFD1A2A063C0055B86E /* ContactsTableviewCell.h */,
+				74ADDDFE1A2A063C0055B86E /* ContactsTableviewCell.m */,
+				74ADDDFF1A2A063C0055B86E /* ContactsViewController.h */,
+				74ADDE001A2A063C0055B86E /* ContactsViewController.m */,
+				74ADDE011A2A063C0055B86E /* DisplaySelectedMemberView.h */,
+				74ADDE021A2A063C0055B86E /* DisplaySelectedMemberView.m */,
+				74ADDE031A2A063C0055B86E /* MutilGroupDetailViewController.h */,
+				74ADDE041A2A063C0055B86E /* MutilGroupDetailViewController.m */,
+				74ADDE051A2A063C0055B86E /* MutilMsgGroupViewController.h */,
+				74ADDE061A2A063C0055B86E /* MutilMsgGroupViewController.m */,
+				74ADDE071A2A063C0055B86E /* StartGroupChatTableviewCell.h */,
+				74ADDE081A2A063C0055B86E /* StartGroupChatTableviewCell.m */,
+			);
+			path = Contacts;
 			sourceTree = "<group>";
 		};
 		7A076AAE18E14F7400911291 /* XXX */ = {
@@ -7369,7 +7419,7 @@
 				7AC51B8218CDD9AB00AD1A8C /* Lobby */,
 				7478F44C1A0D37D200CEB85D /* Post */,
 				7AC51B8718CDDA2C00AD1A8C /* BJQ */,
-				74E85D8A18D0443000F1F1D5 /* ZJZ */,
+				74ADDDCF1A2A063C0055B86E /* ZJZ */,
 				7AC51B8618CDDA0700AD1A8C /* YZS */,
 				04F7FEB418CEF3370086D09D /* ME */,
 			);
@@ -7642,7 +7692,7 @@
 				19C08C39193F1BAA00C548CD /* BJQMoreButton@2x.png in Resources */,
 				19AD08AF18F67F7900E8AA55 /* user_credit_back.png in Resources */,
 				332D7F4518C33F0A007A75D5 /* index_top_btn_addressbook_press@2x.png in Resources */,
-				193FA88919F0A2E600874F1E /* close@2x.png in Resources */,
+				193FA88919F0A2E600874F1E /* imageClose@2x.png in Resources */,
 				74A4E5EB18DFE8B8000F79E6 /* ZJZChat.png in Resources */,
 				1982F7E01A0C73020075F35F /* t_keyboard@2x.png in Resources */,
 				332D7E6718C33F0A007A75D5 /* alarm_im_ss_img_sml@2x.png in Resources */,
@@ -8268,7 +8318,7 @@
 				193FA84519F0A2E600874F1E /* subject@2x.png in Resources */,
 				74A4E5F518DFE8B8000F79E6 /* ZJZSendSMS.png in Resources */,
 				332D7F4718C33F0A007A75D5 /* index_top_btn_friends_press@2x.png in Resources */,
-				193FA88819F0A2E600874F1E /* close.png in Resources */,
+				193FA88819F0A2E600874F1E /* imageClose.png in Resources */,
 				193FA87A19F0A2E600874F1E /* hwork.png in Resources */,
 				332D7FAF18C33F0A007A75D5 /* item_！_im@2x.png in Resources */,
 				7AA5002E18DF168600FC59C4 /* BBZan.png in Resources */,
@@ -8363,10 +8413,10 @@
 				332D75B418C33552007A75D5 /* unzip.c in Sources */,
 				332D759118C33552007A75D5 /* CPPTModelUserInfos.m in Sources */,
 				332D830718C33F0B007A75D5 /* NavigationDefaultStyle.m in Sources */,
-				74A4E5C718DFE4B6000F79E6 /* BBMemberInMsgGroupTableViewCell.m in Sources */,
 				332D74FA18C33552007A75D5 /* CPOperationConverUpdate.m in Sources */,
 				7AC51BA318CDDA6900AD1A8C /* BBWorkTableViewCell.m in Sources */,
 				33771E3E18C9CD6900FB5002 /* PalmHTTPRequest.m in Sources */,
+				74ADDE1C1A2A063C0055B86E /* BBServiceMessageWebViewController.m in Sources */,
 				194EB5E7198F61FA005F7587 /* XMPPNoticeMessage.m in Sources */,
 				332D833F18C33F0B007A75D5 /* SingleLoveExpressionCell.m in Sources */,
 				332D74CC18C33552007A75D5 /* CPDAOContactWay.m in Sources */,
@@ -8374,6 +8424,8 @@
 				332D831518C33F0B007A75D5 /* FxImgBall.m in Sources */,
 				332D835218C33F0B007A75D5 /* SolarTerm.m in Sources */,
 				332D74F218C33552007A75D5 /* CPResManager.m in Sources */,
+				74ADDE201A2A063C0055B86E /* ContactsViewController.m in Sources */,
+				74ADDE191A2A063C0055B86E /* BBServiceMessageDetailView.m in Sources */,
 				332D830218C33F0B007A75D5 /* CustomAlertView.m in Sources */,
 				332D82AB18C33F0A007A75D5 /* AFSectionData.m in Sources */,
 				332D726118C33464007A75D5 /* main.m in Sources */,
@@ -8383,13 +8435,13 @@
 				332D753F18C33552007A75D5 /* XMPPJabberRPCModule.m in Sources */,
 				33771E1B18C9B9A000FB5002 /* PalmUIManagement.m in Sources */,
 				332D75A518C33552007A75D5 /* CPUIModelPetInfo.m in Sources */,
-				741EBBC518D4CC7B00F21085 /* BBSingleMessageGroupCell.m in Sources */,
 				332D82F718C33F0B007A75D5 /* RelationshipBrain.m in Sources */,
 				332D836118C33F0B007A75D5 /* AudioRecorder.m in Sources */,
 				332D82ED18C33F0A007A75D5 /* MessageAskExpressionViewController.m in Sources */,
 				7A47062718D967F2006449F3 /* OHAttributedLabel.m in Sources */,
 				7A47062B18D967F2006449F3 /* OHASBasicHTMLParser.m in Sources */,
 				19145F4F191CDF3B008CE18C /* MJPhotoToolbar.m in Sources */,
+				74ADDE1B1A2A063C0055B86E /* BBServiceMessageShareViewController.m in Sources */,
 				332D754A18C33552007A75D5 /* XMPPvCardTempEmail.m in Sources */,
 				332D74CA18C33552007A75D5 /* CPDAOBabyInfoData.m in Sources */,
 				332D755F18C33552007A75D5 /* RFImageToDataTransformer.m in Sources */,
@@ -8425,6 +8477,7 @@
 				332D754818C33552007A75D5 /* XMPPvCardTempAdrTypes.m in Sources */,
 				332D75A318C33552007A75D5 /* CPUIModelPetElemInfo.m in Sources */,
 				332D830D18C33F0B007A75D5 /* FXBlockViewInfo.m in Sources */,
+				74ADDE091A2A063C0055B86E /* BBGroupMessageGroupCell.m in Sources */,
 				332D74EC18C33552007A75D5 /* CPDBModelUserInfoDataAddition.m in Sources */,
 				332D74EA18C33552007A75D5 /* CPDBModelUserInfo.m in Sources */,
 				332D82F018C33F0B007A75D5 /* MessageExpressionViewController.m in Sources */,
@@ -8444,7 +8497,6 @@
 				33771E2B18C9C7ED00FB5002 /* PalmNetWorkService.m in Sources */,
 				332D836F18C33F0B007A75D5 /* amrFileCodec.cpp in Sources */,
 				332D758F18C33552007A75D5 /* CPPTModelUserInfoData.m in Sources */,
-				745F0AB1198F5899004BC9D4 /* BBNotifyMessageGroupCell.m in Sources */,
 				332D756318C33552007A75D5 /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				332D74D118C33552007A75D5 /* CPDAOPersonalInfoData.m in Sources */,
 				332D82FC18C33F0B007A75D5 /* ProtocolController.m in Sources */,
@@ -8452,6 +8504,7 @@
 				332D75AF18C33552007A75D5 /* NSString+MD5Addition.m in Sources */,
 				332D75B318C33552007A75D5 /* mztools.c in Sources */,
 				332D753018C33552007A75D5 /* XMPPPresence.m in Sources */,
+				74ADDE1F1A2A063C0055B86E /* ContactsTableviewCell.m in Sources */,
 				332D832918C33F0B007A75D5 /* KBMagicView.m in Sources */,
 				332D754918C33552007A75D5 /* XMPPvCardTempBase.m in Sources */,
 				332D750418C33552007A75D5 /* CPOperationPersonalUpdate.m in Sources */,
@@ -8460,6 +8513,7 @@
 				332D74E518C33552007A75D5 /* CPDBModelPersonalInfoData.m in Sources */,
 				332D74C718C33552007A75D5 /* ABPersonMultiValueModel.m in Sources */,
 				332D830F18C33F0B007A75D5 /* FxButton.m in Sources */,
+				74ADDE1D1A2A063C0055B86E /* ContactsModel.m in Sources */,
 				332D752C18C33552007A75D5 /* XMPPJID.m in Sources */,
 				332D757D18C33552007A75D5 /* CPPTModelContactWay.m in Sources */,
 				332D834518C33F0B007A75D5 /* SingleSoundExpressionCell.m in Sources */,
@@ -8469,16 +8523,17 @@
 				7A59194B18D6BDA500C03DED /* BBPBXViewController.m in Sources */,
 				332D754D18C33552007A75D5 /* XMPPvCardTempTel.m in Sources */,
 				332D759618C33552007A75D5 /* CPUIModelManagement.m in Sources */,
+				74ADDE181A2A063C0055B86E /* BBServiceMessageDetailModel.m in Sources */,
 				332D750B18C33552007A75D5 /* CPOperationSysInit.m in Sources */,
 				332D75B218C33552007A75D5 /* ioapi.c in Sources */,
+				74ADDE0E1A2A063C0055B86E /* BBMessageGroupBaseTableView.m in Sources */,
 				745D768A193F6A6000AF666E /* BBStudentListTableViewCell.m in Sources */,
 				7A71E9AD18EBADBD00572E4D /* BBOAModel.m in Sources */,
 				332D834318C33F0B007A75D5 /* SingleSoundAlarmedCell.m in Sources */,
-				741EBBC818D4CCA900F21085 /* BBGroupMessageGroupCell.m in Sources */,
-				745F0AAE198F587A004BC9D4 /* BBMessageGroupBaseCell.m in Sources */,
 				332D836818C33F0B007A75D5 /* SimpleAudioEngine.m in Sources */,
 				332D74FE18C33552007A75D5 /* CPOperationMsgListByPage.m in Sources */,
 				332D74D318C33552007A75D5 /* CPDAOPetInfo.m in Sources */,
+				74ADDE1E1A2A063C0055B86E /* ContactsStartGroupChatViewController.m in Sources */,
 				331447AB18C48621008B5B21 /* Login.m in Sources */,
 				19145F4E191CDF3B008CE18C /* MJPhotoProgressView.m in Sources */,
 				332D836A18C33F0B007A75D5 /* DateUtil.m in Sources */,
@@ -8492,15 +8547,15 @@
 				7A59194A18D6BDA500C03DED /* BBFZYViewController.m in Sources */,
 				19CEFABB1A09F4150044A651 /* CropVideoModel.m in Sources */,
 				332D74DF18C33552007A75D5 /* CPDBModelContact.m in Sources */,
+				74ADDE121A2A063C0055B86E /* BBSingleIMViewController.m in Sources */,
 				047823DA18D2A9F60012D87D /* BBMeTableViewCell.m in Sources */,
+				74ADDE241A2A063C0055B86E /* StartGroupChatTableviewCell.m in Sources */,
 				7A47062D18D967F2006449F3 /* OHASMarkupParserBase.m in Sources */,
 				1975B76318E940F300587B80 /* EGOImageLoader.m in Sources */,
 				332D759318C33552007A75D5 /* CPPTModelUserRegisterInfo.m in Sources */,
-				74421CD818DF467A000D2F1B /* DisplaySelectedMemberView.m in Sources */,
 				7478F4611A0D385500CEB85D /* BBCameraViewController.m in Sources */,
 				332D833B18C33F0B007A75D5 /* GroupSystemUnknowCell.m in Sources */,
 				332D74F418C33552007A75D5 /* CPUserManager.m in Sources */,
-				193E594718D9A39B00DB1FF4 /* BBMutilIMViewController.m in Sources */,
 				332D830318C33F0B007A75D5 /* LoadingView.m in Sources */,
 				19145F50191CDF3B008CE18C /* MJPhotoView.m in Sources */,
 				332D833718C33F0B007A75D5 /* GroupSoundCell.m in Sources */,
@@ -8513,10 +8568,8 @@
 				332D835918C33F0B007A75D5 /* TaggingYear.m in Sources */,
 				1915BAF118D5C04A00098CBF /* UserProfileOperation.m in Sources */,
 				332D838B18C33F0B007A75D5 /* QuadraticBezierCurve.m in Sources */,
-				7478550818DB548C0070DF87 /* StartGroupChatTableviewCell.m in Sources */,
 				7AC51BA018CDDA6900AD1A8C /* BBCellHeight.m in Sources */,
 				332D829C18C33F0A007A75D5 /* CoupleCompletedView.m in Sources */,
-				74EF7E081962C2BC00DCD5A3 /* ContactsTableviewCell.m in Sources */,
 				332D74D918C33552007A75D5 /* FMDatabase.m in Sources */,
 				332D74CF18C33552007A75D5 /* CPDAOMessageGroupMember.m in Sources */,
 				332D82BC18C33F0A007A75D5 /* HomeCloseFriendTableViewCell.m in Sources */,
@@ -8530,17 +8583,16 @@
 				332D750F18C33552007A75D5 /* CPOperationUserInfoUpdate.m in Sources */,
 				332D82F618C33F0B007A75D5 /* MessageVideoViewController.m in Sources */,
 				7A863C7718EB2C000090C430 /* UIScrollView+SVPullToRefresh.m in Sources */,
-				7478550518DB545C0070DF87 /* ContactsStartGroupChatViewController.m in Sources */,
 				19019D391A1DDD1100ED0F8C /* PublicOperation.m in Sources */,
 				332D75AC18C33552007A75D5 /* CPUIModelUserInfoDataAddition.m in Sources */,
 				332D82F918C33F0B007A75D5 /* PetActionItem.m in Sources */,
+				74ADDE221A2A063C0055B86E /* MutilGroupDetailViewController.m in Sources */,
 				332D837918C33F0B007A75D5 /* FIRFilter.cpp in Sources */,
 				332D829B18C33F0A007A75D5 /* CoupleBreakUpView.m in Sources */,
 				7A47062518D967F2006449F3 /* NSAttributedString+Attributes.m in Sources */,
 				332D834718C33F0B007A75D5 /* SingleSystemTextCell.m in Sources */,
 				332D836418C33F0B007A75D5 /* CDAudioManager.m in Sources */,
 				332D82FF18C33F0B007A75D5 /* RegistViewController.m in Sources */,
-				745F0AB7198F58C7004BC9D4 /* CPDAONotifyMessage.m in Sources */,
 				332D832C18C33F0B007A75D5 /* KBSmallView.m in Sources */,
 				332D74E618C33552007A75D5 /* CPDBModelPersonalInfoDataAddition.m in Sources */,
 				19145F56191CDF3B008CE18C /* SDWebImageDownloader.m in Sources */,
@@ -8577,6 +8629,7 @@
 				332D833E18C33F0B007A75D5 /* SingleImageCell.m in Sources */,
 				19145F55191CDF3B008CE18C /* SDWebImageDecoder.m in Sources */,
 				332D82F318C33F0B007A75D5 /* MessagePictrueViewController.m in Sources */,
+				74ADDE1A1A2A063C0055B86E /* BBServiceMessageDetailViewController.m in Sources */,
 				332D831618C33F0B007A75D5 /* FXForgetPasswordPanel.m in Sources */,
 				332D759D18C33552007A75D5 /* CPUIModelMessageGroup.m in Sources */,
 				332D831018C33F0B007A75D5 /* FXButtonExt.m in Sources */,
@@ -8588,6 +8641,7 @@
 				332D82BF18C33F0A007A75D5 /* HomeFriendsView.m in Sources */,
 				332D75B518C33552007A75D5 /* zip.c in Sources */,
 				332D82DE18C33F0A007A75D5 /* MutilIMViewController.m in Sources */,
+				74ADDE111A2A063C0055B86E /* BBNotifyMessageGroupCell.m in Sources */,
 				332D82E718C33F0A007A75D5 /* XiaoShuangIMViewController.m in Sources */,
 				7478F4571A0D37D200CEB85D /* BBPostPBXViewController.m in Sources */,
 				332D759218C33552007A75D5 /* CPPTModelUserProfile.m in Sources */,
@@ -8625,7 +8679,6 @@
 				19CEFABA1A09F4150044A651 /* CropVideo.m in Sources */,
 				332D837B18C33F0B007A75D5 /* PeakFinder.cpp in Sources */,
 				332D836D18C33F0B007A75D5 /* MediaStatusManager.m in Sources */,
-				74A4E5C418DFD9BD000F79E6 /* BBMembersInMsgGroupViewController.m in Sources */,
 				745F0ABD198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m in Sources */,
 				332D753418C33552007A75D5 /* XMPPGroupMessage.m in Sources */,
 				332D754118C33552007A75D5 /* XMPPRoomHybrid.xcdatamodeld in Sources */,
@@ -8647,9 +8700,11 @@
 				332D82CF18C33F0A007A75D5 /* HPHeadView.m in Sources */,
 				7AC51BA418CDDA6900AD1A8C /* BBImageTableViewCell.m in Sources */,
 				332D759818C33552007A75D5 /* CPUIModelAudioSlideInfo.m in Sources */,
+				74ADDE161A2A063C0055B86E /* BBServiceAccountDetailViewController.m in Sources */,
 				332D836618C33F0B007A75D5 /* CocosDenshion.m in Sources */,
 				332D836918C33F0B007A75D5 /* ColorUtil.m in Sources */,
 				332D74D718C33552007A75D5 /* CPDAOUserInfoDataAddition.m in Sources */,
+				74ADDE231A2A063C0055B86E /* MutilMsgGroupViewController.m in Sources */,
 				19451C7E19F78E5800E4D92B /* BBNoticeTableViewCell.m in Sources */,
 				19B39CA319AE3AEE00E8B186 /* ADDetailViewController.m in Sources */,
 				332D756918C33552007A75D5 /* DDTTYLogger.m in Sources */,
@@ -8661,6 +8716,7 @@
 				332D754218C33552007A75D5 /* XMPPMessage+XEP0045.m in Sources */,
 				332D755518C33552007A75D5 /* XMPPvCardAvatarModule.m in Sources */,
 				332D832018C33F0B007A75D5 /* FXStatusPanel.m in Sources */,
+				74ADDE0B1A2A063C0055B86E /* BBMemberInMsgGroupTableViewCell.m in Sources */,
 				332D759F18C33552007A75D5 /* CPUIModelPersonalInfo.m in Sources */,
 				19145F5B191CDF3B008CE18C /* UIButton+WebCache.m in Sources */,
 				332D754518C33552007A75D5 /* XMPPvCard.xcdatamodeld in Sources */,
@@ -8705,10 +8761,12 @@
 				332D835E18C33F0B007A75D5 /* TimeUtil.m in Sources */,
 				19145F4D191CDF3B008CE18C /* MJPhotoLoadingView.m in Sources */,
 				332D756218C33552007A75D5 /* XMPPSRVResolver.m in Sources */,
+				74ADDE0C1A2A063C0055B86E /* BBMembersInMsgGroupViewController.m in Sources */,
 				332D82BE18C33F0A007A75D5 /* HomeFriendsTableViewCell.m in Sources */,
 				332D82D918C33F0A007A75D5 /* GroupUserItemView.m in Sources */,
 				332D833A18C33F0B007A75D5 /* GroupSystemTextCell.m in Sources */,
 				19145F51191CDF3B008CE18C /* MKAnnotationView+WebCache.m in Sources */,
+				74ADDE131A2A063C0055B86E /* BBSingleMessageGroupCell.m in Sources */,
 				332D833518C33F0B007A75D5 /* GroupMagicExpressionCell.m in Sources */,
 				332D756418C33552007A75D5 /* GCDAsyncSocket.m in Sources */,
 				332D756018C33552007A75D5 /* XMPPDigestAuthentication.m in Sources */,
@@ -8718,6 +8776,7 @@
 				332D831B18C33F0B007A75D5 /* FXPictureIcon.m in Sources */,
 				332D758A18C33552007A75D5 /* CPPTModelPersonalInfoData.m in Sources */,
 				19145F58191CDF3B008CE18C /* SDWebImageManager+MJ.m in Sources */,
+				74ADDE141A2A063C0055B86E /* BBZJZViewController.m in Sources */,
 				332D754318C33552007A75D5 /* XMPPMUC.m in Sources */,
 				332D838518C33F0B007A75D5 /* BezierCurve.m in Sources */,
 				332D752018C33552007A75D5 /* NSDictionary+RequestEncoding.m in Sources */,
@@ -8726,19 +8785,19 @@
 				332D82DD18C33F0A007A75D5 /* MSHeadView.m in Sources */,
 				33771E4118C9CDCA00FB5002 /* PalmFormDataRequest.m in Sources */,
 				332D830818C33F0B007A75D5 /* NavigationLeftSingleStyle.m in Sources */,
-				193E594118D990A300DB1FF4 /* BBIMViewController.m in Sources */,
 				332D752218C33552007A75D5 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				332D751218C33552007A75D5 /* ASIDataCompressor.m in Sources */,
+				74ADDE0F1A2A063C0055B86E /* BBmessageMainViewController.m in Sources */,
 				332D751618C33552007A75D5 /* ASIHTTPRequest.m in Sources */,
 				332D837D18C33F0B007A75D5 /* SoundTouch.cpp in Sources */,
 				332D756D18C33552007A75D5 /* NSString+DDXML.m in Sources */,
 				332D829D18C33F0A007A75D5 /* EventTableViewCell.m in Sources */,
 				332D82DC18C33F0A007A75D5 /* messageMainViewController.m in Sources */,
-				193E593E18D9908200DB1FF4 /* BBmessageMainViewController.m in Sources */,
 				7478F4631A0D385500CEB85D /* BBImagePreviewVIewController.m in Sources */,
 				332D82CE18C33F0A007A75D5 /* HomePageViewController.m in Sources */,
 				332D74C918C33552007A75D5 /* BaseDAO.m in Sources */,
 				196421A51928A8D200944016 /* ViewImageViewController.m in Sources */,
+				74ADDE0A1A2A063C0055B86E /* BBIMViewController.m in Sources */,
 				19145F4C191CDF3B008CE18C /* MJPhotoBrowser.m in Sources */,
 				332D831218C33F0B007A75D5 /* FXCheckBox.m in Sources */,
 				332D74DD18C33552007A75D5 /* FMResultSet.m in Sources */,
@@ -8780,6 +8839,7 @@
 				332D82FB18C33F0B007A75D5 /* PetView.m in Sources */,
 				7AC51BA518CDDA6900AD1A8C /* BBBJQViewController.m in Sources */,
 				7A922F8018E3F2A800026C4A /* BBBJQManager.m in Sources */,
+				74ADDE101A2A063C0055B86E /* BBMutilIMViewController.m in Sources */,
 				332D758818C33552007A75D5 /* CPPTModelMessageGroupMember.m in Sources */,
 				332D830418C33F0B007A75D5 /* MessageBoxView.m in Sources */,
 				332D832518C33F0B007A75D5 /* KBButton.m in Sources */,
@@ -8788,7 +8848,6 @@
 				332D752618C33552007A75D5 /* NSData+XMPP.m in Sources */,
 				332D759918C33552007A75D5 /* CPUIModelBabyInfoData.m in Sources */,
 				19A5E2A21A0B1FDF000C3A7A /* DiscoverOperation.m in Sources */,
-				74EF7E071962C2BC00DCD5A3 /* ContactsModel.m in Sources */,
 				332D756818C33552007A75D5 /* DDLog.m in Sources */,
 				7A47062818D967F2006449F3 /* OHParagraphStyle.m in Sources */,
 				332D82C818C33F0A007A75D5 /* HomePageAvatarView.m in Sources */,
@@ -8856,6 +8915,7 @@
 				332D754618C33552007A75D5 /* XMPPvCardTemp.m in Sources */,
 				332D75A918C33552007A75D5 /* CPUIModelResource.m in Sources */,
 				332D755118C33552007A75D5 /* XMPPDateTimeProfiles.m in Sources */,
+				74ADDE271A2A07E10055B86E /* CPDAONotifyMessage.m in Sources */,
 				332D832D18C33F0B007A75D5 /* KBTextViewInternal.m in Sources */,
 				332D829818C33F0A007A75D5 /* ChooseCoupleModel.m in Sources */,
 				332D831918C33F0B007A75D5 /* FXInputWithWarning.m in Sources */,
@@ -8904,21 +8964,20 @@
 				332D74EB18C33552007A75D5 /* CPDBModelUserInfoData.m in Sources */,
 				332D753218C33552007A75D5 /* XMPPBaseMessage.m in Sources */,
 				332D74C518C33552007A75D5 /* AbDataManagement.m in Sources */,
-				193E594418D990C300DB1FF4 /* BBSingleIMViewController.m in Sources */,
 				332D74D518C33552007A75D5 /* CPDAOUserInfo.m in Sources */,
 				332D751C18C33552007A75D5 /* CPXmppEngineTransactionContext.m in Sources */,
 				332D74E818C33552007A75D5 /* CPDBModelPetInfo.m in Sources */,
 				19145F57191CDF3B008CE18C /* SDWebImageDownloaderOperation.m in Sources */,
 				332D750D18C33552007A75D5 /* CPOperationUpdateUserRelation.m in Sources */,
 				7478F4551A0D37D200CEB85D /* BBBasePostViewController.m in Sources */,
-				74EF7E091962C2BC00DCD5A3 /* ContactsViewController.m in Sources */,
+				74ADDE211A2A063C0055B86E /* DisplaySelectedMemberView.m in Sources */,
 				7AC51BA118CDDA6900AD1A8C /* BBBaseTableViewCell.m in Sources */,
+				74ADDE171A2A063C0055B86E /* BBServiceAccountViewController.m in Sources */,
 				332D754018C33552007A75D5 /* XMPPRoom.xcdatamodeld in Sources */,
 				332D835A18C33F0B007A75D5 /* TimeDetector.m in Sources */,
 				332D829918C33F0A007A75D5 /* ChooseCoupleTypeViewController.m in Sources */,
 				332D754718C33552007A75D5 /* XMPPvCardTempAdr.m in Sources */,
 				7A863C7618EB2C000090C430 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
-				745F0AB4198F58A1004BC9D4 /* BBZJZViewController.m in Sources */,
 				332D835818C33F0B007A75D5 /* TaggingWeekDay.m in Sources */,
 				19B39C9A19AE3ADC00E8B186 /* SystemOperation.m in Sources */,
 				332D756F18C33552007A75D5 /* DDXMLElement.m in Sources */,
@@ -8934,7 +8993,6 @@
 				33771E4818C9D28600FB5002 /* PalmUIModelCoding.m in Sources */,
 				332D832E18C33F0B007A75D5 /* KeyboardView.m in Sources */,
 				332D82C518C33F0A007A75D5 /* SVPlacemark.m in Sources */,
-				749D72AE18D6147200936D5E /* BBMessageGroupBaseTableView.m in Sources */,
 				332D82BD18C33F0A007A75D5 /* HomeCloseFriendView.m in Sources */,
 				332D75A818C33552007A75D5 /* CPUIModelRegisterInfo.m in Sources */,
 				332D82E118C33F0A007A75D5 /* ShuangShuangTeamViewController.m in Sources */,
@@ -8954,6 +9012,7 @@
 				332D82E918C33F0A007A75D5 /* AnimImageView.m in Sources */,
 				332D75A118C33552007A75D5 /* CPUIModelPersonalInfoDataAddition.m in Sources */,
 				19601EA81940446E001776F1 /* BBPBXTableViewCell.m in Sources */,
+				74ADDE0D1A2A063C0055B86E /* BBMessageGroupBaseCell.m in Sources */,
 				745D7690193F821700AF666E /* BBStudentModel.m in Sources */,
 				332D835018C33F0B007A75D5 /* Holiday.m in Sources */,
 				332D75B118C33552007A75D5 /* CPKeyChain.m in Sources */,
@@ -8966,6 +9025,7 @@
 				332D836018C33F0B007A75D5 /* ARMicView.m in Sources */,
 				332D752318C33552007A75D5 /* MKNetworkEngine.m in Sources */,
 				332D751918C33552007A75D5 /* CPHttpEngine.m in Sources */,
+				74ADDE151A2A063C0055B86E /* BBContactPersonDetailViewController.m in Sources */,
 				332D754F18C33552007A75D5 /* TURNSocket.m in Sources */,
 				332D74DA18C33552007A75D5 /* FMDatabaseAdditions.m in Sources */,
 				332D755818C33552007A75D5 /* XMPPAutoTime.m in Sources */,

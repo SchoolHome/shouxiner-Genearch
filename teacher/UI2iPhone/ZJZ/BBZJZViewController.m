@@ -7,23 +7,38 @@
 //
 
 #import "BBZJZViewController.h"
-#import "CPUIModelManagement.h"
 #import "ContactsViewController.h"
-
-//test
+#import "MutilMsgGroupViewController.h"
 #import "BBSingleIMViewController.h"
 #import "BBMutilIMViewController.h"
 #import "XiaoShuangIMViewController.h"
 #import "SystemIMViewController.h"
 #import "ShuangShuangTeamViewController.h"
+#import "BBServiceAccountViewController.h"
+#import "BBServiceMessageDetailViewController.h"
+
+
+#import "BBNotifyMessageGroupCell.h"
+//shouxin version 4
+#import "BBGroupModel.h"
 
 //notifyMessage change
-#import "BBNotifyMessageGroupCell.h"
+#import "CPUIModelManagement.h"
 #import "CPDBModelNotifyMessage.h"
 #import "CPDBManagement.h"
+
+
 //
+
+
 @interface BBZJZViewController ()
-@property (nonatomic , strong)NSArray *tableviewDisplayDataArray;
+{
+    NSInteger listType;
+    //是否请求过班级列表
+    BOOL isRequestClassList;
+}
+@property (nonatomic, strong)NSArray *tableviewDisplayDataArray;
+@property (nonatomic, strong) NSArray *classModels; //班级
 @property (nonatomic , strong)BBMessageGroupBaseTableView *messageListTableview;
 @property (nonatomic , strong)UISearchBar *messageListTableSearchBar;
 @end
@@ -36,14 +51,17 @@
     if (self) {
         // Custom initialization
 //        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"通讯录" style:UIBarButtonItemStyleDone target:self action:@selector(turnToContactsViewController)];
+        /*
         UIButton *btnContacts = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnContacts setFrame:CGRectMake(0.f, 7.f, 30.f, 30.f)];
+        [btnContacts setFrame:CGRectMake(0.f, 7.f, 125.f, 30.f)];
         [btnContacts setBackgroundImage:[UIImage imageNamed:@"ZJZAdress"] forState:UIControlStateNormal];
         [btnContacts addTarget:self action:@selector(turnToContactsViewController) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnContacts];
+         */
         [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"userMsgGroupListTag" options:0 context:@""];
         //noticeArrayTag
         [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"noticeArrayTag" options:0 context:@""];
+        
     }
     return self;
 }
@@ -55,15 +73,30 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    self.navigationItem.title = @"找家长";
-    _messageListTableview = [[BBMessageGroupBaseTableView alloc] initWithFrame:CGRectMake(0.f, 40.f, 320.f, self.screenHeight-150.f) style:UITableViewStylePlain];
+    
+    
+    listType = LIST_TYPE_MSG_GROUP;
+    //self.navigationItem.title = @"找家长";
+    
+    UIButton *segementBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [segementBtn setFrame:CGRectMake(0.f, 0.f, 125.f, 30.f)];
+    [segementBtn setBackgroundImage:[UIImage imageNamed:@"tab_mes"] forState:UIControlStateNormal];
+    [segementBtn setBackgroundImage:[UIImage imageNamed:@"tab_contact"] forState:UIControlStateSelected];
+    [segementBtn addTarget:self action:@selector(segeValueChanged:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.titleView = segementBtn;
+    
+    
+    _messageListTableview = [[BBMessageGroupBaseTableView alloc] initWithFrame:CGRectMake(0.f, 0.f, 320.f, self.screenHeight-110.f) style:UITableViewStylePlain];
     _messageListTableview.backgroundColor = [UIColor clearColor];
     _messageListTableview.messageGroupBaseTableViewdelegate = self;
     _messageListTableview.delegate = self;
     _messageListTableview.dataSource = self;
+    //_messageListTableview.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 320.f, 1.f)];
     _messageListTableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    _messageListTableview.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_messageListTableview];
     
+    /* //close searchbar
     _messageListTableSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 32)];
     _messageListTableSearchBar.backgroundColor = [UIColor clearColor];
     //[_messageListTableSearchBar setBackgroundImage:[UIImage imageNamed:@"ZJZSearch"]];
@@ -73,7 +106,7 @@
     
 
     
-    self.view.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
+    
 	// Do any additional setup after loading the view.
     if (!IOS7) {
         for (UIView *subview in _messageListTableSearchBar.subviews)
@@ -84,13 +117,19 @@
                 break;  
             }   
         }
-        
         //[_messageListTableSearchBar setScopeBarBackgroundImage:[UIImage imageNamed:@"ZJZSearch"]];
     }
+    */
+    self.view.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    if (!self.classModels.count) {
+        isRequestClassList = NO;
+        [self requestClasList];
+    }
     
     int unReadCount = 0;
     for (id messageGroup in _tableviewDisplayDataArray) {
@@ -105,6 +144,13 @@
         [[CPUIModelManagement sharedInstance] setFriendMsgUnReadedCount:count];
     };
     dispatch_async(dispatch_get_main_queue(), updateTagBlock);
+    
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupListResult" options:0 context:NULL];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"groupListResult"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -116,19 +162,25 @@
 -(void) dealloc{
     [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"userMsgGroupListTag"];
 }
-
 #pragma mark Setter && Getter
--(NSArray *) tableviewDisplayDataArray
+- (NSArray *)classModels
 {
+    if (!_classModels) _classModels = [[NSArray alloc] init];
     
+    return _classModels;
+}
+
+- (NSArray *) tableviewDisplayDataArray
+{
     if (!_tableviewDisplayDataArray) {
 //        _tableviewDisplayDataArray = [[NSArray alloc] initWithArray:[CPUIModelManagement sharedInstance].userMessageGroupList];
         NSArray *array = [NSArray arrayWithArray:[CPUIModelManagement sharedInstance].userMessageGroupList];
-        NSMutableArray *arrayM = [[NSMutableArray alloc] initWithCapacity:10];
+        NSMutableArray *arrayM = [[NSMutableArray alloc] initWithCapacity:20];
         for (CPUIModelMessageGroup *g in array) {
-            if ([g.msgList count] != 0) {
-                [arrayM addObject:g];
-            }
+//            if ([g.msgList count] != 0) {
+//                [arrayM addObject:g];
+//            }
+            [arrayM addObject:g];
         }
         [arrayM addObjectsFromArray:[PalmUIManagement sharedInstance].noticeArray];
         _tableviewDisplayDataArray = [NSArray arrayWithArray:arrayM];
@@ -152,25 +204,49 @@
         NSArray *array = [NSArray arrayWithArray:[CPUIModelManagement sharedInstance].userMessageGroupList];
         NSMutableArray *arrayM = [[NSMutableArray alloc] initWithCapacity:10];
         for (CPUIModelMessageGroup *g in array) {
-            if ([g.msgList count] != 0) {
-                [arrayM addObject:g];
-            }
+//            if ([g.msgList count] != 0) {
+//                [arrayM addObject:g];
+//            }
+            [arrayM addObject:g];
         }
         [arrayM addObjectsFromArray:[PalmUIManagement sharedInstance].noticeArray];
         
         self.tableviewDisplayDataArray = [NSArray arrayWithArray:arrayM];
-
     }
+    
+    if ([@"groupListResult" isEqualToString:keyPath])  // 班级列表
+    {
+        NSDictionary *result = [PalmUIManagement sharedInstance].groupListResult;
+        
+        if (![result[@"hasError"] boolValue]) {
+            self.classModels = [NSArray arrayWithArray:result[@"data"]];
+            if (listType == LIST_TYPE_CONTACTS) {
+                [self.messageListTableview  reloadData];
+            }
+        }else{
+            [self showProgressWithText:@"班级列表加载失败" withDelayTime:0.1];
+        }
+    }
+
 }
 #pragma mark BBZJZViewControllerMethod
--(void)turnToContactsViewController
+
+- (void)requestClasList
 {
-    ContactsViewController *contacts = [[ContactsViewController alloc] init];
-//    [self presentModalViewController:contacts animated:YES];
-    contacts.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:contacts animated:YES];
+    if (!isRequestClassList) {
+        [[PalmUIManagement sharedInstance] getGroupList];
+        isRequestClassList = YES;
+    }
 }
--(NSMutableArray *)searchResultListByKeyWord:(NSString *)keyword
+
+- (void)segeValueChanged:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+    listType = sender.selected ? LIST_TYPE_CONTACTS : LIST_TYPE_MSG_GROUP;
+    [self.messageListTableview reloadData];
+}
+
+- (NSMutableArray *)searchResultListByKeyWord:(NSString *)keyword
 {
     NSMutableArray *tempSearchResult = [[NSMutableArray alloc] init];
     for (CPUIModelMessageGroup *msgGroup in [CPUIModelManagement sharedInstance].userMessageGroupList) {
@@ -206,7 +282,71 @@
     }
     return tempSearchResult;
 }
+
+- (NSArray *)classifyDataByType:(NSInteger )classNum
+{
+    NSMutableArray *tempTeachersArray = [[NSMutableArray alloc] init];
+    NSMutableArray *tempParentsArray = [[NSMutableArray alloc] init];
+    for (CPUIModelUserInfo *model in [CPUIModelManagement sharedInstance].friendArray) {
+        ContactsModel *tempModel = [[ContactsModel alloc] init];
+        tempModel.modelID = [model.userInfoID integerValue];
+        tempModel.avatarPath = model.headerPath;
+        //tempModel.jid = model.
+        tempModel.mobile = model.mobileNumber;
+        //tempModel.uid = [infoDic objectForKey:@"uid"];
+        tempModel.userName = model.nickName;
+        //是否激活
+        NSLog(@"%d",[model.sex integerValue]);
+        tempModel.isActive = [model.sex integerValue] == 0 ? NO : YES;
+    
+        //是否是家长   //是否是老师
+        if ([model.coupleAccount isEqualToString:@"Teacher"]) {
+            tempModel.isTeacher = YES;
+            tempModel.isParent  = NO;
+            [tempTeachersArray addObject:tempModel];
+        }else if ([model.coupleAccount isEqualToString:@"Parent"])
+        {
+            tempModel.isTeacher = NO;
+            tempModel.isParent  = YES;
+            
+            
+            //所属班级
+            NSDictionary *dic = (NSDictionary *)[model.birthday objectFromJSONString];
+            NSLog(@"%@",dic);
+            if (dic && dic.allKeys > 0) {
+                if ([dic.allKeys[0] integerValue] == classNum) {
+                    [tempParentsArray addObject:tempModel];
+                }
+            }
+        }else if ([model.coupleAccount isEqualToString:@"TeacherAndParent"])
+        {
+            tempModel.isTeacher = YES;
+            tempModel.isParent  = YES;
+            [tempTeachersArray addObject:tempModel];
+            NSDictionary *dic = (NSDictionary *)[model.birthday objectFromJSONString];
+            if (dic && dic.allKeys > 0) {
+                if ([dic.allKeys[0] integerValue] == classNum) {
+                    [tempParentsArray addObject:tempModel];
+                }
+            }
+        }else
+        {
+            tempModel.isTeacher = NO;
+            tempModel.isParent  = NO;
+        }
+        
+    }
+    if (classNum == -1) {
+        return [NSArray arrayWithArray:tempTeachersArray];
+    }else
+    {
+        return [NSArray arrayWithArray:tempParentsArray];
+    }
+}
+
 #pragma mark UITableviewDelegate
+//close searchbar
+/*
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     if ([_messageListTableSearchBar isFirstResponder]) {
@@ -222,97 +362,223 @@
     }
     
 }
+ */
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //notifyMessage change
     
-    BBMessageGroupBaseCell *cell =(BBMessageGroupBaseCell *) [tableView cellForRowAtIndexPath:indexPath];
-    if ([cell.msgGroup isKindOfClass:[CPUIModelMessageGroup class]]) {
-        CPUIModelMessageGroup *messageGroup = cell.msgGroup;
+    //notifyMessage change
+    if (listType == LIST_TYPE_MSG_GROUP)
+    {
+        BBMessageGroupBaseCell *cell =(BBMessageGroupBaseCell *) [tableView cellForRowAtIndexPath:indexPath];
+        if ([cell.msgGroup isKindOfClass:[CPUIModelMessageGroup class]]) {
+            CPUIModelMessageGroup *messageGroup = cell.msgGroup;
+            
+            if ([messageGroup isMsgSingleGroup]) {
+                BBSingleIMViewController *singleIM = [[BBSingleIMViewController alloc] init:messageGroup];
+                singleIM.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:singleIM animated:YES];
+            }else{
+                BBMutilIMViewController *mutilIM = [[BBMutilIMViewController alloc] init:messageGroup];
+                mutilIM.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:mutilIM animated:YES];
+            }
+            
+            __block NSInteger count = [CPUIModelManagement sharedInstance].friendMsgUnReadedCount;
+            count -= [messageGroup.unReadedCount intValue];
+            dispatch_block_t updateTagBlock = ^{
+                [[CPUIModelManagement sharedInstance] setFriendMsgUnReadedCount:count];
+            };
+            dispatch_async(dispatch_get_main_queue(), updateTagBlock);
+        }else if ([cell.msgGroup isKindOfClass:[CPDBModelNotifyMessage class]]){
+            CPDBModelNotifyMessage *msgGroup = cell.msgGroup;
+            //设置未读数
+            
+            [[CPSystemEngine sharedInstance] updateUnreadedMessageStatusChanged:msgGroup];
         
-        if ([messageGroup isMsgSingleGroup]) {
-            BBSingleIMViewController *singleIM = [[BBSingleIMViewController alloc] init:messageGroup];
-            singleIM.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:singleIM animated:YES];
-        }else{
-            BBMutilIMViewController *mutilIM = [[BBMutilIMViewController alloc] init:messageGroup];
-            mutilIM.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:mutilIM animated:YES];
+            if (msgGroup) {
+                BBServiceMessageDetailViewController *messageDetail = [[BBServiceMessageDetailViewController alloc] init];
+                [messageDetail setModel:msgGroup];
+                messageDetail.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:messageDetail animated:YES];
+                
+            }else [self showProgressWithText:@"无法查看" withDelayTime:2];
+        
+        }
+    }else
+    {
+        
+        switch (indexPath.section) {
+            case 0:
+            {
+                BBGroupModel *tempModel = self.classModels[indexPath.row];
+            
+                NSArray *contacts = [self classifyDataByType:[tempModel.groupid integerValue]];
+                if (contacts.count) {
+                    ContactsViewController *contact = [[ContactsViewController alloc] initWithContactsArray:contacts];
+                    contact.hidesBottomBarWhenPushed = YES;
+                    contact.title = tempModel.alias;
+                    [self.navigationController pushViewController:contact animated:YES];
+                }else [self showProgressWithText:@"当前班级无任何联系人" withDelayTime:2.f];
+                
+            }
+                break;
+            case 1:
+            {
+                NSArray *contacts = [self classifyDataByType:-1];
+                if (contacts.count) {
+                    ContactsViewController *contact = [[ContactsViewController alloc] initWithContactsArray:contacts];
+                    contact.hidesBottomBarWhenPushed = YES;
+                    contact.title = @"同事";
+                    [self.navigationController pushViewController:contact animated:YES];
+                }else [self showProgressWithText:@"当前无任何联系人" withDelayTime:2.f];
+            }
+                break;
+            case 2:
+            {
+                NSMutableArray *tempMutilMsgGroups = [[NSMutableArray alloc] init];
+                for (CPUIModelMessageGroup *group in self.tableviewDisplayDataArray) {
+                    if ([group isKindOfClass:[CPUIModelMessageGroup class]]) {
+                        if (![group isMsgSingleGroup]) {
+                            [tempMutilMsgGroups addObject:group];
+                        }
+                    }
+                }
+                MutilMsgGroupViewController *mutilMsgGroup = [[MutilMsgGroupViewController alloc] initWithMutilMsgGroups:tempMutilMsgGroups];
+                mutilMsgGroup.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:mutilMsgGroup animated:YES];
+            }
+                break;
+            case 3:
+            {
+                //[PalmUIManagement sharedInstance].noticeArray
+                BBServiceAccountViewController *serviceAccount = [[BBServiceAccountViewController alloc] initWithServiceItems:[PalmUIManagement sharedInstance].noticeArray];
+                serviceAccount.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:serviceAccount animated:YES];
+            }
+                break;
+            default:
+                break;
         }
         
-        __block NSInteger count = [CPUIModelManagement sharedInstance].friendMsgUnReadedCount;
-        count -= [messageGroup.unReadedCount intValue];
-        dispatch_block_t updateTagBlock = ^{
-            [[CPUIModelManagement sharedInstance] setFriendMsgUnReadedCount:count];
-        };
-        dispatch_async(dispatch_get_main_queue(), updateTagBlock);
-    }else if ([cell.msgGroup isKindOfClass:[CPDBModelNotifyMessage class]]){
-        CPDBModelNotifyMessage *msgGroup = cell.msgGroup;
-        //设置未读数
-        
-        [[CPSystemEngine sharedInstance] updateUnreadedMessageStatusChanged:msgGroup];
-
-        
-        NSArray *msgGroupOfCurrentFrom = [[[CPSystemEngine sharedInstance] dbManagement] findNotifyMessagesOfCurrentFromJID:msgGroup.from];
-        NSLog(@"msgGroupOfCurrentFrom%@",msgGroupOfCurrentFrom);
     }
-
-    
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 #pragma mark UItableviewDatasouce
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+/*
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (self.tableviewDisplayDataArray.count != 0) {
-        return self.tableviewDisplayDataArray.count;
+    if (listType == LIST_TYPE_MSG_GROUP) {
+        return [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, 1.f)];
     }
-    return 0;
+    return nil;
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+*/
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    static NSString *messageGroupCellIdentifier = @"messageGroupCellIdentifier";
-    static NSString *messageSingleCellIdentifier = @"messageSingleCellIdentifier";
-    static NSString *messageNotifyCellIdentifier = @"messageNotifyCellIdentifier";
-    
-    id tempMsgGroup = [self.tableviewDisplayDataArray objectAtIndex:indexPath.row];
-    
-    BBMessageGroupBaseCell *cell;
-    if ([tempMsgGroup isKindOfClass:[CPUIModelMessageGroup class]]) {
-        if ([tempMsgGroup isMsgSingleGroup]) {
-            cell = [tableView dequeueReusableCellWithIdentifier:messageSingleCellIdentifier];
-            if (nil == cell) {
-                cell = [[BBSingleMessageGroupCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:messageSingleCellIdentifier];
-                cell.backgroundColor = [UIColor clearColor];
+    if (listType == LIST_TYPE_MSG_GROUP) {
+        return self.tableviewDisplayDataArray.count != 0 ? self.tableviewDisplayDataArray.count : 0;
+    }else
+    {
+        return section == 0 ? self.classModels.count : 1;
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return listType == LIST_TYPE_MSG_GROUP ? 1 : 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (listType == LIST_TYPE_MSG_GROUP) {
+        static NSString *messageGroupCellIdentifier = @"messageGroupCellIdentifier";
+        static NSString *messageSingleCellIdentifier = @"messageSingleCellIdentifier";
+        static NSString *messageNotifyCellIdentifier = @"messageNotifyCellIdentifier";
+        
+        id tempMsgGroup = [self.tableviewDisplayDataArray objectAtIndex:indexPath.row];
+        
+        BBMessageGroupBaseCell *cell;
+        if ([tempMsgGroup isKindOfClass:[CPUIModelMessageGroup class]]) {
+            if ([tempMsgGroup isMsgSingleGroup]) {
+                cell = [tableView dequeueReusableCellWithIdentifier:messageSingleCellIdentifier];
+                if (nil == cell) {
+                    cell = [[BBSingleMessageGroupCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:messageSingleCellIdentifier];
+                    //cell.backgroundColor = [UIColor clearColor];
+                }
+            }else{
+                cell = [tableView dequeueReusableCellWithIdentifier:messageGroupCellIdentifier];
+                if (nil ==cell) {
+                    cell = [[BBGroupMessageGroupCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:messageGroupCellIdentifier];
+                    //cell.backgroundColor = [UIColor clearColor];
+                }
             }
-        }else{
-            cell = [tableView dequeueReusableCellWithIdentifier:messageGroupCellIdentifier];
-            if (nil ==cell) {
-                cell = [[BBGroupMessageGroupCell  alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:messageGroupCellIdentifier];
-                cell.backgroundColor = [UIColor clearColor];
-            }
-        }
-        [cell setUIModelMsgGroup:tempMsgGroup];
-        //cell.msgGroup = tempMsgGroup;
+            [cell setUIModelMsgGroup:tempMsgGroup];
+            //cell.msgGroup = tempMsgGroup;
         }else if ([tempMsgGroup isKindOfClass:[CPDBModelNotifyMessage class]])
         {
             cell = [tableView dequeueReusableCellWithIdentifier:messageNotifyCellIdentifier];
             if (nil == cell) {
                 cell = [[BBNotifyMessageGroupCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:messageNotifyCellIdentifier];
-                cell.backgroundColor = [UIColor clearColor];
+                //cell.backgroundColor = [UIColor clearColor];
             }
             [cell setDBModelNotifyMsgGroup:tempMsgGroup];
         }
-    return cell;
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor whiteColor];
+        return cell;
+    }else
+    {
+        static NSString *contactsDefaultCellIdentifier = @"contactsDefaultCellIdentifier";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:contactsDefaultCellIdentifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:contactsDefaultCellIdentifier];
+            cell.contentView.backgroundColor = [UIColor whiteColor];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        
+        switch (indexPath.section) {
+            case 0:
+            {
+                BBGroupModel *tempModel = self.classModels[indexPath.row];
+                cell.textLabel.text = tempModel.alias;
+            }
+                break;
+            case 1:
+                cell.textLabel.text = @"讨论组";
+                break;
+                
+            case 2:
+                cell.textLabel.text = @"服务号";
+                break;
+            default:
+                break;
+        }
+        return cell;
+    }
+    
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 70.f;
+    if (listType == LIST_TYPE_MSG_GROUP) {
+        return 0;
+    }else if (section == 0)
+    {
+        return 0;
+    }
+    
+    return 20.f;
 }
--(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    return listType == LIST_TYPE_MSG_GROUP ?70.f : 40.f;
+    
 }
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return listType == LIST_TYPE_MSG_GROUP ?YES : NO;
+}
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewCellEditingStyleDelete;
 }
@@ -326,9 +592,7 @@
         [[CPSystemEngine sharedInstance] deleteNotifyMessageGroupByOperationWithObj:tempMsgGroup];
 //        CPDBModelNotifyMessage *msgGroup = tempMsgGroup;
 //        [[[CPSystemEngine sharedInstance] dbManagement] deleteMsgGroupByFrom:msgGroup.from];
-        
     }
-    
 }
 #pragma mark SearchBarDelegate
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -350,11 +614,12 @@
         });
     }
 }
+/*//close searchbar
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     if ([_messageListTableSearchBar isFirstResponder]) {
         [_messageListTableSearchBar resignFirstResponder];
     }
 }
-
+*/
 @end
