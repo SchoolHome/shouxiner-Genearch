@@ -70,7 +70,7 @@
                     _currentGroup = bjDropdownView.listData[0];
                     [titleButton setTitle:_currentGroup.alias forState:UIControlStateNormal];
                 }
-                
+                [PalmUIManagement sharedInstance].currentGroupInfo = _currentGroup;
                 //            if ([_currentGroup.avatar length]>0) {
                 //                avatar.imageURL = [NSURL URLWithString:_currentGroup.avatar];
                 //            }
