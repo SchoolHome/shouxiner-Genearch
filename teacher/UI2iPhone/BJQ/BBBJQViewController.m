@@ -542,7 +542,13 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [inputBar endEdit];
-    
+    if (bjDropdownView.unfolded) {
+        [bjDropdownView dismiss];
+    }
+    if (fsDropdownView.unfolded) {
+        [fsDropdownView dismiss];
+    }
+
     [self removeObservers];
 }
 
@@ -907,6 +913,7 @@
 #pragma mark - BBBJDropdownViewDelegate
 -(void)bbBJDropdownView:(BBBJDropdownView *) dropdownView_ didSelectedAtIndex:(NSInteger) index_{
     _currentGroup = dropdownView_.listData[index_];
+    [PalmUIManagement sharedInstance].currentGroupInfo = _currentGroup;
     [titleButton setTitle:_currentGroup.alias forState:UIControlStateNormal];
     
     [bjqTableView triggerPullToRefresh];

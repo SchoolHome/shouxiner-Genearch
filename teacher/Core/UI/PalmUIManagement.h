@@ -10,6 +10,7 @@
 #import "PalmNetWorkService.h"
 #import "CPPTModelLoginResult.h"
 #import "CropVideo.h"
+#import "BBGroupModel.h"
 
 #define TRANSFERVALUE @"TransferValue"
 #define TRANSFERVCFROMCLASS @"TransferFromVCClass"
@@ -20,7 +21,8 @@
 +(PalmUIManagement *) sharedInstance;
 // 登陆结果
 @property(nonatomic,strong) CPPTModelLoginResult *loginResult;
-
+// 当前选择的班级信息
+@property(nonatomic,strong) BBGroupModel *currentGroupInfo;
 // 客户端页面间传值KVO
 @property(nonatomic,strong) NSDictionary *transferDic;
 @property(nonatomic,strong) NSDictionary *userProfile;
