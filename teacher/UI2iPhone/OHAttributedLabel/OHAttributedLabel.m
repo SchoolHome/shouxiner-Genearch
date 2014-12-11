@@ -479,6 +479,10 @@ NSDataDetector* sharedReusableDataDetector(NSTextCheckingTypes types)
             
             self.activeLink = nil;
             [self setNeedsDisplay];
+            
+            if ([self.delegate respondsToSelector:@selector(attributedLabelTapped)]) {
+                [self.delegate attributedLabelTapped];
+            }
         }
             break;
         case UIGestureRecognizerStateCancelled:
