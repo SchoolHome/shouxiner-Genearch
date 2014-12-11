@@ -31,19 +31,19 @@
         NSNumber *ct = dict[@"data"][@"count"];
         
         if ([ct intValue] == 0) {
-            markYZS.hidden = YES;
+            self.markYZS.hidden = YES;
         }else{
-            markYZS.hidden = NO;
-            markYZS.text = [NSString stringWithFormat:@"%d",[ct intValue]];
-            CGFloat width = [markYZS.text sizeWithFont:[UIFont systemFontOfSize:14]
+            self.markYZS.hidden = NO;
+            self.markYZS.text = [NSString stringWithFormat:@"%d",[ct intValue]];
+            CGFloat width = [self.markYZS.text sizeWithFont:[UIFont systemFontOfSize:14]
                                   constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].width;
             if (width<17) {
                 width = 20;
             }else{
                 width = width + 8;
             }
-            markYZS.frame = CGRectMake(215, -5, width, 20);
-            [markYZS setNeedsDisplay];
+            self.markYZS.frame = CGRectMake(215, -5, width, 20);
+            [self.markYZS setNeedsDisplay];
         }
     }
     
@@ -55,7 +55,7 @@
         }else{
             markMessage.hidden = NO;
             markMessage.text = [NSString stringWithFormat:@"%d",count];
-            CGFloat width = [markYZS.text sizeWithFont:[UIFont systemFontOfSize:14]
+            CGFloat width = [markMessage.text sizeWithFont:[UIFont systemFontOfSize:14]
                                      constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].width;
             if (width<17) {
                 width = 20;
@@ -66,6 +66,36 @@
             [markMessage setNeedsDisplay];
         }
     }
+    if ([@"discoverResult" isEqualToString:keyPath]){
+        NSDictionary *discoverResult = [PalmUIManagement sharedInstance].discoverResult;
+        if ([discoverResult[@"errno"] integerValue]==0) {
+            NSInteger discoverCount = 0;
+            if (![discoverResult[@"discover"] isKindOfClass:[NSNull class]]) {
+                NSDictionary *discoverDic = discoverResult[@"discover"];
+                discoverCount += [[discoverDic allKeys] count];
+            }
+            if (![discoverResult[@"service"] isKindOfClass:[NSNull class]]) {
+                NSDictionary *serviceDic = discoverResult[@"service"];
+                discoverCount += [[serviceDic allKeys] count];
+            }
+            discoverCount +=2;
+            if (discoverCount > 0) {
+                self.markYZS.hidden = NO;
+                self.markYZS.text = [NSString stringWithFormat:@"%d", discoverCount];
+                CGFloat width = [self.markYZS.text sizeWithFont:[UIFont systemFontOfSize:14]
+                                              constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].width;
+                if (width<17) {
+                    width = 20;
+                }else{
+                    width = width + 8;
+                }
+                self.markYZS.frame = CGRectMake(320/5*4-16.f, -5, width, 20);
+                [self.markYZS setNeedsDisplay];
+            }else{
+                self.markYZS.hidden = YES;
+            }
+        }
+    }
 }
 
 -(id)init{
@@ -74,6 +104,7 @@
         //
         [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"friendMsgUnReadedCount" options:0 context:NULL];
         [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiUnReadCount" options:0 context:NULL];
+        [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"discoverResult" options:0 context:nil];
     }
     return self;
 }
@@ -81,9 +112,6 @@
 -(void)checkUnreadCount{
     
     int time = 0;
-
-    
-    
     CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
     NSString *key = [NSString stringWithFormat:@"check_yzs_unread_time_%@",account.uid];
     
@@ -92,8 +120,9 @@
     if ([ts intValue]>0) {
         time = [ts intValue];
     }
-    [[PalmUIManagement sharedInstance] getUnReadNotiCount:time];
-    [self performSelector:@selector(checkUnreadCount) withObject:nil afterDelay:35.0f];
+//    [[PalmUIManagement sharedInstance] getUnReadNotiCount:time];
+//    [self performSelector:@selector(checkUnreadCount) withObject:nil afterDelay:35.0f];
+    [[PalmUIManagement sharedInstance] getDiscoverData];
 }
 
 - (void)viewDidLoad
@@ -113,7 +142,7 @@
     CustomNavigationController *n3 = [[CustomNavigationController alloc] initWithRootViewController:c3];
     n3.tabBarItem.title = @"YZSS";
     
-    BBYZSViewController *c4 = [[BBYZSViewController alloc] init];
+    BBFXViewController *c4 = [[BBFXViewController alloc] init];
     CustomNavigationController *n4 = [[CustomNavigationController alloc] initWithRootViewController:c4];
     n4.tabBarItem.title = @"YZS";
     
@@ -167,19 +196,19 @@
         }
     }
     
-    markYZS = [[UILabel alloc] initWithFrame:CGRectMake(320/itemCount*4-16.f, -5, 20, 20)];
-    markYZS.font = [UIFont systemFontOfSize:14];
-    [_imageTabBar addSubview:markYZS];
-    markYZS.backgroundColor = [UIColor colorWithRed:252/255.0 green:79/255.0 blue:6/255.0 alpha:1.0];
-    markYZS.textAlignment = NSTextAlignmentCenter;
-    markYZS.textColor = [UIColor whiteColor];
-    CALayer *roundedLayer1= [markYZS layer];
+    _markYZS = [[UILabel alloc] initWithFrame:CGRectMake(320/itemCount*4-16.f, -5, 20, 20)];
+    _markYZS.font = [UIFont systemFontOfSize:14];
+    [_imageTabBar addSubview:_markYZS];
+    _markYZS.backgroundColor = [UIColor colorWithRed:252/255.0 green:79/255.0 blue:6/255.0 alpha:1.0];
+    _markYZS.textAlignment = NSTextAlignmentCenter;
+    _markYZS.textColor = [UIColor whiteColor];
+    CALayer *roundedLayer1= [_markYZS layer];
     [roundedLayer1 setMasksToBounds:YES];
     roundedLayer1.cornerRadius = 10.0;
     roundedLayer1.borderWidth = 0.5;
     roundedLayer1.borderColor = [[UIColor grayColor] CGColor];
-    markYZS.text = @"";
-    markYZS.hidden = YES;
+    _markYZS.text = @"";
+    _markYZS.hidden = YES;
     
     [self checkUnreadCount];
     
@@ -201,9 +230,13 @@
 {
     if ([viewController.tabBarItem.title isEqualToString:@"YZSS"]) {
         //展开view
-        BBMenuView *menu = [[BBMenuView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, [UIScreen mainScreen].bounds.size.height)];
+        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+        BBMenuView *menu = [[BBMenuView alloc] initWithFrame:CGRectMake(0.0f, window.bounds.size.height, window.bounds.size.width, window.bounds.size.height)];
         menu.delegate = self;
-        [[UIApplication sharedApplication].keyWindow addSubview:menu];
+        [window addSubview:menu];
+        [UIView animateWithDuration:0.3f animations:^(void){
+            [menu setFrame:CGRectMake(0, 0, window.bounds.size.width, window.bounds.size.height)];
+        }];
         return NO;
     }
     return YES;
@@ -241,7 +274,7 @@
     }
     
     if (tabBarController.selectedIndex == 3) { // 点击消失
-        markYZS.hidden = YES;
+        self.markYZS.hidden = YES;
     }
 }
 
@@ -252,7 +285,7 @@
 }
 
 -(void)dealloc{
-
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"discoverResult"];
     [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"friendMsgUnReadedCount"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notiUnReadCount"];
 }
