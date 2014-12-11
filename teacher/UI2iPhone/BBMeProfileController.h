@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "PalmViewController.h"
-
+#import "BBProfileModel.h"
 @interface BBMeProfileController : PalmViewController
 {
     UITableView *profileTableView;
     NSArray *listData;
 }
-
-@property (nonatomic, strong) NSDictionary *userProfile;
 @end

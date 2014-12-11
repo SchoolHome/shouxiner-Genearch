@@ -11,6 +11,7 @@
 #import "BBYZSViewController.h"
 #import "BBMeViewController.h"
 #import "BBZJZViewController.h"
+#import "BBFXViewController.h"
 
 @interface BBUITabBarController : UITabBarController
 {
@@ -22,7 +23,6 @@
     
     
     UILabel *markMessage;
-    UILabel *markYZS;
 }
-
+@property (nonatomic, strong) UILabel *markYZS;
 @end
