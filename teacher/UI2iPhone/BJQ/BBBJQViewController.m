@@ -169,7 +169,7 @@
     {
         NSDictionary *dict = [PalmUIManagement sharedInstance].userCredits;
         NSNumber *credits = dict[@"data"][@"credits"];
-        NSString *txt = [NSString stringWithFormat:@"您有 %d 积分",[credits intValue]];
+        NSString *txt = [NSString stringWithFormat:@"您有 %d 手心币",[credits intValue]];
         NSMutableAttributedString* attrStr = [NSMutableAttributedString attributedStringWithString:txt];
         [attrStr setTextColor:[UIColor grayColor]];
         [attrStr setTextColor:[UIColor orangeColor] range:[txt rangeOfString:[NSString stringWithFormat:@"%d",[credits intValue]]]];
@@ -426,10 +426,13 @@
     bjqTableView.separatorColor = [UIColor clearColor];
     bjqTableView.dataSource = self;
     bjqTableView.delegate = self;
-
     [self.view addSubview:bjqTableView];
     [bjqTableView reloadData];
     
+    UIView *bjqBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bjqTableView.frame.size.width, bjqTableView.frame.size.height)];
+    [bjqBgView setBackgroundColor:[UIColor colorWithHexString:@"f2f2f2"]];
+    [bjqTableView setBackgroundView:bjqBgView];
+    bjqBgView = nil;
     
     __weak BBBJQViewController *weakSelf = self;
     // 刷新
@@ -449,30 +452,60 @@
         [[PalmUIManagement sharedInstance] getGroupTopic:[weakSelf.currentGroup.groupid intValue] withTimeStamp:st withOffset:offset withLimit:30  withType:weakSelf.type];
     }];
     
+//    UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 147)];
+//    head.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];//[UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
+//    head.userInteractionEnabled = YES;
+//    
+//    UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
+//    //headImage.backgroundColor = [UIColor orangeColor];
+//    headImage.image = [UIImage imageNamed:@"BBTopBGNew"];
+//    [head addSubview:headImage];
+//    
+//    UIImageView *scoreImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BBScoreBG"]];
+//    scoreImageView.frame = CGRectMake(320.0f - 108.0f, 24.0f, 108.0f, 35.0f);
+//    scoreImageView.userInteractionEnabled = YES;
+//    [head addSubview:scoreImageView];
+//    
+//    
+//    point = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(0, 9, 108, 35)];
+//    point.backgroundColor = [UIColor clearColor];
+//    [scoreImageView addSubview:point];
+//    point.delegate = self;
+//    point.text = @"您有 0 积分";
+//    point.textAlignment = NSTextAlignmentCenter;
+//    point.font = [UIFont boldSystemFontOfSize:11];
+//    point.textColor = [UIColor grayColor];
+//    point.userInteractionEnabled = YES;
+    
     UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 147)];
-    head.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];//[UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
+    head.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
     head.userInteractionEnabled = YES;
     
+    
     UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
-    //headImage.backgroundColor = [UIColor orangeColor];
     headImage.image = [UIImage imageNamed:@"BBTopBGNew"];
+    headImage.userInteractionEnabled = YES;
     [head addSubview:headImage];
     
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer  alloc] initWithTarget:self action:@selector(pointTaped:)];
     UIImageView *scoreImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BBScoreBG"]];
     scoreImageView.frame = CGRectMake(320.0f - 108.0f, 24.0f, 108.0f, 35.0f);
     scoreImageView.userInteractionEnabled = YES;
-    [head addSubview:scoreImageView];
-    
+    [headImage addSubview:scoreImageView];
     
     point = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(0, 9, 108, 35)];
     point.backgroundColor = [UIColor clearColor];
+    point.userInteractionEnabled = YES;
     [scoreImageView addSubview:point];
+    point.text = @"您有 0 手心币";
     point.delegate = self;
-    point.text = @"您有 0 积分";
     point.textAlignment = NSTextAlignmentCenter;
     point.font = [UIFont boldSystemFontOfSize:11];
     point.textColor = [UIColor grayColor];
     point.userInteractionEnabled = YES;
+    [point addGestureRecognizer:gesture];
+    bjqTableView.tableHeaderView = head;
+    bjqTableView.tableHeaderView.userInteractionEnabled = YES;
     
 //    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer  alloc] initWithTarget:self action:@selector(pointTaped:)];
 //    [point addGestureRecognizer:gesture];
@@ -505,14 +538,15 @@
     titleButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     [titleButton addTarget:self action:@selector(bjButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
     [titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    UIImageView *arrow = [[UIImageView alloc] initWithFrame:CGRectMake(124, 9, 22, 22)];
+    UIImageView *arrow = [[UIImageView alloc] initWithFrame:CGRectMake(125, 12, 22, 22)];
     [titleButton addSubview:arrow];
     arrow.image = [UIImage imageNamed:@"BBDown"];
     
-    bjDropdownView = [[BBBJDropdownView alloc] initWithFrame:self.view.bounds];
+    CGRect rect = CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, 280.0f);
+    bjDropdownView = [[BBBJDropdownView alloc] initWithFrame:rect];
     bjDropdownView.delegate = self;
     
-    fsDropdownView = [[BBFSDropdownView alloc] initWithFrame:self.view.bounds];
+    fsDropdownView = [[BBFSDropdownView alloc] initWithFrame:rect];
     fsDropdownView.delegate = self;
     
     CGFloat h = [[UIScreen mainScreen] bounds].size.height;

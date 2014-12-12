@@ -1443,8 +1443,6 @@
 		7A4D2A1B18DAEE2400C128B4 /* BBYZSShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D2A1A18DAEE2400C128B4 /* BBYZSShareViewController.m */; };
 		7A54E7C818F580E3003C9F36 /* BBAmILike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A54E7C718F580E3003C9F36 /* BBAmILike@2x.png */; };
 		7A54E7CA18F580F5003C9F36 /* BBAmILike.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A54E7C918F580F5003C9F36 /* BBAmILike.png */; };
-		7A54E7CC18F58101003C9F36 /* BBTopBGNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A54E7CB18F58101003C9F36 /* BBTopBGNew.png */; };
-		7A54E7CE18F58109003C9F36 /* BBTopBGNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A54E7CD18F58109003C9F36 /* BBTopBGNew@2x.png */; };
 		7A59194918D6BDA500C03DED /* BBFTZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A59193C18D6BDA500C03DED /* BBFTZViewController.m */; };
 		7A59194A18D6BDA500C03DED /* BBFZYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A59193F18D6BDA500C03DED /* BBFZYViewController.m */; };
 		7A59194B18D6BDA500C03DED /* BBPBXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A59194218D6BDA500C03DED /* BBPBXViewController.m */; };
@@ -3642,8 +3640,6 @@
 		7A4D2A1A18DAEE2400C128B4 /* BBYZSShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBYZSShareViewController.m; sourceTree = "<group>"; };
 		7A54E7C718F580E3003C9F36 /* BBAmILike@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBAmILike@2x.png"; sourceTree = "<group>"; };
 		7A54E7C918F580F5003C9F36 /* BBAmILike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBAmILike.png; sourceTree = "<group>"; };
-		7A54E7CB18F58101003C9F36 /* BBTopBGNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBTopBGNew.png; sourceTree = "<group>"; };
-		7A54E7CD18F58109003C9F36 /* BBTopBGNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBTopBGNew@2x.png"; sourceTree = "<group>"; };
 		7A59193B18D6BDA500C03DED /* BBFTZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBFTZViewController.h; sourceTree = "<group>"; };
 		7A59193C18D6BDA500C03DED /* BBFTZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBFTZViewController.m; sourceTree = "<group>"; };
 		7A59193E18D6BDA500C03DED /* BBFZYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBFZYViewController.h; sourceTree = "<group>"; };
@@ -7512,8 +7508,6 @@
 				7AB13C1518F59DDC00C019C6 /* BBComentNotificationContent@2x.png */,
 				7AB13C1018F59D3500C019C6 /* BBComentNotification.png */,
 				7AB13C1118F59D3500C019C6 /* BBComentNotification@2x.png */,
-				7A54E7CD18F58109003C9F36 /* BBTopBGNew@2x.png */,
-				7A54E7CB18F58101003C9F36 /* BBTopBGNew.png */,
 				7A54E7C918F580F5003C9F36 /* BBAmILike.png */,
 				7A54E7C718F580E3003C9F36 /* BBAmILike@2x.png */,
 				7A46B21518F44CCC006AEA00 /* BBheart.png */,
@@ -8518,7 +8512,6 @@
 				1927E4C118E5544E0079EA53 /* ZJZSenderText.png in Resources */,
 				7A334B2118F2DE60001F57C4 /* BBFZYPress.png in Resources */,
 				332D823118C33F0A007A75D5 /* bt_im_profile_presswrite@2x.png in Resources */,
-				7A54E7CC18F58101003C9F36 /* BBTopBGNew.png in Resources */,
 				332D7F0D18C33F0A007A75D5 /* pb_bar_closefriend@2x.png in Resources */,
 				1982F7C11A0C73020075F35F /* list_phone.png in Resources */,
 				1982F7E61A0C73020075F35F /* t_pic_press@2x.png in Resources */,
@@ -8584,7 +8577,6 @@
 				332D7F4418C33F0A007A75D5 /* index_top_btn_addressbook@2x.png in Resources */,
 				7AA5002218DF168600FC59C4 /* BBMessageLine.png in Resources */,
 				7A334AE518F2BF6F001F57C4 /* BBBottomBG@2x.png in Resources */,
-				7A54E7CE18F58109003C9F36 /* BBTopBGNew@2x.png in Resources */,
 				332D7F0E18C33F0A007A75D5 /* pb_bar_closefriend_press@2x.png in Resources */,
 				332D7F7A18C33F0A007A75D5 /* btn_im_play_white_white_black@2x.png in Resources */,
 				332D756C18C33552007A75D5 /* README.txt in Resources */,
@@ -9421,7 +9413,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "36b8f22b-5ef3-42f8-a454-027cab295d76";
+				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -9456,7 +9448,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "36b8f22b-5ef3-42f8-a454-027cab295d76";
+				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
