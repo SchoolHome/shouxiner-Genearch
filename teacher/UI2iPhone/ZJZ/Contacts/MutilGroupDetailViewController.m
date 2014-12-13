@@ -30,11 +30,12 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    [self closeProgress];
+    
     if([keyPath isEqualToString:@"quitGroupDic"]){
         if ([[[CPUIModelManagement sharedInstance].quitGroupDic objectForKey:group_manage_dic_res_code]integerValue]== RESPONSE_CODE_SUCESS) {
             [[HPTopTipView shareInstance] showMessage:@"操作成功" duration:2.0f];
             [self.navigationController popToRootViewControllerAnimated:YES];
+            [self closeProgress];
         }else {
             [self showProgressWithText:[[CPUIModelManagement sharedInstance].quitGroupDic objectForKey:group_manage_dic_res_desc] withDelayTime:3.f];
 
@@ -88,11 +89,12 @@
     [quit setBackgroundImage:[UIImage imageNamed:@"button_del"] forState:UIControlStateNormal];
     [tableviewFootView  addSubview:quit];
     
-    _detailTableview = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, self.screenHeight) style:UITableViewStyleGrouped];
+    _detailTableview = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, self.screenHeight-64.f) style:UITableViewStyleGrouped];
     _detailTableview.dataSource = self;
     _detailTableview.delegate = self;
     _detailTableview.tableFooterView = tableviewFootView;
     _detailTableview.tableHeaderView = _memberDisplayView;
+    _detailTableview.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_detailTableview];
     
     
@@ -105,7 +107,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"quitGroupDic" options:0 context:nil];
 }
@@ -144,7 +146,11 @@
         }
     }
     [_memberDisplayView setMembers:[self getUserInfos]];
+    
+    [self.detailTableview setTableHeaderView:_memberDisplayView];
     [self.detailTableview reloadData];
+
+
 }
 
 - (NSArray *)getUserInfos
@@ -203,7 +209,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cellIden"];
-    cell.textLabel.text = @"群名称";
+    cell.textLabel.text = @"组名称";
     cell.detailTextLabel.text = groupName;
     cell.detailTextLabel.textAlignment = NSTextAlignmentRight;
     return cell;

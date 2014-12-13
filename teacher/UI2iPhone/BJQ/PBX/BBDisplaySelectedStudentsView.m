@@ -33,7 +33,7 @@
         [confirmBtn addTarget:self action:@selector(confirmSelected) forControlEvents:UIControlEventTouchUpInside];
         [confirmBtn setBackgroundImage:[UIImage imageNamed:@"ZJZGroupChat"] forState:UIControlStateNormal];
         [confirmBtn setTitle:@"确认" forState:UIControlStateNormal];
-        confirmBtn.enabled = NO;
+        //confirmBtn.enabled = NO;
         [self addSubview:confirmBtn];
         confirmBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
     }
@@ -61,7 +61,7 @@
         [selectedStudentsScrollview setContentSize:CGSizeZero];
         
         [confirmBtn setTitle:@"确认" forState:UIControlStateNormal];
-        confirmBtn.enabled = NO;
+        //confirmBtn.enabled = NO;
         return;
     }
     
