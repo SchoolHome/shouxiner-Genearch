@@ -24,8 +24,8 @@
 
 @interface BBPostPBXViewController ()
 {
-    NSArray *selectedStuArray;
-    NSArray *selectedRangeArray;
+    NSMutableArray *selectedStuArray;
+    NSMutableArray *selectedRangeArray;
     
     NSString *selectedStuStr;
     NSString *selectedRangeStr;
@@ -50,18 +50,19 @@
             [self showProgressWithText:[dic objectForKey:ASI_REQUEST_ERROR_MESSAGE] withDelayTime:3];
         }else
         {
-            NSDictionary *students = (NSDictionary *)[[[dic objectForKey:ASI_REQUEST_DATA] objectForKey:@"list"] objectForKey:[self.currentGroup.groupid stringValue]];
+            [self closeProgress];
+            NSDictionary *students = (NSDictionary *)[[[dic objectForKey:ASI_REQUEST_DATA] objectForKey:@"list"] objectForKey:[[self getGroupID] stringValue]];
             
             if (students && [students isKindOfClass:[NSDictionary class]]) {
                 BBStudentsListViewController *studentListVC = [[BBStudentsListViewController alloc] initWithSelectedStudents:selectedStuArray withStudentModel:students];
                 [self.navigationController pushViewController:studentListVC animated:YES];
             }else
             {
-                [self showProgressWithText:@"学生列表获取失败" withDelayTime:3];
+                [self showProgressWithText:@"学生列表获取失败" withDelayTime:2.f];
             }
             
         }
-        [self closeProgress];
+        
     }
     if ([@"updateImageResult" isEqualToString:keyPath])  // 图片上传成功
     {
@@ -91,7 +92,7 @@
                 }
                 
                 
-                [[PalmUIManagement sharedInstance] postPBX:[self.currentGroup.groupid intValue] withTitle:@"拍表现" withContent:[self getThingsText] withAttach:attach withAward:[self getAward] withToHomePage:hasHomePage withToUpGroup:hasTopGroup];
+                [[PalmUIManagement sharedInstance] postPBX:[[self getGroupID] intValue] withTitle:@"拍表现" withContent:[self getThingsText] withAttach:attach withAward:[self getAward] withToHomePage:hasHomePage withToUpGroup:hasTopGroup];
             }
             
         }else{  // 上传失败
@@ -155,7 +156,7 @@
                         hasHomePage = YES;
                     }
                 }
-                [[PalmUIManagement sharedInstance] postPBX:[self.currentGroup.groupid intValue] withTitle:@"拍表现" withContent:[self getThingsText] withAttach:attach withAward:[self getAward] withToHomePage:hasHomePage withToUpGroup:hasTopGroup];
+                [[PalmUIManagement sharedInstance] postPBX:[[self getGroupID] intValue] withTitle:@"拍表现" withContent:[self getThingsText] withAttach:attach withAward:[self getAward] withToHomePage:hasHomePage withToUpGroup:hasTopGroup];
             }
         }
     }
@@ -196,8 +197,8 @@
 {
     [super viewDidLoad];
     
-    selectedStuArray = [[NSArray alloc] init];
-    selectedRangeArray = [[NSArray alloc] init];
+    selectedStuArray = [[NSMutableArray alloc] init];
+    selectedRangeArray = [[NSMutableArray alloc] initWithCapacity:2];
     selectedStuStr = @"";
 
     
@@ -213,7 +214,7 @@
 - (void)receiveSeletedRangeList:(NSNotification *)noti
 {
     NSArray *selectedRanges = (NSArray *)[noti object];
-    selectedRangeArray = [[NSArray alloc] initWithArray:selectedRanges];
+    selectedRangeArray = [[NSMutableArray alloc] initWithArray:selectedRanges];
     selectedRangeStr = @"";
     
     for (int i =0 ; i< selectedRanges.count ; i++) {
@@ -229,8 +230,8 @@
 {
     NSArray *selectedStudents = (NSArray *)[noti object];
     
-    selectedStuArray = [[NSArray alloc] initWithArray:selectedStudents];
-    
+    selectedStuArray = [[NSMutableArray alloc] initWithArray:selectedStudents];
+    selectedStuStr = @"";
     NSMutableString *studentListText = [NSMutableString string];
     for ( int i = 0; i< selectedStudents.count; i++) {
         BBStudentModel *tempModel = [selectedStudents objectAtIndex:i];
@@ -280,6 +281,14 @@
 #pragma mark - ViewController
 - (void)sendButtonTaped
 {
+    if ([[self getThingsText] length]==0) {  // 没有输入文本
+        
+        [self showProgressWithText:@"请输入文字" withDelayTime:0.1];
+        
+        return;
+    }
+    
+    
     if ([self videoIsExist]) {
         [self sendVideo];
     }else{
@@ -289,8 +298,9 @@
 }
 - (void)sendVideo
 {
+    [self closeThingsText];
     [self showProgressWithText:@"正在上传"];
-    [[PalmUIManagement sharedInstance] updateUserVideoFile:[NSURL fileURLWithPath:[self getTempSaveVideoPath]] withGroupID:[self.currentGroup.groupid intValue]];
+    [[PalmUIManagement sharedInstance] updateUserVideoFile:[NSURL fileURLWithPath:[self getTempSaveVideoPath]] withGroupID:[[self getGroupID] intValue]];
 }
 
 - (void)sendImages
@@ -311,7 +321,7 @@
         if (image) {
             image = [self imageWithImage:image];
             NSData *data = UIImageJPEGRepresentation(image, 0.5f);
-            [[PalmUIManagement sharedInstance] updateUserImageFile:data withGroupID:[self.currentGroup.groupid intValue]];
+            [[PalmUIManagement sharedInstance] updateUserImageFile:data withGroupID:[[self getGroupID] intValue]];
         }
     }
     
@@ -331,7 +341,7 @@
         }
         
         
-        [[PalmUIManagement sharedInstance] postPBX:[self.currentGroup.groupid intValue] withTitle:@"拍表现" withContent:[self getThingsText] withAttach:@"" withAward:[self getAward] withToHomePage:hasHomePage withToUpGroup:hasTopGroup];
+        [[PalmUIManagement sharedInstance] postPBX:[self getGroupID].intValue withTitle:@"拍表现" withContent:[self getThingsText] withAttach:@"" withAward:[self getAward] withToHomePage:hasHomePage withToUpGroup:hasTopGroup];
     }
     
     [self closeThingsText];
@@ -357,6 +367,32 @@
 - (void)chooseImageViewLoaded
 {
     [self.chooseImageView addImages:tempImages];
+}
+
+-(void)playVideo
+{
+    if ([[CropVideo getFileSizeWithName:[self getTempSaveVideoPath]] integerValue] > 0) {
+        [self.navigationController setNavigationBarHidden:YES];
+        self.moviePlayer.view.hidden = NO;
+        [self.moviePlayer prepareToPlay];
+        [self.moviePlayer play];
+    }else
+    {
+        NSLog(@"not ready");
+    }
+}
+
+#pragma mark - ChooseClassViewControllerDelegate
+- (void)classChoose:(NSInteger)index
+{
+    
+    [selectedStuArray removeAllObjects];
+    [selectedRangeArray removeAllObjects];
+    selectedStuStr = @"";
+    selectedRangeStr = @"";
+    
+    [super classChoose:index];
+
 }
 #pragma mark - Video
 - (void)initMoviePlayer
@@ -385,18 +421,7 @@
     [CropVideo convertMpeg4WithUrl:_videoUrl andDstFilePath:[self getTempSaveVideoPath]];
 }
 
-- (void)playVideo
-{
-    if ([[CropVideo getFileSizeWithName:[self getTempSaveVideoPath]] integerValue] > 0) {
-        [self.navigationController setNavigationBarHidden:YES];
-        self.moviePlayer.view.hidden = NO;
-        [self.moviePlayer prepareToPlay];
-        [self.moviePlayer play];
-    }else
-    {
-        NSLog(@"not ready");
-    }
-}
+
 
 #pragma mark - VideoNoti
 - (void) playerPlaybackDidFinish:(NSNotification*)notification
@@ -412,10 +437,19 @@
     [self closeProgress];
     UIImage *image = [self.moviePlayer thumbnailImageAtTime:1.f timeOption:MPMovieTimeOptionExact];
     NSLog(@"getThumbnailImage==%@",image);
+    if (!image) {
+        [self showProgressWithText:@"获取图片失败,请重试" withDelayTime:2.f];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        return;
+    }
     [self setChoosenImages:@[image] andISVideo:YES];
 }
 
 #pragma mark - UITableview
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return TABLEVIEW_SECTION_COUNT;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -451,10 +485,12 @@
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:studentIden];
                 cell.detailTextLabel.numberOfLines = 100;
+                cell.textLabel.font = [UIFont systemFontOfSize:14.f];
                 cell.detailTextLabel.font = [UIFont systemFontOfSize:14.f];
                 cell.textLabel.backgroundColor = [UIColor blackColor];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.textLabel.text = @"@点名表扬:";
+                
             }
             cell.detailTextLabel.text = selectedStuStr;
             return cell;
@@ -467,6 +503,8 @@
                 cell.textLabel.backgroundColor = [UIColor blackColor];
                 cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.textLabel.font = [UIFont systemFontOfSize:14.f];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:14.f];
             }
             cell.detailTextLabel.text = selectedRangeStr;
             return cell;
@@ -481,10 +519,11 @@
 {
     if (indexPath.section == 2) {
         if (indexPath.row == 0) {
-            [self.postTableview deselectRowAtIndexPath:indexPath animated:NO];
-            [[PalmUIManagement sharedInstance] getGroupStudents:[self.currentGroup.groupid stringValue]];
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
+            [[PalmUIManagement sharedInstance] getGroupStudents:[[self getGroupID] stringValue]];
         }else
         {
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
             BBRecommendedRangeViewController *recommendedRangeVC = [[BBRecommendedRangeViewController alloc] initWithRanges:selectedRangeArray];
             [self.navigationController pushViewController:recommendedRangeVC animated:YES];
         }
@@ -493,18 +532,24 @@
         [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [super scrollViewWillBeginDragging:scrollView];
+}
 #pragma mark - ActionSheet
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if ([[actionSheet buttonTitleAtIndex:0] isEqualToString:@"拍摄"] && buttonIndex == 0) {
         //进自定义拍照界面
+        /*
         for (id viewController in self.navigationController.viewControllers) {
             if ([viewController isKindOfClass:[BBCameraViewController class]]) {
                 [self.navigationController popToViewController:(BBCameraViewController *)viewController animated:YES];
                 return;
             }
         }
-        
+        */
         BBCameraViewController *camera = [[BBCameraViewController alloc] init];
         [self.navigationController pushViewController:camera animated:YES];
     }else
@@ -529,6 +574,13 @@
                                                   otherButtonTitles:@"拍摄",@"相册", nil];
         [sheet showInView:self.view];
     }
+}
+
+- (void)imageDidTapped:(NSArray *)images andIndex:(NSInteger)index
+{
+    if ([self videoIsExist]) {
+        [self playVideo];
+    }else [super imageDidTapped:images andIndex:index];
 }
 
 - (void)imageDidDelete

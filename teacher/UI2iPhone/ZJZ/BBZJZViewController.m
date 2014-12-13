@@ -23,6 +23,7 @@
 #import "BBGroupModel.h"
 
 //notifyMessage change
+#import "CPUIModelMessageGroup.h"
 #import "CPUIModelManagement.h"
 #import "CPDBModelNotifyMessage.h"
 #import "CPDBManagement.h"
@@ -120,7 +121,7 @@
         //[_messageListTableSearchBar setScopeBarBackgroundImage:[UIImage imageNamed:@"ZJZSearch"]];
     }
     */
-    self.view.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
+    //self.view.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -177,10 +178,9 @@
         NSArray *array = [NSArray arrayWithArray:[CPUIModelManagement sharedInstance].userMessageGroupList];
         NSMutableArray *arrayM = [[NSMutableArray alloc] initWithCapacity:20];
         for (CPUIModelMessageGroup *g in array) {
-//            if ([g.msgList count] != 0) {
-//                [arrayM addObject:g];
-//            }
-            [arrayM addObject:g];
+            if (([g.msgList count] != 0 && [g isMsgSingleGroup]) || [g isMsgMultiGroup]) {
+                [arrayM addObject:g];
+            }
         }
         [arrayM addObjectsFromArray:[PalmUIManagement sharedInstance].noticeArray];
         _tableviewDisplayDataArray = [NSArray arrayWithArray:arrayM];
@@ -204,12 +204,34 @@
         NSArray *array = [NSArray arrayWithArray:[CPUIModelManagement sharedInstance].userMessageGroupList];
         NSMutableArray *arrayM = [[NSMutableArray alloc] initWithCapacity:10];
         for (CPUIModelMessageGroup *g in array) {
-//            if ([g.msgList count] != 0) {
-//                [arrayM addObject:g];
-//            }
-            [arrayM addObject:g];
+            if (([g.msgList count] != 0 && [g isMsgSingleGroup]) || [g isMsgMultiGroup]) {
+                [arrayM addObject:g];
+            }
         }
         [arrayM addObjectsFromArray:[PalmUIManagement sharedInstance].noticeArray];
+        
+        [arrayM sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            NSNumber *tempTimeInterval1;
+            NSNumber *tempTimeInterval2;
+            
+            if ([obj1 isKindOfClass:[CPUIModelMessageGroup class]]) {
+                CPUIModelMessageGroup *tempGroup = (CPUIModelMessageGroup *)obj1;
+                tempTimeInterval1 = tempGroup.updateDate;
+            }else{
+                CPDBModelNotifyMessage *tempGroup = (CPDBModelNotifyMessage *)obj1;
+                tempTimeInterval1 = tempGroup.date;
+            }
+            
+            if ([obj2 isKindOfClass:[CPUIModelMessageGroup class]]) {
+                CPUIModelMessageGroup *tempGroup = (CPUIModelMessageGroup *)obj2;
+                tempTimeInterval2 = tempGroup.updateDate;
+            }else{
+                CPDBModelNotifyMessage *tempGroup = (CPDBModelNotifyMessage *)obj2;
+                tempTimeInterval2 = tempGroup.date;
+            }
+            return tempTimeInterval1.integerValue < tempTimeInterval2.integerValue;
+
+        }];
         
         self.tableviewDisplayDataArray = [NSArray arrayWithArray:arrayM];
     }
@@ -289,12 +311,13 @@
     NSMutableArray *tempParentsArray = [[NSMutableArray alloc] init];
     for (CPUIModelUserInfo *model in [CPUIModelManagement sharedInstance].friendArray) {
         ContactsModel *tempModel = [[ContactsModel alloc] init];
-        tempModel.modelID = [model.userInfoID integerValue];
+        tempModel.modelID = [model.lifeStatus integerValue];
         tempModel.avatarPath = model.headerPath;
         //tempModel.jid = model.
         tempModel.mobile = model.mobileNumber;
         //tempModel.uid = [infoDic objectForKey:@"uid"];
         tempModel.userName = model.nickName;
+        tempModel.sex = model.sex;
         //是否激活
         NSLog(@"%d",[model.sex integerValue]);
         tempModel.isActive = [model.sex integerValue] == 0 ? NO : YES;
@@ -392,15 +415,13 @@
         }else if ([cell.msgGroup isKindOfClass:[CPDBModelNotifyMessage class]]){
             CPDBModelNotifyMessage *msgGroup = cell.msgGroup;
             //设置未读数
-            
-            [[CPSystemEngine sharedInstance] updateUnreadedMessageStatusChanged:msgGroup];
         
             if (msgGroup) {
                 BBServiceMessageDetailViewController *messageDetail = [[BBServiceMessageDetailViewController alloc] init];
                 [messageDetail setModel:msgGroup];
                 messageDetail.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:messageDetail animated:YES];
-                
+                [[CPSystemEngine sharedInstance] updateUnreadedMessageStatusChanged:msgGroup];
             }else [self showProgressWithText:@"无法查看" withDelayTime:2];
         
         }
@@ -424,17 +445,6 @@
                 break;
             case 1:
             {
-                NSArray *contacts = [self classifyDataByType:-1];
-                if (contacts.count) {
-                    ContactsViewController *contact = [[ContactsViewController alloc] initWithContactsArray:contacts];
-                    contact.hidesBottomBarWhenPushed = YES;
-                    contact.title = @"同事";
-                    [self.navigationController pushViewController:contact animated:YES];
-                }else [self showProgressWithText:@"当前无任何联系人" withDelayTime:2.f];
-            }
-                break;
-            case 2:
-            {
                 NSMutableArray *tempMutilMsgGroups = [[NSMutableArray alloc] init];
                 for (CPUIModelMessageGroup *group in self.tableviewDisplayDataArray) {
                     if ([group isKindOfClass:[CPUIModelMessageGroup class]]) {
@@ -448,7 +458,7 @@
                 [self.navigationController pushViewController:mutilMsgGroup animated:YES];
             }
                 break;
-            case 3:
+            case 2:
             {
                 //[PalmUIManagement sharedInstance].noticeArray
                 BBServiceAccountViewController *serviceAccount = [[BBServiceAccountViewController alloc] initWithServiceItems:[PalmUIManagement sharedInstance].noticeArray];

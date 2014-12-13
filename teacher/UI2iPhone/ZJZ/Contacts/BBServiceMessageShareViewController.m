@@ -45,26 +45,21 @@
         
         if (![result[@"hasError"] boolValue]) { // 没错
             self.classModels = [NSArray arrayWithArray:result[@"data"]];
+            /*
             if (self.classModels.count > 0) {
                 self.currentGroup = self.classModels[0];
             }
             [self.shareTableview reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+             */
         }else{
-            [self showProgressWithText:@"班级列表加载失败" withDelayTime:0.1];
+           // [self showProgressWithText:@"班级列表加载失败" withDelayTime:0.1];
         }
     }else if ([@"publicMessageForwardResult" isEqualToString:keyPath])//转发
     {
         [self closeProgress];
         NSDictionary *result = [PalmUIManagement sharedInstance].publicMessageForwardResult;
          if (![result[@"hasError"] boolValue]) { 
-             [self.navigationController popToRootViewControllerAnimated:YES];
-             AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-             if ([appDelegate.window.rootViewController isKindOfClass:[BBUITabBarController class]]) {
-                 BBUITabBarController *tabbar = (BBUITabBarController *)appDelegate.window.rootViewController;
-                 [tabbar performSelector:@selector(selectedItem:) withObject:0 afterDelay:0.5];
-                 [[NSNotificationCenter defaultCenter] postNotificationName:@"BJQNeedRefresh" object:nil];
-             }
-             
+             [self.navigationController popViewControllerAnimated:YES];
          }else{
              [self showProgressWithText:result[@"error"] withDelayTime:0.1];
          }
@@ -143,9 +138,14 @@
     [thingsTextView resignFirstResponder];
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [thingsTextView resignFirstResponder];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return indexPath.section == 1 ? 120 : 40;
+    return indexPath.section == 1 ? 140 : 40;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -191,20 +191,24 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:textCellIden];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
-                thingsTextView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(ThingsTextViewSpaceing, ThingsTextViewSpaceing,self.screenWidth-2*ThingsTextViewSpaceing, ThingsTextViewHeight)];
+                thingsTextView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(ThingsTextViewSpaceing, ThingsTextViewSpaceing,self.screenWidth-2*ThingsTextViewSpaceing-20.f, ThingsTextViewHeight)];
                 thingsTextView.placeholder = @"想说的话...";
+                thingsTextView.font = [UIFont systemFontOfSize:14.f];
                 thingsTextView.backgroundColor = [UIColor clearColor];
                 [cell.contentView addSubview:thingsTextView];
                 
-                UIView *shareContentBG = [[UIView alloc] initWithFrame:CGRectMake(ThingsTextViewSpaceing, ThingsTextViewHeight, CGRectGetWidth(thingsTextView.frame), 50.f)];
-                shareContentBG.backgroundColor = [UIColor lightGrayColor];
+                UIView *shareContentBG = [[UIView alloc] initWithFrame:CGRectMake(ThingsTextViewSpaceing, CGRectGetMaxY(thingsTextView.frame)+4.f, CGRectGetWidth(thingsTextView.frame), 50.f)];
+                shareContentBG.backgroundColor = [UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.f];
                 [cell.contentView addSubview:shareContentBG];
                 
                 EGOImageView *messageImageView = [[EGOImageView alloc] initWithFrame:CGRectMake(ThingsTextViewSpaceing+5.f, ThingsTextViewHeight+5.f, 40.f, 40.f)];
                 [messageImageView setImageURL:[NSURL URLWithString:shareModel.imageUrl]];
                 [cell.contentView addSubview:messageImageView];
                 
-                UILabel *messageTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(messageImageView.frame)+5.f, ThingsTextViewHeight+5.f, CGRectGetWidth(shareContentBG.frame)-CGRectGetMaxX(messageImageView.frame)-5.f, CGRectGetHeight(messageImageView.frame))];
+                UILabel *messageTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(messageImageView.frame)+5.f,
+                    ThingsTextViewHeight+5.f,
+                    CGRectGetWidth(shareContentBG.frame)-CGRectGetMaxX(messageImageView.frame)-5.f,
+                    CGRectGetHeight(messageImageView.frame))];
                 messageTitle.font = [UIFont systemFontOfSize:12.f];
                 messageTitle.text = shareModel.content;
                 messageTitle.numberOfLines = 2;
@@ -218,7 +222,7 @@
     }
     
     if (indexPath.section == 0) {
-        cell.detailTextLabel.text = self.currentGroup.alias;
+        cell.detailTextLabel.text = self.currentGroup ? self.currentGroup.alias : [PalmUIManagement sharedInstance].currentGroupInfo.alias;
     }
     
     return cell;
@@ -226,6 +230,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [thingsTextView resignFirstResponder];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     if (indexPath.section == 1) {
@@ -264,7 +269,8 @@
     }
     
     [self showProgressWithText:@"正在提交..."];
-    [[PalmUIManagement sharedInstance] postPublicMessageForward:shareModel.mid  withGroupID:self.currentGroup.groupid.integerValue withMessage:thingsTextView.text];
+    [[PalmUIManagement sharedInstance] postPublicMessageForward:shareModel.mid  withGroupID:self.currentGroup ? self.currentGroup.groupid.integerValue :
+     [PalmUIManagement sharedInstance].currentGroupInfo.groupid.integerValue withMessage:thingsTextView.text];
 }
 #pragma mark - ChooseClassViewControllerDelegate
 - (void)classChoose:(NSInteger)index

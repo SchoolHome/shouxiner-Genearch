@@ -10,13 +10,16 @@
 
 #import "BBBasePostViewController.h"
 #import "ZYQAssetPickerController.h"
-#import "ChooseClassViewController.h"
+#import "ViewImageViewController.h"
+
+
+#import "AppDelegate.h"
 @interface BBBasePostViewController()<
 UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,
-ChooseClassDelegate,
 BBBasePostTableviewTouchDelegate,
-ZYQAssetPickerControllerDelegate>
+ZYQAssetPickerControllerDelegate,
+viewImageDeletedDelegate>
 {
     NSUInteger selectedImagesCount;
     CGFloat chooseImageViewHeight;
@@ -39,7 +42,7 @@ ZYQAssetPickerControllerDelegate>
 @implementation BBBasePostViewController
 -(NSMutableArray *)attachList
 {
-    if (!_attachList) _attachList = [[NSMutableArray alloc] initWithCapacity:7];
+    if (!_attachList) _attachList = [[NSMutableArray alloc] initWithCapacity:9];
     return _attachList;
 }
 - (NSArray *)classModels
@@ -84,7 +87,7 @@ ZYQAssetPickerControllerDelegate>
                 }
                 
                 NSString *attach = [self.attachList componentsJoinedByString:@"***"];
-                [[PalmUIManagement sharedInstance] postTopic:[_currentGroup.groupid intValue]
+                [[PalmUIManagement sharedInstance] postTopic:[[self getGroupID] intValue]
                                                withTopicType:_topicType
                                                  withSubject:_selectedIndex
                                                    withTitle:title
@@ -120,12 +123,14 @@ ZYQAssetPickerControllerDelegate>
         
         if (![result[@"hasError"] boolValue]) { // 没错
             self.classModels = [NSArray arrayWithArray:result[@"data"]];
+            /*
             if (self.classModels.count > 0) {
                 self.currentGroup = self.classModels[0];
             }
             [self.postTableview reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+             */
         }else{
-            [self showProgressWithText:@"班级列表加载失败" withDelayTime:0.1];
+            //[self showProgressWithText:@"班级列表加载失败" withDelayTime:2.f];
         }
     }
 
@@ -215,6 +220,12 @@ ZYQAssetPickerControllerDelegate>
 - (void) backToBJQRoot
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if ([appDelegate.window.rootViewController isKindOfClass:[BBUITabBarController class]]) {
+        BBUITabBarController *tabbar = (BBUITabBarController *)appDelegate.window.rootViewController;
+        [tabbar performSelector:@selector(selectedItem:) withObject:0 afterDelay:0.5];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BJQNeedRefresh" object:nil];
+    }
 }
 #pragma mark - UITableview
 
@@ -227,7 +238,7 @@ ZYQAssetPickerControllerDelegate>
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return indexPath.section == 1 ?
-    chooseImageViewHeight+ThingsTextViewHeight+2*ThingsTextViewSpaceing : 40;
+    chooseImageViewHeight+ThingsTextViewHeight+2*ThingsTextViewSpaceing+10.f : 40;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -263,9 +274,11 @@ ZYQAssetPickerControllerDelegate>
             {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:titleCellIden];
                 cell.textLabel.text = @"当前班级";
+                cell.textLabel.font = [UIFont systemFontOfSize:14.f];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:14.f];
                 cell.textLabel.backgroundColor = [UIColor blackColor];
                 cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
-                //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
                 break;
             case 1:
@@ -273,19 +286,20 @@ ZYQAssetPickerControllerDelegate>
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:imageCellIden];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
-                thingsTextView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(ThingsTextViewSpaceing, ThingsTextViewSpaceing,self.screenWidth-2*ThingsTextViewSpaceing, ThingsTextViewHeight)];
+                thingsTextView = [[UIPlaceHolderTextView alloc] initWithFrame:CGRectMake(ThingsTextViewSpaceing, ThingsTextViewSpaceing,CGRectGetWidth(cell.contentView.frame)-2*ThingsTextViewSpaceing-20, ThingsTextViewHeight)];
                 thingsTextView.placeholder = _placeholder;
+                thingsTextView.font = [UIFont systemFontOfSize:14.f];
                 thingsTextView.backgroundColor = [UIColor clearColor];
                 [cell.contentView addSubview:thingsTextView];
                 
-                _chooseImageView = [[BBChooseImgViewInPostPage alloc] initWithFrame:CGRectMake(0.f, CGRectGetMaxY(thingsTextView.frame)+ThingsTextViewSpaceing,self.screenWidth,chooseImageViewHeight)];
+                _chooseImageView = [[BBChooseImgViewInPostPage alloc] initWithFrame:CGRectMake(0.f, CGRectGetMaxY(thingsTextView.frame)+ThingsTextViewSpaceing,CGRectGetWidth(cell.contentView.frame)-20.f,chooseImageViewHeight)];
                 _chooseImageView.delegate = self;
                 
                 if (_postType == POST_TYPE_FZY) {
-                    _chooseImageView.maxImages = 3;
+                    _chooseImageView.maxImages = 9;
                 }else
                 {
-                    _chooseImageView.maxImages = 7;
+                    _chooseImageView.maxImages = 9;
                 }
                 [cell.contentView addSubview:_chooseImageView];
                 
@@ -301,7 +315,8 @@ ZYQAssetPickerControllerDelegate>
     }
     
     if (indexPath.section == 0) {
-        cell.detailTextLabel.text = self.currentGroup.alias;
+        NSLog(@"%@",[PalmUIManagement sharedInstance].currentGroupInfo.alias);
+        cell.detailTextLabel.text = self.currentGroup ? self.currentGroup.alias : [PalmUIManagement sharedInstance].currentGroupInfo.alias;
     }
     
     return cell;
@@ -310,7 +325,9 @@ ZYQAssetPickerControllerDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    /*
+    
+    [self closeThingsText];
+    
     if (indexPath.section == 1) {
         return;
     }else
@@ -325,13 +342,19 @@ ZYQAssetPickerControllerDelegate>
         }
 
     }
-     */
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self closeThingsText];
+}
 #pragma mark - ViewControllerMethod
 - (void)closeThingsText
 {
-    [thingsTextView resignFirstResponder];
+    if ([thingsTextView isFirstResponder]) {
+        [thingsTextView resignFirstResponder];
+    }
+    
 }
 
 - (void)backButtonTaped:(id)sender{
@@ -355,7 +378,8 @@ ZYQAssetPickerControllerDelegate>
             if (image) {
                 image = [self imageWithImage:image];
                 NSData *data = UIImageJPEGRepresentation(image, 0.5f);
-                [[PalmUIManagement sharedInstance] updateUserImageFile:data withGroupID:[_currentGroup.groupid intValue]];
+                
+                [[PalmUIManagement sharedInstance] updateUserImageFile:data withGroupID:[[self getGroupID] intValue]];
             }
         }
 
@@ -386,7 +410,7 @@ ZYQAssetPickerControllerDelegate>
                 break;
         }
         
-        [[PalmUIManagement sharedInstance] postTopic:[_currentGroup.groupid intValue]
+        [[PalmUIManagement sharedInstance] postTopic:[[self getGroupID] intValue]
                                        withTopicType:_topicType
                                          withSubject:_selectedIndex
                                            withTitle:title
@@ -426,7 +450,7 @@ ZYQAssetPickerControllerDelegate>
         case POST_TYPE_PBX:
             //
             _placeholder = @"说点赞美话...";
-            self.title = @"拍状态";
+            self.title = @"拍表现";
             
             _topicType = 4;
             break;
@@ -442,11 +466,18 @@ ZYQAssetPickerControllerDelegate>
             break;
     }
 }
+
+- (NSNumber *)getGroupID
+{
+    return self.currentGroup ? self.currentGroup.groupid:
+    [PalmUIManagement sharedInstance].currentGroupInfo.groupid;
+}
 #pragma mark - ChooseClassViewControllerDelegate
 - (void)classChoose:(NSInteger)index
 {
     self.currentGroup = self.classModels[index];
-    [self.postTableview reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    //[self.postTableview reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.postTableview reloadData];
 }
 #pragma mark - ActionSheet
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -474,11 +505,11 @@ ZYQAssetPickerControllerDelegate>
             
         {
             if (_postType == POST_TYPE_FZY) {
-                if (selectedImagesCount >= 3) {
+                if (selectedImagesCount >= _chooseImageView.maxImages) {
                     return;
                 }
             }else{
-                if (selectedImagesCount >= 7) {
+                if (selectedImagesCount >= _chooseImageView.maxImages) {
                     return;
                 }
             }
@@ -487,9 +518,9 @@ ZYQAssetPickerControllerDelegate>
             
             ZYQAssetPickerController *picker = [[ZYQAssetPickerController alloc] init];
             if (_postType == POST_TYPE_FZY){
-                picker.maximumNumberOfSelection = 3 - selectedImagesCount;
+                picker.maximumNumberOfSelection = _chooseImageView.maxImages - selectedImagesCount;
             }else{
-                picker.maximumNumberOfSelection = 7 - selectedImagesCount;
+                picker.maximumNumberOfSelection = _chooseImageView.maxImages - selectedImagesCount;
             }
             picker.assetsFilter = [ALAssetsFilter allPhotos];
             picker.showEmptyGroups=NO;
@@ -577,6 +608,17 @@ ZYQAssetPickerControllerDelegate>
     
 }
 
+- (void)imageDidTapped:(NSArray *)images andIndex:(NSInteger)index
+{
+    ViewImageViewController *imagesVC = [[ViewImageViewController alloc] initViewImageVC:images withSelectedIndex:index];
+    imagesVC.delegate = self;
+    [self.navigationController pushViewController:imagesVC animated:YES];
+}
+
+- (void) delectedIndex:(NSInteger)index
+{
+    [_chooseImageView removeImage:index];
+}
 @end
 
 @implementation BBBasePostTableview
@@ -603,9 +645,13 @@ ZYQAssetPickerControllerDelegate>
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
-        return NO;
+        if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+            return NO;
+        }
     }
     return YES;
 }
+
+
 
 @end
