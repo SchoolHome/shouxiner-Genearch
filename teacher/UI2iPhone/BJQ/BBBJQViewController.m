@@ -365,6 +365,11 @@
     BBXXXViewController *xxx = [[BBXXXViewController alloc] init];
     xxx.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:xxx animated:YES];
+    [self.notifyButton removeTarget:self action:@selector(newNotifyTaped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.notifyButton removeFromSuperview];
+    self.notifyButton = nil;
+    bjqTableView.tableHeaderView.frame = CGRectMake(0, 0, 320, 147);
+    [bjqTableView reloadData];
 }
 
 -(void)bjButtonTaped:(id)sender{
@@ -1227,7 +1232,7 @@
     MPMoviePlayerViewController *playViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:videoPathURL];
     MPMoviePlayerController *player = [playViewController moviePlayer];
     player.scalingMode = MPMovieScalingModeFill;
-    player.controlStyle = MPMovieControlStyleFullscreen;
+    player.controlStyle = MPMovieControlStyleDefault;
     [player play];
     [self.navigationController presentViewController:playViewController animated:NO completion:nil];
 }

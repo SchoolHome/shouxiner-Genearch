@@ -107,7 +107,7 @@
     //icon.imageURL = [NSURL URLWithString:_data.sender_avatar];
     
     title.text = _data.sender_name;
-    content.text = data.topic_title;
+    content.text = data.comment;
     time.text = [self timeStringFromNumber:data.ts];
     
 //    tlike
