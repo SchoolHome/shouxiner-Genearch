@@ -261,6 +261,7 @@
             [(UINavigationController *)self.selectedViewController pushViewController:post animated:YES];
         }
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeVC" object:nil];
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
