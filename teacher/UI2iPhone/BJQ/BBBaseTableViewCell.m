@@ -152,6 +152,9 @@
         _likeContent.font = [UIFont systemFontOfSize:12];
         _likeContent.numberOfLines = 0;
         _likeContent.backgroundColor = [UIColor clearColor];
+        
+        self.cellLine = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"BJQCellLine"] stretchableImageWithLeftCapWidth:1.0f topCapHeight:1.0f]];
+        [self addSubview:self.cellLine];
     }
     return self;
 }
