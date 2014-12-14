@@ -142,10 +142,10 @@
                 [bjqTableView reloadData];
             }else{
                 self.notifyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-                self.notifyButton.frame = CGRectMake(75, 156, 172, 38);
+                self.notifyButton.frame = CGRectMake((320.0f - 128.0f)/2.0f, 156, 128, 31);
                 [self.notifyButton setBackgroundImage:[UIImage imageNamed:@"BBNewMessage"] forState:UIControlStateNormal];
                 self.notifyButton.backgroundColor = [UIColor clearColor];
-                self.notifyButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+                self.notifyButton.titleLabel.font = [UIFont boldSystemFontOfSize:13];
                 self.notifyButton.titleLabel.textAlignment = NSTextAlignmentCenter;
                 [self.notifyButton setTitle:[NSString stringWithFormat:@"您有%d条新消息",notifyCount] forState:UIControlStateNormal];
                 [self.notifyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -365,6 +365,11 @@
     BBXXXViewController *xxx = [[BBXXXViewController alloc] init];
     xxx.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:xxx animated:YES];
+    [self.notifyButton removeTarget:self action:@selector(newNotifyTaped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.notifyButton removeFromSuperview];
+    self.notifyButton = nil;
+    bjqTableView.tableHeaderView.frame = CGRectMake(0, 0, 320, 147);
+    [bjqTableView reloadData];
 }
 
 -(void)bjButtonTaped:(id)sender{
@@ -430,7 +435,7 @@
     [bjqTableView reloadData];
     
     UIView *bjqBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bjqTableView.frame.size.width, bjqTableView.frame.size.height)];
-    [bjqBgView setBackgroundColor:[UIColor colorWithHexString:@"f2f2f2"]];
+    [bjqBgView setBackgroundColor:[UIColor clearColor]];
     [bjqTableView setBackgroundView:bjqBgView];
     bjqBgView = nil;
     
@@ -452,35 +457,9 @@
         [[PalmUIManagement sharedInstance] getGroupTopic:[weakSelf.currentGroup.groupid intValue] withTimeStamp:st withOffset:offset withLimit:30  withType:weakSelf.type];
     }];
     
-//    UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 147)];
-//    head.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];//[UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
-//    head.userInteractionEnabled = YES;
-//    
-//    UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
-//    //headImage.backgroundColor = [UIColor orangeColor];
-//    headImage.image = [UIImage imageNamed:@"BBTopBGNew"];
-//    [head addSubview:headImage];
-//    
-//    UIImageView *scoreImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BBScoreBG"]];
-//    scoreImageView.frame = CGRectMake(320.0f - 108.0f, 24.0f, 108.0f, 35.0f);
-//    scoreImageView.userInteractionEnabled = YES;
-//    [head addSubview:scoreImageView];
-//    
-//    
-//    point = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(0, 9, 108, 35)];
-//    point.backgroundColor = [UIColor clearColor];
-//    [scoreImageView addSubview:point];
-//    point.delegate = self;
-//    point.text = @"您有 0 积分";
-//    point.textAlignment = NSTextAlignmentCenter;
-//    point.font = [UIFont boldSystemFontOfSize:11];
-//    point.textColor = [UIColor grayColor];
-//    point.userInteractionEnabled = YES;
-    
     UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 147)];
-    head.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
+    head.backgroundColor = [UIColor clearColor];
     head.userInteractionEnabled = YES;
-    
     
     UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
     headImage.image = [UIImage imageNamed:@"BBTopBGNew"];
@@ -716,53 +695,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-//    if (notifyCount>0) {
-//        
-//        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 76)];
-//        //backView.backgroundColor = [UIColor whiteColor];
-//        backView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
-//        
-//        //        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(60, 0, 8, backView.bounds.size.height)];
-//        //        //line.backgroundColor = [UIColor lightGrayColor];
-//        //        line.image = [UIImage imageNamed:@"BBLine"];
-//        //        //line.alpha = 0.5;
-//        //        [backView addSubview:line];
-//        
-//        UIButton *newNotify = [UIButton buttonWithType:UIButtonTypeCustom];
-//        newNotify.frame = CGRectMake(75, 36, 172, 38);
-//        [newNotify setBackgroundImage:[UIImage imageNamed:@"BBNewMessage"] forState:UIControlStateNormal];
-//        newNotify.backgroundColor = [UIColor clearColor];
-//        [backView addSubview:newNotify];
-//        [newNotify addTarget:self action:@selector(newNotifyTaped:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        //        UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 30, 30)];
-//        //        [newNotify addSubview:icon];
-//        //        CALayer *roundedLayer = [icon layer];
-//        //        [roundedLayer setMasksToBounds:YES];
-//        //        roundedLayer.cornerRadius = 15.0;
-//        //        roundedLayer.borderWidth = 1;
-//        //        roundedLayer.borderColor = [[UIColor whiteColor] CGColor];
-//        //        icon.image = [UIImage imageNamed:@"girl"];
-//        //
-//        //        NSString *path = [[CPUIModelManagement sharedInstance].uiPersonalInfo selfHeaderImgPath];
-//        //        if (path) {
-//        //            icon.image = [UIImage imageWithContentsOfFile:path];
-//        //        }
-//        
-//        UILabel *msg = [[UILabel alloc] initWithFrame:CGRectMake(0, 9, 170, 20)];
-//        [newNotify addSubview:msg];
-//        msg.textColor = [UIColor whiteColor];
-//        msg.backgroundColor = [UIColor clearColor];
-//        msg.font = [UIFont boldSystemFontOfSize:14];
-//        msg.textAlignment = NSTextAlignmentCenter;
-//        msg.text = [NSString stringWithFormat:@"您有%d条新消息",notifyCount];
-//        
-//        return backView;
-//    }
-    
     return nil;
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -1070,7 +1003,7 @@
     copyContentButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [copyContentButton setBackgroundImage:[UIImage imageNamed:@"BBCopyContent"] forState:UIControlStateNormal];
     [copyContentButton setBackgroundImage:[UIImage imageNamed:@"BBCopyContent"] forState:UIControlStateHighlighted];
-    copyContentButton.frame = CGRectMake(superPointaa.x - 32.0f, superPointaa.y - 80.0f, 64.0f, 37.0f);
+    copyContentButton.frame = CGRectMake(superPointaa.x - 32.0f, superPointaa.y - 60.0f, 64.0f, 37.0f);
     [copyContentButton addTarget:self action:@selector(copyContent) forControlEvents:UIControlEventTouchUpInside];
     self.contentText = text;
     [self.view addSubview:copyContentButton];
@@ -1227,7 +1160,7 @@
     MPMoviePlayerViewController *playViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:videoPathURL];
     MPMoviePlayerController *player = [playViewController moviePlayer];
     player.scalingMode = MPMovieScalingModeFill;
-    player.controlStyle = MPMovieControlStyleFullscreen;
+    player.controlStyle = MPMovieControlStyleDefault;
     [player play];
     [self.navigationController presentViewController:playViewController animated:NO completion:nil];
 }

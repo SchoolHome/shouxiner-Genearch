@@ -16,6 +16,8 @@
 -(void) getAdvInfoWithGroupID;
 -(void) getSmsVerifyCode;
 -(void) getCustomerServiceTel;
+-(void) getResetPasswordSMS;
+-(void) postResetPassword;
 @end
 
 @implementation SystemOperation
@@ -59,6 +61,28 @@
     return self;
 }
 
+-(SystemOperation *) initGetResetPasswordSMS : (NSString *) mobileNumber{
+    self = [self initOperation];
+    if (nil != self) {
+        self.type = kGetResetPasswordSMS;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/resetPasswordSMS?mobile=%@",K_HOST_NAME_OF_PALM_SERVER,mobileNumber];
+        [self setHttpRequestGetWithUrl:urlStr];
+    }
+    return self;
+}
+
+-(SystemOperation *) initPostResetPassword : (NSString *) smsID withSmsCode : (NSString *) smsCode withNewPassword : (NSString *) newPassword{
+    if ([self initOperation]) {
+        self.type = kPostResetPassword;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/resetPassword",K_HOST_NAME_OF_PALM_SERVER];
+        [self setHttpRequestPostWithUrl:urlStr params:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       smsID == nil ? @"" : smsID , @"id",
+                                                       smsCode == nil ? @"" : smsCode , @"code",
+                                                       newPassword == nil ? @"" : newPassword , @"newPassword",
+                                                       nil]];
+    }
+    return self;
+}
 
 -(void) getAdvInfo{
     __weak PalmHTTPRequest *weakRequest = self.request;
@@ -108,6 +132,26 @@
     [self startAsynchronous];
 }
 
+-(void) getResetPasswordSMS{
+    [self.request setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t updateTagBlock = ^{
+            [PalmUIManagement sharedInstance].resetSMSCode = data;
+        };
+        dispatch_async(dispatch_get_main_queue(), updateTagBlock);
+    }];
+    [self startAsynchronous];
+}
+
+-(void) postResetPassword{
+    [self.dataRequest setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t updateTagBlock = ^{
+            [PalmUIManagement sharedInstance].resetPassword = data;
+        };
+        dispatch_async(dispatch_get_main_queue(), updateTagBlock);
+    }];
+    [self startAsynchronous];
+}
+
 
 -(void) main{
     @autoreleasepool {
@@ -124,6 +168,12 @@
             case kGetCustomerServiceTel:
                 [self getCustomerServiceTel];
                 break;
+            case kGetResetPasswordSMS:
+                [self getResetPasswordSMS];
+                return;
+            case kPostResetPassword:
+                [self postResetPassword];
+                return;
             default:
                 break;
         }

@@ -97,7 +97,7 @@
     if (self) {
         // Initialization code
         
-        self.contentView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
+        self.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
         
         _icon = [[EGOImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
         [self addSubview:_icon];
@@ -152,6 +152,7 @@
         _likeContent.font = [UIFont systemFontOfSize:12];
         _likeContent.numberOfLines = 0;
         _likeContent.backgroundColor = [UIColor clearColor];
+        
     }
     return self;
 }
