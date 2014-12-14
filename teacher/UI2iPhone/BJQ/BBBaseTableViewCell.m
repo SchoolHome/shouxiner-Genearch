@@ -97,7 +97,7 @@
     if (self) {
         // Initialization code
         
-        self.contentView.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
+        self.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
         
         _icon = [[EGOImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
         [self addSubview:_icon];
@@ -153,8 +153,6 @@
         _likeContent.numberOfLines = 0;
         _likeContent.backgroundColor = [UIColor clearColor];
         
-        self.cellLine = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"BJQCellLine"] stretchableImageWithLeftCapWidth:1.0f topCapHeight:1.0f]];
-        [self addSubview:self.cellLine];
     }
     return self;
 }
