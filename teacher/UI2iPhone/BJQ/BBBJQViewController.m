@@ -44,6 +44,7 @@
 @property (nonatomic,strong) NSString *videoFilePath;
 -(void) playVideo : (NSString *) videoPath;
 -(void) needRefresh;
+-(void) needRefreshBJQData;
 @end
 
 @implementation BBBJQViewController
@@ -602,6 +603,11 @@
 }
 
 -(void) needRefresh{
+    NSLog(@"needRefresh");
+    [self performSelector:@selector(needRefreshBJQData) withObject:nil afterDelay:1.0f];
+}
+
+-(void) needRefreshBJQData{
     [bjqTableView triggerPullToRefresh];
 }
 
