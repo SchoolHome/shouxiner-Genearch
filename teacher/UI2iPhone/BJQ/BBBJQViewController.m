@@ -964,6 +964,7 @@
     if (self.tempMoreImage != nil) {
         [self.tempMoreImage removeFromSuperview];
         self.tempMoreImage = nil;
+        return;
     }
     if (nil != copyContentButton) {
         [copyContentButton removeFromSuperview];
