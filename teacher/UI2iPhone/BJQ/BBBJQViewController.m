@@ -20,6 +20,7 @@
 #import "ColorUtil.h"
 #import "BBVideoTableViewCell.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "BBShareWebViewController.h"
 
 @class BBWSPViewController;
 @interface BBBJQViewController ()<ADImageviewDelegate,OHAttributedLabelDelegate>
@@ -43,6 +44,7 @@
 @property (nonatomic,strong) NSString *videoFilePath;
 -(void) playVideo : (NSString *) videoPath;
 -(void) needRefresh;
+-(void) needRefreshBJQData;
 @end
 
 @implementation BBBJQViewController
@@ -126,7 +128,11 @@
             default:
                 break;
         }
-        
+        if ([self.allTopicList count] >= 30) {
+            bjqTableView.showsInfiniteScrolling = YES;
+        }else{
+            bjqTableView.showsInfiniteScrolling = NO;
+        }
         [bjqTableView reloadData];
         [bjqTableView bringSubviewToFront:avatar];
     }
@@ -295,6 +301,11 @@
                 break;
             }
         }
+        if ([self.allTopicList count] >= 30) {
+            bjqTableView.showsInfiniteScrolling = YES;
+        }else{
+            bjqTableView.showsInfiniteScrolling = NO;
+        }
         [bjqTableView reloadData];
     }
     
@@ -456,6 +467,7 @@
         int st = [model.ts intValue];
         [[PalmUIManagement sharedInstance] getGroupTopic:[weakSelf.currentGroup.groupid intValue] withTimeStamp:st withOffset:offset withLimit:30  withType:weakSelf.type];
     }];
+    bjqTableView.showsInfiniteScrolling = NO;
     
     UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 147)];
     head.backgroundColor = [UIColor clearColor];
@@ -591,6 +603,11 @@
 }
 
 -(void) needRefresh{
+    NSLog(@"needRefresh");
+    [self performSelector:@selector(needRefreshBJQData) withObject:nil afterDelay:1.0f];
+}
+
+-(void) needRefreshBJQData{
     [bjqTableView triggerPullToRefresh];
 }
 
@@ -947,6 +964,7 @@
     if (self.tempMoreImage != nil) {
         [self.tempMoreImage removeFromSuperview];
         self.tempMoreImage = nil;
+        return;
     }
     if (nil != copyContentButton) {
         [copyContentButton removeFromSuperview];
@@ -1112,7 +1130,7 @@
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell linkButtonTaped:(UIButton *)sender{
 
     if (cell.data.forward.url) {
-        BBJFViewController *jf = [[BBJFViewController alloc] init];
+        BBShareWebViewController *jf = [[BBShareWebViewController alloc] init];
         jf.hidesBottomBarWhenPushed = YES;
         jf.url = [NSURL URLWithString:cell.data.forward.url];
         [self.navigationController pushViewController:jf animated:YES];
@@ -1159,10 +1177,10 @@
     NSURL*videoPathURL=[[NSURL alloc] initFileURLWithPath:videoPath];
     MPMoviePlayerViewController *playViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:videoPathURL];
     MPMoviePlayerController *player = [playViewController moviePlayer];
-    player.scalingMode = MPMovieScalingModeFill;
-    player.controlStyle = MPMovieControlStyleDefault;
-    [player play];
+    player.scalingMode = MPMovieScalingModeNone;
+    player.controlStyle = MPMovieControlStyleFullscreen;
     [self.navigationController presentViewController:playViewController animated:NO completion:nil];
+    [player play];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -1172,6 +1190,22 @@
     if (self.tempMoreImage != nil) {
         [self.tempMoreImage removeFromSuperview];
         self.tempMoreImage = nil;
+    }
+    if (bjDropdownView.unfolded) {
+        [bjDropdownView dismiss];
+    }
+    if (fsDropdownView.unfolded) {
+        [fsDropdownView dismiss];
+    }
+    
+    if (self.tempMoreImage != nil) {
+        [self.tempMoreImage removeFromSuperview];
+        self.tempMoreImage = nil;
+    }
+    if (nil != copyContentButton) {
+        [copyContentButton removeFromSuperview];
+        self.contentText = @"";
+        copyContentButton = nil;
     }
 }
 

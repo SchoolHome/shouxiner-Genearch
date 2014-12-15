@@ -257,6 +257,7 @@
 		1970BC5C191BB7E400F63454 /* ActivateButtonPress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1970BC54191BB7E400F63454 /* ActivateButtonPress@2x.png */; };
 		1970BC5D191BB7E400F63454 /* ActivateSmallFrom.png in Resources */ = {isa = PBXBuildFile; fileRef = 1970BC55191BB7E400F63454 /* ActivateSmallFrom.png */; };
 		1970BC5E191BB7E400F63454 /* ActivateSmallFrom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1970BC56191BB7E400F63454 /* ActivateSmallFrom@2x.png */; };
+		197363851A3EFDA60026AA31 /* BBShareWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 197363841A3EFDA60026AA31 /* BBShareWebViewController.m */; };
 		19757BE519F8FA68009F9E17 /* BJQHaveNotZanButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19757BDD19F8FA68009F9E17 /* BJQHaveNotZanButton.png */; };
 		19757BE619F8FA68009F9E17 /* BJQHaveNotZanButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19757BDE19F8FA68009F9E17 /* BJQHaveNotZanButton@2x.png */; };
 		19757BE719F8FA68009F9E17 /* BJQMoreBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 19757BDF19F8FA68009F9E17 /* BJQMoreBg.png */; };
@@ -1831,6 +1832,8 @@
 		1970BC54191BB7E400F63454 /* ActivateButtonPress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActivateButtonPress@2x.png"; sourceTree = "<group>"; };
 		1970BC55191BB7E400F63454 /* ActivateSmallFrom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActivateSmallFrom.png; sourceTree = "<group>"; };
 		1970BC56191BB7E400F63454 /* ActivateSmallFrom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActivateSmallFrom@2x.png"; sourceTree = "<group>"; };
+		197363831A3EFDA60026AA31 /* BBShareWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBShareWebViewController.h; sourceTree = "<group>"; };
+		197363841A3EFDA60026AA31 /* BBShareWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBShareWebViewController.m; sourceTree = "<group>"; };
 		19757BDD19F8FA68009F9E17 /* BJQHaveNotZanButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BJQHaveNotZanButton.png; sourceTree = "<group>"; };
 		19757BDE19F8FA68009F9E17 /* BJQHaveNotZanButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BJQHaveNotZanButton@2x.png"; sourceTree = "<group>"; };
 		19757BDF19F8FA68009F9E17 /* BJQMoreBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BJQMoreBg.png; sourceTree = "<group>"; };
@@ -7668,6 +7671,8 @@
 				7A922F7B18E2CEFC00026C4A /* BBInputView.m */,
 				7AC51B9E18CDDA6900AD1A8C /* BBBJQViewController.h */,
 				7AC51B9F18CDDA6900AD1A8C /* BBBJQViewController.m */,
+				197363831A3EFDA60026AA31 /* BBShareWebViewController.h */,
+				197363841A3EFDA60026AA31 /* BBShareWebViewController.m */,
 			);
 			path = BJQ;
 			sourceTree = "<group>";
@@ -9108,6 +9113,7 @@
 				332D75A618C33552007A75D5 /* CPUIModelPetMagicAnim.m in Sources */,
 				332D829418C33F0A007A75D5 /* AddContactModel.m in Sources */,
 				332D74D618C33552007A75D5 /* CPDAOUserInfoData.m in Sources */,
+				197363851A3EFDA60026AA31 /* BBShareWebViewController.m in Sources */,
 				332D755318C33552007A75D5 /* XMPPCapabilities.xcdatamodel in Sources */,
 				332D82DB18C33F0A007A75D5 /* IndependentProfileViewController.m in Sources */,
 				7487E41F1A3C6152000AC4A8 /* BBServiceMessageDetailModel.m in Sources */,
