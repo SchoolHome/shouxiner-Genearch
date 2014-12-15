@@ -202,7 +202,7 @@
                 [cell.contentView addSubview:shareContentBG];
                 
                 EGOImageView *messageImageView = [[EGOImageView alloc] initWithFrame:CGRectMake(ThingsTextViewSpaceing+5.f, ThingsTextViewHeight+5.f, 40.f, 40.f)];
-                [messageImageView setImageURL:[NSURL URLWithString:shareModel.imageUrl]];
+                [messageImageView setImageURL:[NSURL URLWithString:shareModel.avatar]];
                 [cell.contentView addSubview:messageImageView];
                 
                 UILabel *messageTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(messageImageView.frame)+5.f,
