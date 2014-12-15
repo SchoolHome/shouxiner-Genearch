@@ -474,15 +474,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 #pragma mark UItableviewDatasouce
-/*
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (listType == LIST_TYPE_MSG_GROUP) {
-        return [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, 1.f)];
+    if (listType == LIST_TYPE_CONTACTS) {
+        UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, 20.f)];
+        sectionView.backgroundColor =  [UIColor colorWithHexString:@"#f2f2f2"];
+        return sectionView;
     }
     return nil;
 }
-*/
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (listType == LIST_TYPE_MSG_GROUP) {
@@ -544,7 +546,14 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:contactsDefaultCellIdentifier];
             cell.contentView.backgroundColor = [UIColor whiteColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            if (!IOS7) {
+                UIView *cellBG = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, CGRectGetHeight(cell.frame))];
+                cellBG.backgroundColor = [UIColor whiteColor];
+                [cell addSubview:cellBG];
+                [cell sendSubviewToBack:cellBG];
+            }
         }
+        
         
         switch (indexPath.section) {
             case 0:
