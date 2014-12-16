@@ -351,6 +351,7 @@ typedef enum
 @property (nonatomic,assign) NSInteger userRelationDelTag;
 @property (nonatomic,strong) NSArray *userRelationDelList;
 /********************add relationDel KVO by wang shuo*************************/
+@property (nonatomic,strong) NSString *loginErrorMsg;
 
 + (CPUIModelManagement *) sharedInstance;
 
