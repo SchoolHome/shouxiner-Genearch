@@ -98,6 +98,15 @@
 - (void)close
 {
     //[self.navigationController popToRootViewControllerAnimated:YES];
+    NSMutableArray *navControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    for (id controller in navControllers) {
+        if ([controller isKindOfClass:[BBPostPBXViewController class]]) {
+            [navControllers removeObject:controller];
+            [self.navigationController setViewControllers:[NSArray arrayWithArray:navControllers] animated:NO];
+            break;
+        }
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
