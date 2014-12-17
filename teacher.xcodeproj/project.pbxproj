@@ -416,6 +416,7 @@
 		19EC86761A3DA7D200F98C76 /* BBNewMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 19EC86741A3DA7D200F98C76 /* BBNewMessage.png */; };
 		19EC86771A3DA7D200F98C76 /* BBNewMessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19EC86751A3DA7D200F98C76 /* BBNewMessage@2x.png */; };
 		19EF58461917CF0D00371505 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF58451917CF0D00371505 /* Crashlytics.framework */; };
+		19FB122A1A41CA1C00F4E418 /* MsgPlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 19FB12291A41CA1C00F4E418 /* MsgPlaySound.m */; };
 		331447AB18C48621008B5B21 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 331447AA18C48621008B5B21 /* Login.m */; };
 		332D725518C33464007A75D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 332D725418C33464007A75D5 /* Foundation.framework */; };
 		332D725718C33464007A75D5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 332D725618C33464007A75D5 /* CoreGraphics.framework */; };
@@ -2013,6 +2014,8 @@
 		19EC86741A3DA7D200F98C76 /* BBNewMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBNewMessage.png; sourceTree = "<group>"; };
 		19EC86751A3DA7D200F98C76 /* BBNewMessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBNewMessage@2x.png"; sourceTree = "<group>"; };
 		19EF58451917CF0D00371505 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		19FB12281A41CA1C00F4E418 /* MsgPlaySound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MsgPlaySound.h; path = teacher/UI2iPhone/ZJZ/MsgPlaySound.h; sourceTree = SOURCE_ROOT; };
+		19FB12291A41CA1C00F4E418 /* MsgPlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MsgPlaySound.m; path = teacher/UI2iPhone/ZJZ/MsgPlaySound.m; sourceTree = SOURCE_ROOT; };
 		331447A918C48621008B5B21 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
 		331447AA18C48621008B5B21 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
 		332D725118C33464007A75D5 /* teacher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = teacher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -7673,6 +7676,8 @@
 				7AC51B9F18CDDA6900AD1A8C /* BBBJQViewController.m */,
 				197363831A3EFDA60026AA31 /* BBShareWebViewController.h */,
 				197363841A3EFDA60026AA31 /* BBShareWebViewController.m */,
+				19FB12281A41CA1C00F4E418 /* MsgPlaySound.h */,
+				19FB12291A41CA1C00F4E418 /* MsgPlaySound.m */,
 			);
 			path = BJQ;
 			sourceTree = "<group>";
@@ -9024,6 +9029,7 @@
 				1975B76218E940F300587B80 /* EGOImageLoadConnection.m in Sources */,
 				332D832318C33F0B007A75D5 /* FXVideoView.m in Sources */,
 				332D829E18C33F0A007A75D5 /* MultiSelectTableViewCell.m in Sources */,
+				19FB122A1A41CA1C00F4E418 /* MsgPlaySound.m in Sources */,
 				332D82F218C33F0B007A75D5 /* MessagePetViewController.m in Sources */,
 				332D752118C33552007A75D5 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				043A1B931A395907004013B1 /* BBFXTableViewCell.m in Sources */,
