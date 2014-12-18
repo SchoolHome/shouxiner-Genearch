@@ -606,6 +606,7 @@
 
 -(void) needRefresh{
     NSLog(@"needRefresh");
+    [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
     [self performSelector:@selector(needRefreshBJQData) withObject:nil afterDelay:1.0f];
 }
 
@@ -889,11 +890,14 @@
      */
     if (index_ == 0) {
         self.type = 0;
+        [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
         [bjqTableView triggerPullToRefresh];
     }else if(index_ == 1){
         self.type = 2;
+        [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
         [bjqTableView triggerPullToRefresh];
     }else{
+        [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
         [bjqTableView triggerPullToRefresh];
     }
     
@@ -926,7 +930,7 @@
     _currentGroup = dropdownView_.listData[index_];
     [PalmUIManagement sharedInstance].currentGroupInfo = _currentGroup;
     [titleButton setTitle:_currentGroup.alias forState:UIControlStateNormal];
-    
+    [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
     [bjqTableView triggerPullToRefresh];
     
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
