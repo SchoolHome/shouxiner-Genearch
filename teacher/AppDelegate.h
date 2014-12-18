@@ -10,6 +10,7 @@
 #import "HomePageCheatView.h"
 #import "BBUITabBarController.h"
 #import "CustomNavigationController.h"
+#import <CoreLocation/CoreLocation.h>
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>{
     UIImageView *loadingView;
 }
@@ -22,6 +23,7 @@
 @property (strong,nonatomic) CustomNavigationController * guid_nav_c;
 
 @property (nonatomic,strong) NSString *url;
+@property (nonatomic, strong) CLLocationManager *locationManager;
 
 -(void) launchLogin;
 -(void) launchApp;
