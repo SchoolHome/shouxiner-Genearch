@@ -505,6 +505,7 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.textLabel.font = [UIFont systemFontOfSize:14.f];
                 cell.detailTextLabel.font = [UIFont systemFontOfSize:14.f];
+                cell.backgroundColor = [UIColor whiteColor];
             }
             cell.detailTextLabel.text = selectedRangeStr;
             return cell;

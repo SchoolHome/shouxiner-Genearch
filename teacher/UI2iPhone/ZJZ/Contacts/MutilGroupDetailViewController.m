@@ -113,6 +113,11 @@
     _detailTableview.delegate = self;
     _detailTableview.tableFooterView = tableviewFootView;
     _detailTableview.tableHeaderView = _memberDisplayView;
+    if (!IOS7) {
+        UIView *tableviewBGView = [[UIView alloc] initWithFrame:_detailTableview.frame];
+        tableviewBGView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        _detailTableview.backgroundView = tableviewBGView;
+    }
     _detailTableview.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_detailTableview];
     
@@ -233,6 +238,7 @@
     cell.textLabel.text = @"组名称";
     cell.detailTextLabel.text = groupName;
     cell.detailTextLabel.textAlignment = NSTextAlignmentRight;
+    cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 @end
