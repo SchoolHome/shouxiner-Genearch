@@ -110,6 +110,11 @@
     self.shareTableview.touchDelegate = self;
     self.shareTableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.shareTableview.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 320.f, 1.f)];
+    if (!IOS7) {
+        UIView *tableviewBGView = [[UIView alloc] initWithFrame:self.shareTableview.frame];
+        tableviewBGView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        self.shareTableview.backgroundView = tableviewBGView;
+    }
     self.shareTableview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.shareTableview];
     
@@ -219,6 +224,7 @@
                 
                 break;
         }
+        cell.backgroundColor = [UIColor whiteColor];
     }
     
     if (indexPath.section == 0) {

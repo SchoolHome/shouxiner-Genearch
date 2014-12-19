@@ -32,20 +32,28 @@
         totalCount = 60.0f; 
         
         micBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        micBackground.image = [UIImage imageNamed:@"im_recording"];
+        //micBackground.image = [UIImage imageNamed:@"im_recording"];
+        micBackground.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
+        micBackground.layer.cornerRadius = 20.f;
+        micBackground.layer.masksToBounds = YES;
+        
         [self addSubview:micBackground];
         
-        countDownLabel = [[UILabel alloc] initWithFrame:CGRectMake(11,5,60,15)];
+        UIImageView *recordIcon = [[UIImageView alloc] initWithFrame:CGRectMake(16.f, 10.f, 25.f, 35.f)];
+        [recordIcon setImage:[UIImage imageNamed:@"IMSoundImage"]];
+        [micBackground addSubview:recordIcon];
+        
+        countDownLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,50,60,15)];
         countDownLabel.backgroundColor = [UIColor clearColor];
         countDownLabel.textColor = [UIColor colorWithHexString:@"#CCCCCC"];
-        countDownLabel.shadowColor = [UIColor blackColor];
-        countDownLabel.shadowOffset = CGSizeMake(0,-1);
+        //countDownLabel.shadowColor = [UIColor blackColor];
+        //countDownLabel.shadowOffset = CGSizeMake(0,-1);
         countDownLabel.textAlignment = UITextAlignmentCenter;
         countDownLabel.font = [UIFont systemFontOfSize:11];
         [self addSubview:countDownLabel];
         countDownLabel.text = [NSString stringWithFormat:@"%ds",(int)totalCount];
         
-        levelView = [[ARLevelView alloc] initWithFrame:CGRectMake(54.0, 22.0, 17.0, 37.0)];
+        levelView = [[ARLevelView alloc] initWithFrame:CGRectMake(45.0, 6.f, 17.0, 37.0)];
         [self addSubview:levelView];
         
         audioRecorder = [[AudioRecorder alloc] init];
