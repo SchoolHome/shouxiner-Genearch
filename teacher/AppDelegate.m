@@ -90,7 +90,14 @@
     //[[UINavigationBar appearance] setTitleTextAttributes:attributes];
     [[UINavigationBar appearanceWhenContainedIn:[CustomNavigationController class], nil] setTitleTextAttributes:attributes];
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    //注册推送通知，兼容ios8及ios8-
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound |  UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else {
+        [[UIApplication sharedApplication]registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+    }
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     // Configure logging framework
@@ -111,9 +118,16 @@
         CustomNavigationController * nav = [[CustomNavigationController alloc] initWithRootViewController:guid];
         [nav setNavigationBarHidden:YES];
         self.window.rootViewController = nav;
-        [self.window makeKeyAndVisible];
         [[NSUserDefaults standardUserDefaults] setObject:GuidVersion forKey:@"guidVersion"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        //开启定位功能
+        _locationManager = [[CLLocationManager alloc]init];
+        if([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+            [_locationManager requestAlwaysAuthorization]; // 永久授权
+            [_locationManager requestWhenInUseAuthorization]; //使用中授权
+        }
+        [_locationManager startUpdatingLocation];
+        [self.window makeKeyAndVisible];
         return YES;
     }
     
@@ -133,7 +147,13 @@
     }else{
         [self launchApp];
     }
-    
+    //开启定位功能
+    _locationManager = [[CLLocationManager alloc]init];
+    if([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [_locationManager requestAlwaysAuthorization]; // 永久授权
+        [_locationManager requestWhenInUseAuthorization]; //使用中授权
+    }
+    [_locationManager startUpdatingLocation];
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -185,6 +205,7 @@
     if (account.loginName != nil && account.pwdMD5 != nil && ![account.loginName isEqualToString:@""] && ![account.pwdMD5 isEqualToString:@""]) {
         [[PalmUIManagement sharedInstance] userLoginToken];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BJQNeedRefresh" object:nil];
 //    [[PalmUIManagement sharedInstance] postCheckVersion];
 }
 

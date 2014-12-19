@@ -27,12 +27,12 @@
         title.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
         title.backgroundColor = [UIColor clearColor];
         
-        self.TuiJianImage = [[UIImageView alloc] initWithFrame:CGRectMake(title.frame.origin.x + title.frame.size.width, 2.0f, 10, 15.0f)];
+        self.TuiJianImage = [[UIImageView alloc] initWithFrame:CGRectMake(title.frame.origin.x + title.frame.size.width, 7.0f, 15, 24.0f)];
         self.TuiJianImage.image = [UIImage imageNamed:@"BJQTuiJian"];
         self.TuiJianImage.hidden = YES;
         [self addSubview:self.TuiJianImage];
         
-        self.RongYuImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 10, 15.0f)];
+        self.RongYuImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 15, 24.0f)];
         self.RongYuImage.image = [UIImage imageNamed:@"BJQRongYun"];
         self.RongYuImage.hidden = YES;
         [self addSubview:self.RongYuImage];
@@ -64,11 +64,15 @@
     [title sizeToFit];
     
     if (data.recommended) {
-        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
         self.TuiJianImage.hidden = NO;
     }else{
-        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
         self.TuiJianImage.hidden = YES;
+    }
+    
+    if (data.award) {
+        self.RongYuImage.hidden = NO;
+    }else{
+        self.RongYuImage.hidden = YES;
     }
     
     int contentHeight = [self.data.content sizeWithFont:[UIFont systemFontOfSize:14]
@@ -132,8 +136,7 @@
     self.time.text = [self timeStringFromNumber:self.data.ts];
 
     self.deleteTopic.frame = CGRectMake(K_LEFT_PADDING + 62.0f, self.time.frame.origin.y + 6.0f, 40.0f, 20.0f);
-    CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
-    if ([account.uid integerValue] == [data.author_uid integerValue]) {
+    if (data.editable) {
         self.deleteTopic.hidden = NO;
     }else{
         self.deleteTopic.hidden = YES;

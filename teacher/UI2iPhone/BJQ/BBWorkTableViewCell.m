@@ -34,15 +34,15 @@
         typeImage = [[UIImageView alloc] initWithFrame:CGRectMake(280.0f, 10.0f, 28.0f, 15.0f)];
         [self addSubview:typeImage];
         
-        self.TuiJianImage = [[UIImageView alloc] initWithFrame:CGRectMake(title.frame.origin.x + title.frame.size.width, 2.0f, 10, 15.0f)];
-        self.TuiJianImage.image = [UIImage imageNamed:@"BJQTuiJian"];
-        self.TuiJianImage.hidden = YES;
-        [self addSubview:self.TuiJianImage];
-        
-        self.RongYuImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.TuiJianImage.frame.origin.x + 20.0f, 2.0f, 10, 15.0f)];
+        self.RongYuImage = [[UIImageView alloc] initWithFrame:CGRectMake(typeImage.frame.origin.x - 25.0f, 7.0f, 15, 24.0f)];
         self.RongYuImage.image = [UIImage imageNamed:@"BJQRongYun"];
         self.RongYuImage.hidden = YES;
         [self addSubview:self.RongYuImage];
+        
+        self.TuiJianImage = [[UIImageView alloc] initWithFrame:CGRectMake(typeImage.frame.origin.x - 50.0f, 2.0f, 15, 24.0f)];
+        self.TuiJianImage.image = [UIImage imageNamed:@"BJQTuiJian"];
+        self.TuiJianImage.hidden = YES;
+        [self addSubview:self.TuiJianImage];
         
         content = [[UILabel alloc] init];
         [self addSubview:content];
@@ -79,11 +79,15 @@
     content.frame = CGRectMake(K_LEFT_PADDING, title.frame.origin.y + title.frame.size.height + 10.0f, 225, 0);
     
     if (data.recommended) {
-        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
         self.TuiJianImage.hidden = NO;
     }else{
-        self.TuiJianImage.frame = CGRectMake(title.frame.origin.x + title.frame.size.width + 5.0f, 2.0f, 15.0f, 15.0f);
         self.TuiJianImage.hidden = YES;
+    }
+    
+    if (data.award) {
+        self.RongYuImage.hidden = NO;
+    }else{
+        self.RongYuImage.hidden = YES;
     }
     
     content.text = self.data.content;
@@ -145,8 +149,7 @@
     self.time.text = [self timeStringFromNumber:self.data.ts];
     
     self.deleteTopic.frame = CGRectMake(K_LEFT_PADDING + 62.0f, self.time.frame.origin.y + 6.0f, 40.0f, 20.0f);
-    CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
-    if ([account.uid integerValue] == [data.author_uid integerValue]) {
+    if (data.editable) {
         self.deleteTopic.hidden = NO;
     }else{
         self.deleteTopic.hidden = YES;

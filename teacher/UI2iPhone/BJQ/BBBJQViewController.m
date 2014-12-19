@@ -41,10 +41,12 @@
 //如果为2则获取作业类型，否则取全部类型数据
 @property (nonatomic) int type;
 @property(nonatomic,strong) BBBaseTableViewCell *deleteCell;
+@property(nonatomic,strong) BBVideoTableViewCell *videoCell;
 @property (nonatomic,strong) NSString *videoFilePath;
 -(void) playVideo : (NSString *) videoPath;
 -(void) needRefresh;
 -(void) needRefreshBJQData;
+-(void) downLoadVideo;
 @end
 
 @implementation BBBJQViewController
@@ -604,6 +606,7 @@
 
 -(void) needRefresh{
     NSLog(@"needRefresh");
+    [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
     [self performSelector:@selector(needRefreshBJQData) withObject:nil afterDelay:1.0f];
 }
 
@@ -887,11 +890,14 @@
      */
     if (index_ == 0) {
         self.type = 0;
+        [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
         [bjqTableView triggerPullToRefresh];
     }else if(index_ == 1){
         self.type = 2;
+        [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
         [bjqTableView triggerPullToRefresh];
     }else{
+        [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
         [bjqTableView triggerPullToRefresh];
     }
     
@@ -924,7 +930,7 @@
     _currentGroup = dropdownView_.listData[index_];
     [PalmUIManagement sharedInstance].currentGroupInfo = _currentGroup;
     [titleButton setTitle:_currentGroup.alias forState:UIControlStateNormal];
-    
+    [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
     [bjqTableView triggerPullToRefresh];
     
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
@@ -1141,12 +1147,19 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"删除" message:@"是否删除" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alert.delegate = self;
     self.deleteCell = cell;
+    alert.tag = 1;
     [alert show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex != 0) {
-        [[PalmUIManagement sharedInstance] deleteTopic:[self.deleteCell.data.topicid longLongValue]];
+    if (alertView.tag == 1) {
+        if (buttonIndex != 0) {
+            [[PalmUIManagement sharedInstance] deleteTopic:[self.deleteCell.data.topicid longLongValue]];
+        }
+    }else if (alertView.tag == 2){
+        if (buttonIndex != 0) {
+            [self downLoadVideo];
+        }
     }
 }
 
@@ -1165,14 +1178,68 @@
     if ([fileManager fileExistsAtPath:self.videoFilePath]) {
         [self playVideo:self.videoFilePath];
     }else{
-        [self showProgressWithText:@"正在下载"];
-        [[PalmUIManagement sharedInstance] downLoadUserVideoFile:url withKey:key];
+        switch ([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus]) {
+            case NotReachable:{
+                // 无网的情况
+                [self showProgressWithText:@"网络不是很给力哦，稍等后再试试" withDelayTime:2.0f];
+                return;
+            }
+                break;
+            case ReachableViaWiFi:{
+                // wifi的情况
+                [self showProgressWithText:@"正在下载"];
+                [[PalmUIManagement sharedInstance] downLoadUserVideoFile:url withKey:key];
+            }
+                break;
+            case ReachableViaWWAN:{
+                // 3g的情况
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"下载" message:@"您当前处于非wifi情况，下载需要耗费流量，是否下载？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                alert.delegate = self;
+                alert.tag = 2;
+                self.videoCell = cell;
+                [alert show];
+            }
+                break;
+            default:
+                break;
+        }
     }
+}
+
+-(void) downLoadVideo{
+    NSArray *array = [self.videoCell.data.videoList[0] componentsSeparatedByString:@","];
+    NSString *url = array[0];
+    url = [url substringToIndex:url.length - 1];
+    NSString *key = [[url componentsSeparatedByString:@"/"] lastObject];
+    url = [NSString stringWithFormat:@"%@/mp4",url];
+    
+    CPLGModelAccount *account = [[CPSystemEngine sharedInstance] accountModel];
+    NSString *writeFileName = [NSString stringWithFormat:@"%@.%@",key,@".mp4"];
+    NSString *fileDir = [NSString stringWithFormat:@"%@/Video/",account.loginName];
+    self.videoFilePath = [NSString stringWithFormat:@"%@/%@%@",[CoreUtils getDocumentPath],fileDir,writeFileName];
+    [self showProgressWithText:@"正在下载"];
+    [[PalmUIManagement sharedInstance] downLoadUserVideoFile:url withKey:key];
 }
 
 -(void) playVideo:(NSString *)videoPath{
     if (videoPath == nil || [videoPath isEqualToString:@""]) {
         return;
+    }
+    if (bjDropdownView.unfolded) {
+        [bjDropdownView dismiss];
+    }
+    if (fsDropdownView.unfolded) {
+        [fsDropdownView dismiss];
+    }
+    
+    if (self.tempMoreImage != nil) {
+        [self.tempMoreImage removeFromSuperview];
+        self.tempMoreImage = nil;
+    }
+    if (nil != copyContentButton) {
+        [copyContentButton removeFromSuperview];
+        self.contentText = @"";
+        copyContentButton = nil;
     }
     NSURL*videoPathURL=[[NSURL alloc] initFileURLWithPath:videoPath];
     MPMoviePlayerViewController *playViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:videoPathURL];
