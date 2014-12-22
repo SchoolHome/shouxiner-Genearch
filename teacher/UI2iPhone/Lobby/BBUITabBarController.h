@@ -25,4 +25,5 @@
     UILabel *markMessage;
 }
 @property (nonatomic, strong) UILabel *markYZS;
+@property (nonatomic) BOOL canClick;
 @end

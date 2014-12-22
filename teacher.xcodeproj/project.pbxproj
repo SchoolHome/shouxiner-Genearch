@@ -238,6 +238,8 @@
 		19451C9519F78E8B00E4D92B /* BJQMoreButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19451C8F19F78E8B00E4D92B /* BJQMoreButton.png */; };
 		19451C9619F78E8B00E4D92B /* BJQMoreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19451C9019F78E8B00E4D92B /* BJQMoreButton@2x.png */; };
 		194EB5E7198F61FA005F7587 /* XMPPNoticeMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 194EB5E6198F61FA005F7587 /* XMPPNoticeMessage.m */; };
+		19503C9C1A483A77007B6D52 /* BJQCellLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 19503C9A1A483A77007B6D52 /* BJQCellLine.png */; };
+		19503C9D1A483A77007B6D52 /* BJQCellLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19503C9B1A483A77007B6D52 /* BJQCellLine@2x.png */; };
 		1950ADAF18D2B293002120C4 /* Login568.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1950ADAC18D2B293002120C4 /* Login568.jpg */; };
 		1950ADB318D2B72A002120C4 /* Login.png in Resources */ = {isa = PBXBuildFile; fileRef = 1950ADB118D2B72A002120C4 /* Login.png */; };
 		1950ADB418D2B72A002120C4 /* Login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1950ADB218D2B72A002120C4 /* Login@2x.png */; };
@@ -1803,6 +1805,8 @@
 		19451C9019F78E8B00E4D92B /* BJQMoreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BJQMoreButton@2x.png"; sourceTree = "<group>"; };
 		194EB5E5198F61FA005F7587 /* XMPPNoticeMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPNoticeMessage.h; sourceTree = "<group>"; };
 		194EB5E6198F61FA005F7587 /* XMPPNoticeMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPNoticeMessage.m; sourceTree = "<group>"; };
+		19503C9A1A483A77007B6D52 /* BJQCellLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BJQCellLine.png; sourceTree = "<group>"; };
+		19503C9B1A483A77007B6D52 /* BJQCellLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BJQCellLine@2x.png"; sourceTree = "<group>"; };
 		1950ADAC18D2B293002120C4 /* Login568.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Login568.jpg; sourceTree = "<group>"; };
 		1950ADB118D2B72A002120C4 /* Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login.png; sourceTree = "<group>"; };
 		1950ADB218D2B72A002120C4 /* Login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Login@2x.png"; sourceTree = "<group>"; };
@@ -4091,6 +4095,8 @@
 		193FA7BE19F0A2E600874F1E /* 中间内容 */ = {
 			isa = PBXGroup;
 			children = (
+				19503C9A1A483A77007B6D52 /* BJQCellLine.png */,
+				19503C9B1A483A77007B6D52 /* BJQCellLine@2x.png */,
 				197C286B1A43D8D600ACB6F9 /* BJQZuoye.png */,
 				197C286C1A43D8D600ACB6F9 /* BJQZuoye@2x.png */,
 				1978E7051A13486B00E95FF0 /* BJQRongYun.png */,
@@ -8151,6 +8157,7 @@
 				74A4E5F618DFE8B8000F79E6 /* ZJZSendSMS@2x.png in Resources */,
 				332D822918C33F0A007A75D5 /* bt_im_profile_changebackgroundpress@2x.png in Resources */,
 				332D7F6618C33F0A007A75D5 /* bt_im_profile_penpress@2x.png in Resources */,
+				19503C9C1A483A77007B6D52 /* BJQCellLine.png in Resources */,
 				19CBA1F419FE132000548396 /* BJQClassTap.png in Resources */,
 				043A1B7D1A394B1E004013B1 /* sign_out@2x.png in Resources */,
 				332D7F8618C33F0A007A75D5 /* btn_video_download@2x.png in Resources */,
@@ -8373,6 +8380,7 @@
 				332D7F0518C33F0A007A75D5 /* item_invitelike_Ice-breaking@2x.png in Resources */,
 				7A334B0918F2C49F001F57C4 /* BBSendButton.png in Resources */,
 				74A4E5F218DFE8B8000F79E6 /* ZJZGroupChat@2x.png in Resources */,
+				19503C9D1A483A77007B6D52 /* BJQCellLine@2x.png in Resources */,
 				0433AD0F18E53A8800BDF9D5 /* keyboard_keyboard_hover.png in Resources */,
 				332D823B18C33F0A007A75D5 /* bt_im_profile_x@2x.png in Resources */,
 				197FCF9F18F41D5000EE751B /* navBarBg44.png in Resources */,
@@ -9389,7 +9397,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8e5b680b-73ab-4510-acb2-95e91e419c06";
+				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -9424,7 +9432,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8e5b680b-73ab-4510-acb2-95e91e419c06";
+				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

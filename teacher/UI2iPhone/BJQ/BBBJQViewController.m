@@ -21,6 +21,7 @@
 #import "BBVideoTableViewCell.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "BBShareWebViewController.h"
+#import "AppDelegate.h"
 
 @class BBWSPViewController;
 @interface BBBJQViewController ()<ADImageviewDelegate,OHAttributedLabelDelegate>
@@ -319,6 +320,11 @@
             [self closeProgress];
             [self playVideo:self.videoFilePath];
         }
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        if ([appDelegate.window.rootViewController isKindOfClass:[BBUITabBarController class]]) {
+            BBUITabBarController *tabbar = (BBUITabBarController *)appDelegate.window.rootViewController;
+            tabbar.canClick = YES;
+        }
     }
 }
 
@@ -343,6 +349,7 @@
     // 广告
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"advWithGroupResult" options:0 context:NULL];
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"deleteTopicResult" options:0 context:NULL];
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"downloadVideoResult" options:0 context:nil];
 }
 
 -(void)removeObservers{
@@ -359,10 +366,10 @@
 
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"advWithGroupResult"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"deleteTopicResult"];
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"downloadVideoResult"];
 }
 
 -(void)checkNotify{
-
     [[PalmUIManagement sharedInstance] getNotiCount];
     [self performSelector:@selector(checkNotify) withObject:nil afterDelay:35.0f];
 
@@ -1249,6 +1256,11 @@
             case ReachableViaWiFi:{
                 // wifi的情况
                 [self showProgressWithText:@"正在下载"];
+                AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                if ([appDelegate.window.rootViewController isKindOfClass:[BBUITabBarController class]]) {
+                    BBUITabBarController *tabbar = (BBUITabBarController *)appDelegate.window.rootViewController;
+                    tabbar.canClick = NO;
+                }
                 [[PalmUIManagement sharedInstance] downLoadUserVideoFile:url withKey:key];
             }
                 break;
@@ -1257,7 +1269,7 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"下载" message:@"您当前处于非wifi情况，下载需要耗费流量，是否下载？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                 alert.delegate = self;
                 alert.tag = 2;
-                self.videoCell = cell;
+                self.videoCell = (BBVideoTableViewCell*)cell;
                 [alert show];
             }
                 break;
@@ -1278,7 +1290,13 @@
     NSString *writeFileName = [NSString stringWithFormat:@"%@.%@",key,@".mp4"];
     NSString *fileDir = [NSString stringWithFormat:@"%@/Video/",account.loginName];
     self.videoFilePath = [NSString stringWithFormat:@"%@/%@%@",[CoreUtils getDocumentPath],fileDir,writeFileName];
-    [self showProgressWithText:@"正在下载"];
+//    [self showProgressWithText:@"正在下载" dimBackground:YES];
+    [self showProgressOnwindowsWithText:@"正在下载"];
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if ([appDelegate.window.rootViewController isKindOfClass:[BBUITabBarController class]]) {
+        BBUITabBarController *tabbar = (BBUITabBarController *)appDelegate.window.rootViewController;
+        tabbar.canClick = NO;
+    }
     [[PalmUIManagement sharedInstance] downLoadUserVideoFile:url withKey:key];
 }
 
