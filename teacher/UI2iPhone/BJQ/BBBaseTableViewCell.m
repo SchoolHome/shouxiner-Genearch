@@ -121,11 +121,11 @@
         [self.moreButton setBackgroundImage:[UIImage imageNamed:@"BJQMoreButton"] forState:UIControlStateHighlighted];
         [self.moreButton addTarget:self action:@selector(moreTaped:) forControlEvents:UIControlEventTouchUpInside];
         
-        self.recommendButton = [[UIButton alloc] init];
-        [self addSubview:self.recommendButton];
-        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateNormal];
-        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateHighlighted];
-        [self.recommendButton addTarget:self action:@selector(recommendTaped:) forControlEvents:UIControlEventTouchUpInside];
+//        self.recommendButton = [[UIButton alloc] init];
+//        [self addSubview:self.recommendButton];
+//        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateNormal];
+//        [self.recommendButton setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotTuiJian"] forState:UIControlStateHighlighted];
+//        [self.recommendButton addTarget:self action:@selector(recommendTaped:) forControlEvents:UIControlEventTouchUpInside];
         
         self.deleteTopic = [UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:self.deleteTopic];

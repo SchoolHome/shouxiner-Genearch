@@ -403,14 +403,13 @@
     }
 }
 
-- (void)attributedLabelTapped
-{
-#ifdef IS_TEACHER
+- (void)attributedLabelTapped{
+//#ifdef IS_TEACHER
     BBJFViewController *jf = [[BBJFViewController alloc] init];
     jf.hidesBottomBarWhenPushed = YES;
     jf.url = [NSURL URLWithString:@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"];
     [self.navigationController pushViewController:jf animated:YES];
-#endif
+//#endif
 }
 
 -(void)pointTaped:(UITapGestureRecognizer *)gesture{
@@ -987,6 +986,48 @@
 // 更多
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell moreButtonTaped:(UIButton *)sender{
     
+//    if (self.tempMoreImage != nil) {
+//        [self.tempMoreImage removeFromSuperview];
+//        self.tempMoreImage = nil;
+//        return;
+//    }
+//    if (nil != copyContentButton) {
+//        [copyContentButton removeFromSuperview];
+//        self.contentText = @"";
+//        copyContentButton = nil;
+//    }
+//    
+//    CGRect superViewRect = [cell convertRect:sender.frame toView:self.view];
+//    self.tempCell = cell;
+//    UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(superViewRect.origin.x - 128.0f, superViewRect.origin.y-2.0f, 125.0f, 30.0f)];
+//    bgImageView.image = [UIImage imageNamed:@"BJQMoreBg"];
+//    bgImageView.userInteractionEnabled = YES;
+//    bgImageView.hidden = YES;
+//    bgImageView.alpha = 0.0f;
+//    [self.view addSubview:bgImageView];
+//    self.tempMoreImage = bgImageView;
+//    
+//    UIButton *like = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 62.0f, 30.0f)];
+//    if ([cell.data.am_i_like boolValue]) {
+//        [like setBackgroundImage:[UIImage imageNamed:@"BJQHasZanButton"] forState:UIControlStateNormal];
+//    }else{
+//        [like setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotZanButton"] forState:UIControlStateNormal];
+//        [like addTarget:self action:@selector(likeTaped:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    [bgImageView addSubview:like];
+//    
+//    UIButton *reply = [[UIButton alloc] initWithFrame:CGRectMake(63.0f, 0.0f, 62.0f, 30.0f)];
+//    [reply setBackgroundImage:[UIImage imageNamed:@"BJQPingLunButton"] forState:UIControlStateNormal];
+//    [reply setBackgroundImage:[UIImage imageNamed:@"BJQPingLunButtonPressed"] forState:UIControlStateHighlighted];
+//    
+//    [bgImageView addSubview:reply];
+//    
+//    [UIImageView animateWithDuration:0.3f animations:^{
+//        bgImageView.alpha = 1.0f;
+//        bgImageView.hidden = NO;
+//    } completion:^(BOOL finished) {
+//        [reply addTarget:self action:@selector(replyTaped:) forControlEvents:UIControlEventTouchUpInside];
+//    }];
     if (self.tempMoreImage != nil) {
         [self.tempMoreImage removeFromSuperview];
         self.tempMoreImage = nil;
