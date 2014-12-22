@@ -34,6 +34,7 @@
         }else{
             self.screenHeight = 480.0f;
         }
+        self.screenWidth = 320;
 //        [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"transferDic" options:0 context:nil];
     }
     return self;
@@ -97,8 +98,6 @@
     }else{
         _screenTop = 0.0f;
     }
-    
-    self.screenWidth = 320;
 }
 
 /*! @brief 初始化导航栏左侧按钮

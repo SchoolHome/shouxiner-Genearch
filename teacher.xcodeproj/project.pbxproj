@@ -1304,6 +1304,8 @@
 		7457D04B1A48576400C82636 /* small_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7457D03F1A48576400C82636 /* small_camera@2x.png */; };
 		7457D04C1A48576400C82636 /* small_record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7457D0401A48576400C82636 /* small_record@2x.png */; };
 		7457D04D1A48576400C82636 /* switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7457D0411A48576400C82636 /* switch@2x.png */; };
+		7457D0581A485A9800C82636 /* BBCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7457D0551A485A9800C82636 /* BBCameraViewController.m */; };
+		7457D0591A485A9800C82636 /* BBRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7457D0571A485A9800C82636 /* BBRecordViewController.m */; };
 		745D7690193F821700AF666E /* BBStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D768F193F821700AF666E /* BBStudentModel.m */; };
 		745F0ABA198F5923004BC9D4 /* CPDBModelNotifyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0AB9198F5923004BC9D4 /* CPDBModelNotifyMessage.m */; };
 		745F0ABD198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0ABC198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m */; };
@@ -1311,12 +1313,10 @@
 		7487E3DA1A3C5E56000AC4A8 /* BBPostHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3D41A3C5E56000AC4A8 /* BBPostHomeworkViewController.m */; };
 		7487E3DB1A3C5E56000AC4A8 /* BBPostPBXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3D61A3C5E56000AC4A8 /* BBPostPBXViewController.m */; };
 		7487E3DC1A3C5E56000AC4A8 /* ChooseClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3D81A3C5E56000AC4A8 /* ChooseClassViewController.m */; };
-		7487E3ED1A3C5F60000AC4A8 /* BBCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3DE1A3C5F60000AC4A8 /* BBCameraViewController.m */; };
 		7487E3EE1A3C5F60000AC4A8 /* BBChooseClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3E01A3C5F60000AC4A8 /* BBChooseClassViewController.m */; };
 		7487E3EF1A3C5F60000AC4A8 /* BBDisplaySelectedStudentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3E21A3C5F60000AC4A8 /* BBDisplaySelectedStudentsView.m */; };
 		7487E3F01A3C5F60000AC4A8 /* BBImagePreviewVIewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3E41A3C5F60000AC4A8 /* BBImagePreviewVIewController.m */; };
 		7487E3F11A3C5F60000AC4A8 /* BBRecommendedRangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3E61A3C5F60000AC4A8 /* BBRecommendedRangeViewController.m */; };
-		7487E3F21A3C5F60000AC4A8 /* BBRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3E81A3C5F60000AC4A8 /* BBRecordViewController.m */; };
 		7487E3F31A3C5F60000AC4A8 /* BBStudentListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3EA1A3C5F60000AC4A8 /* BBStudentListTableViewCell.m */; };
 		7487E3F41A3C5F60000AC4A8 /* BBStudentsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3EC1A3C5F60000AC4A8 /* BBStudentsListViewController.m */; };
 		7487E3F71A3C6029000AC4A8 /* BBZJZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3F61A3C6029000AC4A8 /* BBZJZViewController.m */; };
@@ -3447,6 +3447,10 @@
 		7457D03F1A48576400C82636 /* small_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "small_camera@2x.png"; sourceTree = "<group>"; };
 		7457D0401A48576400C82636 /* small_record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "small_record@2x.png"; sourceTree = "<group>"; };
 		7457D0411A48576400C82636 /* switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch@2x.png"; sourceTree = "<group>"; };
+		7457D0541A485A9800C82636 /* BBCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCameraViewController.h; sourceTree = "<group>"; };
+		7457D0551A485A9800C82636 /* BBCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBCameraViewController.m; sourceTree = "<group>"; };
+		7457D0561A485A9800C82636 /* BBRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecordViewController.h; sourceTree = "<group>"; };
+		7457D0571A485A9800C82636 /* BBRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecordViewController.m; sourceTree = "<group>"; };
 		745D768E193F821700AF666E /* BBStudentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBStudentModel.h; sourceTree = "<group>"; };
 		745D768F193F821700AF666E /* BBStudentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBStudentModel.m; sourceTree = "<group>"; };
 		745F0AB8198F5923004BC9D4 /* CPDBModelNotifyMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDBModelNotifyMessage.h; sourceTree = "<group>"; };
@@ -3461,8 +3465,6 @@
 		7487E3D61A3C5E56000AC4A8 /* BBPostPBXViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPostPBXViewController.m; sourceTree = "<group>"; };
 		7487E3D71A3C5E56000AC4A8 /* ChooseClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseClassViewController.h; sourceTree = "<group>"; };
 		7487E3D81A3C5E56000AC4A8 /* ChooseClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseClassViewController.m; sourceTree = "<group>"; };
-		7487E3DD1A3C5F60000AC4A8 /* BBCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCameraViewController.h; sourceTree = "<group>"; };
-		7487E3DE1A3C5F60000AC4A8 /* BBCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBCameraViewController.m; sourceTree = "<group>"; };
 		7487E3DF1A3C5F60000AC4A8 /* BBChooseClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBChooseClassViewController.h; sourceTree = "<group>"; };
 		7487E3E01A3C5F60000AC4A8 /* BBChooseClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBChooseClassViewController.m; sourceTree = "<group>"; };
 		7487E3E11A3C5F60000AC4A8 /* BBDisplaySelectedStudentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBDisplaySelectedStudentsView.h; sourceTree = "<group>"; };
@@ -3471,8 +3473,6 @@
 		7487E3E41A3C5F60000AC4A8 /* BBImagePreviewVIewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBImagePreviewVIewController.m; sourceTree = "<group>"; };
 		7487E3E51A3C5F60000AC4A8 /* BBRecommendedRangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecommendedRangeViewController.h; sourceTree = "<group>"; };
 		7487E3E61A3C5F60000AC4A8 /* BBRecommendedRangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecommendedRangeViewController.m; sourceTree = "<group>"; };
-		7487E3E71A3C5F60000AC4A8 /* BBRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecordViewController.h; sourceTree = "<group>"; };
-		7487E3E81A3C5F60000AC4A8 /* BBRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecordViewController.m; sourceTree = "<group>"; };
 		7487E3E91A3C5F60000AC4A8 /* BBStudentListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBStudentListTableViewCell.h; sourceTree = "<group>"; };
 		7487E3EA1A3C5F60000AC4A8 /* BBStudentListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBStudentListTableViewCell.m; sourceTree = "<group>"; };
 		7487E3EB1A3C5F60000AC4A8 /* BBStudentsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBStudentsListViewController.h; sourceTree = "<group>"; };
@@ -7452,18 +7452,18 @@
 				7A59194218D6BDA500C03DED /* BBPBXViewController.m */,
 				745D768E193F821700AF666E /* BBStudentModel.h */,
 				745D768F193F821700AF666E /* BBStudentModel.m */,
-				7487E3DD1A3C5F60000AC4A8 /* BBCameraViewController.h */,
-				7487E3DE1A3C5F60000AC4A8 /* BBCameraViewController.m */,
 				7487E3DF1A3C5F60000AC4A8 /* BBChooseClassViewController.h */,
 				7487E3E01A3C5F60000AC4A8 /* BBChooseClassViewController.m */,
 				7487E3E11A3C5F60000AC4A8 /* BBDisplaySelectedStudentsView.h */,
 				7487E3E21A3C5F60000AC4A8 /* BBDisplaySelectedStudentsView.m */,
+				7457D0541A485A9800C82636 /* BBCameraViewController.h */,
+				7457D0551A485A9800C82636 /* BBCameraViewController.m */,
+				7457D0561A485A9800C82636 /* BBRecordViewController.h */,
+				7457D0571A485A9800C82636 /* BBRecordViewController.m */,
 				7487E3E31A3C5F60000AC4A8 /* BBImagePreviewVIewController.h */,
 				7487E3E41A3C5F60000AC4A8 /* BBImagePreviewVIewController.m */,
 				7487E3E51A3C5F60000AC4A8 /* BBRecommendedRangeViewController.h */,
 				7487E3E61A3C5F60000AC4A8 /* BBRecommendedRangeViewController.m */,
-				7487E3E71A3C5F60000AC4A8 /* BBRecordViewController.h */,
-				7487E3E81A3C5F60000AC4A8 /* BBRecordViewController.m */,
 				7487E3E91A3C5F60000AC4A8 /* BBStudentListTableViewCell.h */,
 				7487E3EA1A3C5F60000AC4A8 /* BBStudentListTableViewCell.m */,
 				7487E3EB1A3C5F60000AC4A8 /* BBStudentsListViewController.h */,
@@ -8836,7 +8836,6 @@
 				332D82C318C33F0A007A75D5 /* BKLocationManager.m in Sources */,
 				7487E3F31A3C5F60000AC4A8 /* BBStudentListTableViewCell.m in Sources */,
 				332D835418C33F0B007A75D5 /* TaggingHoliday.m in Sources */,
-				7487E3F21A3C5F60000AC4A8 /* BBRecordViewController.m in Sources */,
 				332D756518C33552007A75D5 /* DDAbstractDatabaseLogger.m in Sources */,
 				332D755E18C33552007A75D5 /* LibIDN.m in Sources */,
 				7487E3EF1A3C5F60000AC4A8 /* BBDisplaySelectedStudentsView.m in Sources */,
@@ -8954,7 +8953,6 @@
 				332D832018C33F0B007A75D5 /* FXStatusPanel.m in Sources */,
 				74ADDE0B1A2A063C0055B86E /* BBMemberInMsgGroupTableViewCell.m in Sources */,
 				332D759F18C33552007A75D5 /* CPUIModelPersonalInfo.m in Sources */,
-				7487E3ED1A3C5F60000AC4A8 /* BBCameraViewController.m in Sources */,
 				19145F5B191CDF3B008CE18C /* UIButton+WebCache.m in Sources */,
 				332D754518C33552007A75D5 /* XMPPvCard.xcdatamodeld in Sources */,
 				332D755C18C33552007A75D5 /* DDList.m in Sources */,
@@ -9059,6 +9057,7 @@
 				7A4D2A1B18DAEE2400C128B4 /* BBYZSShareViewController.m in Sources */,
 				19E1A0FF194EDDCA009C06F7 /* ZYQAssetPickerController.m in Sources */,
 				33771E4518C9D20900FB5002 /* AsiGetRequestModel.m in Sources */,
+				7457D0591A485A9800C82636 /* BBRecordViewController.m in Sources */,
 				332D753D18C33552007A75D5 /* XMPPIQ+JabberRPC.m in Sources */,
 				0420E12218E13FC7003997ED /* BBHelpViewController.m in Sources */,
 				332D82F518C33F0B007A75D5 /* MessageSoundPlayer.m in Sources */,
@@ -9217,6 +9216,7 @@
 				332D74C518C33552007A75D5 /* AbDataManagement.m in Sources */,
 				332D74D518C33552007A75D5 /* CPDAOUserInfo.m in Sources */,
 				332D751C18C33552007A75D5 /* CPXmppEngineTransactionContext.m in Sources */,
+				7457D0581A485A9800C82636 /* BBCameraViewController.m in Sources */,
 				332D74E818C33552007A75D5 /* CPDBModelPetInfo.m in Sources */,
 				19145F57191CDF3B008CE18C /* SDWebImageDownloaderOperation.m in Sources */,
 				332D750D18C33552007A75D5 /* CPOperationUpdateUserRelation.m in Sources */,
