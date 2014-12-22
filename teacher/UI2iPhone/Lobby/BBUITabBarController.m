@@ -69,16 +69,26 @@
     if ([@"discoverResult" isEqualToString:keyPath]){
         NSDictionary *discoverResult = [PalmUIManagement sharedInstance].discoverResult;
         if ([discoverResult[@"errno"] integerValue]==0) {
+            NSDictionary *dataResult = discoverResult[@"data"];
             NSInteger discoverCount = 0;
-            if (![discoverResult[@"discover"] isKindOfClass:[NSNull class]]) {
-                NSDictionary *discoverDic = discoverResult[@"discover"];
-                discoverCount += [[discoverDic allKeys] count];
+            if (![dataResult[@"discover"] isKindOfClass:[NSNull class]]) {
+                NSDictionary *discoverDic = dataResult[@"discover"];
+                for (NSString *key in [discoverDic allKeys]) {
+                    NSDictionary *dic = discoverDic[key];
+                    if ([dic[@"isNew"] boolValue]) {
+                        discoverCount += 1;
+                    }
+                }
             }
-            if (![discoverResult[@"service"] isKindOfClass:[NSNull class]]) {
-                NSDictionary *serviceDic = discoverResult[@"service"];
-                discoverCount += [[serviceDic allKeys] count];
+            if (![dataResult[@"service"] isKindOfClass:[NSNull class]]) {
+                NSDictionary *serviceDic = dataResult[@"service"];
+                for (NSString *key in [serviceDic allKeys]) {
+                    NSDictionary *dic = serviceDic[key];
+                    if ([dic[@"isNew"] boolValue]) {
+                        discoverCount += 1;
+                    }
+                }
             }
-            discoverCount +=2;
             if (discoverCount > 0) {
                 self.markYZS.hidden = NO;
                 self.markYZS.text = [NSString stringWithFormat:@"%d", discoverCount];
@@ -105,6 +115,7 @@
         [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"friendMsgUnReadedCount" options:0 context:NULL];
         [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"notiUnReadCount" options:0 context:NULL];
         [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"discoverResult" options:0 context:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUnreadCount) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
     return self;
 }
@@ -287,6 +298,7 @@
 }
 
 -(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"discoverResult"];
     [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"friendMsgUnReadedCount"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"notiUnReadCount"];
