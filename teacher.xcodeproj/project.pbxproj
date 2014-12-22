@@ -238,6 +238,8 @@
 		19451C9519F78E8B00E4D92B /* BJQMoreButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19451C8F19F78E8B00E4D92B /* BJQMoreButton.png */; };
 		19451C9619F78E8B00E4D92B /* BJQMoreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19451C9019F78E8B00E4D92B /* BJQMoreButton@2x.png */; };
 		194EB5E7198F61FA005F7587 /* XMPPNoticeMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 194EB5E6198F61FA005F7587 /* XMPPNoticeMessage.m */; };
+		19503C9C1A483A77007B6D52 /* BJQCellLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 19503C9A1A483A77007B6D52 /* BJQCellLine.png */; };
+		19503C9D1A483A77007B6D52 /* BJQCellLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19503C9B1A483A77007B6D52 /* BJQCellLine@2x.png */; };
 		1950ADAF18D2B293002120C4 /* Login568.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1950ADAC18D2B293002120C4 /* Login568.jpg */; };
 		1950ADB318D2B72A002120C4 /* Login.png in Resources */ = {isa = PBXBuildFile; fileRef = 1950ADB118D2B72A002120C4 /* Login.png */; };
 		1950ADB418D2B72A002120C4 /* Login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1950ADB218D2B72A002120C4 /* Login@2x.png */; };
@@ -373,16 +375,10 @@
 		19C08C2D193F1BAA00C548CD /* BJQBiaoXianRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C15193F1BAA00C548CD /* BJQBiaoXianRight@2x.png */; };
 		19C08C30193F1BAA00C548CD /* BJQHasZanButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C18193F1BAA00C548CD /* BJQHasZanButton.png */; };
 		19C08C31193F1BAA00C548CD /* BJQHasZanButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C19193F1BAA00C548CD /* BJQHasZanButton@2x.png */; };
-		19C08C34193F1BAA00C548CD /* BJQHaveNotZanButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C1C193F1BAA00C548CD /* BJQHaveNotZanButton.png */; };
-		19C08C35193F1BAA00C548CD /* BJQHaveNotZanButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C1D193F1BAA00C548CD /* BJQHaveNotZanButton@2x.png */; };
 		19C08C36193F1BAA00C548CD /* BJQMoreBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C1E193F1BAA00C548CD /* BJQMoreBg.png */; };
 		19C08C37193F1BAA00C548CD /* BJQMoreBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C1F193F1BAA00C548CD /* BJQMoreBg@2x.png */; };
 		19C08C38193F1BAA00C548CD /* BJQMoreButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C20193F1BAA00C548CD /* BJQMoreButton.png */; };
 		19C08C39193F1BAA00C548CD /* BJQMoreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C21193F1BAA00C548CD /* BJQMoreButton@2x.png */; };
-		19C08C3A193F1BAA00C548CD /* BJQPingLunButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C22193F1BAA00C548CD /* BJQPingLunButton.png */; };
-		19C08C3B193F1BAA00C548CD /* BJQPingLunButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C23193F1BAA00C548CD /* BJQPingLunButton@2x.png */; };
-		19C08C3C193F1BAA00C548CD /* BJQPingLunButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C24193F1BAA00C548CD /* BJQPingLunButtonPressed.png */; };
-		19C08C3D193F1BAA00C548CD /* BJQPingLunButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C25193F1BAA00C548CD /* BJQPingLunButtonPressed@2x.png */; };
 		19CB2F7A1962422C00C33C5D /* BBCopyContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 19CB2F781962422C00C33C5D /* BBCopyContent.png */; };
 		19CB2F7B1962422C00C33C5D /* BBCopyContent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19CB2F791962422C00C33C5D /* BBCopyContent@2x.png */; };
 		19CBA1EA19FE132000548396 /* BJQChinese.png in Resources */ = {isa = PBXBuildFile; fileRef = 19CBA1D819FE132000548396 /* BJQChinese.png */; };
@@ -1809,6 +1805,8 @@
 		19451C9019F78E8B00E4D92B /* BJQMoreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BJQMoreButton@2x.png"; sourceTree = "<group>"; };
 		194EB5E5198F61FA005F7587 /* XMPPNoticeMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPNoticeMessage.h; sourceTree = "<group>"; };
 		194EB5E6198F61FA005F7587 /* XMPPNoticeMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPNoticeMessage.m; sourceTree = "<group>"; };
+		19503C9A1A483A77007B6D52 /* BJQCellLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BJQCellLine.png; sourceTree = "<group>"; };
+		19503C9B1A483A77007B6D52 /* BJQCellLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BJQCellLine@2x.png"; sourceTree = "<group>"; };
 		1950ADAC18D2B293002120C4 /* Login568.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Login568.jpg; sourceTree = "<group>"; };
 		1950ADB118D2B72A002120C4 /* Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login.png; sourceTree = "<group>"; };
 		1950ADB218D2B72A002120C4 /* Login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Login@2x.png"; sourceTree = "<group>"; };
@@ -1966,16 +1964,10 @@
 		19C08C15193F1BAA00C548CD /* BJQBiaoXianRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BJQBiaoXianRight@2x.png"; path = "BJQ2/BJQBiaoXianRight@2x.png"; sourceTree = "<group>"; };
 		19C08C18193F1BAA00C548CD /* BJQHasZanButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BJQHasZanButton.png; path = BJQ2/BJQHasZanButton.png; sourceTree = "<group>"; };
 		19C08C19193F1BAA00C548CD /* BJQHasZanButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BJQHasZanButton@2x.png"; path = "BJQ2/BJQHasZanButton@2x.png"; sourceTree = "<group>"; };
-		19C08C1C193F1BAA00C548CD /* BJQHaveNotZanButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BJQHaveNotZanButton.png; path = BJQ2/BJQHaveNotZanButton.png; sourceTree = "<group>"; };
-		19C08C1D193F1BAA00C548CD /* BJQHaveNotZanButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BJQHaveNotZanButton@2x.png"; path = "BJQ2/BJQHaveNotZanButton@2x.png"; sourceTree = "<group>"; };
 		19C08C1E193F1BAA00C548CD /* BJQMoreBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BJQMoreBg.png; path = BJQ2/BJQMoreBg.png; sourceTree = "<group>"; };
 		19C08C1F193F1BAA00C548CD /* BJQMoreBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BJQMoreBg@2x.png"; path = "BJQ2/BJQMoreBg@2x.png"; sourceTree = "<group>"; };
 		19C08C20193F1BAA00C548CD /* BJQMoreButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BJQMoreButton.png; path = BJQ2/BJQMoreButton.png; sourceTree = "<group>"; };
 		19C08C21193F1BAA00C548CD /* BJQMoreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BJQMoreButton@2x.png"; path = "BJQ2/BJQMoreButton@2x.png"; sourceTree = "<group>"; };
-		19C08C22193F1BAA00C548CD /* BJQPingLunButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BJQPingLunButton.png; path = BJQ2/BJQPingLunButton.png; sourceTree = "<group>"; };
-		19C08C23193F1BAA00C548CD /* BJQPingLunButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BJQPingLunButton@2x.png"; path = "BJQ2/BJQPingLunButton@2x.png"; sourceTree = "<group>"; };
-		19C08C24193F1BAA00C548CD /* BJQPingLunButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BJQPingLunButtonPressed.png; path = BJQ2/BJQPingLunButtonPressed.png; sourceTree = "<group>"; };
-		19C08C25193F1BAA00C548CD /* BJQPingLunButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BJQPingLunButtonPressed@2x.png"; path = "BJQ2/BJQPingLunButtonPressed@2x.png"; sourceTree = "<group>"; };
 		19CB2F781962422C00C33C5D /* BBCopyContent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBCopyContent.png; sourceTree = "<group>"; };
 		19CB2F791962422C00C33C5D /* BBCopyContent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBCopyContent@2x.png"; sourceTree = "<group>"; };
 		19CBA1D819FE132000548396 /* BJQChinese.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BJQChinese.png; sourceTree = "<group>"; };
@@ -4103,6 +4095,8 @@
 		193FA7BE19F0A2E600874F1E /* 中间内容 */ = {
 			isa = PBXGroup;
 			children = (
+				19503C9A1A483A77007B6D52 /* BJQCellLine.png */,
+				19503C9B1A483A77007B6D52 /* BJQCellLine@2x.png */,
 				197C286B1A43D8D600ACB6F9 /* BJQZuoye.png */,
 				197C286C1A43D8D600ACB6F9 /* BJQZuoye@2x.png */,
 				1978E7051A13486B00E95FF0 /* BJQRongYun.png */,
@@ -4234,16 +4228,10 @@
 				19C08C15193F1BAA00C548CD /* BJQBiaoXianRight@2x.png */,
 				19C08C18193F1BAA00C548CD /* BJQHasZanButton.png */,
 				19C08C19193F1BAA00C548CD /* BJQHasZanButton@2x.png */,
-				19C08C1C193F1BAA00C548CD /* BJQHaveNotZanButton.png */,
-				19C08C1D193F1BAA00C548CD /* BJQHaveNotZanButton@2x.png */,
 				19C08C1E193F1BAA00C548CD /* BJQMoreBg.png */,
 				19C08C1F193F1BAA00C548CD /* BJQMoreBg@2x.png */,
 				19C08C20193F1BAA00C548CD /* BJQMoreButton.png */,
 				19C08C21193F1BAA00C548CD /* BJQMoreButton@2x.png */,
-				19C08C22193F1BAA00C548CD /* BJQPingLunButton.png */,
-				19C08C23193F1BAA00C548CD /* BJQPingLunButton@2x.png */,
-				19C08C24193F1BAA00C548CD /* BJQPingLunButtonPressed.png */,
-				19C08C25193F1BAA00C548CD /* BJQPingLunButtonPressed@2x.png */,
 				1970BC4E191BB7E400F63454 /* Activate */,
 				19AD08AD18F67F7900E8AA55 /* user_credit_back.png */,
 				19AD08AE18F67F7900E8AA55 /* user_credit_back@2x.png */,
@@ -7767,7 +7755,6 @@
 				7A334AF018F2BF6F001F57C4 /* BBBottomIndexPress2.png in Resources */,
 				332D7F9318C33F0A007A75D5 /* float_im_magicdownload@2x.png in Resources */,
 				332D7FC818C33F0A007A75D5 /* surepress_im_magicdownload@2x.png in Resources */,
-				19C08C3D193F1BAA00C548CD /* BJQPingLunButtonPressed@2x.png in Resources */,
 				332D7F9A18C33F0A007A75D5 /* headcouple@2x.png in Resources */,
 				193FA82A19F0A2E600874F1E /* talk.png in Resources */,
 				332D7FCB18C33F0A007A75D5 /* xiazai_QP@2x.gif in Resources */,
@@ -7803,7 +7790,6 @@
 				332D7F8318C33F0A007A75D5 /* btn_play_talkpress@2x.png in Resources */,
 				332D824818C33F0A007A75D5 /* profile_btn_bar_psd@2x.png in Resources */,
 				332D823218C33F0A007A75D5 /* bt_im_profile_pressx@2x.png in Resources */,
-				19C08C3B193F1BAA00C548CD /* BJQPingLunButton@2x.png in Resources */,
 				332D7FA418C33F0A007A75D5 /* icon_losemessage_darkenred@2x.png in Resources */,
 				1982F7C91A0C73020075F35F /* tab_mes.png in Resources */,
 				332D7F4E18C33F0A007A75D5 /* menu_btn_dear_press@2x.png in Resources */,
@@ -7974,7 +7960,6 @@
 				7AC51BAB18CDDA8000AD1A8C /* like.png in Resources */,
 				74A4E5EC18DFE8B8000F79E6 /* ZJZChat@2x.png in Resources */,
 				19757BEC19F8FA68009F9E17 /* BJQPingLunButtonPressed@2x.png in Resources */,
-				19C08C3C193F1BAA00C548CD /* BJQPingLunButtonPressed.png in Resources */,
 				332D7FB718C33F0A007A75D5 /* btn_backmsgwall_press@2x.png in Resources */,
 				74A4E5E618DFE8B8000F79E6 /* ZJZBaige@2x.png in Resources */,
 				1982F7E11A0C73020075F35F /* t_keyboard_press.png in Resources */,
@@ -8015,7 +8000,6 @@
 				1982F7BD1A0C73020075F35F /* list_add.png in Resources */,
 				19A3E55519F3AD2500AFD251 /* BBTopBGNew.png in Resources */,
 				19CBA1EC19FE132000548396 /* BJQClassBottom.png in Resources */,
-				19C08C34193F1BAA00C548CD /* BJQHaveNotZanButton.png in Resources */,
 				1982F7E81A0C73020075F35F /* t_voice@2x.png in Resources */,
 				193FA86019F0A2E600874F1E /* me_gray.png in Resources */,
 				19C08C37193F1BAA00C548CD /* BJQMoreBg@2x.png in Resources */,
@@ -8165,7 +8149,6 @@
 				7AA5001F18DF168600FC59C4 /* BBCommentPress@2x.png in Resources */,
 				043A1B6C1A394B1E004013B1 /* clock.png in Resources */,
 				7A6B776018ED2B330000DBFE /* BBOther@2x.png in Resources */,
-				19C08C3A193F1BAA00C548CD /* BJQPingLunButton.png in Resources */,
 				332D7F9B18C33F0A007A75D5 /* headpic_38_38@2x.png in Resources */,
 				04FA26A61A425F1A00415405 /* 3_4@2x.png in Resources */,
 				332D7F7E18C33F0A007A75D5 /* btn_login_sign_okpress@2x.png in Resources */,
@@ -8174,6 +8157,7 @@
 				74A4E5F618DFE8B8000F79E6 /* ZJZSendSMS@2x.png in Resources */,
 				332D822918C33F0A007A75D5 /* bt_im_profile_changebackgroundpress@2x.png in Resources */,
 				332D7F6618C33F0A007A75D5 /* bt_im_profile_penpress@2x.png in Resources */,
+				19503C9C1A483A77007B6D52 /* BJQCellLine.png in Resources */,
 				19CBA1F419FE132000548396 /* BJQClassTap.png in Resources */,
 				043A1B7D1A394B1E004013B1 /* sign_out@2x.png in Resources */,
 				332D7F8618C33F0A007A75D5 /* btn_video_download@2x.png in Resources */,
@@ -8396,6 +8380,7 @@
 				332D7F0518C33F0A007A75D5 /* item_invitelike_Ice-breaking@2x.png in Resources */,
 				7A334B0918F2C49F001F57C4 /* BBSendButton.png in Resources */,
 				74A4E5F218DFE8B8000F79E6 /* ZJZGroupChat@2x.png in Resources */,
+				19503C9D1A483A77007B6D52 /* BJQCellLine@2x.png in Resources */,
 				0433AD0F18E53A8800BDF9D5 /* keyboard_keyboard_hover.png in Resources */,
 				332D823B18C33F0A007A75D5 /* bt_im_profile_x@2x.png in Resources */,
 				197FCF9F18F41D5000EE751B /* navBarBg44.png in Resources */,
@@ -8553,7 +8538,6 @@
 				1982F7E21A0C73020075F35F /* t_keyboard_press@2x.png in Resources */,
 				332D7EDD18C33F0A007A75D5 /* icon_lovers@2x.png in Resources */,
 				1982F7BB1A0C73020075F35F /* line.png in Resources */,
-				19C08C35193F1BAA00C548CD /* BJQHaveNotZanButton@2x.png in Resources */,
 				193FA82019F0A2E600874F1E /* f_hwork.png in Resources */,
 				332D7FC118C33F0A007A75D5 /* pic_system@2x.jpg in Resources */,
 				332D7FB118C33F0A007A75D5 /* man@2x.png in Resources */,
@@ -9413,7 +9397,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8e5b680b-73ab-4510-acb2-95e91e419c06";
+				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -9448,7 +9432,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8e5b680b-73ab-4510-acb2-95e91e419c06";
+				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

@@ -286,6 +286,49 @@
 	[self.progressHUD showWhileExecuting:sel onTarget:self withObject:nil animated:YES];
 }
 
+-(void) showProgressOnwindowsWithText : (NSString *) context withDelayTime : (NSUInteger) sec{
+    if (nil == self.progressHUD) {
+        if ( [[[UIApplication sharedApplication] windows] count] >=1) {
+            UIWindow *tempKeyboardWindow = [[[UIApplication sharedApplication] windows] lastObject];
+            self.progressHUD = [[MBProgressHUD alloc] initWithWindow:tempKeyboardWindow];
+            [tempKeyboardWindow addSubview:self.progressHUD];
+            [self.progressHUD show:YES];
+            self.progressHUD.delegate = self;
+            isAutoCloseProgress = NO;
+        }
+        
+        else
+        {
+            return;
+        }
+    }
+    
+    if (sec <= 1) {
+        sec = 2;
+    }
+    self.progressHUD.mode = MBProgressHUDModeText;
+    self.progressHUD.detailsLabelText = context;
+    [self.progressHUD hide:YES afterDelay:sec];
+}
+
+-(void) showProgressOnwindowsWithText : (NSString *) context{
+    if (nil == self.progressHUD) {
+        if ( [[[UIApplication sharedApplication] windows] count] >=1) {
+            UIWindow *tempKeyboardWindow = [[[UIApplication sharedApplication] windows] lastObject];
+            self.progressHUD = [[MBProgressHUD alloc] initWithWindow:tempKeyboardWindow];
+            [tempKeyboardWindow addSubview:self.progressHUD];
+            [self.progressHUD show:YES];
+            self.progressHUD.delegate = self;
+            isAutoCloseProgress = NO;
+        }else{
+            return;
+        }
+    }
+    self.progressHUD.mode = MBProgressHUDModeText;
+    self.progressHUD.detailsLabelText = context;
+    self.progressHUD.dimBackground = YES;
+}
+
 #pragma mark -
 #pragma mark MBProgressHUDDelegate methods
 

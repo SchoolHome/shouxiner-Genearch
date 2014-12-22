@@ -21,6 +21,7 @@
 #import "BBVideoTableViewCell.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "BBShareWebViewController.h"
+#import "AppDelegate.h"
 
 @class BBWSPViewController;
 @interface BBBJQViewController ()<ADImageviewDelegate,OHAttributedLabelDelegate>
@@ -319,6 +320,11 @@
             [self closeProgress];
             [self playVideo:self.videoFilePath];
         }
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        if ([appDelegate.window.rootViewController isKindOfClass:[BBUITabBarController class]]) {
+            BBUITabBarController *tabbar = (BBUITabBarController *)appDelegate.window.rootViewController;
+            tabbar.canClick = YES;
+        }
     }
 }
 
@@ -343,6 +349,7 @@
     // 广告
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"advWithGroupResult" options:0 context:NULL];
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"deleteTopicResult" options:0 context:NULL];
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"downloadVideoResult" options:0 context:nil];
 }
 
 -(void)removeObservers{
@@ -359,10 +366,10 @@
 
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"advWithGroupResult"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"deleteTopicResult"];
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"downloadVideoResult"];
 }
 
 -(void)checkNotify{
-
     [[PalmUIManagement sharedInstance] getNotiCount];
     [self performSelector:@selector(checkNotify) withObject:nil afterDelay:35.0f];
 
@@ -403,14 +410,13 @@
     }
 }
 
-- (void)attributedLabelTapped
-{
-#ifdef IS_TEACHER
+- (void)attributedLabelTapped{
+//#ifdef IS_TEACHER
     BBJFViewController *jf = [[BBJFViewController alloc] init];
     jf.hidesBottomBarWhenPushed = YES;
     jf.url = [NSURL URLWithString:@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"];
     [self.navigationController pushViewController:jf animated:YES];
-#endif
+//#endif
 }
 
 -(void)pointTaped:(UITapGestureRecognizer *)gesture{
@@ -987,6 +993,48 @@
 // 更多
 -(void)bbBaseTableViewCell:(BBBaseTableViewCell *)cell moreButtonTaped:(UIButton *)sender{
     
+//    if (self.tempMoreImage != nil) {
+//        [self.tempMoreImage removeFromSuperview];
+//        self.tempMoreImage = nil;
+//        return;
+//    }
+//    if (nil != copyContentButton) {
+//        [copyContentButton removeFromSuperview];
+//        self.contentText = @"";
+//        copyContentButton = nil;
+//    }
+//    
+//    CGRect superViewRect = [cell convertRect:sender.frame toView:self.view];
+//    self.tempCell = cell;
+//    UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(superViewRect.origin.x - 128.0f, superViewRect.origin.y-2.0f, 125.0f, 30.0f)];
+//    bgImageView.image = [UIImage imageNamed:@"BJQMoreBg"];
+//    bgImageView.userInteractionEnabled = YES;
+//    bgImageView.hidden = YES;
+//    bgImageView.alpha = 0.0f;
+//    [self.view addSubview:bgImageView];
+//    self.tempMoreImage = bgImageView;
+//    
+//    UIButton *like = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 62.0f, 30.0f)];
+//    if ([cell.data.am_i_like boolValue]) {
+//        [like setBackgroundImage:[UIImage imageNamed:@"BJQHasZanButton"] forState:UIControlStateNormal];
+//    }else{
+//        [like setBackgroundImage:[UIImage imageNamed:@"BJQHaveNotZanButton"] forState:UIControlStateNormal];
+//        [like addTarget:self action:@selector(likeTaped:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    [bgImageView addSubview:like];
+//    
+//    UIButton *reply = [[UIButton alloc] initWithFrame:CGRectMake(63.0f, 0.0f, 62.0f, 30.0f)];
+//    [reply setBackgroundImage:[UIImage imageNamed:@"BJQPingLunButton"] forState:UIControlStateNormal];
+//    [reply setBackgroundImage:[UIImage imageNamed:@"BJQPingLunButtonPressed"] forState:UIControlStateHighlighted];
+//    
+//    [bgImageView addSubview:reply];
+//    
+//    [UIImageView animateWithDuration:0.3f animations:^{
+//        bgImageView.alpha = 1.0f;
+//        bgImageView.hidden = NO;
+//    } completion:^(BOOL finished) {
+//        [reply addTarget:self action:@selector(replyTaped:) forControlEvents:UIControlEventTouchUpInside];
+//    }];
     if (self.tempMoreImage != nil) {
         [self.tempMoreImage removeFromSuperview];
         self.tempMoreImage = nil;
@@ -1208,6 +1256,11 @@
             case ReachableViaWiFi:{
                 // wifi的情况
                 [self showProgressWithText:@"正在下载"];
+                AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                if ([appDelegate.window.rootViewController isKindOfClass:[BBUITabBarController class]]) {
+                    BBUITabBarController *tabbar = (BBUITabBarController *)appDelegate.window.rootViewController;
+                    tabbar.canClick = NO;
+                }
                 [[PalmUIManagement sharedInstance] downLoadUserVideoFile:url withKey:key];
             }
                 break;
@@ -1216,7 +1269,7 @@
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"下载" message:@"您当前处于非wifi情况，下载需要耗费流量，是否下载？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                 alert.delegate = self;
                 alert.tag = 2;
-                self.videoCell = cell;
+                self.videoCell = (BBVideoTableViewCell*)cell;
                 [alert show];
             }
                 break;
@@ -1237,7 +1290,13 @@
     NSString *writeFileName = [NSString stringWithFormat:@"%@.%@",key,@".mp4"];
     NSString *fileDir = [NSString stringWithFormat:@"%@/Video/",account.loginName];
     self.videoFilePath = [NSString stringWithFormat:@"%@/%@%@",[CoreUtils getDocumentPath],fileDir,writeFileName];
-    [self showProgressWithText:@"正在下载"];
+//    [self showProgressWithText:@"正在下载" dimBackground:YES];
+    [self showProgressOnwindowsWithText:@"正在下载"];
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if ([appDelegate.window.rootViewController isKindOfClass:[BBUITabBarController class]]) {
+        BBUITabBarController *tabbar = (BBUITabBarController *)appDelegate.window.rootViewController;
+        tabbar.canClick = NO;
+    }
     [[PalmUIManagement sharedInstance] downLoadUserVideoFile:url withKey:key];
 }
 
