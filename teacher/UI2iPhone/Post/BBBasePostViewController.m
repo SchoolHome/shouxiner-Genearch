@@ -200,6 +200,11 @@ viewImageDeletedDelegate>
     self.postTableview.touchDelegate = self;
     self.postTableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.postTableview.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 320.f, 1.f)];
+    if (!IOS7) {
+        UIView *tableviewBGView = [[UIView alloc] initWithFrame:self.postTableview.frame];
+        tableviewBGView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        self.postTableview.backgroundView = tableviewBGView;
+    }
     self.postTableview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.postTableview];
     
@@ -312,6 +317,7 @@ viewImageDeletedDelegate>
                 
                 break;
         }
+        cell.backgroundColor = [UIColor whiteColor];
     }
     
     if (indexPath.section == 0) {
@@ -376,8 +382,8 @@ viewImageDeletedDelegate>
         for (int i = 0; i<self.chooseImageView.images.count; i++) {
             UIImage *image = self.chooseImageView.images[i];
             if (image) {
-                image = [self imageWithImage:image];
-                NSData *data = UIImageJPEGRepresentation(image, 0.5f);
+                //image = [self imageWithImage:image];
+                NSData *data = UIImageJPEGRepresentation(image, 0.6f);
                 
                 [[PalmUIManagement sharedInstance] updateUserImageFile:data withGroupID:[[self getGroupID] intValue]];
             }

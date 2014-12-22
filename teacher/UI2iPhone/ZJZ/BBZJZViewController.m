@@ -548,7 +548,7 @@
             cell.contentView.backgroundColor = [UIColor whiteColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (!IOS7) {
-                UIView *cellBG = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, CGRectGetHeight(cell.frame))];
+                UIView *cellBG = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, 40.f)];
                 cellBG.backgroundColor = [UIColor whiteColor];
                 [cell addSubview:cellBG];
                 [cell sendSubviewToBack:cellBG];
