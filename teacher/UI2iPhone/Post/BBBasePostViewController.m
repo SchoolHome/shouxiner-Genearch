@@ -284,6 +284,7 @@ viewImageDeletedDelegate>
                 cell.textLabel.backgroundColor = [UIColor blackColor];
                 cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#4a7f9d"];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                
             }
                 break;
             case 1:
@@ -334,7 +335,7 @@ viewImageDeletedDelegate>
     
     [self closeThingsText];
     
-    if (indexPath.section == 1) {
+    if (indexPath.section == 1 ) {
         return;
     }else
     {

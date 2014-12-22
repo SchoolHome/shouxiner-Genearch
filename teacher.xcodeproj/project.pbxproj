@@ -1333,7 +1333,6 @@
 		7487E4291A3C6152000AC4A8 /* MutilGroupDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E4171A3C6152000AC4A8 /* MutilGroupDetailViewController.m */; };
 		7487E42A1A3C6152000AC4A8 /* MutilMsgGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E4191A3C6152000AC4A8 /* MutilMsgGroupViewController.m */; };
 		7487E42B1A3C6152000AC4A8 /* StartGroupChatTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E41B1A3C6152000AC4A8 /* StartGroupChatTableviewCell.m */; };
-		7487E42E1A3C6295000AC4A8 /* ViewImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E42D1A3C6295000AC4A8 /* ViewImageViewController.m */; };
 		7487E4301A3C62BA000AC4A8 /* XLCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E42F1A3C62BA000AC4A8 /* XLCycleScrollView.m */; };
 		74A4E5E118DFE8B8000F79E6 /* ZJZAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5C918DFE8B7000F79E6 /* ZJZAdd.png */; };
 		74A4E5E218DFE8B8000F79E6 /* ZJZAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5CA18DFE8B7000F79E6 /* ZJZAdd@2x.png */; };
@@ -1373,6 +1372,7 @@
 		74AF37161963A494008EA251 /* ZJZCellChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AF37121963A494008EA251 /* ZJZCellChat@2x.png */; };
 		74AF371D1963A4F0008EA251 /* BBAddContacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AF371B1963A4F0008EA251 /* BBAddContacts.png */; };
 		74AF371E1963A4F0008EA251 /* BBAddContacts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74AF371C1963A4F0008EA251 /* BBAddContacts@2x.png */; };
+		74B64A651A48443300AF46A7 /* ViewImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B64A641A48443300AF46A7 /* ViewImageViewController.m */; };
 		74EF7E0C1962C2E800DCD5A3 /* ZJZ_Seg_Parent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74EF7E0A1962C2E800DCD5A3 /* ZJZ_Seg_Parent@2x.png */; };
 		74EF7E0D1962C2E800DCD5A3 /* ZJZ_Seg_Teacher@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74EF7E0B1962C2E800DCD5A3 /* ZJZ_Seg_Teacher@2x.png */; };
 		7A076A9518DFFF1B00911291 /* BBComentBottomBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A076A9318DFFF1B00911291 /* BBComentBottomBG.png */; };
@@ -3504,8 +3504,6 @@
 		7487E4191A3C6152000AC4A8 /* MutilMsgGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutilMsgGroupViewController.m; sourceTree = "<group>"; };
 		7487E41A1A3C6152000AC4A8 /* StartGroupChatTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartGroupChatTableviewCell.h; sourceTree = "<group>"; };
 		7487E41B1A3C6152000AC4A8 /* StartGroupChatTableviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartGroupChatTableviewCell.m; sourceTree = "<group>"; };
-		7487E42C1A3C6295000AC4A8 /* ViewImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewImageViewController.h; sourceTree = "<group>"; };
-		7487E42D1A3C6295000AC4A8 /* ViewImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewImageViewController.m; sourceTree = "<group>"; };
 		7487E42F1A3C62BA000AC4A8 /* XLCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLCycleScrollView.m; sourceTree = "<group>"; };
 		74A4E5C918DFE8B7000F79E6 /* ZJZAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZJZAdd.png; sourceTree = "<group>"; };
 		74A4E5CA18DFE8B7000F79E6 /* ZJZAdd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZAdd@2x.png"; sourceTree = "<group>"; };
@@ -3557,6 +3555,8 @@
 		74AF37121963A494008EA251 /* ZJZCellChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZCellChat@2x.png"; sourceTree = "<group>"; };
 		74AF371B1963A4F0008EA251 /* BBAddContacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBAddContacts.png; sourceTree = "<group>"; };
 		74AF371C1963A4F0008EA251 /* BBAddContacts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBAddContacts@2x.png"; sourceTree = "<group>"; };
+		74B64A631A48443300AF46A7 /* ViewImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewImageViewController.h; sourceTree = "<group>"; };
+		74B64A641A48443300AF46A7 /* ViewImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewImageViewController.m; sourceTree = "<group>"; };
 		74EF7E0A1962C2E800DCD5A3 /* ZJZ_Seg_Parent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZ_Seg_Parent@2x.png"; sourceTree = "<group>"; };
 		74EF7E0B1962C2E800DCD5A3 /* ZJZ_Seg_Teacher@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZ_Seg_Teacher@2x.png"; sourceTree = "<group>"; };
 		7A076A9318DFFF1B00911291 /* BBComentBottomBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBComentBottomBG.png; sourceTree = "<group>"; };
@@ -7424,8 +7424,8 @@
 				7A076AD018E1D67E00911291 /* UIPlaceholderTextView.m */,
 				7A59193E18D6BDA500C03DED /* BBFZYViewController.h */,
 				7A59193F18D6BDA500C03DED /* BBFZYViewController.m */,
-				7487E42C1A3C6295000AC4A8 /* ViewImageViewController.h */,
-				7487E42D1A3C6295000AC4A8 /* ViewImageViewController.m */,
+				74B64A631A48443300AF46A7 /* ViewImageViewController.h */,
+				74B64A641A48443300AF46A7 /* ViewImageViewController.m */,
 			);
 			path = FZY;
 			sourceTree = "<group>";
@@ -9060,12 +9060,12 @@
 				332D837018C33F0B007A75D5 /* interf_dec.c in Sources */,
 				04F7FEB718CEF38A0086D09D /* BBMeViewController.m in Sources */,
 				332D82C118C33F0A007A75D5 /* HomeMainView.m in Sources */,
-				7487E42E1A3C6295000AC4A8 /* ViewImageViewController.m in Sources */,
 				332D833218C33F0B007A75D5 /* GroupAskExpressionCell.m in Sources */,
 				332D831E18C33F0B007A75D5 /* FXSexChanger.m in Sources */,
 				332D82FB18C33F0B007A75D5 /* PetView.m in Sources */,
 				7AC51BA518CDDA6900AD1A8C /* BBBJQViewController.m in Sources */,
 				7A922F8018E3F2A800026C4A /* BBBJQManager.m in Sources */,
+				74B64A651A48443300AF46A7 /* ViewImageViewController.m in Sources */,
 				043A1B941A395907004013B1 /* BBFXViewController.m in Sources */,
 				74ADDE101A2A063C0055B86E /* BBMutilIMViewController.m in Sources */,
 				332D758818C33552007A75D5 /* CPPTModelMessageGroupMember.m in Sources */,
