@@ -85,7 +85,7 @@
     }
     [[UINavigationBar appearanceWhenContainedIn:[CustomNavigationController class], nil] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
-<<<<<<< HEAD
+
     NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:
                               [UIColor colorWithRed:251/255.f green:76/255.f blue:7/255.f alpha:1.f],UITextAttributeTextColor,
                               [UIColor colorWithRed:251/255.f green:76/255.f blue:7/255.f alpha:1.f],NSForegroundColorAttributeName,
@@ -93,7 +93,7 @@
                               [NSValue valueWithUIOffset:UIOffsetZero],UITextAttributeTextShadowOffset, nil];
     //[[UINavigationBar appearance] setTitleTextAttributes:attributes];
     [[UINavigationBar appearanceWhenContainedIn:[CustomNavigationController class], nil] setTitleTextAttributes:attributes];
-=======
+
     if (IOS7) {
         NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:
                                   [UIColor colorWithRed:251/255.f green:76/255.f blue:7/255.f alpha:1.f],UITextAttributeTextColor,
@@ -103,7 +103,7 @@
         //[[UINavigationBar appearance] setTitleTextAttributes:attributes];
         [[UINavigationBar appearanceWhenContainedIn:[CustomNavigationController class], nil] setTitleTextAttributes:attributes];
     }
->>>>>>> 47fab585fc3f14cc09e43525fcf8ebf8d26f77d0
+
     
     //注册推送通知，兼容ios8及ios8-
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
