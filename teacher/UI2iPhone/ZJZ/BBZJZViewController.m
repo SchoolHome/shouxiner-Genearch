@@ -121,7 +121,6 @@
     }
     */
     //self.view.backgroundColor = [UIColor colorWithRed:242/255.f green:236/255.f blue:230/255.f alpha:1.f];
-    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupListResult" options:0 context:NULL];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -146,9 +145,14 @@
     };
     dispatch_async(dispatch_get_main_queue(), updateTagBlock);
     
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupListResult" options:0 context:NULL];
 
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"groupListResult"];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -158,9 +162,7 @@
 
 -(void) dealloc{
     [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"userMsgGroupListTag"];
-    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"groupListResult"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"noticeArrayTag"];
-    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"groupListResult"];
 }
 #pragma mark Setter && Getter
 - (NSArray *)classModels
