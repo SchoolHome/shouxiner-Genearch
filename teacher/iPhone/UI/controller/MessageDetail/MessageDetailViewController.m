@@ -1393,23 +1393,17 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade]; 
     [[UIApplication sharedApplication].keyWindow addSubview:self.messagePictrueController.view]; 
     self.canPlayMagic = NO;
-//    if ([self.delegate respondsToSelector:@selector(clickPictrueToOriginMessage:withPictrueInViewRect:)]) {
-//        CGRect imageRect = imageCell.displayImageView.frame;
-//        CGRect superViewRect = [imageCell convertRect:imageRect toView:nil];
-//        [self.delegate clickPictrueToOriginMessage:imageCell withPictrueInViewRect:superViewRect];
-//    }
 }
 
 #pragma 展示图片的委托实现开始
 -(void)beganCloseImageAnimation{
-    [[HPStatusBarTipView shareInstance] setHidden:NO];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade]; 
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
--(void)endCloseImageAnimation
-{
+-(void)endCloseImageAnimation{
+    [self.messagePictrueController.view removeFromSuperview];
+    [self.messagePictrueController removeFromParentViewController];
     self.canPlayMagic = YES;
     CPLogInfo(@"endCloseImageAnimation");
-    
 }
 
 #pragma mark - 展示图片的委托实现结束
