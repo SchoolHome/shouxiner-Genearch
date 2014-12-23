@@ -9,6 +9,8 @@
 #import "BBImagePreviewVIewController.h"
 
 #import "BBPostPBXViewController.h"
+
+#import "ImageUtil.h"
 @interface BBImagePreviewVIewController ()
 {
     UIView *toolBar;
@@ -36,9 +38,15 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor blackColor];
-    
+
+    CGFloat scale = _image.size.height/_image.size.width;
+    /*
+    CGRect frame = scale > 1 ? CGRectMake(0.f, 0.f, self.screenWidth, self.screenHeight):
+    CGRectMake(self.screenWidth-(self.screenWidth*scale)/2, (self.screenHeight-self.screenHeight*scale)/2, self.screenWidth*scale, self.screenHeight*scale);
+    */
     previewImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, self.screenHeight)];
     [previewImageView setImage:_image];
+    if (scale < 1) previewImageView.contentMode = UIViewContentModeScaleAspectFit;
     previewImageView.userInteractionEnabled = YES;
     [self.view addSubview:previewImageView];
     
@@ -115,5 +123,7 @@
     BBPostPBXViewController *postPBX = [[BBPostPBXViewController alloc] initWithImages:[NSArray arrayWithObject:self.image]];
     [self.navigationController pushViewController:postPBX animated:YES];
 }
+
+
 
 @end

@@ -13,6 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>{
     UIImageView *loadingView;
+    UIBackgroundTaskIdentifier taskID;
 }
 @property (strong, nonatomic) UIWindow *window;
 
@@ -23,6 +24,8 @@
 @property (strong,nonatomic) CustomNavigationController * guid_nav_c;
 
 @property (nonatomic,strong) NSString *url;
+
+@property (nonatomic) NSInteger smsTime;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
 -(void) launchLogin;

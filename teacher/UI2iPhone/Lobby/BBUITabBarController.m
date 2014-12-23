@@ -299,6 +299,18 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeVC" object:nil];
 }
 
+- (void)selectedItem:(NSInteger)itemIndex
+{
+    self.selectedIndex = 0;
+    for (int i = 0 ; i<[_tapImages count]; i++) {
+        if (i == 0) {
+            _subTabItem[i].image = [_tapImages objectAtIndex:i];
+        }else{
+            _subTabItem[i].image = nil;
+        }
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

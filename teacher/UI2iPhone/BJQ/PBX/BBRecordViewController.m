@@ -54,6 +54,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     
+
     CGFloat height = IOS7? 0.f:-20.f;
     
     closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -121,14 +122,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    //[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    //[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     [self.navigationController setNavigationBarHidden:NO];
 }
 /*
@@ -240,6 +241,8 @@
 {
     [_countDurTimer invalidate];
     self.countDurTimer = nil;
+    
+
 }
 
 - (AVCaptureDevice *)getCameraDevice:(BOOL)isFront
@@ -563,6 +566,7 @@
 - (void)stopCurrentVideoRecording
 {
     [self stopCountDurTimer];
+    //[self recoverToolWhenEndRecording];
     [_movieFileOutput stopRecording];
 }
 

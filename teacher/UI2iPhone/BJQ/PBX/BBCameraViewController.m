@@ -99,6 +99,7 @@
     self.imagePickerController.delegate = self;
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
     self.imagePickerController.showsCameraControls = NO;
+
     self.imagePickerController.navigationBarHidden = YES;
     
     CGRect overlayViewFrame = self.imagePickerController.cameraOverlayView.frame;
@@ -116,12 +117,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    [super viewWillAppear:animated];
+    
+    //[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+    
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     [self.navigationController setNavigationBarHidden:NO];
 }
@@ -220,13 +225,13 @@
 
 -(void)close
 {
-    //[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     for (id controller in self.navigationController.viewControllers ) {
         if ([controller isKindOfClass:[BBPostPBXViewController class]]) {
             [self.navigationController popToViewController:controller animated:YES];
             return;
         }
     }
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -246,7 +251,7 @@
     }
 }
 
-
+/*
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     UIImage *image = nil;
@@ -255,6 +260,12 @@
     }
     [self dismissModalViewControllerAnimated:YES];
     
+    BBImagePreviewVIewController *imagePreview = [[BBImagePreviewVIewController  alloc] initWithPreviewImage:image];
+    [self.navigationController pushViewController:imagePreview animated:YES];
+}
+*/
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
     BBImagePreviewVIewController *imagePreview = [[BBImagePreviewVIewController  alloc] initWithPreviewImage:image];
     [self.navigationController pushViewController:imagePreview animated:YES];
 }
