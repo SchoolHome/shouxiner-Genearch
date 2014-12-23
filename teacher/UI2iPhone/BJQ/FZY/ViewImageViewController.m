@@ -125,7 +125,9 @@
 - (UIView *)pageAtIndex:(NSInteger)index{
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, self.screenHeight)];
     imageView.image = [self.dataSource objectAtIndex:index];
-    imageView.contentMode = UIViewContentModeScaleAspectFit & UIViewContentModeCenter;
+    CGFloat scale = imageView.image.size.height/imageView.image.size.width;
+    
+    imageView.contentMode = scale > 1 ? UIViewContentModeScaleAspectFit & UIViewContentModeCenter : UIViewContentModeScaleAspectFit;
     
     return imageView;
 }

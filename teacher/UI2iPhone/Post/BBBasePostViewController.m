@@ -12,7 +12,7 @@
 #import "ZYQAssetPickerController.h"
 #import "ViewImageViewController.h"
 
-
+#import "CPUIModelManagement.h"
 #import "AppDelegate.h"
 @interface BBBasePostViewController()<
 UIImagePickerControllerDelegate,
@@ -378,7 +378,10 @@ viewImageDeletedDelegate>
     }
     
     
-    
+    if(![[CPUIModelManagement sharedInstance] canConnectToNetwork]){
+        [self showProgressWithText:NETWORK_ERROR_TEXT withDelayTime:2.f];
+        return;
+    }
 
         for (int i = 0; i<self.chooseImageView.images.count; i++) {
             UIImage *image = self.chooseImageView.images[i];

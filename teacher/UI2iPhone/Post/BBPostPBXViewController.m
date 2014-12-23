@@ -21,7 +21,7 @@
 #import "CoreUtils.h"
 
 
-
+#import "CPUIModelManagement.h"
 @interface BBPostPBXViewController ()
 {
     NSMutableArray *selectedStuArray;
@@ -288,6 +288,10 @@
         return;
     }
     
+    if(![[CPUIModelManagement sharedInstance] canConnectToNetwork]){
+        [self showProgressWithText:NETWORK_ERROR_TEXT withDelayTime:2.f];
+        return;
+    }
     
     if ([self videoIsExist]) {
         [self sendVideo];
@@ -308,7 +312,7 @@
     
     if ([[self getThingsText] length]==0) {  // 没有输入文本
         
-        [self showProgressWithText:@"请输入文字" withDelayTime:0.1];
+        [self showProgressWithText:@"请输入文字" withDelayTime:1.1];
         
         return;
     }
@@ -543,8 +547,6 @@
 {
     if ([[actionSheet buttonTitleAtIndex:0] isEqualToString:@"拍摄"] && buttonIndex == 0) {
         //进自定义拍照界面
-        
-        
         BBCameraViewController *camera = [[BBCameraViewController alloc] init];
         [self.navigationController pushViewController:camera animated:YES];
     }else

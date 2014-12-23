@@ -15,6 +15,7 @@
 
 #import "EGOImageView.h"
 
+#import "CPUIModelManagement.h"
 #import "AppDelegate.h"
 @interface BBServiceMessageShareViewController ()<UITableViewDataSource,UITableViewDelegate,ChooseClassDelegate>
 {
@@ -271,6 +272,11 @@
         
         [self showProgressWithText:@"请输入文字" withDelayTime:0.1];
         
+        return;
+    }
+    
+    if(![[CPUIModelManagement sharedInstance] canConnectToNetwork]){
+        [self showProgressWithText:NETWORK_ERROR_TEXT withDelayTime:2.f];
         return;
     }
     
