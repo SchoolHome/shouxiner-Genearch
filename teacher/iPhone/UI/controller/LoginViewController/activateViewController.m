@@ -88,7 +88,11 @@
     // Do any additional setup after loading the view.
     self.title = @"账号激活";
     [self.navigationController setNavigationBarHidden:NO];
-    self.navigationItem.hidesBackButton = YES;
+    UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
+    [back setFrame:CGRectMake(0.f, 7.f, 22.f, 22.f)];
+    [back setBackgroundImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+    [back addTarget:self action:@selector(backViewController) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
     CPPTModelLoginResult *loginModel = [PalmUIManagement sharedInstance].loginResult;
     CGFloat height = 10.f;
     UIView *subView = [[UIView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 44.f)];
@@ -116,9 +120,9 @@
     self.smsCode.delegate = self;
     [self.view addSubview:self.smsCode];
     self.smsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.smsButton setBackgroundImage:[UIImage imageNamed:@"GetSmsCode"] forState:UIControlStateNormal];
-    [self.smsButton setBackgroundImage:[UIImage imageNamed:@"GetSmsCode"] forState:UIControlStateHighlighted];
+    [self.smsButton setImage:[UIImage imageNamed:@"GetSmsCode"] forState:UIControlStateNormal];
     self.smsButton.frame = CGRectMake(self.view.frame.size.width-100, height+7.f, 80.0f, 30.0f);
+    [self.smsButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [self.smsButton addTarget:self action:@selector(getsmsCode) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.smsButton];
     
@@ -163,7 +167,7 @@
     self.confrimPassWord.placeholder = @"确认密码";
     [self.view addSubview:self.confrimPassWord];
     
-    if([loginModel.mobile length]>0){
+    if([loginModel.mobile length] == 11){
         [self.telPhone setText:loginModel.mobile];
         [self.telPhone setUserInteractionEnabled:NO];
     }else{
