@@ -14,6 +14,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        [self setBackgroundColor:[UIColor clearColor]];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.userInteractionEnabled = YES;
     }
