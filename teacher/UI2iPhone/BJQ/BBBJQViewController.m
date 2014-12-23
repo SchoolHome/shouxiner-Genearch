@@ -1082,9 +1082,7 @@
 // 复制
 -(void) bbBaseTableViewCell:(BBBaseTableViewCell *)cell touchPoint:(CGPoint)touchPoint longPressText:(NSString *)text{
     if (nil != copyContentButton) {
-        [copyContentButton removeFromSuperview];
-        self.contentText = @"";
-        copyContentButton = nil;
+        return;
     }
     if (self.tempMoreImage != nil) {
         [self.tempMoreImage removeFromSuperview];
@@ -1256,6 +1254,7 @@
             case ReachableViaWiFi:{
                 // wifi的情况
                 [self showProgressWithText:@"正在下载"];
+                [inputBar endEdit];
                 AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
                 if ([appDelegate.window.rootViewController isKindOfClass:[BBUITabBarController class]]) {
                     BBUITabBarController *tabbar = (BBUITabBarController *)appDelegate.window.rootViewController;
@@ -1290,8 +1289,8 @@
     NSString *writeFileName = [NSString stringWithFormat:@"%@.%@",key,@".mp4"];
     NSString *fileDir = [NSString stringWithFormat:@"%@/Video/",account.loginName];
     self.videoFilePath = [NSString stringWithFormat:@"%@/%@%@",[CoreUtils getDocumentPath],fileDir,writeFileName];
-//    [self showProgressWithText:@"正在下载" dimBackground:YES];
     [self showProgressOnwindowsWithText:@"正在下载"];
+    [inputBar endEdit];
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     if ([appDelegate.window.rootViewController isKindOfClass:[BBUITabBarController class]]) {
         BBUITabBarController *tabbar = (BBUITabBarController *)appDelegate.window.rootViewController;
@@ -1320,6 +1319,7 @@
         self.contentText = @"";
         copyContentButton = nil;
     }
+    [inputBar endEdit];
     NSURL*videoPathURL=[[NSURL alloc] initFileURLWithPath:videoPath];
     MPMoviePlayerViewController *playViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:videoPathURL];
     MPMoviePlayerController *player = [playViewController moviePlayer];
