@@ -212,8 +212,8 @@
 		193FA88119F0A2E600874F1E /* options@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81419F0A2E600874F1E /* options@2x.png */; };
 		193FA88219F0A2E600874F1E /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81519F0A2E600874F1E /* up.png */; };
 		193FA88319F0A2E600874F1E /* up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81619F0A2E600874F1E /* up@2x.png */; };
-		193FA88419F0A2E600874F1E /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81819F0A2E600874F1E /* add.png */; };
-		193FA88519F0A2E600874F1E /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81919F0A2E600874F1E /* add@2x.png */; };
+		193FA88419F0A2E600874F1E /* postAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81819F0A2E600874F1E /* postAdd.png */; };
+		193FA88519F0A2E600874F1E /* postAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81919F0A2E600874F1E /* postAdd@2x.png */; };
 		193FA88619F0A2E600874F1E /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81A19F0A2E600874F1E /* back.png */; };
 		193FA88719F0A2E600874F1E /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81B19F0A2E600874F1E /* back@2x.png */; };
 		193FA88819F0A2E600874F1E /* imageClose.png in Resources */ = {isa = PBXBuildFile; fileRef = 193FA81C19F0A2E600874F1E /* imageClose.png */; };
@@ -1788,8 +1788,8 @@
 		193FA81419F0A2E600874F1E /* options@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "options@2x.png"; sourceTree = "<group>"; };
 		193FA81519F0A2E600874F1E /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		193FA81619F0A2E600874F1E /* up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up@2x.png"; sourceTree = "<group>"; };
-		193FA81819F0A2E600874F1E /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
-		193FA81919F0A2E600874F1E /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
+		193FA81819F0A2E600874F1E /* postAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = postAdd.png; sourceTree = "<group>"; };
+		193FA81919F0A2E600874F1E /* postAdd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "postAdd@2x.png"; sourceTree = "<group>"; };
 		193FA81A19F0A2E600874F1E /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		193FA81B19F0A2E600874F1E /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		193FA81C19F0A2E600874F1E /* imageClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imageClose.png; sourceTree = "<group>"; };
@@ -4216,8 +4216,8 @@
 		193FA81719F0A2E600874F1E /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				193FA81819F0A2E600874F1E /* add.png */,
-				193FA81919F0A2E600874F1E /* add@2x.png */,
+				193FA81819F0A2E600874F1E /* postAdd.png */,
+				193FA81919F0A2E600874F1E /* postAdd@2x.png */,
 				193FA81A19F0A2E600874F1E /* back.png */,
 				193FA81B19F0A2E600874F1E /* back@2x.png */,
 				193FA81C19F0A2E600874F1E /* imageClose.png */,
@@ -7975,7 +7975,7 @@
 				332D7F0018C33F0A007A75D5 /* bg_info_red@2x.png in Resources */,
 				192447371941EFC10077D5DB /* begin@2x.png in Resources */,
 				7A334B2018F2DE60001F57C4 /* BBFZY@2x.png in Resources */,
-				193FA88519F0A2E600874F1E /* add@2x.png in Resources */,
+				193FA88519F0A2E600874F1E /* postAdd@2x.png in Resources */,
 				7AC51BA918CDDA8000AD1A8C /* girl.png in Resources */,
 				74A4E5F718DFE8B8000F79E6 /* ZJZUnCheck.png in Resources */,
 				7A334B2A18F2DE60001F57C4 /* BBSBSPress@2x.png in Resources */,
@@ -8312,7 +8312,7 @@
 				19A83D4818D34C8900441FDE /* LoginButtonPress.png in Resources */,
 				1970BC58191BB7E400F63454 /* ActivateBigFrom@2x.png in Resources */,
 				332D823318C33F0A007A75D5 /* bt_im_profile_Recording@2x.png in Resources */,
-				193FA88419F0A2E600874F1E /* add.png in Resources */,
+				193FA88419F0A2E600874F1E /* postAdd.png in Resources */,
 				043A1B6F1A394B1E004013B1 /* file@2x.png in Resources */,
 				332D7EDF18C33F0A007A75D5 /* icon_lovers_hover@2x.png in Resources */,
 				19451C9219F78E8B00E4D92B /* BJQHasTuiJian@2x.png in Resources */,

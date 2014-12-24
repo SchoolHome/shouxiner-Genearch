@@ -577,6 +577,7 @@
 {
     if ([self videoIsExist]) {
         [self playVideo];
+        [self closeThingsText];
     }else [super imageDidTapped:images andIndex:index];
 }
 

@@ -620,6 +620,7 @@ viewImageDeletedDelegate>
 
 - (void)imageDidTapped:(NSArray *)images andIndex:(NSInteger)index
 {
+    [self closeThingsText];
     ViewImageViewController *imagesVC = [[ViewImageViewController alloc] initViewImageVC:images withSelectedIndex:index];
     imagesVC.delegate = self;
     [self.navigationController pushViewController:imagesVC animated:YES];
