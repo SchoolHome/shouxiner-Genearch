@@ -547,6 +547,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:contactsDefaultCellIdentifier];
             cell.contentView.backgroundColor = [UIColor whiteColor];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.font = [UIFont systemFontOfSize:14.f];
             if (!IOS7) {
                 UIView *cellBG = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, 40.f)];
                 cellBG.backgroundColor = [UIColor whiteColor];

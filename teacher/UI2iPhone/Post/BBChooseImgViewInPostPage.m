@@ -95,7 +95,7 @@
             //add
             if (!_addImageBtn) {
                 _addImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                [_addImageBtn setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+                [_addImageBtn setBackgroundImage:[UIImage imageNamed:@"postAdd"] forState:UIControlStateNormal];
                 
                 [_addImageBtn addTarget:self action:@selector(addImageAction:) forControlEvents:UIControlEventTouchUpInside];
                 [self addSubview:_addImageBtn];
