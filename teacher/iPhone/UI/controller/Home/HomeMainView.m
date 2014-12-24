@@ -31,7 +31,6 @@ imageviewForTableViewBG = _imageviewForTableViewBG;
 
         //初始化上部分的imageview
         UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, -hiddendUpPart, 320.0f, hiddendUpPart+imageviewDisplayPart+HiddendDownPart)];
-        imageview.backgroundColor = [UIColor redColor];
         self.imageviewUpPart = imageview;
         imageview = nil;
         [self addSubview:self.imageviewUpPart];

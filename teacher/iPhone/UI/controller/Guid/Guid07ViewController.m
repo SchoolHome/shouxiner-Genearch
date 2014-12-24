@@ -233,7 +233,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         //
-        self.backgroundColor = [UIColor redColor];
         UIImageView *background = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:background];
         background.image = [UIImage imageNamed:@"guide_pet@2x.jpg"];

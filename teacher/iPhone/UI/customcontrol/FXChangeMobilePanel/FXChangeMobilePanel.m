@@ -146,12 +146,6 @@
 
     FXShakeField * mobile_field_temp = [[FXShakeField alloc] initWithFrame:CGRectMake(VERIFY_MOBILE_FIELD_X, VERIFY_MOBILE_FIELD_Y, VERIFY_MOBILE_FIELD_WIDTH, VERIFY_MOBILE_FIELD_HEIGHT) ground_image:REGIST_TEXT_PHONE_IMG icon_image:REGIST_TXT_PHONE_IMG];
     [mobile_field_temp.shake_text_field setContentMode:UIViewContentModeScaleAspectFill];
-    //[mobile_field_temp.shake_text_field setBackgroundColor:[UIColor redColor]];
-    //CGPoint mobile_shake_field_center = mobile_field_temp.center;
-    //[mobile_field_temp.shake_text_field setCenter:CGPointMake(mobile_shake_field_center.x, mobile_shake_field_center.y+5)];
-    //CGRect content_stetch = mobile_field_temp.shake_text_field.contentStretch;
-    //CGFloat content_stretch = mobile_field_temp.shake_text_field.contentScaleFactor;
-    //[mobile_field_temp.shake_text_field setContentStretch:CGRectMake(content_stetch.origin.x, content_stetch.origin.y-3, content_stetch.size.width, content_stetch.size.height)];
     CGRect field_frame = mobile_field_temp.shake_text_field.frame;
     [mobile_field_temp.shake_text_field setFrame:CGRectMake(field_frame.origin.x+3, field_frame.origin.y-3, field_frame.size.width, field_frame.size.height)];
     [mobile_field_temp do_set_keyboard_appearance:UIKeyboardAppearanceDefault];

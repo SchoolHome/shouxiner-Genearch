@@ -473,7 +473,6 @@
                 UIView *audioRecentView = [self viewWithTag:audioRecentViewTag];
                 if (!audioRecentView) {
                     audioRecentView = [[UIView alloc] initWithFrame:CGRectMake(28, 70.f, 122.f, 80.f)];
-                    //audioRecentView.backgroundColor = [UIColor redColor];
                     audioRecentView.tag = audioRecentViewTag;
                     [self.viewContentBG addSubview:audioRecentView];
                     

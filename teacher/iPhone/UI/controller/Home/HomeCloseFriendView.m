@@ -295,7 +295,6 @@
       //  view.backgroundColor = [UIColor colorWithRed:243/255.f green:238/255.f blue:229/255.f alpha:1.f];
         UIImageView *imageviewBG = [[UIImageView alloc] initWithFrame:CGRectMake(18.f, 0.f, 300.f, 16.f)];
         imageviewBG.backgroundColor = [UIColor colorWithRed:243/255.f green:238/255.f blue:229/255.f alpha:1.f];
-        //imageviewBG.backgroundColor = [UIColor redColor];
         //[imageviewBG setFrame:view.frame];
         [view addSubview:imageviewBG];
         

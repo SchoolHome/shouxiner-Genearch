@@ -221,7 +221,6 @@ currentStatus = _currentStatus,   isMoved = _isMoved ,nickName = _nickName,butto
     //            [[FXEditContainer shareInstance] doResetEditContainer];
     //        if (![self.view.subviews containsObject:[FXEditContainer shareInstance]]) {
     //            [[FXEditContainer shareInstance] setDelegate:self];
-    //            //[FXEditContainer shareInstance].backgroundColor = [UIColor redColor];
     //            [self.view addSubview:[FXEditContainer shareInstance]];            
     //        }
     
