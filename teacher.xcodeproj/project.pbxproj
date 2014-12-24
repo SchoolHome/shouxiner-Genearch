@@ -375,8 +375,6 @@
 		19C08C31193F1BAA00C548CD /* BJQHasZanButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C19193F1BAA00C548CD /* BJQHasZanButton@2x.png */; };
 		19C08C36193F1BAA00C548CD /* BJQMoreBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C1E193F1BAA00C548CD /* BJQMoreBg.png */; };
 		19C08C37193F1BAA00C548CD /* BJQMoreBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C1F193F1BAA00C548CD /* BJQMoreBg@2x.png */; };
-		19C08C38193F1BAA00C548CD /* BJQMoreButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C20193F1BAA00C548CD /* BJQMoreButton.png */; };
-		19C08C39193F1BAA00C548CD /* BJQMoreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C08C21193F1BAA00C548CD /* BJQMoreButton@2x.png */; };
 		19CB2F7A1962422C00C33C5D /* BBCopyContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 19CB2F781962422C00C33C5D /* BBCopyContent.png */; };
 		19CB2F7B1962422C00C33C5D /* BBCopyContent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19CB2F791962422C00C33C5D /* BBCopyContent@2x.png */; };
 		19CBA1EA19FE132000548396 /* BJQChinese.png in Resources */ = {isa = PBXBuildFile; fileRef = 19CBA1D819FE132000548396 /* BJQChinese.png */; };
@@ -1975,8 +1973,6 @@
 		19C08C19193F1BAA00C548CD /* BJQHasZanButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BJQHasZanButton@2x.png"; path = "BJQ2/BJQHasZanButton@2x.png"; sourceTree = "<group>"; };
 		19C08C1E193F1BAA00C548CD /* BJQMoreBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BJQMoreBg.png; path = BJQ2/BJQMoreBg.png; sourceTree = "<group>"; };
 		19C08C1F193F1BAA00C548CD /* BJQMoreBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BJQMoreBg@2x.png"; path = "BJQ2/BJQMoreBg@2x.png"; sourceTree = "<group>"; };
-		19C08C20193F1BAA00C548CD /* BJQMoreButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BJQMoreButton.png; path = BJQ2/BJQMoreButton.png; sourceTree = "<group>"; };
-		19C08C21193F1BAA00C548CD /* BJQMoreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BJQMoreButton@2x.png"; path = "BJQ2/BJQMoreButton@2x.png"; sourceTree = "<group>"; };
 		19CB2F781962422C00C33C5D /* BBCopyContent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBCopyContent.png; sourceTree = "<group>"; };
 		19CB2F791962422C00C33C5D /* BBCopyContent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBCopyContent@2x.png"; sourceTree = "<group>"; };
 		19CBA1D819FE132000548396 /* BJQChinese.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BJQChinese.png; sourceTree = "<group>"; };
@@ -4242,8 +4238,6 @@
 				19C08C19193F1BAA00C548CD /* BJQHasZanButton@2x.png */,
 				19C08C1E193F1BAA00C548CD /* BJQMoreBg.png */,
 				19C08C1F193F1BAA00C548CD /* BJQMoreBg@2x.png */,
-				19C08C20193F1BAA00C548CD /* BJQMoreButton.png */,
-				19C08C21193F1BAA00C548CD /* BJQMoreButton@2x.png */,
 				1970BC4E191BB7E400F63454 /* Activate */,
 				19AD08AD18F67F7900E8AA55 /* user_credit_back.png */,
 				19AD08AE18F67F7900E8AA55 /* user_credit_back@2x.png */,
@@ -7906,7 +7900,6 @@
 				332D824B18C33F0A007A75D5 /* profile_btn_gotalk_nor@2x.png in Resources */,
 				1982F7DB1A0C73020075F35F /* other_talk.png in Resources */,
 				332D7E5B18C33F0A007A75D5 /* alarm_im_btn_sent@2x.png in Resources */,
-				19C08C39193F1BAA00C548CD /* BJQMoreButton@2x.png in Resources */,
 				19AD08AF18F67F7900E8AA55 /* user_credit_back.png in Resources */,
 				332D7F4518C33F0A007A75D5 /* index_top_btn_addressbook_press@2x.png in Resources */,
 				193FA88919F0A2E600874F1E /* imageClose@2x.png in Resources */,
@@ -8159,7 +8152,6 @@
 				332D7F4C18C33F0A007A75D5 /* logo_barpress@2x.png in Resources */,
 				332D825018C33F0A007A75D5 /* profile_btn_red_nor@2x.png in Resources */,
 				0433AD1718E53A8800BDF9D5 /* keyboard_sound_hover.png in Resources */,
-				19C08C38193F1BAA00C548CD /* BJQMoreButton.png in Resources */,
 				1982F7D41A0C73020075F35F /* i_talk@2x.png in Resources */,
 				19A3E55419F3AD2500AFD251 /* BBScoreBG@2x.png in Resources */,
 				193FA88B19F0A2E600874F1E /* enter@2x.png in Resources */,

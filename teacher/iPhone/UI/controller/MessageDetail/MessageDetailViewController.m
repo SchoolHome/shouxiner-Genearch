@@ -509,7 +509,6 @@
     timeLabel.frame = CGRectMake(11.0f, 2.5f, timeLabel.frame.size.width,timeLabel.frame.size.height);
     [timeView addSubview:lineImageView];
     [timeView addSubview:bgImageView];
-    //    [timeView setBackgroundColor:[UIColor redColor]];
     
     return timeView;
 }
@@ -561,7 +560,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UIView *tempView = [[UIView alloc] init];
     [cell setBackgroundView:tempView];
-//    [tempView setBackgroundColor:[UIColor redColor]];
 //    [cell.contentView setBackgroundColor:[UIColor greenColor]];
     cell.delegate = self;
 //    for (UIView *view in self.messageTable.subviews) {

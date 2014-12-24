@@ -62,7 +62,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deleteButton];
     */
     self.csView = [[XLCycleScrollView alloc] initCycleScrollView:(int)self.selectedIndex withFrame:CGRectMake(0.f, 0.f, self.screenWidth, self.screenHeight)];
-    self.csView.backgroundColor = [UIColor redColor];
+//    self.csView.backgroundColor = [UIColor redColor];
     self.csView.delegate = self;
     self.csView.datasource = self;
     [self.view addSubview:self.csView];

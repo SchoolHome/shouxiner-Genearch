@@ -28,7 +28,6 @@
         CPUIModelUserInfo *userInfo = member.userInfo;
 //        UILabel * labelRecentText = [[UILabel alloc] initWithFrame:CGRectMake(5.f, 3.f, self.frame.size.width-8.f, self.frame.size.height-6.f)];
         UILabel *labelRecentText = [[UILabel alloc] init];
-        //labelRecentText.backgroundColor = [UIColor redColor];
         labelRecentText.textAlignment = UITextAlignmentLeft;
         labelRecentText.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
         labelRecentText.backgroundColor = [UIColor clearColor];

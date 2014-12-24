@@ -39,14 +39,12 @@
         UIButton *chat = [UIButton buttonWithType:UIButtonTypeCustom];
         [chat setFrame:CGRectMake(230, (60-SmallIconHeight)/2, SmallIconWidth, SmallIconHeight)];
         chat.tag = 1001;
-        //chat.backgroundColor = [UIColor redColor];
         [chat setBackgroundImage:[UIImage imageNamed:@"list_chat_bubble"] forState:UIControlStateNormal];
         [chat addTarget:self action:@selector(chat) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:chat];
         //打电话
         UIButton *call = [UIButton buttonWithType:UIButtonTypeCustom];
         [call setFrame:CGRectMake(CGRectGetMaxX(chat.frame)+16, (60-SmallIconHeight)/2, SmallIconWidth, SmallIconHeight)];
-        //call.backgroundColor = [UIColor yellowColor];
         [call setBackgroundImage:[UIImage imageNamed:@"list_phone"] forState:UIControlStateNormal];
         [call addTarget:self action:@selector(call) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:call];

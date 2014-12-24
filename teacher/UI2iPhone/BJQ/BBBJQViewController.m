@@ -533,7 +533,8 @@
     
     titleButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 125, 44)];
     [titleButton setTitle:@"班级" forState:UIControlStateNormal];
-    self.navigationItem.titleView = titleButton;
+    self.navigationItem.titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 125, 44)];
+    [self.navigationItem.titleView addSubview: titleButton];
     titleButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     [titleButton addTarget:self action:@selector(bjButtonTaped:) forControlEvents:UIControlEventTouchUpInside];
     [titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
