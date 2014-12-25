@@ -32,10 +32,6 @@
     if([keyPath isEqualToString:@"quitGroupDic"]){
         if ([[[CPUIModelManagement sharedInstance].quitGroupDic objectForKey:group_manage_dic_res_code]integerValue]== RESPONSE_CODE_SUCESS) {
             
-            if (alreadyQuitGroup) {
-                return;
-            }
-            
             [self closeProgress];
             NSMutableArray *tempMutilMsgGroups = [[NSMutableArray alloc] init];
             for (CPUIModelMessageGroup *group in [CPUIModelManagement sharedInstance].userMessageGroupList) {
@@ -52,15 +48,11 @@
             [self showProgressWithText:[[CPUIModelManagement sharedInstance].quitGroupDic objectForKey:group_manage_dic_res_desc] withDelayTime:3.f];
             
         }
-        alreadyQuitGroup = YES;
     }
     
     //quitGroupDic无效时备用
     if ([keyPath isEqualToString:@"userMsgGroupTag"]) {
         if ([CPUIModelManagement sharedInstance].userMsgGroupTag == UPDATE_USER_GROUP_TAG_DEL) {
-            if (alreadyQuitGroup) {
-                return;
-            }
             [self closeProgress];
             NSMutableArray *tempMutilMsgGroups = [[NSMutableArray alloc] init];
             for (CPUIModelMessageGroup *group in [CPUIModelManagement sharedInstance].userMessageGroupList) {
@@ -74,7 +66,6 @@
             mutilMsgGroups = tempMutilMsgGroups;
             [groupTableview reloadData];
             
-            alreadyQuitGroup = YES;
         }
     }
 }
