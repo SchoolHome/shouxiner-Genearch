@@ -262,7 +262,7 @@
         [profileModel coverWithJson:userProfile];
         //查询用户商城积分
         self.navigationItem.title = profileModel.username;
-        [[PalmUIManagement sharedInstance] getUserCredits];
+        [meTableView reloadData];
     }
     if ([@"uiPersonalInfoTag" isEqualToString:keyPath]) {
         //[meTableView reloadData];
