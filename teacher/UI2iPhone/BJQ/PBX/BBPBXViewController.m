@@ -67,7 +67,7 @@
     
     studentList = [[UILabel alloc] initWithFrame:CGRectMake(5.f, 5.f, 190, 20.f)];
     studentList.backgroundColor = [UIColor clearColor];
-    studentList.text = @"@:点名表扬,可不选...";
+    studentList.text = @"@:发小红花,可不选...";
     studentList.numberOfLines = 20;
     studentList.font = [UIFont boldSystemFontOfSize:14.f];
     studentList.textColor = [UIColor colorWithRed:131/255.f green:131/255.f blue:131/255.f alpha:1.f];
