@@ -45,7 +45,8 @@
         
         countDownLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,50,60,15)];
         countDownLabel.backgroundColor = [UIColor clearColor];
-        countDownLabel.textColor = [UIColor colorWithHexString:@"#CCCCCC"];
+        //countDownLabel.textColor = [UIColor colorWithHexString:@"#CCCCCC"];
+        countDownLabel.textColor = [UIColor whiteColor];
         //countDownLabel.shadowColor = [UIColor blackColor];
         //countDownLabel.shadowOffset = CGSizeMake(0,-1);
         countDownLabel.textAlignment = UITextAlignmentCenter;
