@@ -95,7 +95,7 @@
     } else {
         [self photoStartLoad];
     }
-    
+
     // 调整frame参数
     [self adjustFrame];
 }
@@ -118,6 +118,7 @@
             self.imageView = nil;
         }
         self.imageView = [[EGOImageView alloc] initWithPlaceholderImage:_photo.placeholder];
+//        self.imageView.image = _photo.srcImageView.image;
         [self adjustFrame];
         CGSize size = _photo.srcImageView.image.size;
         float width = 320.0f;
@@ -208,16 +209,17 @@
 	}
     
     if (_photo.firstShow) { // 第一次显示的图片
-        _photo.firstShow = NO; // 已经显示过了
-        _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
-        
-        [UIView animateWithDuration:0.3 animations:^{
-            _imageView.frame = imageFrame;
-        } completion:^(BOOL finished) {
-            // 设置底部的小图片
-            _photo.srcImageView.image = _photo.placeholder;
-            [self photoStartLoad];
-        }];
+//        _photo.firstShow = NO; // 已经显示过了
+//        _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
+//        
+//        [UIView animateWithDuration:0.0 animations:^{
+//            _imageView.frame = imageFrame;
+//        } completion:^(BOOL finished) {
+//            // 设置底部的小图片
+//            _photo.srcImageView.image = _photo.placeholder;
+//            [self photoStartLoad];
+//        }];
+        _imageView.frame = imageFrame;
     } else {
         _imageView.frame = imageFrame;
     }
