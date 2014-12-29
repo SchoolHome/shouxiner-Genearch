@@ -143,6 +143,7 @@
 
 - (void)imageViewLoadedImage:(EGOImageView*)imageView{
     // 调整frame参数
+    _photo.image = imageView.image;
     [self adjustFrame];
     [_photoLoadingView stop];
 }
