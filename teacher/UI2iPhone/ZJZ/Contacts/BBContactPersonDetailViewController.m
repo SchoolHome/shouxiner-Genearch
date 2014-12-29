@@ -12,6 +12,7 @@
 
 #import "CPUIModelManagement.h"
 
+#import "EGOImageView.h"
 @interface BBContactPersonDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong)ContactsModel *userInfo;
@@ -44,7 +45,7 @@
     
     UIView *tableviewHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, 90.f)];
     
-    UIImageView *head = [[UIImageView alloc] initWithFrame:CGRectMake(10.f, 10.f, 70.f, 70.f)];
+    EGOImageView *head = [[EGOImageView alloc] initWithFrame:CGRectMake(10.f, 10.f, 70.f, 70.f)];
     if (self.userInfo.avatarPath.length > 0) {
         [head setImage:[UIImage imageWithContentsOfFile:self.userInfo.avatarPath]];
         head.layer.masksToBounds = YES;
