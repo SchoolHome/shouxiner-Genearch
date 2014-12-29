@@ -53,16 +53,27 @@
         if (count <= 0) {
             markMessage.hidden = YES;
         }else{
+
             markMessage.hidden = NO;
-            markMessage.text = [NSString stringWithFormat:@"%d",count];
-            CGFloat width = [markMessage.text sizeWithFont:[UIFont systemFontOfSize:14]
+            markMessage.text = count > 99 ? @"99+" : [NSString stringWithFormat:@"%d",count];
+            CGFloat width;
+            if (count > 99) {
+                width = [markMessage.text sizeWithFont:[UIFont systemFontOfSize:12]
                                      constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].width;
+                markMessage.font = [UIFont systemFontOfSize:12.f];
+            }else
+            {
+                width = [markMessage.text sizeWithFont:[UIFont systemFontOfSize:14]
+                                     constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].width;
+                markMessage.font = [UIFont systemFontOfSize:14.f];
+            }
+
             if (width<17) {
                 width = 20;
             }else{
                 width = width + 8;
             }
-            markMessage.frame = CGRectMake(320/5*2-18.f, -5, width, 20);
+            markMessage.frame = CGRectMake(320/5*2-20.f, -5, width, 20);
             [markMessage setNeedsDisplay];
         }
     }
@@ -224,7 +235,7 @@
     
     [self checkUnreadCount];
     
-    markMessage = [[UILabel alloc] initWithFrame:CGRectMake(320/itemCount*2-18.f, -5, 20, 20)];
+    markMessage = [[UILabel alloc] initWithFrame:CGRectMake(320/itemCount*2-20.f, -5, 20, 20)];
     markMessage.font = [UIFont systemFontOfSize:14];
     [_imageTabBar addSubview:markMessage];
     markMessage.backgroundColor = [UIColor colorWithRed:252/255.0 green:79/255.0 blue:6/255.0 alpha:1.0];
@@ -237,6 +248,8 @@
     roundedLayer2.borderColor = [[UIColor grayColor] CGColor];
     markMessage.text = @"";
     markMessage.hidden = YES;
+    
+
 }
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     if (!self.canClick) {
