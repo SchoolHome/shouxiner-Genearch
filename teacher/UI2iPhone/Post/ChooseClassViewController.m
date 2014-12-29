@@ -56,7 +56,7 @@
 
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:classCellIden];
-        cell.textLabel.font = [UIFont systemFontOfSize:14.f];    
+        cell.textLabel.font = [UIFont systemFontOfSize:14.f];
     }
     
     BBGroupModel *model = classModels[indexPath.row];
