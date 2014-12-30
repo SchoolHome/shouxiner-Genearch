@@ -478,9 +478,7 @@
         weakSelf.isLoading = YES;
         weakSelf.loadStatus = TopicLoadStatusAppend;
         int offset = [weakSelf.allTopicList count];
-        BBTopicModel *model = [weakSelf.allTopicList lastObject];
-        int st = [model.ts intValue];
-        [[PalmUIManagement sharedInstance] getGroupTopic:[weakSelf.currentGroup.groupid intValue] withTimeStamp:st withOffset:offset withLimit:30  withType:weakSelf.type];
+        [[PalmUIManagement sharedInstance] getGroupTopic:[weakSelf.currentGroup.groupid intValue] withTimeStamp:1 withOffset:offset withLimit:30 withType:weakSelf.type];
     }];
     bjqTableView.showsInfiniteScrolling = NO;
     
