@@ -150,7 +150,11 @@
         notifyCount = count;
         if (count > 0) {
             if (self.notifyButton != nil) {
-                self.notifyButton.titleLabel.text = [NSString stringWithFormat:@"您有%d条新消息",notifyCount];
+                if (count > 99) {
+                    self.notifyButton.titleLabel.text = [NSString stringWithFormat:@"您有%d+条新消息",99];
+                }else{
+                    self.notifyButton.titleLabel.text = [NSString stringWithFormat:@"您有%d条新消息",notifyCount];
+                }
                 [bjqTableView reloadData];
             }else{
                 self.notifyButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -159,7 +163,11 @@
                 self.notifyButton.backgroundColor = [UIColor clearColor];
                 self.notifyButton.titleLabel.font = [UIFont boldSystemFontOfSize:13];
                 self.notifyButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-                [self.notifyButton setTitle:[NSString stringWithFormat:@"您有%d条新消息",notifyCount] forState:UIControlStateNormal];
+                if (count>99) {
+                    [self.notifyButton setTitle:[NSString stringWithFormat:@"您有%d+条新消息",99] forState:UIControlStateNormal];
+                }else{
+                    [self.notifyButton setTitle:[NSString stringWithFormat:@"您有%d条新消息",notifyCount] forState:UIControlStateNormal];
+                }
                 [self.notifyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 bjqTableView.tableHeaderView.frame = CGRectMake(0, 0, 320, 188);
                 [bjqTableView.tableHeaderView addSubview:self.notifyButton];
