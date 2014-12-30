@@ -45,6 +45,8 @@
 @property(nonatomic,strong) BBBaseTableViewCell *deleteCell;
 @property(nonatomic,strong) BBVideoTableViewCell *videoCell;
 @property (nonatomic,strong) NSString *videoFilePath;
+@property (nonatomic,strong) UIButton *addButton;
+
 -(void) playVideo : (NSString *) videoPath;
 -(void) needRefresh;
 -(void) needRefreshBJQData;
@@ -379,6 +381,12 @@
 -(void)addNewTaped:(id)sender{
     [[UIApplication sharedApplication].keyWindow addSubview:fsDropdownView];
     [fsDropdownView show];
+    CGAffineTransform endAngle = CGAffineTransformMakeRotation(-180.0f * (M_PI / 180.0f));
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.addButton.transform = endAngle;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 -(void)newNotifyTaped:(id)sender{
@@ -522,11 +530,11 @@
     [addButton addTarget:self action:@selector(addNewTaped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
 #else
-    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addButton setFrame:CGRectMake(0.f, 14.f, 23.f, 23.f)];
-    [addButton setBackgroundImage:[UIImage imageNamed:@"BBAdd"] forState:UIControlStateNormal];
-    [addButton addTarget:self action:@selector(addNewTaped:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addButton];
+    self.addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.addButton setFrame:CGRectMake(0.f, 14.f, 23.f, 23.f)];
+    [self.addButton setBackgroundImage:[UIImage imageNamed:@"BBAdd"] forState:UIControlStateNormal];
+    [self.addButton addTarget:self action:@selector(addNewTaped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.addButton];
 //    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [shareButton setFrame:CGRectMake(0.f, 7.f, 40.f, 30.f)];
 //    [shareButton setTitle:@"分享" forState:UIControlStateNormal];
@@ -610,6 +618,12 @@
     }
     if (fsDropdownView.unfolded) {
         [fsDropdownView dismiss];
+        CGAffineTransform endAngle = CGAffineTransformMakeRotation(0.0f * (M_PI / 180.0f));
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.addButton.transform = endAngle;
+        } completion:^(BOOL finished) {
+            
+        }];
     }
     
     if (self.tempMoreImage != nil) {
@@ -635,6 +649,12 @@
     }
     if (fsDropdownView.unfolded) {
         [fsDropdownView dismiss];
+        CGAffineTransform endAngle = CGAffineTransformMakeRotation(0.0f * (M_PI / 180.0f));
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.addButton.transform = endAngle;
+        } completion:^(BOOL finished) {
+            
+        }];
     }
     
     if (self.tempMoreImage != nil) {
@@ -945,28 +965,21 @@
         [bjqTableView triggerPullToRefresh];
     }
     
-//    if (index_ == 0) {
-//        BBPBXViewController *pbx = [[BBPBXViewController alloc] init];
-//        pbx.hidesBottomBarWhenPushed = YES;
-//        pbx.currentGroup = _currentGroup;
-//        [self.navigationController pushViewController:pbx animated:YES];
-//    }else{
-//        BBFZYViewController *fzy = [[BBFZYViewController alloc] init];
-//        fzy.hidesBottomBarWhenPushed = YES;
-//        if (index_ == 1) {
-//            fzy.style = 0;
-//        }else if (index_ == 2){
-//            fzy.style = 1;
-//        }else{
-//            fzy.style = 3;
-//        }
-//        fzy.currentGroup = _currentGroup;
-//        [self.navigationController pushViewController:fzy animated:YES];
-//    }
+    CGAffineTransform endAngle = CGAffineTransformMakeRotation(0.0f * (M_PI / 180.0f));
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.addButton.transform = endAngle;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 -(void)bbFSDropdownViewTaped:(BBFSDropdownView *) dropdownView_{
-
+    CGAffineTransform endAngle = CGAffineTransformMakeRotation(0.0f * (M_PI / 180.0f));
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.addButton.transform = endAngle;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 #pragma mark - BBBJDropdownViewDelegate
@@ -1344,6 +1357,12 @@
     }
     if (fsDropdownView.unfolded) {
         [fsDropdownView dismiss];
+        CGAffineTransform endAngle = CGAffineTransformMakeRotation(0.0f * (M_PI / 180.0f));
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.addButton.transform = endAngle;
+        } completion:^(BOOL finished) {
+            
+        }];
     }
     
     if (self.tempMoreImage != nil) {
@@ -1384,6 +1403,12 @@
     }
     if (fsDropdownView.unfolded) {
         [fsDropdownView dismiss];
+        CGAffineTransform endAngle = CGAffineTransformMakeRotation(0.0f * (M_PI / 180.0f));
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.addButton.transform = endAngle;
+        } completion:^(BOOL finished) {
+            
+        }];
     }
     
     if (self.tempMoreImage != nil) {
