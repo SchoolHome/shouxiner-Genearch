@@ -409,7 +409,7 @@
     }else{
         [bjDropdownView show];
         CGAffineTransform endAngle = CGAffineTransformMakeRotation(-180.0f * (M_PI / 180.0f));
-        [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
             self.arrow.transform = endAngle;
         } completion:^(BOOL finished) {
             
@@ -602,7 +602,7 @@
     if (bjDropdownView.unfolded) {
         [bjDropdownView dismiss];
         CGAffineTransform endAngle = CGAffineTransformMakeRotation(0.0f * (M_PI / 180.0f));
-        [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
             self.arrow.transform = endAngle;
         } completion:^(BOOL finished) {
             
@@ -981,7 +981,7 @@
     [def setInteger:index_ forKey:@"saved_topic_group_index"];
     [def synchronize];
     CGAffineTransform endAngle = CGAffineTransformMakeRotation(0.0f * (M_PI / 180.0f));
-    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         self.arrow.transform = endAngle;
     } completion:^(BOOL finished) {
         
@@ -990,7 +990,7 @@
 
 -(void)bbBJDropdownViewTaped:(BBBJDropdownView *) dropdownView_{
     CGAffineTransform endAngle = CGAffineTransformMakeRotation(0.0f * (M_PI / 180.0f));
-    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         self.arrow.transform = endAngle;
     } completion:^(BOOL finished) {
         
@@ -1376,7 +1376,7 @@
     if (bjDropdownView.unfolded) {
         [bjDropdownView dismiss];
         CGAffineTransform endAngle = CGAffineTransformMakeRotation(0.0f * (M_PI / 180.0f));
-        [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
             self.arrow.transform = endAngle;
         } completion:^(BOOL finished) {
             
