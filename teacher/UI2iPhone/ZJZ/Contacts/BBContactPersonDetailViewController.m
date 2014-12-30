@@ -47,7 +47,8 @@
     
     EGOImageView *head = [[EGOImageView alloc] initWithFrame:CGRectMake(10.f, 10.f, 70.f, 70.f)];
     if (self.userInfo.avatarPath.length > 0) {
-        [head setImage:[UIImage imageWithContentsOfFile:self.userInfo.avatarPath]];
+        //[head setImage:[UIImage imageWithContentsOfFile:self.userInfo.avatarPath]];
+        [head setImageURL:[NSURL URLWithString:self.userInfo.avatarPath]];
         head.layer.masksToBounds = YES;
         head.layer.cornerRadius = 35.f;
         head.layer.borderColor = [[UIColor whiteColor] CGColor];

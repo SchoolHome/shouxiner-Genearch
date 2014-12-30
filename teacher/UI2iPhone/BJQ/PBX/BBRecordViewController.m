@@ -8,7 +8,7 @@
 #define MIN_VIDEO_DUR 2.0f
 #define MAX_VIDEO_DUR 15.0f
 #define VIDEO_FOLDER @"Video"
-#define COUNT_DUR_TIMER_INTERVAL 0.05
+#define COUNT_DUR_TIMER_INTERVAL 0.2
 
 #import "BBRecordViewController.h"
 #import "BBPostPBXViewController.h"
@@ -23,6 +23,8 @@
     UIView *localView;
     
     UILabel *timeCountDisplay;
+    
+    BOOL isEnteredBackground;
     
 }
 @property (strong, nonatomic) NSTimer *countDurTimer;
@@ -54,7 +56,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     
-
+    
     CGFloat height = IOS7? 0.f:-20.f;
     
     closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -77,15 +79,15 @@
     [camerControl setImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
     [camerControl setImageEdgeInsets:UIEdgeInsetsMake(5.f, 10.f, 5.f, 10.f)];
     [camerControl addTarget:self action:@selector(controlCarmerDirection:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:camerControl];
+    //[self.view addSubview:camerControl];
     
-
-
+    
+    
     
     recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [recordBtn setFrame:CGRectMake(self.screenWidth/2-66/2, self.screenHeight-80.f+height,66.f , 66.f)];
-//    [recordBtn setFrame:CGRectMake(100, 50.f , 66.f,66.f)];
-
+    //    [recordBtn setFrame:CGRectMake(100, 50.f , 66.f,66.f)];
+    
     [recordBtn addTarget:self action:@selector(startVideoCapture:) forControlEvents:UIControlEventTouchUpInside];
     [recordBtn setBackgroundImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
     [recordBtn setBackgroundColor:[UIColor blackColor]];
@@ -125,6 +127,7 @@
     //[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [self.navigationController setNavigationBarHidden:YES];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -132,11 +135,13 @@
     [super viewWillDisappear:animated];
     //[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     [self.navigationController setNavigationBarHidden:NO];
+   
     
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.captureSession stopRunning];
 }
 /*
@@ -202,7 +207,17 @@
     [backCamera unlockForConfiguration];
     
     self.videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:backCamera error:nil];
-    AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio] error:nil];
+    //AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio] error:nil];
+    NSError *error = nil;
+    AVCaptureDevice *audioDevice = [[AVCaptureDevice devicesWithMediaType:AVMediaTypeAudio] firstObject];
+    AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
+    
+    
+    if (error)
+    {
+        NSLog(@"%@", error);
+    }
+    
     [_captureSession addInput:_videoDeviceInput];
     [_captureSession addInput:audioDeviceInput];
     
@@ -226,7 +241,7 @@
 {
     self.countDurTimer = [NSTimer scheduledTimerWithTimeInterval:COUNT_DUR_TIMER_INTERVAL target:self selector:@selector(onTimer:) userInfo:nil repeats:YES];
     timeCountDisplay.hidden = NO;
-    recordBtn.enabled = NO;
+    
 }
 
 - (void)onTimer:(NSTimer *)timer
@@ -249,7 +264,7 @@
     [_countDurTimer invalidate];
     self.countDurTimer = nil;
     
-
+    
 }
 
 - (AVCaptureDevice *)getCameraDevice:(BOOL)isFront
@@ -370,19 +385,19 @@
 
 - (void)hideToolsWhenRecording
 {
-//    flashBtn.hidden = YES;
-//    camerControl.hidden = YES;
-//    takePictureBtn.hidden = YES;
-//    closeBtn.hidden = YES;
+    //    flashBtn.hidden = YES;
+    //    camerControl.hidden = YES;
+    //    takePictureBtn.hidden = YES;
+    //    closeBtn.hidden = YES;
     camerControl.alpha = takePictureBtn.alpha = closeBtn.alpha = flashBtn.alpha = 0.f;
 }
 
 - (void)recoverToolWhenEndRecording
 {
-//    flashBtn.hidden = NO;
-//    camerControl.hidden = NO;
-//    takePictureBtn.hidden = NO;
-//    closeBtn.hidden = NO;
+    //    flashBtn.hidden = NO;
+    //    camerControl.hidden = NO;
+    //    takePictureBtn.hidden = NO;
+    //    closeBtn.hidden = NO;
     camerControl.alpha = takePictureBtn.alpha = closeBtn.alpha = flashBtn.alpha = 1.f;
 }
 
@@ -394,8 +409,21 @@
     [self stopCountDurTimer];
     [self recoverToolWhenEndRecording];
     
+    //    self.captureSession = nil;
+    //    self.preViewLayer = nil;
+    //    self.movieFileOutput = nil;
+    //    self.videoDeviceInput = nil;
+    //
+    //    [self initalize];
+    
 }
 
+- (void)receiveDidEnterBackground
+{
+    if ([_movieFileOutput isRecording]) {
+        isEnteredBackground = YES;
+    }
+}
 
 #pragma mark - Orientation
 - (NSUInteger)supportedInterfaceOrientations
@@ -454,7 +482,7 @@
 
 -(void)startVideoCapture:(UIButton *)sender
 {
-
+    
     if ([_movieFileOutput isRecording]) {
         [recordBtn setBackgroundImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
         [self stopCurrentVideoRecording];
@@ -467,17 +495,19 @@
         //NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"movie" stringByAppendingPathExtension:@"mov"]];
         [self startRecordingToOutputFileURL:[NSURL fileURLWithPath:[self getTempSaveVideoPath]]];
         [self.view bringSubviewToFront:localView];
+        
         recordBtn.enabled = NO;
     }
 }
 
 - (void)takePicture
 {
-    NSLog(@"%@",self.navigationController.viewControllers);
+    
     for (id viewController in self.navigationController.viewControllers) {
         if ([viewController isKindOfClass:[BBCameraViewController class]]) {
-            [self.navigationController popToViewController:(BBCameraViewController *)viewController animated:NO];
-            return;
+            NSMutableArray *tempNavViewControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+            [tempNavViewControllers removeObject:viewController];
+            self.navigationController.viewControllers = tempNavViewControllers;
         }
     }
     
@@ -526,22 +556,26 @@
         [self openTorch:NO];
     }
     
-    [_captureSession beginConfiguration];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [_captureSession beginConfiguration];
+        
+        [_captureSession removeInput:_videoDeviceInput];
+        
+        self.isUsingFrontCamera = !_isUsingFrontCamera;
+        AVCaptureDevice *device = [self getCameraDevice:_isUsingFrontCamera];
+        
+        [device lockForConfiguration:nil];
+        if ([device isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
+            [device setExposureMode:AVCaptureExposureModeContinuousAutoExposure];
+        }
+        [device unlockForConfiguration];
+        
+        self.videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+        [_captureSession addInput:_videoDeviceInput];
+        [_captureSession commitConfiguration];
+    });
     
-    [_captureSession removeInput:_videoDeviceInput];
     
-    self.isUsingFrontCamera = !_isUsingFrontCamera;
-    AVCaptureDevice *device = [self getCameraDevice:_isUsingFrontCamera];
-    
-    [device lockForConfiguration:nil];
-    if ([device isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
-        [device setExposureMode:AVCaptureExposureModeContinuousAutoExposure];
-    }
-    [device unlockForConfiguration];
-    
-    self.videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
-    [_captureSession addInput:_videoDeviceInput];
-    [_captureSession commitConfiguration];
 }
 
 - (BOOL)isTorchSupported
@@ -593,6 +627,7 @@
 #pragma mark - AVCaptureFileOutputRecordignDelegate
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections
 {
+    
     self.currentFileURL = fileURL;
     
     self.currentVideoDur = 0.0f;
@@ -603,21 +638,6 @@
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
 {
-    /*
-    if (error) {
-        //[self showProgressWithText:@"出错了!" withDelayTime:1.5f];
-        [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
-        [self resetState];
-        return;
-    }
-     */
-    
-    self.totalVideoDur += _currentVideoDur;
-    NSLog(@"本段视频长度: %f", _currentVideoDur);
-    NSLog(@"现在的视频总长度: %f", _totalVideoDur);
-    
-    //    BBWSPViewController *wsp = [[BBWSPViewController alloc] initWithVideoUrl:outputFileURL andType:VIDEO_TYPE_CARMER andGroupModel:model];
-    //    [self.navigationController pushViewController:wsp animated:YES];
     NSMutableArray *navControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     for (id controller in navControllers) {
         if ([controller isKindOfClass:[BBPostPBXViewController class]]) {
@@ -627,16 +647,36 @@
         }
     }
     
-    BBPostPBXViewController *postVideoPBX = [[BBPostPBXViewController alloc] initWithPostType:POST_TYPE_PBX];
-    if (error) {
+    if (isEnteredBackground  || error) {
         [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
-    }else
-    {
-        postVideoPBX.videoUrl = outputFileURL;
-        [postVideoPBX showProgressWithText:@"正在压缩"];
+        BBPostPBXViewController *postVideoPBX = [[BBPostPBXViewController alloc] initWithPostType:POST_TYPE_PBX];
+        
+        [self.navigationController pushViewController:postVideoPBX animated:YES];
+        return;
     }
+    
+    /*
+     if (error) {
+     //[self showProgressWithText:@"出错了!" withDelayTime:1.5f];
+     [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
+     [self resetState];
+     return;
+     }
+     */
+    
+    self.totalVideoDur += _currentVideoDur;
+    NSLog(@"本段视频长度: %f", _currentVideoDur);
+    NSLog(@"现在的视频总长度: %f", _totalVideoDur);
+    
+    //    BBWSPViewController *wsp = [[BBWSPViewController alloc] initWithVideoUrl:outputFileURL andType:VIDEO_TYPE_CARMER andGroupModel:model];
+    //    [self.navigationController pushViewController:wsp animated:YES];
+    
+    
+    BBPostPBXViewController *postVideoPBX = [[BBPostPBXViewController alloc] initWithPostType:POST_TYPE_PBX];
+    
     [self.navigationController pushViewController:postVideoPBX animated:YES];
-
+    postVideoPBX.videoUrl = outputFileURL;
+    [postVideoPBX showProgressWithText:@"正在压缩"];
 }
 
 -(NSString *)getTempSaveVideoPath

@@ -546,8 +546,18 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if ([[actionSheet buttonTitleAtIndex:0] isEqualToString:@"拍摄"] && buttonIndex == 0) {
+        NSMutableArray *navControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+        for (id controller in navControllers) {
+            if ([controller isKindOfClass:[BBCameraViewController class]]) {
+                [navControllers removeObject:controller];
+                [self.navigationController setViewControllers:[NSArray arrayWithArray:navControllers] animated:NO];
+                break;
+            }
+        }
+        
         //进自定义拍照界面
         BBCameraViewController *camera = [[BBCameraViewController alloc] init];
+        camera.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:camera animated:YES];
     }else
     {

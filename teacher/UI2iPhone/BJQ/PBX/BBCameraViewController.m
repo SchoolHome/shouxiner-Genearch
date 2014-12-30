@@ -68,7 +68,7 @@
     [camerControl setImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
     [camerControl setImageEdgeInsets:UIEdgeInsetsMake(5.f, 10.f, 5.f, 10.f)];
     [camerControl addTarget:self action:@selector(swapFrontAndBackCameras:) forControlEvents:UIControlEventTouchUpInside];
-    [toolBarBG addSubview:camerControl];
+    //[toolBarBG addSubview:camerControl];
     
     UIView *bottomBarBG = [[UIView alloc] initWithFrame:CGRectMake(0.f, self.screenHeight-100.f, self.screenWidth, 100.f)];
     bottomBarBG.backgroundColor = [UIColor blackColor];
@@ -180,6 +180,15 @@
 #pragma mark Camera Actions
 - (void)record
 {
+    
+    for (id viewController in self.navigationController.viewControllers) {
+        if ([viewController isKindOfClass:[BBRecordViewController class]]) {
+            NSMutableArray *tempNavViewControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+            [tempNavViewControllers removeObject:viewController];
+            self.navigationController.viewControllers = tempNavViewControllers;
+            break;
+        }
+    }
     
     BBRecordViewController *record = [[BBRecordViewController alloc] init];
     [self.navigationController pushViewController:record animated:NO];
