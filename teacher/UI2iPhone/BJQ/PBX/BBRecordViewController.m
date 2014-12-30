@@ -24,6 +24,7 @@
     
     UILabel *timeCountDisplay;
     
+    BOOL isEnteredBackground;
 }
 @property (strong, nonatomic) NSTimer *countDurTimer;
 @property (assign, nonatomic) CGFloat currentVideoDur;
@@ -77,7 +78,7 @@
     [camerControl setImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
     [camerControl setImageEdgeInsets:UIEdgeInsetsMake(5.f, 10.f, 5.f, 10.f)];
     [camerControl addTarget:self action:@selector(controlCarmerDirection:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:camerControl];
+    //[self.view addSubview:camerControl];
     
 
 
@@ -125,6 +126,8 @@
     //[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [self.navigationController setNavigationBarHidden:YES];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -132,6 +135,7 @@
     [super viewWillDisappear:animated];
     //[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     [self.navigationController setNavigationBarHidden:NO];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 
@@ -396,7 +400,12 @@
     
 }
 
-
+- (void)receiveDidEnterBackground
+{
+    if ([_movieFileOutput isRecording]) {
+        isEnteredBackground = YES;
+    }
+}
 #pragma mark - Orientation
 - (NSUInteger)supportedInterfaceOrientations
 {
@@ -611,13 +620,6 @@
         return;
     }
      */
-    
-    self.totalVideoDur += _currentVideoDur;
-    NSLog(@"本段视频长度: %f", _currentVideoDur);
-    NSLog(@"现在的视频总长度: %f", _totalVideoDur);
-    
-    //    BBWSPViewController *wsp = [[BBWSPViewController alloc] initWithVideoUrl:outputFileURL andType:VIDEO_TYPE_CARMER andGroupModel:model];
-    //    [self.navigationController pushViewController:wsp animated:YES];
     NSMutableArray *navControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     for (id controller in navControllers) {
         if ([controller isKindOfClass:[BBPostPBXViewController class]]) {
@@ -627,15 +629,26 @@
         }
     }
     
-    BBPostPBXViewController *postVideoPBX = [[BBPostPBXViewController alloc] initWithPostType:POST_TYPE_PBX];
-    if (error) {
+    if (isEnteredBackground) {
         [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
-    }else
-    {
-        postVideoPBX.videoUrl = outputFileURL;
-        [postVideoPBX showProgressWithText:@"正在压缩"];
+        BBPostPBXViewController *postVideoPBX = [[BBPostPBXViewController alloc] initWithPostType:POST_TYPE_PBX];
+        
+        [self.navigationController pushViewController:postVideoPBX animated:YES];
+        return;
     }
+    
+    self.totalVideoDur += _currentVideoDur;
+    NSLog(@"本段视频长度: %f", _currentVideoDur);
+    NSLog(@"现在的视频总长度: %f", _totalVideoDur);
+    
+    //    BBWSPViewController *wsp = [[BBWSPViewController alloc] initWithVideoUrl:outputFileURL andType:VIDEO_TYPE_CARMER andGroupModel:model];
+    //    [self.navigationController pushViewController:wsp animated:YES];
+
+    
+    BBPostPBXViewController *postVideoPBX = [[BBPostPBXViewController alloc] initWithPostType:POST_TYPE_PBX];
     [self.navigationController pushViewController:postVideoPBX animated:YES];
+    postVideoPBX.videoUrl = outputFileURL;
+    [postVideoPBX showProgressWithText:@"正在压缩"];
 
 }
 
