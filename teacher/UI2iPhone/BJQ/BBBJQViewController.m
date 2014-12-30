@@ -670,8 +670,10 @@
 
 -(void) needRefresh{
     NSLog(@"needRefresh");
-    [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
-    [self performSelector:@selector(needRefreshBJQData) withObject:nil afterDelay:1.0f];
+    if ([[self.navigationController.viewControllers lastObject] isMemberOfClass:[self class]]) {
+        [bjqTableView scrollRectToVisible:CGRectMake(0.0f, 0.0f, 1.0f, 1.0f) animated:NO];
+        [self performSelector:@selector(needRefreshBJQData) withObject:nil afterDelay:1.0f];
+    }
 }
 
 -(void) needRefreshBJQData{
