@@ -150,15 +150,15 @@
         notifyCount = count;
         if (count > 0) {
             if (self.notifyButton != nil) {
-                if (count > 99) {
-                    self.notifyButton.titleLabel.text = [NSString stringWithFormat:@"您有%d+条新消息",99];
+                if (count>99) {
+                    [self.notifyButton setTitle:[NSString stringWithFormat:@"您有%d+条新消息",99] forState:UIControlStateNormal];
                 }else{
-                    self.notifyButton.titleLabel.text = [NSString stringWithFormat:@"您有%d条新消息",notifyCount];
+                    [self.notifyButton setTitle:[NSString stringWithFormat:@"您有%d条新消息",notifyCount] forState:UIControlStateNormal];
                 }
                 [bjqTableView reloadData];
             }else{
                 self.notifyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-                self.notifyButton.frame = CGRectMake((320.0f - 128.0f)/2.0f, 156, 128, 31);
+                self.notifyButton.frame = CGRectMake((320.0f - 134.0f)/2.0f, 150, 134, 31);
                 [self.notifyButton setBackgroundImage:[UIImage imageNamed:@"BBNewMessage"] forState:UIControlStateNormal];
                 self.notifyButton.backgroundColor = [UIColor clearColor];
                 self.notifyButton.titleLabel.font = [UIFont boldSystemFontOfSize:13];
