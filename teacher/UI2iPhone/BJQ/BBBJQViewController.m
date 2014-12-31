@@ -150,10 +150,10 @@
         notifyCount = count;
         if (count > 0) {
             if (self.notifyButton != nil) {
-                if (count > 99) {
-                    self.notifyButton.titleLabel.text = [NSString stringWithFormat:@"您有%d+条新消息",99];
+                if (count>99) {
+                    [self.notifyButton setTitle:[NSString stringWithFormat:@"您有%d+条新消息",99] forState:UIControlStateNormal];
                 }else{
-                    self.notifyButton.titleLabel.text = [NSString stringWithFormat:@"您有%d条新消息",notifyCount];
+                    [self.notifyButton setTitle:[NSString stringWithFormat:@"您有%d条新消息",notifyCount] forState:UIControlStateNormal];
                 }
                 [bjqTableView reloadData];
             }else{
