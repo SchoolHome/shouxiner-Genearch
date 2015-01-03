@@ -9,8 +9,10 @@
 
 
 #import "UIImage+ProportionalFill.h"
+#import "CPUIModelManagement.h"
 #import "CPUIModelMessageGroupMember.h"
 #import "CPUIModelUserInfo.h"
+#import "CPUIModelPersonalInfo.h"
 #import "CPUIModelMessageGroup.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ColorUtil.h"
@@ -116,7 +118,11 @@
         if (![member isHiddenMember]) {
             
             CPUIModelUserInfo *userInfo = member.userInfo;
-            UIImage *image = [UIImage imageWithContentsOfFile:userInfo.headerPath];
+            UIImage *image ;
+            if (!userInfo.nickName.length || [userInfo.nickName isEqualToString:[CPUIModelManagement sharedInstance].uiPersonalInfo.nickName]) {
+                image = [UIImage imageWithContentsOfFile:[CPUIModelManagement sharedInstance].uiPersonalInfo.selfHeaderImgPath];
+            }else image = [UIImage imageWithContentsOfFile:userInfo.headerPath];
+            
             
             
             
@@ -163,6 +169,7 @@
     
     
     //如果没满的话就用色块填充够4个
+    /*
     for (int i = count; i<4; i++) {
         UIImage *image = [UIImage imageNamed:@"wall_bg_noone.png"];
         if (0 == count) {
@@ -182,6 +189,7 @@
             break;
         }
     }
+     */
     UIImage *resultingImage = UIGraphicsGetImageFromCurrentImageContext();  
     UIGraphicsEndImageContext();  
     

@@ -56,7 +56,7 @@
 
 -(PublicOperation *) initGetPublicAccountMessages : (int) accountID withMid : (NSString *) mid withSize : (int) size{
     if ([self initOperation]) {
-        self.type = kPostPublicMessage;
+        self.type = kGetPublicAccountMessages;
         NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/pubAccountMessages",K_HOST_NAME_OF_PALM_SERVER];
         [self setHttpRequestPostWithUrl:urlStr params:[NSDictionary dictionaryWithObjectsAndKeys:
                                                        [NSNumber numberWithInt:accountID] , @"account",

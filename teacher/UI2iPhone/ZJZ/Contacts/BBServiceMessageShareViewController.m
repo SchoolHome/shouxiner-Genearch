@@ -111,12 +111,12 @@
     self.shareTableview.touchDelegate = self;
     self.shareTableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.shareTableview.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 320.f, 1.f)];
+    self.shareTableview.backgroundColor = [UIColor clearColor];
     if (!IOS7) {
         UIView *tableviewBGView = [[UIView alloc] initWithFrame:self.shareTableview.frame];
         tableviewBGView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
         self.shareTableview.backgroundView = tableviewBGView;
     }
-    self.shareTableview.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.shareTableview];
     
     
@@ -207,18 +207,21 @@
                 shareContentBG.backgroundColor = [UIColor colorWithRed:225/255.f green:225/255.f blue:225/255.f alpha:1.f];
                 [cell.contentView addSubview:shareContentBG];
                 
-                EGOImageView *messageImageView = [[EGOImageView alloc] initWithFrame:CGRectMake(ThingsTextViewSpaceing+5.f, ThingsTextViewHeight+5.f, 40.f, 40.f)];
+                EGOImageView *messageImageView = [[EGOImageView alloc] initWithFrame:CGRectMake(ThingsTextViewSpaceing+5.f, CGRectGetMinY(shareContentBG.frame)+5.f, 40.f, 40.f)];
                 [messageImageView setImageURL:[NSURL URLWithString:shareModel.avatar]];
                 [cell.contentView addSubview:messageImageView];
                 
                 UILabel *messageTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(messageImageView.frame)+5.f,
-                    ThingsTextViewHeight+5.f,
+                    CGRectGetMinY(shareContentBG.frame)+5.f,
                     CGRectGetWidth(shareContentBG.frame)-CGRectGetMaxX(messageImageView.frame)-5.f,
                     CGRectGetHeight(messageImageView.frame))];
                 messageTitle.font = [UIFont systemFontOfSize:12.f];
+                messageTitle.backgroundColor = [UIColor clearColor];
                 messageTitle.text = shareModel.content;
                 messageTitle.numberOfLines = 2;
                 [cell.contentView addSubview:messageTitle];
+                
+
             }
                 break;
             default:
@@ -270,7 +273,7 @@
 {
     if ([thingsTextView.text length]==0) {  // 没有输入文本
         
-        [self showProgressWithText:@"请输入文字" withDelayTime:0.1];
+        [self showProgressWithText:@"请输入文字" withDelayTime:1.f];
         
         return;
     }
