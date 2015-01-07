@@ -37,6 +37,8 @@
     
     self.title = @"详情";
     
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+    
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(0.f, 7.f, 24.f, 24.f)];
     [backButton setBackgroundImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
@@ -73,6 +75,7 @@
     tableview.scrollEnabled = NO;
     tableview.delegate = self;
     tableview.dataSource = self;
+    tableview.backgroundColor = [UIColor clearColor];
     tableview.tableHeaderView = tableviewHeaderView;
     tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:tableview];
@@ -112,6 +115,9 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"cellIden"];
     cell.textLabel.text = @"功能介绍";
     cell.textLabel.textAlignment  = NSTextAlignmentCenter;
+    cell.userInteractionEnabled = NO;
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor lightGrayColor];
     cell.detailTextLabel.numberOfLines = 100;
     cell.detailTextLabel.font = [UIFont systemFontOfSize:12.f];
