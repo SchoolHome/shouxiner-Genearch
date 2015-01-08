@@ -32,7 +32,7 @@
     
     NSArray *tempImages;
 }
-@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;
+@property (nonatomic, strong) MPMoviePlayerViewController *moviePlayer;
 @end
 
 @implementation BBPostPBXViewController
@@ -377,9 +377,9 @@
 {
     if ([[CropVideo getFileSizeWithName:[self getTempSaveVideoPath]] integerValue] > 0) {
         [self.navigationController setNavigationBarHidden:YES];
-        self.moviePlayer.view.hidden = NO;
-        [self.moviePlayer prepareToPlay];
-        [self.moviePlayer play];
+        [self presentMoviePlayerViewControllerAnimated:self.moviePlayer];
+        [self.moviePlayer.moviePlayer prepareToPlay];
+        [self.moviePlayer.moviePlayer play];
     }else
     {
         NSLog(@"not ready");
@@ -404,20 +404,12 @@
     //videoPlayer
     // 显示视频
     NSLog(@"cropSize==%@",[CropVideo getFileSizeWithName:[self getTempSaveVideoPath]]);
-    self.moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:[self getTempSaveVideoPath]]];
-    NSLog(@"%@",self.moviePlayer.contentURL);
-    self.moviePlayer.view.frame = CGRectMake(0.0f, 0.0f, self.screenWidth, self.screenHeight);
+    self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:[self getTempSaveVideoPath]]];
+    self.moviePlayer.moviePlayer.shouldAutoplay = NO;
     
-    
-    self.moviePlayer.useApplicationAudioSession = NO;
-    self.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
-    self.moviePlayer.shouldAutoplay = NO;
-    self.moviePlayer.view.backgroundColor = [UIColor blackColor];
-    self.moviePlayer.view.hidden = YES;
-    
-    [self.view addSubview:self.moviePlayer.view];
-    [self.moviePlayer requestThumbnailImagesAtTimes:@[[NSNumber numberWithFloat:1.f]] timeOption:MPMovieTimeOptionExact];
-    //[self.moviePlayer setFullscreen:YES animated:NO];
+    self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
+    self.moviePlayer.moviePlayer.useApplicationAudioSession = NO;
+    [self.moviePlayer.moviePlayer requestThumbnailImagesAtTimes:@[[NSNumber numberWithFloat:1.f]] timeOption:MPMovieTimeOptionExact];
     
 }
 - (void)convertMp4
@@ -431,15 +423,15 @@
 - (void) playerPlaybackDidFinish:(NSNotification*)notification
 {
     [self.navigationController setNavigationBarHidden:NO];
-    [self.moviePlayer stop];
-    self.moviePlayer.view.hidden = YES;
+    [self.moviePlayer dismissMoviePlayerViewControllerAnimated];
+    [self.moviePlayer.moviePlayer stop];
 }
 
 
 - (void)getThumbnailImage:(NSNotification *)notification
 {
     [self closeProgress];
-    UIImage *image = [self.moviePlayer thumbnailImageAtTime:1.f timeOption:MPMovieTimeOptionExact];
+    UIImage *image = [self.moviePlayer.moviePlayer thumbnailImageAtTime:1.f timeOption:MPMovieTimeOptionExact];
     NSLog(@"getThumbnailImage==%@",image);
     if (!image) {
         [self showProgressWithText:@"获取图片失败,请重试" withDelayTime:2.f];

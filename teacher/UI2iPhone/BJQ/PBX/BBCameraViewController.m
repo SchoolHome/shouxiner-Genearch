@@ -24,8 +24,9 @@
     UIButton *camerControl;
     UIButton *albumBtn;
     
-    NSInteger flashStatus;
+
 }
+
 @end
 
 @implementation BBCameraViewController
@@ -35,7 +36,7 @@
     [super viewDidLoad];
 
     
-    flashStatus = 0;
+    _flashStatus = 0;
     
     //self.view.backgroundColor = [UIColor clearColor];
     CGFloat height = -20.f;
@@ -68,7 +69,7 @@
     [camerControl setImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
     [camerControl setImageEdgeInsets:UIEdgeInsetsMake(5.f, 10.f, 5.f, 10.f)];
     [camerControl addTarget:self action:@selector(swapFrontAndBackCameras:) forControlEvents:UIControlEventTouchUpInside];
-    //[toolBarBG addSubview:camerControl];
+    [toolBarBG addSubview:camerControl];
     
     UIView *bottomBarBG = [[UIView alloc] initWithFrame:CGRectMake(0.f, self.screenHeight-100.f, self.screenWidth, 100.f)];
     bottomBarBG.backgroundColor = [UIColor blackColor];
@@ -83,7 +84,7 @@
     recordButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [recordButton setFrame:CGRectMake(30.f, CGRectGetMinY(takePictureButton.frame)+(CGRectGetHeight(takePictureButton.frame)-32)/2,40.f , 29.f)];
     [recordButton setBackgroundImage:[UIImage imageNamed:@"small_record"] forState:UIControlStateNormal];
-    [recordButton addTarget:self action:@selector(record) forControlEvents:UIControlEventTouchUpInside];
+    [recordButton addTarget:self action:@selector(record:) forControlEvents:UIControlEventTouchUpInside];
     [recordButton setBackgroundColor:[UIColor blackColor]];
     [bottomBarBG addSubview:recordButton];
     
@@ -98,9 +99,10 @@
     self.imagePickerController = [[UIImagePickerController alloc] init];
     self.imagePickerController.delegate = self;
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.imagePickerController.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
     self.imagePickerController.showsCameraControls = NO;
-
     self.imagePickerController.navigationBarHidden = YES;
+    self.imagePickerController.cameraFlashMode = (UIImagePickerControllerCameraFlashMode)self.flashStatus;
     
     CGRect overlayViewFrame = self.imagePickerController.cameraOverlayView.frame;
     //CGRectGetHeight(overlayViewFrame) -self.view.frame.size.height
@@ -113,14 +115,6 @@
 
     [self.view addSubview:self.imagePickerController.view];
     
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    //[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -142,45 +136,63 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    [self.navigationController setNavigationBarHidden:YES];
+    
+    recordButton.enabled = YES;
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-    [self.navigationController setNavigationBarHidden:NO];
+    //[self.navigationController setNavigationBarHidden:NO];
+    
+    
 }
 
 - (void )getFirstImageInAlbum
 {
-    ALAssetsLibrary *assetsLibrary;
-    NSMutableArray *imageArray = [[NSMutableArray alloc] initWithCapacity:1];
-    assetsLibrary = [[ALAssetsLibrary alloc] init];
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        if (group) {
-            [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-                if (result && index == group.numberOfAssets-1) {
-                    NSLog(@"%@",result);
-                    [imageArray addObject:[UIImage imageWithCGImage: result.thumbnail]];
-                    *stop = YES;
-                }
-            }];
-            if (imageArray.count) {
-                *stop = YES;
-                [albumBtn setBackgroundImage:imageArray[0] forState:UIControlStateNormal];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        ALAssetsLibrary *assetsLibrary;
+        NSMutableArray *imageArray = [[NSMutableArray alloc] initWithCapacity:1];
+        assetsLibrary = [[ALAssetsLibrary alloc] init];
+        [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+            if (group) {
+                [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                    if (result && index == group.numberOfAssets-1) {
+                        NSLog(@"%@",result);
+                        [imageArray addObject:[UIImage imageWithCGImage: result.thumbnail]];
+                        *stop = YES;
+                    }
+                }];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (imageArray.count) {
+                        *stop = YES;
+                        [albumBtn setBackgroundImage:imageArray[0] forState:UIControlStateNormal];
+                    }
+                });
+
+                
             }
-            
-        }
-    } failureBlock:^(NSError *error) {
-        NSLog(@"Group not found!\n");
-    }];
+        } failureBlock:^(NSError *error) {
+            NSLog(@"Group not found!\n");
+        }];
+    });
+ 
     
 }
 
 #pragma mark -
 #pragma mark Camera Actions
-- (void)record
+- (void)record: (UIButton *)sender
 {
-    
+    sender.enabled = NO;
+    /*
     for (id viewController in self.navigationController.viewControllers) {
         if ([viewController isKindOfClass:[BBRecordViewController class]]) {
             NSMutableArray *tempNavViewControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
@@ -189,32 +201,39 @@
             break;
         }
     }
-    
+   */
+    sleep(1.f);
     BBRecordViewController *record = [[BBRecordViewController alloc] init];
     [self.navigationController pushViewController:record animated:NO];
 }
 
 //闪光灯
 -(IBAction)cameraTorchOn:(id)sender{
-    if (flashStatus != 1) {
-        flashStatus++;
-    }else flashStatus = -1;
-
-    self.imagePickerController.cameraFlashMode = flashStatus;
+    if (![UIImagePickerController isFlashAvailableForCameraDevice:self.imagePickerController.cameraDevice]) {
+        return;
+    }
     
-    switch (flashStatus) {
-        case -1:
-            [flashBtn setImage:[UIImage imageNamed:@"lamp_off"] forState:UIControlStateNormal];
+    if (_flashStatus != 1) {
+        _flashStatus++;
+    }else _flashStatus = -1;
+
+    switch (_flashStatus) {
+        case UIImagePickerControllerCameraFlashModeOff:
+            [flashBtn setImage:[UIImage imageNamed:@"lamp_off"] forState:UIControlStateNormal];\
+            _flashStatus = UIImagePickerControllerCameraFlashModeOff;
             break;
-        case 0:
+        case UIImagePickerControllerCameraFlashModeAuto:
             [flashBtn setImage:[UIImage imageNamed:@"lamp_auto"] forState:UIControlStateNormal];
+            _flashStatus = UIImagePickerControllerCameraFlashModeAuto;
             break;
-        case 1:
+        case UIImagePickerControllerCameraFlashModeOn:
             [flashBtn setImage:[UIImage imageNamed:@"lamp"] forState:UIControlStateNormal];
+            _flashStatus = UIImagePickerControllerCameraFlashModeOn;
             break;
         default:
             break;
     }
+    self.imagePickerController.cameraFlashMode = (UIImagePickerControllerCameraFlashMode)self.flashStatus;
 }
 
 //前后摄像头
@@ -279,7 +298,7 @@
     }
 }
 
-/*
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     UIImage *image = nil;
@@ -288,12 +307,6 @@
     }
     [self dismissModalViewControllerAnimated:YES];
     
-    BBImagePreviewVIewController *imagePreview = [[BBImagePreviewVIewController  alloc] initWithPreviewImage:image];
-    [self.navigationController pushViewController:imagePreview animated:YES];
-}
-*/
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
-{
     BBImagePreviewVIewController *imagePreview = [[BBImagePreviewVIewController  alloc] initWithPreviewImage:image];
     [self.navigationController pushViewController:imagePreview animated:YES];
 }
