@@ -71,7 +71,7 @@
     [tableviewFootView  addSubview:checkMessage];
     */
     
-    UITableView *tableview = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, self.screenHeight-40.f) style:UITableViewStyleGrouped];
+    UITableView *tableview = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.screenWidth, self.screenHeight-40.f) style:UITableViewStylePlain];
     tableview.scrollEnabled = NO;
     tableview.delegate = self;
     tableview.dataSource = self;

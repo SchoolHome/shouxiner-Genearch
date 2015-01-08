@@ -14,14 +14,17 @@
 #import "BBRecommendedRangeViewController.h"
 #import "BBStudentsListViewController.h"
 #import "BBCameraViewController.h"
+#import "BBImagePreviewVIewController.h"
+#import "BBRecordViewController.h"
 
 #import "BBStudentModel.h"
 #import "CropVideo.h"
 #import "CropVideoModel.h"
 #import "CoreUtils.h"
 
-
 #import "CPUIModelManagement.h"
+
+//#import "SDAVAssetExportSession.h"
 @interface BBPostPBXViewController ()
 {
     NSMutableArray *selectedStuArray;
@@ -32,6 +35,7 @@
     
     NSArray *tempImages;
 }
+//@property (nonatomic, strong) MPMoviePlayerController *moviePlayer;
 @property (nonatomic, strong) MPMoviePlayerViewController *moviePlayer;
 @end
 
@@ -116,6 +120,7 @@
             [self backToBJQRoot];
         }
     }
+    
     if ([@"groupListResult" isEqualToString:keyPath]) {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
@@ -126,6 +131,7 @@
         CropVideoModel *model = [PalmUIManagement sharedInstance].videoCompressionState;
         if (model.state == kCropVideoCompleted) {
             [self closeProgress];
+            [[NSFileManager defaultManager] removeItemAtURL:self.videoUrl error:nil];
             [self initMoviePlayer];
         }else if (model.state == KCropVideoError){
             [self closeProgress];
@@ -175,13 +181,20 @@
 {
     [super viewWillAppear:animated];
     
-    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"updateImageResult" options:0 context:NULL];
-    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"topicResult" options:0 context:NULL];
+    [self.navigationController setNavigationBarHidden:NO];
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"updateImageResult" options:0 context:nil];
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"topicResult" options:0 context:nil];
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupStudents" options:0 context:nil];
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"videoCompressionState" options:0 context:nil];
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"uploadVideoResult" options:0 context:nil];
-    
+    /*
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayBackDidFinish:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:nil];
+     */
 }
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -191,6 +204,26 @@
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"groupStudents"];
     [[PalmUIManagement sharedInstance]removeObserver:self forKeyPath:@"videoCompressionState"];
     [[PalmUIManagement sharedInstance]removeObserver:self forKeyPath:@"uploadVideoResult"];
+    
+//    if (self.moviePlayer) {
+//        self.moviePlayer = nil;
+//    }
+    
+    /*
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+     */
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    NSMutableArray *navControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    for (id controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[BBCameraViewController class]] || [controller isKindOfClass:[BBRecordViewController class]] || [controller isKindOfClass:[BBImagePreviewVIewController  class]]) {
+            [navControllers removeObject:controller];
+        }
+    }
+    [self.navigationController setViewControllers:[NSArray arrayWithArray:navControllers] animated:NO];
 }
 
 - (void)viewDidLoad
@@ -312,7 +345,7 @@
     
     if ([[self getThingsText] length]==0) {  // 没有输入文本
         
-        [self showProgressWithText:@"请输入文字" withDelayTime:1.1];
+        [self showProgressWithText:@"请输入文字" withDelayTime:0.1];
         
         return;
     }
@@ -376,10 +409,16 @@
 -(void)playVideo
 {
     if ([[CropVideo getFileSizeWithName:[self getTempSaveVideoPath]] integerValue] > 0) {
+        //self.moviePlayer.moviePlayer.shouldAutoplay = YES;
+        //[self.moviePlayer.moviePlayer setContentURL:[NSURL fileURLWithPath:[self getTempSaveVideoPath]]];
         [self.navigationController setNavigationBarHidden:YES];
+        //self.moviePlayer.view.hidden = NO;
         [self presentMoviePlayerViewControllerAnimated:self.moviePlayer];
+        //[self presentViewController:self.moviePlayer animated:YES completion:nil];
         [self.moviePlayer.moviePlayer prepareToPlay];
         [self.moviePlayer.moviePlayer play];
+        
+
     }else
     {
         NSLog(@"not ready");
@@ -404,17 +443,71 @@
     //videoPlayer
     // 显示视频
     NSLog(@"cropSize==%@",[CropVideo getFileSizeWithName:[self getTempSaveVideoPath]]);
+    
+    //self.moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:[self getTempSaveVideoPath]]];
     self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:[self getTempSaveVideoPath]]];
     self.moviePlayer.moviePlayer.shouldAutoplay = NO;
+    NSLog(@"%@",self.moviePlayer.moviePlayer.contentURL);
+    
+    //self.moviePlayer.view.frame = CGRectMake(0.0f, IOS7?0.f:-20.f, self.screenWidth, IOS7?self.screenHeight:self.screenHeight+20.f);
     
     self.moviePlayer.moviePlayer.controlStyle = MPMovieControlStyleFullscreen;
     self.moviePlayer.moviePlayer.useApplicationAudioSession = NO;
+    //self.moviePlayer.view.backgroundColor = [UIColor blackColor];
+    //self.moviePlayer.view.hidden = YES;
+    
+    //[self.view addSubview:self.moviePlayer.view];
     [self.moviePlayer.moviePlayer requestThumbnailImagesAtTimes:@[[NSNumber numberWithFloat:1.f]] timeOption:MPMovieTimeOptionExact];
+    //[self.moviePlayer setFullscreen:YES animated:NO];
     
 }
 - (void)convertMp4
 {
     [CropVideo convertMpeg4WithUrl:_videoUrl andDstFilePath:[self getTempSaveVideoPath]];
+    /*
+    SDAVAssetExportSession *encoder = [SDAVAssetExportSession.alloc initWithAsset:[AVAsset assetWithURL:_videoUrl]];
+    encoder.outputFileType = AVFileTypeMPEG4;
+    encoder.outputURL = [NSURL fileURLWithPath:[self getTempSaveVideoPath]];
+    encoder.videoSettings = @
+    {
+    AVVideoCodecKey: AVVideoCodecH264,
+    AVVideoWidthKey: @360,
+    AVVideoHeightKey: @480,
+    AVVideoCompressionPropertiesKey: @
+        {
+        AVVideoAverageBitRateKey: @600000,
+        AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
+        },
+    };
+    encoder.audioSettings = @
+    {
+    AVFormatIDKey: @(kAudioFormatMPEG4AAC),
+    AVNumberOfChannelsKey: @2,
+    AVSampleRateKey: @44100,
+    AVEncoderBitRateKey: @128000,
+    };
+    
+    [encoder exportAsynchronouslyWithCompletionHandler:^{
+        
+        if (encoder.status == AVAssetExportSessionStatusCompleted)
+        {
+            NSLog(@"Video export succeeded");
+            //[self performSelector:@selector(initMoviePlayer) withObject:nil afterDelay:1.f];
+            [self initMoviePlayer];
+        }
+        else if (encoder.status == AVAssetExportSessionStatusCancelled)
+        {
+            NSLog(@"Video export cancelled");
+        }
+        else
+        {
+            [self closeProgress];
+            NSLog(@"Video export failed with error:");
+        }
+        
+    }];
+
+*/
 }
 
 
@@ -425,6 +518,11 @@
     [self.navigationController setNavigationBarHidden:NO];
     [self.moviePlayer dismissMoviePlayerViewControllerAnimated];
     [self.moviePlayer.moviePlayer stop];
+    //[[UIApplication sharedApplication] setStatusBarHidden:NO];
+    //[self.view setFrame:CGRectMake(0.f, 0.f, self.screenWidth, self.screenHeight)];
+    //self.moviePlayer.controlStyle = MPMovieControlStyleDefault;
+    
+    //self.moviePlayer.view.hidden = YES;
 }
 
 
@@ -435,7 +533,8 @@
     NSLog(@"getThumbnailImage==%@",image);
     if (!image) {
         [self showProgressWithText:@"获取图片失败,请重试" withDelayTime:2.f];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        //[self setChoosenImages:@[image] andISVideo:YES];
+        //[self.navigationController popToRootViewControllerAnimated:YES];
         return;
     }
     [self setChoosenImages:@[image] andISVideo:YES];
@@ -486,6 +585,7 @@
                 cell.textLabel.backgroundColor = [UIColor blackColor];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.textLabel.text = @"@:发小红花:";
+                cell.backgroundColor = [UIColor whiteColor];
                 
             }
             cell.detailTextLabel.text = selectedStuStr;
@@ -538,20 +638,14 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if ([[actionSheet buttonTitleAtIndex:0] isEqualToString:@"拍摄"] && buttonIndex == 0) {
-        NSMutableArray *navControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-        for (id controller in navControllers) {
-            if ([controller isKindOfClass:[BBCameraViewController class]]) {
-                [navControllers removeObject:controller];
-                [self.navigationController setViewControllers:[NSArray arrayWithArray:navControllers] animated:NO];
-                break;
-            }
-        }
-        
         //进自定义拍照界面
+
+        
         BBCameraViewController *camera = [[BBCameraViewController alloc] init];
         camera.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:camera animated:YES];
-    }else
+        NSLog(@"%@",self.navigationController.viewControllers);
+        }else
     {
         [super actionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
     }
@@ -577,6 +671,7 @@
 
 - (void)imageDidTapped:(NSArray *)images andIndex:(NSInteger)index
 {
+    
     if ([self videoIsExist]) {
         [self playVideo];
         [self closeThingsText];

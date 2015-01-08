@@ -1318,9 +1318,9 @@
 		746336401A5EE4C100DDD0D9 /* BBCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463363B1A5EE4C100DDD0D9 /* BBCameraViewController.m */; };
 		746336411A5EE4C100DDD0D9 /* BBRecordPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463363D1A5EE4C100DDD0D9 /* BBRecordPreviewView.m */; };
 		746336421A5EE4C100DDD0D9 /* BBRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463363F1A5EE4C100DDD0D9 /* BBRecordViewController.m */; };
+		746336451A5EEABB00DDD0D9 /* BBPostPBXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746336441A5EEABB00DDD0D9 /* BBPostPBXViewController.m */; };
 		7487E3D91A3C5E56000AC4A8 /* BBBasePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3D21A3C5E56000AC4A8 /* BBBasePostViewController.m */; };
 		7487E3DA1A3C5E56000AC4A8 /* BBPostHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3D41A3C5E56000AC4A8 /* BBPostHomeworkViewController.m */; };
-		7487E3DB1A3C5E56000AC4A8 /* BBPostPBXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3D61A3C5E56000AC4A8 /* BBPostPBXViewController.m */; };
 		7487E3DC1A3C5E56000AC4A8 /* ChooseClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3D81A3C5E56000AC4A8 /* ChooseClassViewController.m */; };
 		7487E3EE1A3C5F60000AC4A8 /* BBChooseClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3E01A3C5F60000AC4A8 /* BBChooseClassViewController.m */; };
 		7487E3EF1A3C5F60000AC4A8 /* BBDisplaySelectedStudentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3E21A3C5F60000AC4A8 /* BBDisplaySelectedStudentsView.m */; };
@@ -3478,12 +3478,12 @@
 		7463363D1A5EE4C100DDD0D9 /* BBRecordPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecordPreviewView.m; sourceTree = "<group>"; };
 		7463363E1A5EE4C100DDD0D9 /* BBRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecordViewController.h; sourceTree = "<group>"; };
 		7463363F1A5EE4C100DDD0D9 /* BBRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecordViewController.m; sourceTree = "<group>"; };
+		746336431A5EEABB00DDD0D9 /* BBPostPBXViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPostPBXViewController.h; sourceTree = "<group>"; };
+		746336441A5EEABB00DDD0D9 /* BBPostPBXViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPostPBXViewController.m; sourceTree = "<group>"; };
 		7487E3D11A3C5E56000AC4A8 /* BBBasePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBasePostViewController.h; sourceTree = "<group>"; };
 		7487E3D21A3C5E56000AC4A8 /* BBBasePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBasePostViewController.m; sourceTree = "<group>"; };
 		7487E3D31A3C5E56000AC4A8 /* BBPostHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPostHomeworkViewController.h; sourceTree = "<group>"; };
 		7487E3D41A3C5E56000AC4A8 /* BBPostHomeworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPostHomeworkViewController.m; sourceTree = "<group>"; };
-		7487E3D51A3C5E56000AC4A8 /* BBPostPBXViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPostPBXViewController.h; sourceTree = "<group>"; };
-		7487E3D61A3C5E56000AC4A8 /* BBPostPBXViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPostPBXViewController.m; sourceTree = "<group>"; };
 		7487E3D71A3C5E56000AC4A8 /* ChooseClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseClassViewController.h; sourceTree = "<group>"; };
 		7487E3D81A3C5E56000AC4A8 /* ChooseClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseClassViewController.m; sourceTree = "<group>"; };
 		7487E3DF1A3C5F60000AC4A8 /* BBChooseClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBChooseClassViewController.h; sourceTree = "<group>"; };
@@ -7209,8 +7209,8 @@
 				7487E3D21A3C5E56000AC4A8 /* BBBasePostViewController.m */,
 				7487E3D31A3C5E56000AC4A8 /* BBPostHomeworkViewController.h */,
 				7487E3D41A3C5E56000AC4A8 /* BBPostHomeworkViewController.m */,
-				7487E3D51A3C5E56000AC4A8 /* BBPostPBXViewController.h */,
-				7487E3D61A3C5E56000AC4A8 /* BBPostPBXViewController.m */,
+				746336431A5EEABB00DDD0D9 /* BBPostPBXViewController.h */,
+				746336441A5EEABB00DDD0D9 /* BBPostPBXViewController.m */,
 				7487E3D71A3C5E56000AC4A8 /* ChooseClassViewController.h */,
 				7487E3D81A3C5E56000AC4A8 /* ChooseClassViewController.m */,
 				7487E3F81A3C6073000AC4A8 /* BBChooseImgViewInPostPage.h */,
@@ -8920,7 +8920,6 @@
 				7A076AD118E1D67E00911291 /* UIPlaceholderTextView.m in Sources */,
 				332D82CB18C33F0A007A75D5 /* HomePageDocumentView.m in Sources */,
 				332D837F18C33F0B007A75D5 /* TDStretch.cpp in Sources */,
-				7487E3DB1A3C5E56000AC4A8 /* BBPostPBXViewController.m in Sources */,
 				332D753E18C33552007A75D5 /* XMPPIQ+JabberRPCResonse.m in Sources */,
 				332D755418C33552007A75D5 /* XMPPCapabilities.m in Sources */,
 				332D757F18C33552007A75D5 /* CPPTModelGetUsersResult.m in Sources */,
@@ -9124,6 +9123,7 @@
 				19145F59191CDF3B008CE18C /* SDWebImageManager.m in Sources */,
 				332D74FD18C33552007A75D5 /* CPOperationMsgDel.m in Sources */,
 				332D750718C33552007A75D5 /* CPOperationResDownload.m in Sources */,
+				746336451A5EEABB00DDD0D9 /* BBPostPBXViewController.m in Sources */,
 				332D728518C3348E007A75D5 /* AppDelegate.m in Sources */,
 				332D82FA18C33F0B007A75D5 /* PetProgressView.m in Sources */,
 				332D832418C33F0B007A75D5 /* FanxerIndicatorControl.m in Sources */,
@@ -9453,7 +9453,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8e5b680b-73ab-4510-acb2-95e91e419c06";
+				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -9488,7 +9488,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8e5b680b-73ab-4510-acb2-95e91e419c06";
+				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
