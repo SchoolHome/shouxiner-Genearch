@@ -41,6 +41,17 @@
     return self;
 }
 
+-(SystemOperation *) initGetAdvBannerInBJQ
+{
+    self = [self initOperation];
+    if (nil != self) {
+        self.type = kGetAdvBannerInBJQ;
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/adv/class",K_HOST_NAME_OF_PALM_SERVER];
+        [self setHttpRequestGetWithUrl:urlStr];
+    }
+    return self;
+}
+
 -(SystemOperation *) initGetSMSVerifyCode : (NSString *)mobile{
     self = [self initOperation];
     if (nil != self) {
@@ -173,6 +184,9 @@
                 return;
             case kPostResetPassword:
                 [self postResetPassword];
+                return;
+            case kGetAdvBannerInBJQ:
+                [self getAdvBannerInBJQ];
                 return;
             default:
                 break;

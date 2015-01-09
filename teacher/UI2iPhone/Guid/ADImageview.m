@@ -21,31 +21,33 @@
     }
     return self;
 }
--(id)initWithUrl:(NSURL *)url
+-(id)initWithAdvDic:(NSDictionary *)advDic;
 {
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     //280,400.
     self = [self initWithFrame:CGRectMake(0.f, 0.f, 320.f, screenHeight)];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-//        UIImageView *bg = [[UIImageView alloc] initWithFrame:self.frame];
-//        bg.backgroundColor  = [UIColor blackColor];
-//        bg.alpha = 0.4;
-//        [self addSubview:bg];
-        
+        //        UIImageView *bg = [[UIImageView alloc] initWithFrame:self.frame];
+        //        bg.backgroundColor  = [UIColor blackColor];
+        //        bg.alpha = 0.4;
+        //        [self addSubview:bg];
+        self.webUrl = advDic[@"url"];
+        self.imgUrl = [NSURL URLWithString:advDic[@"image"]];
         EGOImageView *adImageview = [[EGOImageView alloc] initWithFrame:CGRectMake(0,0 , 320.f, screenHeight)];
-        [adImageview setImageURL:url];
+        [adImageview setImageURL:self.imgUrl];
         [self addSubview:adImageview];
         
-        UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
-        [close setFrame:CGRectMake(320-closeButtonWidth, screenHeight-closeButtonHeight, closeButtonWidth, closeButtonHeight)];
-        //[close setBackgroundImage:[UIImage imageNamed:@"ZJZBaige"] forState:UIControlStateNormal];
-        [close setTitle:@"关闭" forState:UIControlStateNormal];
-        close.titleLabel.font = [UIFont boldSystemFontOfSize:14.f];
-        [close setBackgroundColor:[UIColor colorWithRed:178/255.f green:0.f blue:25/255.f alpha:1.f]];
-        [close addTarget:self action:@selector(closeAD) forControlEvents:UIControlEventTouchUpInside];
-        [adImageview addSubview:close];
-        
+        if ([advDic[@"closeButton"] boolValue]) {
+            UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
+            [close setFrame:CGRectMake(320-closeButtonWidth, screenHeight-closeButtonHeight, closeButtonWidth, closeButtonHeight)];
+            //[close setBackgroundImage:[UIImage imageNamed:@"ZJZBaige"] forState:UIControlStateNormal];
+            [close setTitle:@"关闭" forState:UIControlStateNormal];
+            close.titleLabel.font = [UIFont boldSystemFontOfSize:14.f];
+            [close setBackgroundColor:[UIColor colorWithRed:178/255.f green:0.f blue:25/255.f alpha:1.f]];
+            [close addTarget:self action:@selector(closeAD) forControlEvents:UIControlEventTouchUpInside];
+            [adImageview addSubview:close];
+        }
         self.userInteractionEnabled = YES;
         adImageview.userInteractionEnabled = YES;
         
@@ -54,7 +56,6 @@
     }
     return self;
 }
-
 -(void)closeAD
 {
     [self removeFromSuperview];
@@ -62,11 +63,12 @@
 
 -(void)tapImage
 {
-    if ([self.adDelegate respondsToSelector:@selector(imageTapped)]) {
-        [self.adDelegate imageTapped];
+    if ([self.adDelegate respondsToSelector:@selector(imageTappedURL:)]) {
+        [self.adDelegate imageTappedURL:self.webUrl];
         [self removeFromSuperview];
     }
 }
+
 -(void)imageViewLoadedImage:(EGOImageView *)imageView
 {
     CGSize imageSize = imageView.image.size;

@@ -22,6 +22,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "BBShareWebViewController.h"
 #import "AppDelegate.h"
+#import "BBBJQBannerView.h"
 
 @class BBWSPViewController;
 @interface BBBJQViewController ()<ADImageviewDelegate,OHAttributedLabelDelegate>
@@ -295,11 +296,10 @@
     if ([@"advWithGroupResult" isEqualToString:keyPath]) {
         if (![[[PalmUIManagement sharedInstance].advWithGroupResult objectForKey:ASI_REQUEST_HAS_ERROR] boolValue]) {
             NSDictionary *result = [[[PalmUIManagement sharedInstance].advWithGroupResult objectForKey:ASI_REQUEST_DATA] objectForKey:@"content"];
-            self.webUrl = result[@"url"];
-            self.imageUrl = result[@"image"];
-            ADImageview *adImage = [[ADImageview alloc] initWithUrl:[NSURL URLWithString:self.imageUrl]];
+            ADImageview *adImage = [[ADImageview alloc] initWithAdvDic:result];
             adImage.adDelegate = self;
             [[UIApplication sharedApplication].keyWindow addSubview:adImage];
+            [[UIApplication sharedApplication].keyWindow bringSubviewToFront:adImage];
         }
     }
     
@@ -335,6 +335,17 @@
         if ([appDelegate.window.rootViewController isKindOfClass:[BBUITabBarController class]]) {
             BBUITabBarController *tabbar = (BBUITabBarController *)appDelegate.window.rootViewController;
             tabbar.canClick = YES;
+        }
+    }
+    if ([keyPath isEqualToString:@"advBannerInBJQ"]) {
+        NSDictionary *dic = [PalmUIManagement sharedInstance].advBannerInBJQ;
+        if (![dic[@"hasError"] boolValue]) {
+            NSDictionary *allAdvs = dic[@"data"][@"list"];
+            NSMutableArray *advArray = [[NSMutableArray alloc] init];
+            for (NSString *key in [allAdvs allKeys]) {
+                [advArray addObject:[allAdvs objectForKey:key]];
+            }
+            [self addBannerByAdvs:advArray];
         }
     }
 }
@@ -596,6 +607,8 @@
     roundedLayer.cornerRadius = 40.0;
     roundedLayer.borderWidth = 2;
     roundedLayer.borderColor = [[UIColor whiteColor] CGColor];
+    
+    [[PalmUIManagement sharedInstance] getAdvBannerInBJQ];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -1477,9 +1490,32 @@
     [super didReceiveMemoryWarning];
 }
 
+-(id)init
+{
+    self = [super init];
+    if (self) {
+        [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"advBannerInBJQ" options:0 context:nil];
+    }
+    return self;
+}
 
 -(void) dealloc{
     [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"uiPersonalInfoTag"];
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"advBannerInBJQ"];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeVC" object:nil];
+}
+
+-(void)addBannerByAdvs:(NSArray *)advArray
+{
+    BBBJQBannerView *bannerView = [[BBBJQBannerView alloc] initWithAdvs:advArray];
+    [bannerView setDelegate:(id<BBBJQBannerViewDelegate>)self];
+    [self.navigationController.view addSubview:bannerView];
+}
+
+-(void)advTappedByURL:(NSURL *)advUrl
+{
+    ADDetailViewController *adDetailVC = [[ADDetailViewController alloc] initWithUrl:advUrl andADType:AD_TYPE_SCREEN];
+    adDetailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:adDetailVC animated:YES];
 }
 @end

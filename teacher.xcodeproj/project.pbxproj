@@ -77,6 +77,11 @@
 		043A1BAA1A395E26004013B1 /* ForgotPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A1BA91A395E26004013B1 /* ForgotPwdVC.m */; };
 		043FCF3F1A4C01E900CB217E /* reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 043FCF3D1A4C01E900CB217E /* reset.png */; };
 		043FCF401A4C01E900CB217E /* reset@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043FCF3E1A4C01E900CB217E /* reset@2x.png */; };
+		046B54B61A5FA5170027E7AD /* BBBJQBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046B54B51A5FA5170027E7AD /* BBBJQBannerView.m */; };
+		046B54BB1A5FA7000027E7AD /* bjq_banner_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 046B54B71A5FA7000027E7AD /* bjq_banner_close.png */; };
+		046B54BC1A5FA7000027E7AD /* bjq_banner_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 046B54B81A5FA7000027E7AD /* bjq_banner_close@2x.png */; };
+		046B54BD1A5FA7000027E7AD /* bjq_banner_graybg.png in Resources */ = {isa = PBXBuildFile; fileRef = 046B54B91A5FA7000027E7AD /* bjq_banner_graybg.png */; };
+		046B54BE1A5FA7000027E7AD /* bjq_banner_graybg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 046B54BA1A5FA7000027E7AD /* bjq_banner_graybg@2x.png */; };
 		047823DA18D2A9F60012D87D /* BBMeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047823D918D2A9F60012D87D /* BBMeTableViewCell.m */; };
 		047823DD18D2C8660012D87D /* BBMeProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047823DC18D2C8660012D87D /* BBMeProfileController.m */; };
 		047823E018D2CABE0012D87D /* BBMeProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047823DF18D2CABE0012D87D /* BBMeProfileTableViewCell.m */; };
@@ -1617,6 +1622,12 @@
 		043A1BA91A395E26004013B1 /* ForgotPwdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPwdVC.m; sourceTree = "<group>"; };
 		043FCF3D1A4C01E900CB217E /* reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset.png; sourceTree = "<group>"; };
 		043FCF3E1A4C01E900CB217E /* reset@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reset@2x.png"; sourceTree = "<group>"; };
+		046B54B41A5FA5170027E7AD /* BBBJQBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBJQBannerView.h; sourceTree = "<group>"; };
+		046B54B51A5FA5170027E7AD /* BBBJQBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBJQBannerView.m; sourceTree = "<group>"; };
+		046B54B71A5FA7000027E7AD /* bjq_banner_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bjq_banner_close.png; sourceTree = "<group>"; };
+		046B54B81A5FA7000027E7AD /* bjq_banner_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bjq_banner_close@2x.png"; sourceTree = "<group>"; };
+		046B54B91A5FA7000027E7AD /* bjq_banner_graybg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bjq_banner_graybg.png; sourceTree = "<group>"; };
+		046B54BA1A5FA7000027E7AD /* bjq_banner_graybg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bjq_banner_graybg@2x.png"; sourceTree = "<group>"; };
 		047823D818D2A9F60012D87D /* BBMeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBMeTableViewCell.h; path = ME/BBMeTableViewCell.h; sourceTree = "<group>"; };
 		047823D918D2A9F60012D87D /* BBMeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBMeTableViewCell.m; path = ME/BBMeTableViewCell.m; sourceTree = "<group>"; };
 		047823DB18D2C8660012D87D /* BBMeProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMeProfileController.h; sourceTree = "<group>"; };
@@ -7532,6 +7543,10 @@
 		7AA5000518DF168600FC59C4 /* BJQ */ = {
 			isa = PBXGroup;
 			children = (
+				046B54B71A5FA7000027E7AD /* bjq_banner_close.png */,
+				046B54B81A5FA7000027E7AD /* bjq_banner_close@2x.png */,
+				046B54B91A5FA7000027E7AD /* bjq_banner_graybg.png */,
+				046B54BA1A5FA7000027E7AD /* bjq_banner_graybg@2x.png */,
 				196421A61928D18D00944016 /* BBDelete.png */,
 				196421A71928D18D00944016 /* BBDelete@2x.png */,
 				7AB13C1418F59DDC00C019C6 /* BBComentNotificationContent.png */,
@@ -7704,6 +7719,8 @@
 				7AC51B9F18CDDA6900AD1A8C /* BBBJQViewController.m */,
 				197363831A3EFDA60026AA31 /* BBShareWebViewController.h */,
 				197363841A3EFDA60026AA31 /* BBShareWebViewController.m */,
+				046B54B41A5FA5170027E7AD /* BBBJQBannerView.h */,
+				046B54B51A5FA5170027E7AD /* BBBJQBannerView.m */,
 				19FB12281A41CA1C00F4E418 /* MsgPlaySound.h */,
 				19FB12291A41CA1C00F4E418 /* MsgPlaySound.m */,
 			);
@@ -7819,6 +7836,7 @@
 				332D7F6718C33F0A007A75D5 /* btn_cancle_profile.png in Resources */,
 				332D752918C33552007A75D5 /* copying.txt in Resources */,
 				19CBA1EE19FE132000548396 /* BJQClassBottomPressed.png in Resources */,
+				046B54BE1A5FA7000027E7AD /* bjq_banner_graybg@2x.png in Resources */,
 				7457D0471A48576400C82636 /* ok.png in Resources */,
 				332D7EC818C33F0A007A75D5 /* bg_list_hover@2x.png in Resources */,
 				332D7ED018C33F0A007A75D5 /* btn_addcouple2_Ice-breaking@2x.jpg in Resources */,
@@ -8259,6 +8277,7 @@
 				332D7F9F18C33F0A007A75D5 /* headpic_im_120x120@2x.png in Resources */,
 				193FA86A19F0A2E600874F1E /* all.png in Resources */,
 				332D7F1618C33F0A007A75D5 /* wall_newmsg_my@2x.png in Resources */,
+				046B54BB1A5FA7000027E7AD /* bjq_banner_close.png in Resources */,
 				332D824318C33F0A007A75D5 /* profile_bg_recent_others@2x.png in Resources */,
 				332D7F6018C33F0A007A75D5 /* bg_im_talk_white_press@2x.png in Resources */,
 				332D7F1C18C33F0A007A75D5 /* btn_nobody@2x.png in Resources */,
@@ -8354,6 +8373,7 @@
 				332D7F3F18C33F0A007A75D5 /* headpic_index_normal_120x120@2x.png in Resources */,
 				332D7FB318C33F0A007A75D5 /* bg_im__graybackround@2x.png in Resources */,
 				332D7F6818C33F0A007A75D5 /* btn_canclepress_profile.png in Resources */,
+				046B54BC1A5FA7000027E7AD /* bjq_banner_close@2x.png in Resources */,
 				043FCF3F1A4C01E900CB217E /* reset.png in Resources */,
 				1982F7D31A0C73020075F35F /* i_talk.png in Resources */,
 				332D824718C33F0A007A75D5 /* profile_btn_bar_press@2x.png in Resources */,
@@ -8548,6 +8568,7 @@
 				7A334B2118F2DE60001F57C4 /* BBFZYPress.png in Resources */,
 				332D823118C33F0A007A75D5 /* bt_im_profile_presswrite@2x.png in Resources */,
 				332D7F0D18C33F0A007A75D5 /* pb_bar_closefriend@2x.png in Resources */,
+				046B54BD1A5FA7000027E7AD /* bjq_banner_graybg.png in Resources */,
 				1982F7E61A0C73020075F35F /* t_pic_press@2x.png in Resources */,
 				332D7F0918C33F0A007A75D5 /* pb_addcouple@2x.png in Resources */,
 				193FA88319F0A2E600874F1E /* up@2x.png in Resources */,
@@ -9274,6 +9295,7 @@
 				332D750118C33552007A75D5 /* CPOperationMsgSend.m in Sources */,
 				7A59194918D6BDA500C03DED /* BBFTZViewController.m in Sources */,
 				332D82C218C33F0A007A75D5 /* HomeMainViewController.m in Sources */,
+				046B54B61A5FA5170027E7AD /* BBBJQBannerView.m in Sources */,
 				7487E3F01A3C5F60000AC4A8 /* BBImagePreviewVIewController.m in Sources */,
 				332D82D218C33F0A007A75D5 /* HPStatusBarTipView.m in Sources */,
 				7A47062A18D967F2006449F3 /* CoreTextUtils.m in Sources */,

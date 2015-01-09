@@ -17,6 +17,7 @@ typedef enum{
     kGetResetPasswordSMS,
     // 登陆前重置密码
     kPostResetPassword,
+    kGetAdvBannerInBJQ,
 }SystemType;
 
 @interface SystemOperation : PalmOperation

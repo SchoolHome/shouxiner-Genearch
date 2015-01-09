@@ -77,7 +77,8 @@
 
 // 广告
 @property(nonatomic,strong) NSDictionary *advResult;
-
+//班级圈banner
+@property(nonatomic, strong) NSDictionary *advBannerInBJQ;
 // 广告
 @property(nonatomic,strong) NSDictionary *advWithGroupResult;
 // 激活
@@ -181,6 +182,8 @@
 
 //获取班级圈广告
 -(void) getAdvWithGroupID : (int) groupID;
+//获取班级圈广告
+-(void)getAdvBannerInBJQ;
 
 // 上传视频
 -(void) updateUserVideoFile : (NSURL *) videoUrl withGroupID : (int) groupID;

@@ -43,7 +43,7 @@
     bgImgv = nil;
     
     [self.egoLogo setFrame:CGRectMake(0, 0, 107, 107)];
-    [self.txtName setFrame:CGRectMake(0, frame.size.height-20, frame.size.width-1, 20)];
+    [self.txtName setFrame:CGRectMake(0, frame.size.height-30, frame.size.width-1, 20)];
     [self.flagNew setFrame:CGRectMake(frame.size.width-20, 10, 10, 10)];
 }
 
