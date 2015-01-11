@@ -1299,10 +1299,8 @@
 		7441DF3E1969823E00D9928A /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7441DF3D1969823E00D9928A /* CustomNavigationController.m */; };
 		74482CAB1A582CD000BA6D8F /* BBServiceAccountDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74482CA61A582CD000BA6D8F /* BBServiceAccountDetailViewController.m */; };
 		74482CAC1A582CD000BA6D8F /* BBServiceAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74482CA81A582CD000BA6D8F /* BBServiceAccountModel.m */; };
-		74482CAD1A582CD000BA6D8F /* BBServiceAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74482CAA1A582CD000BA6D8F /* BBServiceAccountViewController.m */; };
 		74482CB41A582CEB00BA6D8F /* BBServiceMessageDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74482CAF1A582CEB00BA6D8F /* BBServiceMessageDetailModel.m */; };
 		74482CB51A582CEB00BA6D8F /* BBServiceMessageDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74482CB11A582CEB00BA6D8F /* BBServiceMessageDetailView.m */; };
-		74482CB61A582CEB00BA6D8F /* BBServiceMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74482CB31A582CEB00BA6D8F /* BBServiceMessageDetailViewController.m */; };
 		74482CB91A582ECD00BA6D8F /* BBServiceMessageShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74482CB81A582ECD00BA6D8F /* BBServiceMessageShareViewController.m */; };
 		74528B2C1A50731100AE7516 /* IMSoundImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74528B2B1A50731100AE7516 /* IMSoundImage@2x.png */; };
 		7457D0421A48576400C82636 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7457D0361A48576400C82636 /* camera@2x.png */; };
@@ -1346,6 +1344,8 @@
 		7487E42A1A3C6152000AC4A8 /* MutilMsgGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E4191A3C6152000AC4A8 /* MutilMsgGroupViewController.m */; };
 		7487E42B1A3C6152000AC4A8 /* StartGroupChatTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E41B1A3C6152000AC4A8 /* StartGroupChatTableviewCell.m */; };
 		7487E4301A3C62BA000AC4A8 /* XLCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E42F1A3C62BA000AC4A8 /* XLCycleScrollView.m */; };
+		748A3AF01A62D08A005BAC18 /* BBServiceAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 748A3AED1A62D08A005BAC18 /* BBServiceAccountViewController.m */; };
+		748A3AF11A62D08A005BAC18 /* BBServiceMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 748A3AEF1A62D08A005BAC18 /* BBServiceMessageDetailViewController.m */; };
 		74A4E5E118DFE8B8000F79E6 /* ZJZAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5C918DFE8B7000F79E6 /* ZJZAdd.png */; };
 		74A4E5E218DFE8B8000F79E6 /* ZJZAdd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5CA18DFE8B7000F79E6 /* ZJZAdd@2x.png */; };
 		74A4E5E318DFE8B8000F79E6 /* ZJZAdress.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A4E5CB18DFE8B7000F79E6 /* ZJZAdress.png */; };
@@ -3454,14 +3454,10 @@
 		74482CA61A582CD000BA6D8F /* BBServiceAccountDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceAccountDetailViewController.m; sourceTree = "<group>"; };
 		74482CA71A582CD000BA6D8F /* BBServiceAccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceAccountModel.h; sourceTree = "<group>"; };
 		74482CA81A582CD000BA6D8F /* BBServiceAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceAccountModel.m; sourceTree = "<group>"; };
-		74482CA91A582CD000BA6D8F /* BBServiceAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceAccountViewController.h; sourceTree = "<group>"; };
-		74482CAA1A582CD000BA6D8F /* BBServiceAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceAccountViewController.m; sourceTree = "<group>"; };
 		74482CAE1A582CEB00BA6D8F /* BBServiceMessageDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageDetailModel.h; sourceTree = "<group>"; };
 		74482CAF1A582CEB00BA6D8F /* BBServiceMessageDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageDetailModel.m; sourceTree = "<group>"; };
 		74482CB01A582CEB00BA6D8F /* BBServiceMessageDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageDetailView.h; sourceTree = "<group>"; };
 		74482CB11A582CEB00BA6D8F /* BBServiceMessageDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageDetailView.m; sourceTree = "<group>"; };
-		74482CB21A582CEB00BA6D8F /* BBServiceMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageDetailViewController.h; sourceTree = "<group>"; };
-		74482CB31A582CEB00BA6D8F /* BBServiceMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageDetailViewController.m; sourceTree = "<group>"; };
 		74482CB71A582ECD00BA6D8F /* BBServiceMessageShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageShareViewController.h; sourceTree = "<group>"; };
 		74482CB81A582ECD00BA6D8F /* BBServiceMessageShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageShareViewController.m; sourceTree = "<group>"; };
 		74528B2B1A50731100AE7516 /* IMSoundImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IMSoundImage@2x.png"; sourceTree = "<group>"; };
@@ -3534,6 +3530,10 @@
 		7487E41A1A3C6152000AC4A8 /* StartGroupChatTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartGroupChatTableviewCell.h; sourceTree = "<group>"; };
 		7487E41B1A3C6152000AC4A8 /* StartGroupChatTableviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartGroupChatTableviewCell.m; sourceTree = "<group>"; };
 		7487E42F1A3C62BA000AC4A8 /* XLCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLCycleScrollView.m; sourceTree = "<group>"; };
+		748A3AEC1A62D08A005BAC18 /* BBServiceAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceAccountViewController.h; sourceTree = "<group>"; };
+		748A3AED1A62D08A005BAC18 /* BBServiceAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceAccountViewController.m; sourceTree = "<group>"; };
+		748A3AEE1A62D08A005BAC18 /* BBServiceMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageDetailViewController.h; sourceTree = "<group>"; };
+		748A3AEF1A62D08A005BAC18 /* BBServiceMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageDetailViewController.m; sourceTree = "<group>"; };
 		74A4E5C918DFE8B7000F79E6 /* ZJZAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZJZAdd.png; sourceTree = "<group>"; };
 		74A4E5CA18DFE8B7000F79E6 /* ZJZAdd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZJZAdd@2x.png"; sourceTree = "<group>"; };
 		74A4E5CB18DFE8B7000F79E6 /* ZJZAdress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZJZAdress.png; sourceTree = "<group>"; };
@@ -7239,14 +7239,14 @@
 				74482CA61A582CD000BA6D8F /* BBServiceAccountDetailViewController.m */,
 				74482CA71A582CD000BA6D8F /* BBServiceAccountModel.h */,
 				74482CA81A582CD000BA6D8F /* BBServiceAccountModel.m */,
-				74482CA91A582CD000BA6D8F /* BBServiceAccountViewController.h */,
-				74482CAA1A582CD000BA6D8F /* BBServiceAccountViewController.m */,
+				748A3AEC1A62D08A005BAC18 /* BBServiceAccountViewController.h */,
+				748A3AED1A62D08A005BAC18 /* BBServiceAccountViewController.m */,
+				748A3AEE1A62D08A005BAC18 /* BBServiceMessageDetailViewController.h */,
+				748A3AEF1A62D08A005BAC18 /* BBServiceMessageDetailViewController.m */,
 				74482CAE1A582CEB00BA6D8F /* BBServiceMessageDetailModel.h */,
 				74482CAF1A582CEB00BA6D8F /* BBServiceMessageDetailModel.m */,
 				74482CB01A582CEB00BA6D8F /* BBServiceMessageDetailView.h */,
 				74482CB11A582CEB00BA6D8F /* BBServiceMessageDetailView.m */,
-				74482CB21A582CEB00BA6D8F /* BBServiceMessageDetailViewController.h */,
-				74482CB31A582CEB00BA6D8F /* BBServiceMessageDetailViewController.m */,
 				74482CB71A582ECD00BA6D8F /* BBServiceMessageShareViewController.h */,
 				74482CB81A582ECD00BA6D8F /* BBServiceMessageShareViewController.m */,
 				7487E40A1A3C6152000AC4A8 /* BBServiceMessageWebViewController.h */,
@@ -9013,6 +9013,7 @@
 				332D758418C33552007A75D5 /* CPPTModelInviteFriendResult.m in Sources */,
 				332D759E18C33552007A75D5 /* CPUIModelMessageGroupMember.m in Sources */,
 				19145F52191CDF3B008CE18C /* NSData+GIF.m in Sources */,
+				748A3AF01A62D08A005BAC18 /* BBServiceAccountViewController.m in Sources */,
 				19B39CA419AE3AEE00E8B186 /* ADImageview.m in Sources */,
 				19145F5E191CDF3B008CE18C /* UIImage+WebP.m in Sources */,
 				332D831C18C33F0B007A75D5 /* FXShakePanel.m in Sources */,
@@ -9057,7 +9058,6 @@
 				332D758A18C33552007A75D5 /* CPPTModelPersonalInfoData.m in Sources */,
 				19145F58191CDF3B008CE18C /* SDWebImageManager+MJ.m in Sources */,
 				332D754318C33552007A75D5 /* XMPPMUC.m in Sources */,
-				74482CAD1A582CD000BA6D8F /* BBServiceAccountViewController.m in Sources */,
 				332D838518C33F0B007A75D5 /* BezierCurve.m in Sources */,
 				332D752018C33552007A75D5 /* NSDictionary+RequestEncoding.m in Sources */,
 				332D74C818C33552007A75D5 /* CPDBManagement.m in Sources */,
@@ -9118,6 +9118,7 @@
 				332D74CD18C33552007A75D5 /* CPDAOMessage.m in Sources */,
 				332D837018C33F0B007A75D5 /* interf_dec.c in Sources */,
 				04F7FEB718CEF38A0086D09D /* BBMeViewController.m in Sources */,
+				748A3AF11A62D08A005BAC18 /* BBServiceMessageDetailViewController.m in Sources */,
 				74482CAB1A582CD000BA6D8F /* BBServiceAccountDetailViewController.m in Sources */,
 				332D82C118C33F0A007A75D5 /* HomeMainView.m in Sources */,
 				332D833218C33F0B007A75D5 /* GroupAskExpressionCell.m in Sources */,
@@ -9318,7 +9319,6 @@
 				332D759C18C33552007A75D5 /* CPUIModelMessage.m in Sources */,
 				332D836018C33F0B007A75D5 /* ARMicView.m in Sources */,
 				332D752318C33552007A75D5 /* MKNetworkEngine.m in Sources */,
-				74482CB61A582CEB00BA6D8F /* BBServiceMessageDetailViewController.m in Sources */,
 				332D751918C33552007A75D5 /* CPHttpEngine.m in Sources */,
 				332D754F18C33552007A75D5 /* TURNSocket.m in Sources */,
 				332D74DA18C33552007A75D5 /* FMDatabaseAdditions.m in Sources */,
@@ -9475,7 +9475,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0f969c4d-6b2e-44e5-8349-9d5b14bf6345";
+				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -9510,7 +9510,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0f969c4d-6b2e-44e5-8349-9d5b14bf6345";
+				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

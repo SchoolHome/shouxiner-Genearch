@@ -114,15 +114,23 @@
     
     for (int i = 0; i < [groupModel.memberList count]; i++) {
         
-        CPUIModelMessageGroupMember *member =  [groupModel.memberList objectAtIndex:i]; 
+        CPUIModelMessageGroupMember *member =  [groupModel.memberList objectAtIndex:i];
         if (![member isHiddenMember]) {
             
             CPUIModelUserInfo *userInfo = member.userInfo;
-            UIImage *image ;
+            
+            UIImage *image;
             if (!userInfo.nickName.length || [userInfo.nickName isEqualToString:[CPUIModelManagement sharedInstance].uiPersonalInfo.nickName]) {
                 image = [UIImage imageWithContentsOfFile:[CPUIModelManagement sharedInstance].uiPersonalInfo.selfHeaderImgPath];
             }else image = [UIImage imageWithContentsOfFile:userInfo.headerPath];
-            
+            /*
+             if ((userInfo.nickName.length == 0 || [userInfo.nickName isEqualToString:[CPUIModelManagement sharedInstance].uiPersonalInfo.nickName]) && groupModel.memberList.count < 5) {
+             image = [UIImage imageWithContentsOfFile:[CPUIModelManagement sharedInstance].uiPersonalInfo.selfHeaderImgPath];
+             }else
+             {
+             image = [UIImage imageWithContentsOfFile:userInfo.headerPath];
+             }
+             */
             
             
             
@@ -130,6 +138,9 @@
                 image = [UIImage imageWithContentsOfFile:member.headerPath];
             }
             
+            if (!image) {
+                image = [UIImage imageNamed:@"girl"];
+            }
             
             if (image) {
                 if (0 == count) {
@@ -137,29 +148,29 @@
                     
                     [[UIColor colorWithHexString:@"#DDDDDD"] set];  // 底图颜色
                     //[[UIColor redColor] set];
-                    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: 
-                                                          CGRectMake(5-radius/2, 5-radius/2, 20+radius, 20+radius) cornerRadius: radius];
+                    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect:
+                                                          CGRectMake(5-radius/2, 5-radius/2, 20+radius, 20+radius) cornerRadius: radius+4];
                     [roundedRectanglePath setLineWidth:radius];
                     [roundedRectanglePath stroke];
                 }else if (1 == count) {
                     [image drawInRect:CGRectMake(30, 5, 20, 20)];
-                    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: 
-                                                          CGRectMake(30-radius/2, 5-radius/2, 20+radius, 20+radius) cornerRadius: radius];
+                    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect:
+                                                          CGRectMake(30-radius/2, 5-radius/2, 20+radius, 20+radius) cornerRadius: radius+4];
                     [roundedRectanglePath setLineWidth:radius];
                     [roundedRectanglePath stroke];
                 }else if (2 == count) {
                     [image drawInRect:CGRectMake(5, 30, 20, 20)];
-                    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: 
-                                                          CGRectMake(5-radius/2, 30-radius/2, 20+radius, 20+radius) cornerRadius: radius];
+                    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect:
+                                                          CGRectMake(5-radius/2, 30-radius/2, 20+radius, 20+radius) cornerRadius: radius+4];
                     [roundedRectanglePath setLineWidth:radius];
                     [roundedRectanglePath stroke];
                 }else if (3 == count) {
                     [image drawInRect:CGRectMake(30, 30, 20, 20)];
-                    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: 
-                                                          CGRectMake(30-radius/2, 30-radius/2, 20+radius, 20+radius) cornerRadius: radius];
+                    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect:
+                                                          CGRectMake(30-radius/2, 30-radius/2, 20+radius, 20+radius) cornerRadius: radius+4];
                     [roundedRectanglePath setLineWidth:radius];
                     [roundedRectanglePath stroke];
-                     count ++;
+                    count ++;
                     break;
                 }
                 count ++;
@@ -170,30 +181,30 @@
     
     //如果没满的话就用色块填充够4个
     /*
-    for (int i = count; i<4; i++) {
-        UIImage *image = [UIImage imageNamed:@"wall_bg_noone.png"];
-        if (0 == count) {
-            [image drawInRect:CGRectMake(5, 5, 20, 20)];
-            
-            [[UIColor colorWithHexString:@"#DDDDDD"] set];  // 底图颜色
-
-        }else if (1 == count) {
-            [image drawInRect:CGRectMake(30, 5, 20, 20)];
-
-        }else if (2 == count) {
-            [image drawInRect:CGRectMake(5, 30, 20, 20)];
-
-        }else if (3 == count) {
-            [image drawInRect:CGRectMake(30, 30, 20, 20)];
-
-            break;
-        }
-    }
+     for (int i = count; i<4; i++) {
+     UIImage *image = [UIImage imageNamed:@"wall_bg_noone.png"];
+     if (0 == count) {
+     [image drawInRect:CGRectMake(5, 5, 20, 20)];
+     
+     [[UIColor colorWithHexString:@"#DDDDDD"] set];  // 底图颜色
+     
+     }else if (1 == count) {
+     [image drawInRect:CGRectMake(30, 5, 20, 20)];
+     
+     }else if (2 == count) {
+     [image drawInRect:CGRectMake(5, 30, 20, 20)];
+     
+     }else if (3 == count) {
+     [image drawInRect:CGRectMake(30, 30, 20, 20)];
+     
+     break;
+     }
+     }
      */
-    UIImage *resultingImage = UIGraphicsGetImageFromCurrentImageContext();  
-    UIGraphicsEndImageContext();  
+    UIImage *resultingImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
-    return resultingImage;  
+    return resultingImage;
 }
 +(UIImage *)groupHeaderForFriendWall:(CPUIModelMessageGroup *) groupModel{
     
