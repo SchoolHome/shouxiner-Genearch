@@ -236,7 +236,6 @@
         [viewController setHidesBottomBarWhenPushed:YES];
         [viewController.navigationItem setTitle:[dataDic objectForKey:@"title"]];
         viewController.url = [NSURL URLWithString:[dataDic objectForKey:@"url"]];
-        viewController.isHiddenHeader = NO;
         [self.navigationController pushViewController:viewController animated:YES];
     }else{
         BBMeSettingViewController *viewController = [[BBMeSettingViewController alloc] init];

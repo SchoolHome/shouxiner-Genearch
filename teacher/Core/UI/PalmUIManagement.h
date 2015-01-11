@@ -153,7 +153,7 @@
 -(void) updateUserImageFile : (NSData *) imageData withGroupID : (int) groupID;
 // 发表Topic
 -(void) postTopic : (int) groupid withTopicType : (int) topicType withSubject : (int) subject withTitle : (NSString *) title
-                            withContent : (NSString *) content withAttach : (NSString *) attach;
+                            withContent : (NSString *) content withAttach : (NSString *) attach activityid:(NSString *)activityID;
 
 -(void) postCheckVersion;
 
