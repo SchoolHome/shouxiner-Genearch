@@ -163,6 +163,16 @@
     [self startAsynchronous];
 }
 
+-(void)getAdvBannerInBJQ
+{
+    [self.request setRequestCompleted:^(NSDictionary *data){
+        dispatch_block_t updateTagBlock = ^{
+            [PalmUIManagement sharedInstance].advBannerInBJQ = data;
+        };
+        dispatch_async(dispatch_get_main_queue(), updateTagBlock);
+    }];
+    [self startAsynchronous];
+}
 
 -(void) main{
     @autoreleasepool {

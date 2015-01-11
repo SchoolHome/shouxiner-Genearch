@@ -350,8 +350,8 @@
     }
 }
 
--(void)imageTapped{
-    ADDetailViewController *adDetailVC = [[ADDetailViewController alloc] initWithUrl:[NSURL URLWithString:self.webUrl]andADType:AD_TYPE_SCREEN];
+-(void)imageTappedURL:(NSURL *)url{
+    ADDetailViewController *adDetailVC = [[ADDetailViewController alloc] initWithUrl:url andADType:AD_TYPE_SCREEN];
     adDetailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:adDetailVC animated:YES];
 }
