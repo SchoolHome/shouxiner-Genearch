@@ -23,6 +23,7 @@ typedef enum{
 @interface SystemOperation : PalmOperation
 -(SystemOperation *) initGetAdvInfo;
 -(SystemOperation *) initGetAdvInfo : (int) groupID;
+-(SystemOperation *) initGetAdvBannerInBJQ;
 -(SystemOperation *) initGetSMSVerifyCode : (NSString *)mobile;
 -(SystemOperation *) initGetCustomerServiceTel;
 
