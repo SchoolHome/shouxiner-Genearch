@@ -1320,10 +1320,10 @@
 		745D7690193F821700AF666E /* BBStudentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 745D768F193F821700AF666E /* BBStudentModel.m */; };
 		745F0ABA198F5923004BC9D4 /* CPDBModelNotifyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0AB9198F5923004BC9D4 /* CPDBModelNotifyMessage.m */; };
 		745F0ABD198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F0ABC198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m */; };
-		746336401A5EE4C100DDD0D9 /* BBCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463363B1A5EE4C100DDD0D9 /* BBCameraViewController.m */; };
 		746336411A5EE4C100DDD0D9 /* BBRecordPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463363D1A5EE4C100DDD0D9 /* BBRecordPreviewView.m */; };
-		746336421A5EE4C100DDD0D9 /* BBRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7463363F1A5EE4C100DDD0D9 /* BBRecordViewController.m */; };
 		746336451A5EEABB00DDD0D9 /* BBPostPBXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746336441A5EEABB00DDD0D9 /* BBPostPBXViewController.m */; };
+		747998861A61842F002E14F1 /* BBCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 747998831A61842F002E14F1 /* BBCameraViewController.m */; };
+		747998871A61842F002E14F1 /* BBRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 747998851A61842F002E14F1 /* BBRecordViewController.m */; };
 		7487E3D91A3C5E56000AC4A8 /* BBBasePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3D21A3C5E56000AC4A8 /* BBBasePostViewController.m */; };
 		7487E3DA1A3C5E56000AC4A8 /* BBPostHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3D41A3C5E56000AC4A8 /* BBPostHomeworkViewController.m */; };
 		7487E3DC1A3C5E56000AC4A8 /* ChooseClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7487E3D81A3C5E56000AC4A8 /* ChooseClassViewController.m */; };
@@ -3483,14 +3483,14 @@
 		745F0AB9198F5923004BC9D4 /* CPDBModelNotifyMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDBModelNotifyMessage.m; sourceTree = "<group>"; };
 		745F0ABB198F594C004BC9D4 /* CPOperationReceiveYTZMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPOperationReceiveYTZMessage.h; sourceTree = "<group>"; };
 		745F0ABC198F594C004BC9D4 /* CPOperationReceiveYTZMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPOperationReceiveYTZMessage.m; sourceTree = "<group>"; };
-		7463363A1A5EE4C100DDD0D9 /* BBCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCameraViewController.h; sourceTree = "<group>"; };
-		7463363B1A5EE4C100DDD0D9 /* BBCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBCameraViewController.m; sourceTree = "<group>"; };
 		7463363C1A5EE4C100DDD0D9 /* BBRecordPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecordPreviewView.h; sourceTree = "<group>"; };
 		7463363D1A5EE4C100DDD0D9 /* BBRecordPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecordPreviewView.m; sourceTree = "<group>"; };
-		7463363E1A5EE4C100DDD0D9 /* BBRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecordViewController.h; sourceTree = "<group>"; };
-		7463363F1A5EE4C100DDD0D9 /* BBRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecordViewController.m; sourceTree = "<group>"; };
 		746336431A5EEABB00DDD0D9 /* BBPostPBXViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPostPBXViewController.h; sourceTree = "<group>"; };
 		746336441A5EEABB00DDD0D9 /* BBPostPBXViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBPostPBXViewController.m; sourceTree = "<group>"; };
+		747998821A61842F002E14F1 /* BBCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCameraViewController.h; sourceTree = "<group>"; };
+		747998831A61842F002E14F1 /* BBCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBCameraViewController.m; sourceTree = "<group>"; };
+		747998841A61842F002E14F1 /* BBRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBRecordViewController.h; sourceTree = "<group>"; };
+		747998851A61842F002E14F1 /* BBRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBRecordViewController.m; sourceTree = "<group>"; };
 		7487E3D11A3C5E56000AC4A8 /* BBBasePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBasePostViewController.h; sourceTree = "<group>"; };
 		7487E3D21A3C5E56000AC4A8 /* BBBasePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBasePostViewController.m; sourceTree = "<group>"; };
 		7487E3D31A3C5E56000AC4A8 /* BBPostHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBPostHomeworkViewController.h; sourceTree = "<group>"; };
@@ -7489,12 +7489,12 @@
 				7487E3EA1A3C5F60000AC4A8 /* BBStudentListTableViewCell.m */,
 				7487E3EB1A3C5F60000AC4A8 /* BBStudentsListViewController.h */,
 				7487E3EC1A3C5F60000AC4A8 /* BBStudentsListViewController.m */,
-				7463363A1A5EE4C100DDD0D9 /* BBCameraViewController.h */,
-				7463363B1A5EE4C100DDD0D9 /* BBCameraViewController.m */,
+				747998821A61842F002E14F1 /* BBCameraViewController.h */,
+				747998831A61842F002E14F1 /* BBCameraViewController.m */,
+				747998841A61842F002E14F1 /* BBRecordViewController.h */,
+				747998851A61842F002E14F1 /* BBRecordViewController.m */,
 				7463363C1A5EE4C100DDD0D9 /* BBRecordPreviewView.h */,
 				7463363D1A5EE4C100DDD0D9 /* BBRecordPreviewView.m */,
-				7463363E1A5EE4C100DDD0D9 /* BBRecordViewController.h */,
-				7463363F1A5EE4C100DDD0D9 /* BBRecordViewController.m */,
 			);
 			path = PBX;
 			sourceTree = "<group>";
@@ -8912,6 +8912,7 @@
 				332D831018C33F0B007A75D5 /* FXButtonExt.m in Sources */,
 				332D82C618C33F0A007A75D5 /* HomePageAnimView.m in Sources */,
 				7A47062918D967F2006449F3 /* OHTouchesGestureRecognizer.m in Sources */,
+				747998861A61842F002E14F1 /* BBCameraViewController.m in Sources */,
 				332D74D218C33552007A75D5 /* CPDAOPersonalInfoDataAddition.m in Sources */,
 				332D835618C33F0B007A75D5 /* TaggingMonthDay.m in Sources */,
 				332D82BF18C33F0A007A75D5 /* HomeFriendsView.m in Sources */,
@@ -8966,7 +8967,6 @@
 				332D839018C33F0B007A75D5 /* TSortOperator.m in Sources */,
 				332D82EE18C33F0A007A75D5 /* MessageCellFactory.m in Sources */,
 				19145F5F191CDF3B008CE18C /* UIImageView+MJWebCache.m in Sources */,
-				746336401A5EE4C100DDD0D9 /* BBCameraViewController.m in Sources */,
 				332D74E918C33552007A75D5 /* CPDBModelResource.m in Sources */,
 				332D750818C33552007A75D5 /* CPOperationResDownloadResponse.m in Sources */,
 				332D74F118C33552007A75D5 /* CPPetManager.m in Sources */,
@@ -9178,7 +9178,7 @@
 				332D74D618C33552007A75D5 /* CPDAOUserInfoData.m in Sources */,
 				197363851A3EFDA60026AA31 /* BBShareWebViewController.m in Sources */,
 				332D755318C33552007A75D5 /* XMPPCapabilities.xcdatamodel in Sources */,
-				746336421A5EE4C100DDD0D9 /* BBRecordViewController.m in Sources */,
+				747998871A61842F002E14F1 /* BBRecordViewController.m in Sources */,
 				332D82DB18C33F0A007A75D5 /* IndependentProfileViewController.m in Sources */,
 				332D838A18C33F0B007A75D5 /* NSArray_PointArray.m in Sources */,
 				332D833418C33F0B007A75D5 /* GroupLoveExpressionCell.m in Sources */,
