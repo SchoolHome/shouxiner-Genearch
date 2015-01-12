@@ -506,7 +506,7 @@
             case 2:
             {
                 //[PalmUIManagement sharedInstance].noticeArray
-                BBServiceAccountViewController *serviceAccount = [[BBServiceAccountViewController alloc] initWithServiceItems:[PalmUIManagement sharedInstance].noticeArray];
+                BBServiceAccountViewController *serviceAccount = [[BBServiceAccountViewController alloc] init];
                 serviceAccount.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:serviceAccount animated:YES];
             }
