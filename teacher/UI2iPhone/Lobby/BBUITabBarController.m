@@ -178,7 +178,9 @@
     self.tabBar.tintColor = [UIColor blackColor];
     self.selectedIndex = 0;
     self.delegate = (id<UITabBarControllerDelegate>)self;
-    
+    if (IOS7) {
+        [self.tabBar setBarStyle:UIBarStyleBlack];
+    }
     _imageTabBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 49)];
     _imageTabBar.image = [UIImage imageNamed:@"Bottomlabel_bg"];
     _imageTabBar.backgroundColor = [UIColor whiteColor];
