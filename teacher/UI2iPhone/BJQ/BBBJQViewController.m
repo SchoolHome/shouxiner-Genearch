@@ -27,7 +27,7 @@
 @class BBWSPViewController;
 @interface BBBJQViewController ()<ADImageviewDelegate,OHAttributedLabelDelegate>
 {
-
+    BBBJQBannerView *bannerView;
 }
 @property (nonatomic,strong) BBTopicModel *tempTopModel;
 @property (nonatomic,strong) BBTopicModel *tempTopModelInput;
@@ -616,7 +616,9 @@
     
     self.isLoading = NO;
     [self addObservers];
-    
+    if (nil != bannerView) {
+        [bannerView setHidden:NO];
+    }
 //    [bjqTableView triggerPullToRefresh];
 }
 
@@ -624,6 +626,9 @@
     [super viewWillDisappear:animated];
     [inputBar endEdit];
     [self removeObservers];
+    if (nil != bannerView) {
+        [bannerView setHidden:YES];
+    }
 }
 
 -(void) viewDidDisappear:(BOOL)animated{
@@ -1507,9 +1512,12 @@
 
 -(void)addBannerByAdvs:(NSArray *)advArray
 {
-    BBBJQBannerView *bannerView = [[BBBJQBannerView alloc] initWithAdvs:advArray];
+    bannerView = [[BBBJQBannerView alloc] initWithAdvs:advArray];
     [bannerView setDelegate:(id<BBBJQBannerViewDelegate>)self];
     [self.navigationController.view addSubview:bannerView];
+    if (self.navigationController.viewControllers.count > 1) {
+        [bannerView setHidden:YES];
+    }
 }
 
 -(void)advTappedByURL:(NSURL *)advUrl
