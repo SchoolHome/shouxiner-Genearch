@@ -358,7 +358,6 @@
 
 -(void)addObservers{
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupListResult" options:0 context:NULL];
-    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupTopicListResult" options:0 context:NULL];
     
     // 积分
     [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"userCredits" options:0 context:NULL];
@@ -377,7 +376,6 @@
 -(void)removeObservers{
 
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"groupListResult"];
-    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"groupTopicListResult"];
     
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"userCredits"];
     
@@ -465,7 +463,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    //增加班级圈话题列表kvo
+    [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"groupTopicListResult" options:0 context:NULL];
     self.allTopicList = [[NSMutableArray alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeVC) name:@"changeVC" object:nil];
     
@@ -1505,6 +1504,8 @@
 }
 
 -(void) dealloc{
+    //移除班级圈话题列表kvo
+    [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"groupTopicListResult"];
     [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"uiPersonalInfoTag"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"advBannerInBJQ"];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeVC" object:nil];
