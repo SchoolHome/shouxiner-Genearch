@@ -189,14 +189,15 @@
     [alert show];
 }
 
--(void)successCallBack
+-(void)successCallBack:(NSNotification *)notification
 {
-    [adWebview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"onShouxinerPublishTopicComplete(true, %@)", activeID]];
+    [adWebview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"onShouxinerPublishTopicComplete(true, %@)", [notification object]]];
 }
 
 -(void)dealloc
 {
     [adWebview setDelegate:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"WebDetailNeedCallBack" object:nil];
 }
 
 
