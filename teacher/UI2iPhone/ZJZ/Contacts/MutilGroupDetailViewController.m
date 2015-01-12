@@ -172,7 +172,7 @@
             break;
         }
     }
-    [_memberDisplayView setMembers:[self getUserInfos]];
+    [_memberDisplayView setMembers:self.msgGroup.memberList];
     
     [self.detailTableview setTableHeaderView:_memberDisplayView];
     [self.detailTableview reloadData];
@@ -184,7 +184,10 @@
 {
     NSMutableArray *userInfos = [[NSMutableArray alloc] init];
     for (CPUIModelMessageGroupMember *member in self.msgGroup.memberList) {
-        [userInfos addObject:member.userInfo];
+        if (member.userInfo) {
+            [userInfos addObject:member.userInfo];
+        }
+        
     }
     return [NSArray arrayWithArray:userInfos];
 }

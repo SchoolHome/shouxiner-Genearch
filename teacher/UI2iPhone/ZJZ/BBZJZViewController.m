@@ -37,6 +37,8 @@
     NSInteger listType;
     //是否请求过班级列表
     BOOL isRequestClassList;
+    
+    CPDBModelNotifyMessage *tempCacheNotifyMsg;
 }
 @property (nonatomic, strong)NSArray *tableviewDisplayDataArray;
 @property (nonatomic, strong) NSArray *classModels; //班级
@@ -81,8 +83,8 @@
     UIButton *segementBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [segementBtn setFrame:CGRectMake(0.f, 0.f, 125.f, 30.f)];
     [segementBtn setBackgroundImage:[UIImage imageNamed:@"tab_mes"] forState:UIControlStateNormal];
-    [segementBtn setBackgroundImage:[UIImage imageNamed:@"tab_contact"] forState:UIControlStateSelected];
-    [segementBtn addTarget:self action:@selector(segeValueChanged:) forControlEvents:UIControlEventTouchUpInside];
+    //[segementBtn setBackgroundImage:[UIImage imageNamed:@"tab_contact"] forState:UIControlStateSelected];
+    [segementBtn addTarget:self action:@selector(segeValueChanged:event:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = segementBtn;
     
     
@@ -251,6 +253,38 @@
         }
     }
 
+    
+    if ([keyPath isEqualToString:@"publicAccountDic"]) {
+        [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"publicAccountDic"];
+        NSDictionary *result = [PalmUIManagement sharedInstance].publicAccountDic;
+        if (![result[@"hasError"] boolValue]) {
+            [self closeProgress];
+            NSDictionary *data = result[@"data"][@"list"];
+            for (NSDictionary *tempItemModel in data.allValues) {
+                if ([tempItemModel isKindOfClass:[NSDictionary class]]) {
+                    if ([tempItemModel[@"name"] isEqualToString:tempCacheNotifyMsg.fromUserName]) {
+                        
+                        BBServiceMessageDetailViewController *messageDetail = [[BBServiceMessageDetailViewController alloc] init];
+                        [messageDetail setModel:[BBServiceAccountModel convertByDic:tempItemModel]];
+                        messageDetail.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:messageDetail animated:YES];
+                        [[CPSystemEngine sharedInstance] updateUnreadedMessageStatusChanged:tempCacheNotifyMsg];
+                        return;
+                    }
+                }
+            }
+            if (tempCacheNotifyMsg) {
+                BBServiceMessageDetailViewController *messageDetail = [[BBServiceMessageDetailViewController alloc] init];
+                [messageDetail setNotifyMsgmodel:tempCacheNotifyMsg];
+                messageDetail.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:messageDetail animated:YES];
+                [[CPSystemEngine sharedInstance] updateUnreadedMessageStatusChanged:tempCacheNotifyMsg];
+            }else [self showProgressWithText:@"无法查看" withDelayTime:2];
+        }else
+        {
+            [self showProgressWithText:result[@"errorMessage"] withDelayTime:2.f];
+        }
+    }
 }
 #pragma mark BBZJZViewControllerMethod
 
@@ -262,9 +296,20 @@
     }
 }
 
-- (void)segeValueChanged:(UIButton *)sender
+- (void)segeValueChanged:(UIButton *)sender event:(UIEvent *) touchEvent
 {
+    UITouch *touch = [[touchEvent allTouches] anyObject];
+    
+    CGPoint point = [touch locationInView:sender];
+    if ((CGRectContainsPoint(CGRectMake(0.f, 0.f, CGRectGetWidth(sender.frame)/2, CGRectGetHeight(sender.frame)), [touch locationInView:sender]) || point.x < 0.f) && listType == LIST_TYPE_MSG_GROUP ) {
+        return;
+    }else if ((CGRectContainsPoint(CGRectMake(CGRectGetWidth(sender.frame)/2, 0.f, CGRectGetWidth(sender.frame)/2, CGRectGetHeight(sender.frame)), [touch locationInView:sender]) || point.x > 126.f) && listType == LIST_TYPE_CONTACTS)
+    {
+        return;
+    }
+    
     sender.selected = !sender.selected;
+    [sender setBackgroundImage:sender.selected ? [UIImage imageNamed:@"tab_contact"] : [UIImage imageNamed:@"tab_mes"] forState:UIControlStateNormal];
     listType = sender.selected ? LIST_TYPE_CONTACTS : LIST_TYPE_MSG_GROUP;
     [self.messageListTableview reloadData];
 }
@@ -417,16 +462,12 @@
             };
             dispatch_async(dispatch_get_main_queue(), updateTagBlock);
         }else if ([cell.msgGroup isKindOfClass:[CPDBModelNotifyMessage class]]){
-            CPDBModelNotifyMessage *msgGroup = cell.msgGroup;
-            //设置未读数
-        
-            if (msgGroup) {
-                BBServiceMessageDetailViewController *messageDetail = [[BBServiceMessageDetailViewController alloc] init];
-                [messageDetail setModel:msgGroup];
-                messageDetail.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:messageDetail animated:YES];
-                [[CPSystemEngine sharedInstance] updateUnreadedMessageStatusChanged:msgGroup];
-            }else [self showProgressWithText:@"无法查看" withDelayTime:2];
+            [[PalmUIManagement sharedInstance] addObserver:self forKeyPath:@"publicAccountDic" options:0 context:nil];
+            
+            tempCacheNotifyMsg = cell.msgGroup;
+            
+            [self showProgressWithText:@"正在获取"];
+            [[PalmUIManagement sharedInstance] getPublicAccount];
         
         }
     }else
