@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 ws. All rights reserved.
 //
 
-#define Banner_Image_Height 120.f
-#define Banner_Image_Width 280.f
+#define Banner_Image_Height 150.f
+#define Banner_Image_Width 270.f
 
-#define Item_Image_Widht 40.f
+#define Item_Image_Widht 50.f
 
 #import "BBServiceMessageDetailView.h"
 
@@ -44,8 +44,8 @@
         
         banner = [[EGOImageView alloc] initWithPlaceholderImage:nil];
         banner.userInteractionEnabled = YES;
-        banner.contentMode = UIViewContentModeScaleAspectFit;
-        [banner setFrame:CGRectMake(5.f, 5.f, Banner_Image_Width, Banner_Image_Height)];
+        banner.contentMode = UIViewContentModeScaleAspectFill;
+        [banner setFrame:CGRectMake(10.f, 5.f, Banner_Image_Width, Banner_Image_Height)];
         [back addSubview:banner];
     }
     return self;
@@ -109,7 +109,7 @@
                 titleLabel.font = [UIFont boldSystemFontOfSize:14.f];
                 titleLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
                 titleLabel.textColor = [UIColor whiteColor];
-                titleLabel.text = model.content;
+                titleLabel.text = model.title;
                 [back addSubview:titleLabel];
                 
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mutilViewBannerTapped)];
@@ -127,7 +127,7 @@
                 
                 UILabel *readTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(banner.frame), CGRectGetMaxY(line.frame)+4, CGRectGetMaxX(banner.frame)-Item_Image_Widht-20.f, 36.f)];
                 readTitle.backgroundColor = [UIColor clearColor];
-                readTitle.text = model.content;
+                readTitle.text = model.title;
                 readTitle.numberOfLines = 2;
                 readTitle.font = [UIFont systemFontOfSize:13.f];
                 readTitle.textColor = [UIColor lightGrayColor];
