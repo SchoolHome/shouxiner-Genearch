@@ -105,6 +105,7 @@
     groupTableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     groupTableview.showsVerticalScrollIndicator = NO;
     [self.view addSubview:groupTableview];
+    
     // Do any additional setup after loading the view.
 }
 
