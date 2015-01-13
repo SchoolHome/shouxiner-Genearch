@@ -340,7 +340,14 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ContactsModel *model = self.contactsListSection[indexPath.section][indexPath.row];
+    ContactsModel *model;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if (searchResultList.count > indexPath.row) model = searchResultList[indexPath.row];
+    }else
+    {
+        
+        model = self.contactsListSection[indexPath.section][indexPath.row];
+    }
 
     if (!model.isActive) {
         [self showProgressWithText:@"当前用户没有激活,请先邀请他加入手心" withDelayTime:3];
