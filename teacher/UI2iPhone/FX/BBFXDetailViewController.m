@@ -67,8 +67,7 @@
     adWebview.scalesPageToFit = YES;
     adWebview.delegate = (id<UIWebViewDelegate>)self;
     [adWebview.scrollView setMaximumZoomScale:4.f];
-    //    NSURLRequest *request =[NSURLRequest requestWithURL:self.url];
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.11.69:8088/ps-test.html"]];
+    NSURLRequest *request =[NSURLRequest requestWithURL:self.url];
     [adWebview loadRequest:request];
     [self.view addSubview:adWebview];
     
@@ -84,7 +83,7 @@
     [view addSubview:activityIndicator];
     [self.view addSubview:view];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successCallBack) name:@"WebDetailNeedCallBack" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successCallBack:) name:@"WebDetailNeedCallBack" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
