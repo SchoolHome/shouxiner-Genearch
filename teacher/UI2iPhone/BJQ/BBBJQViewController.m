@@ -617,6 +617,7 @@
     [self addObservers];
     if (nil != bannerView) {
         [bannerView setHidden:NO];
+        [self.navigationController.view bringSubviewToFront:bannerView];
     }
 //    [bjqTableView triggerPullToRefresh];
 }
