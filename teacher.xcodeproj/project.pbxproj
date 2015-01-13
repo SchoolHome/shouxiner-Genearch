@@ -1302,7 +1302,7 @@
 		74482CB41A582CEB00BA6D8F /* BBServiceMessageDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74482CAF1A582CEB00BA6D8F /* BBServiceMessageDetailModel.m */; };
 		74482CB91A582ECD00BA6D8F /* BBServiceMessageShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74482CB81A582ECD00BA6D8F /* BBServiceMessageShareViewController.m */; };
 		74528B2C1A50731100AE7516 /* IMSoundImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 74528B2B1A50731100AE7516 /* IMSoundImage@2x.png */; };
-		74567CA31A64F26E002FD2AF /* BBServiceMessageDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74567CA21A64F26E002FD2AF /* BBServiceMessageDetailView.m */; };
+		74567CA61A65231F002FD2AF /* BBServiceMessageDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74567CA51A65231F002FD2AF /* BBServiceMessageDetailView.m */; };
 		7457D0421A48576400C82636 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7457D0361A48576400C82636 /* camera@2x.png */; };
 		7457D0431A48576400C82636 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7457D0371A48576400C82636 /* close@2x.png */; };
 		7457D0441A48576400C82636 /* lamp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7457D0381A48576400C82636 /* lamp@2x.png */; };
@@ -3456,11 +3456,11 @@
 		74482CA81A582CD000BA6D8F /* BBServiceAccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceAccountModel.m; sourceTree = "<group>"; };
 		74482CAE1A582CEB00BA6D8F /* BBServiceMessageDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageDetailModel.h; sourceTree = "<group>"; };
 		74482CAF1A582CEB00BA6D8F /* BBServiceMessageDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageDetailModel.m; sourceTree = "<group>"; };
-		74482CB01A582CEB00BA6D8F /* BBServiceMessageDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageDetailView.h; sourceTree = "<group>"; };
 		74482CB71A582ECD00BA6D8F /* BBServiceMessageShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageShareViewController.h; sourceTree = "<group>"; };
 		74482CB81A582ECD00BA6D8F /* BBServiceMessageShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageShareViewController.m; sourceTree = "<group>"; };
 		74528B2B1A50731100AE7516 /* IMSoundImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IMSoundImage@2x.png"; sourceTree = "<group>"; };
-		74567CA21A64F26E002FD2AF /* BBServiceMessageDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageDetailView.m; sourceTree = "<group>"; };
+		74567CA41A65231F002FD2AF /* BBServiceMessageDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBServiceMessageDetailView.h; sourceTree = "<group>"; };
+		74567CA51A65231F002FD2AF /* BBServiceMessageDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBServiceMessageDetailView.m; sourceTree = "<group>"; };
 		7457D0361A48576400C82636 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
 		7457D0371A48576400C82636 /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
 		7457D0381A48576400C82636 /* lamp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lamp@2x.png"; sourceTree = "<group>"; };
@@ -7245,8 +7245,8 @@
 				748A3AEF1A62D08A005BAC18 /* BBServiceMessageDetailViewController.m */,
 				74482CAE1A582CEB00BA6D8F /* BBServiceMessageDetailModel.h */,
 				74482CAF1A582CEB00BA6D8F /* BBServiceMessageDetailModel.m */,
-				74482CB01A582CEB00BA6D8F /* BBServiceMessageDetailView.h */,
-				74567CA21A64F26E002FD2AF /* BBServiceMessageDetailView.m */,
+				74567CA41A65231F002FD2AF /* BBServiceMessageDetailView.h */,
+				74567CA51A65231F002FD2AF /* BBServiceMessageDetailView.m */,
 				74482CB71A582ECD00BA6D8F /* BBServiceMessageShareViewController.h */,
 				74482CB81A582ECD00BA6D8F /* BBServiceMessageShareViewController.m */,
 				7487E40A1A3C6152000AC4A8 /* BBServiceMessageWebViewController.h */,
@@ -8997,7 +8997,7 @@
 				332D755C18C33552007A75D5 /* DDList.m in Sources */,
 				332D755018C33552007A75D5 /* NSDate+XMPPDateTimeProfiles.m in Sources */,
 				332D835B18C33F0B007A75D5 /* TimeParser.m in Sources */,
-				74567CA31A64F26E002FD2AF /* BBServiceMessageDetailView.m in Sources */,
+				74567CA61A65231F002FD2AF /* BBServiceMessageDetailView.m in Sources */,
 				332D832118C33F0B007A75D5 /* StatusPanelItem.m in Sources */,
 				332D829518C33F0A007A75D5 /* AddContactViewController.m in Sources */,
 				332D755718C33552007A75D5 /* XMPPPing.m in Sources */,
