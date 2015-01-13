@@ -192,9 +192,6 @@
 - (void)filterData:(NSDictionary *)fullData
 {
     //转model
-    
-  
-    
 
     
     NSMutableArray *tempMessages = [[NSMutableArray alloc] init];
@@ -282,7 +279,7 @@
         [self.detailScrollview addSubview:detailView];
     }
     
-    [self.detailScrollview setContentSize:CGSizeMake(self.screenWidth-30.f, singeViewHeight*singeViews+MutilViewHeight*mutilViews)];
+    [self.detailScrollview setContentSize:CGSizeMake(self.screenWidth-30.f, singeViewHeight*singeViews+currentMutilViewHeight)];
     
     [self closeProgress];
 }
