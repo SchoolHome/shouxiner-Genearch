@@ -193,6 +193,10 @@
 {
     //转model
     
+  
+    
+
+    
     NSMutableArray *tempMessages = [[NSMutableArray alloc] init];
     
     for (NSString *key in fullData.allKeys) {
@@ -254,19 +258,24 @@
     
     int singeViews = 0;
     int mutilViews = 0;
-    CGFloat singeViewHeight = 240.f;
-    CGFloat MutilViewHeight = 284.f;
+    CGFloat singeViewHeight = 254.f;
+    CGFloat currentMutilViewHeight = 0.f;
     for (int i = 0; i<self.messages.count; i++) {
         NSArray *tempArray = self.messages[i];
         CGRect frame;
         if (tempArray.count == 1) {
-            frame = CGRectMake(0.f, singeViewHeight*singeViews+MutilViewHeight*mutilViews, CGRectGetWidth(self.detailScrollview.frame), singeViewHeight);
+            frame = CGRectMake(0.f, singeViewHeight*singeViews+currentMutilViewHeight, CGRectGetWidth(self.detailScrollview.frame), singeViewHeight);
             singeViews++;
         }else
         {
-            frame = CGRectMake(0.f, singeViewHeight*singeViews+MutilViewHeight*mutilViews, CGRectGetWidth(self.detailScrollview.frame), MutilViewHeight);
+            CGFloat mutilViewOwnHeight = 200+(tempArray.count-1)*40;
+            
+            frame = CGRectMake(0.f, singeViewHeight*singeViews+currentMutilViewHeight, CGRectGetWidth(self.detailScrollview.frame), mutilViewOwnHeight);
             mutilViews++;
+            
+            currentMutilViewHeight += mutilViewOwnHeight;
         }
+        
         BBServiceMessageDetailView *detailView = [[BBServiceMessageDetailView alloc] initWithFrame:frame];
         detailView.delegate = self;
         [detailView setModels:tempArray];
