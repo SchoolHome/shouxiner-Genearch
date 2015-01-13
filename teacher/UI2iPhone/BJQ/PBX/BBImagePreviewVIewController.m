@@ -121,6 +121,7 @@
 - (void)confirm
 {
     BBPostPBXViewController *postPBX = [[BBPostPBXViewController alloc] initWithImages:[NSArray arrayWithObject:self.image]];
+    postPBX.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:postPBX animated:YES];
 }
 

@@ -233,8 +233,8 @@
         NSArray *tempObj2 = (NSArray *)obj2;
         BBServiceMessageDetailModel *tempModel1;
         BBServiceMessageDetailModel *tempModel2;
-        tempModel1 = tempObj1.count == 1 ? tempObj1[0] : tempObj1[0][0];
-        tempModel2 = tempObj2.count == 1 ? tempObj2[0] : tempObj2[0][0];
+        if (tempObj1.count > 0)  tempModel1 = tempObj1.count == 1 ? tempObj1[0] : tempObj1[0];
+        if (tempObj2.count > 0) tempModel2 = tempObj2.count == 1 ? tempObj2[0] : tempObj2[0];
         
         return tempModel1.ts.integerValue < tempModel2.ts.integerValue;
     }];
