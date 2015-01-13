@@ -255,7 +255,7 @@
     
     int singeViews = 0;
     int mutilViews = 0;
-    CGFloat singeViewHeight = 254.f;
+    CGFloat singeViewHeight = 284.f;
     CGFloat currentMutilViewHeight = 0.f;
     for (int i = 0; i<self.messages.count; i++) {
         NSArray *tempArray = self.messages[i];
@@ -265,7 +265,7 @@
             singeViews++;
         }else
         {
-            CGFloat mutilViewOwnHeight = 200+(tempArray.count-1)*40;
+            CGFloat mutilViewOwnHeight = 230+(tempArray.count-1)*50;
             
             frame = CGRectMake(0.f, singeViewHeight*singeViews+currentMutilViewHeight, CGRectGetWidth(self.detailScrollview.frame), mutilViewOwnHeight);
             mutilViews++;

@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 ws. All rights reserved.
 //
 
-#define Banner_Image_Height 120.f
-#define Banner_Image_Width 280.f
+#define Banner_Image_Height 150.f
+#define Banner_Image_Width 270.f
 
-#define Item_Image_Widht 40.f
+#define Item_Image_Widht 50.f
 
 #import "BBServiceMessageDetailView.h"
 
@@ -45,7 +45,7 @@
         banner = [[EGOImageView alloc] initWithPlaceholderImage:nil];
         banner.userInteractionEnabled = YES;
         banner.contentMode = UIViewContentModeScaleAspectFit;
-        [banner setFrame:CGRectMake(5.f, 5.f, Banner_Image_Width, Banner_Image_Height)];
+        [banner setFrame:CGRectMake(10.f, 5.f, Banner_Image_Width, Banner_Image_Height)];
         [back addSubview:banner];
     }
     return self;
