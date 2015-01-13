@@ -122,10 +122,6 @@
     if (navigationType == UIWebViewNavigationTypeOther || navigationType == UIWebViewNavigationTypeLinkClicked) {
         NSURL *url = [request URL];
         NSString *funcUrl= [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        if ([funcUrl rangeOfString:@"nativeMethod=goBack"].location != NSNotFound) {
-            [self.navigationController popViewControllerAnimated:YES];
-            return NO;
-        }
         if ([funcUrl rangeOfString:@"shouxiner://function:"].location != NSNotFound) {
             NSRange range = [funcUrl rangeOfString:@"shouxiner://function:"];
             NSString *subUrl = [funcUrl substringFromIndex:range.length];
@@ -153,6 +149,7 @@
         [setWebview setFrame:CGRectMake(0.f, 0, self.view.frame.size.width, self.screenHeight)];
     }
     [self.navigationController setNavigationBarHidden:(!isShowNavBar) animated:YES];
+    [setWebview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"onShouxinerSetTitleBarVisibleComplete(true)"]];
 }
 //定位
 -(void)getLocate:(NSArray *)args
@@ -195,6 +192,11 @@
 -(void)successCallBack:(NSNotification *)notification
 {
     [setWebview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"onShouxinerPublishTopicComplete(true, %@)", [notification object]]];
+}
+
+-(void) close:(NSArray *)args
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)dealloc
