@@ -19,6 +19,8 @@
 @interface PalmUIManagement : NSObject
 
 +(PalmUIManagement *) sharedInstance;
+
+@property (nonatomic) BOOL isEnteredBJQ;
 // 登陆结果
 @property(nonatomic,strong) CPPTModelLoginResult *loginResult;
 // 当前选择的班级信息
