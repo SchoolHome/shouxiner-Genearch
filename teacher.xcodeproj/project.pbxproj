@@ -9452,8 +9452,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yuan gao (5PS549TGY5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yuan gao (5PS549TGY5)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -9475,7 +9475,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "99736D92-6F96-4D05-A3C3-A99ED1A68585";
+				PROVISIONING_PROFILE = "0f969c4d-6b2e-44e5-8349-9d5b14bf6345";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -9487,8 +9487,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yuan gao (5PS549TGY5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yuan gao (5PS549TGY5)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/teacher/UI2iPhone",
@@ -9510,7 +9510,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "99736D92-6F96-4D05-A3C3-A99ED1A68585";
+				PROVISIONING_PROFILE = "0f969c4d-6b2e-44e5-8349-9d5b14bf6345";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
