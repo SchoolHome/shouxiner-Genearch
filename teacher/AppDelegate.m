@@ -216,7 +216,7 @@
     [self setLatestActiveTime:[CoreUtils getLongFormatWithNowDate]];
     [[CPUIModelManagement sharedInstance] sysActive];
     BBUITabBarController *tabbar = (BBUITabBarController *)self.window.rootViewController;
-    if (tabbar.selectedIndex == 0) {
+    if ([tabbar isKindOfClass:[BBUITabBarController class]] && tabbar.selectedIndex == 0) {
         int groupID = [PalmUIManagement sharedInstance].currentGroupInfo.groupid.intValue;
         if (groupID) {
             [[PalmUIManagement sharedInstance] getAdvWithGroupID:groupID];
