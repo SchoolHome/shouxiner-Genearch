@@ -148,8 +148,10 @@
         }else{
             bjqTableView.showsInfiniteScrolling = NO;
         }
-        [bjqTableView reloadData];
-        [bjqTableView bringSubviewToFront:avatar];
+        if (self.allTopicList != nil && [self.allTopicList count] != 0) {
+            [bjqTableView reloadData];
+            [bjqTableView bringSubviewToFront:avatar];
+        }
     }
     
     if ([@"notifyCount" isEqualToString:keyPath])  // 新消息
@@ -829,7 +831,9 @@
     static NSString *cellIdentifier4 = @"pbxCell";
     static NSString *cellIdentifier5 = @"noticeCell";
     static NSString *cellIdentifier6 = @"videoCell";
+    
     BBTopicModel *model = self.allTopicList[indexPath.row];
+    
     /*
     1 班级通知
     2 家庭作业
