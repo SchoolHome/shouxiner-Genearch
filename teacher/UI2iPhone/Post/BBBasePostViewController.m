@@ -372,7 +372,11 @@ viewImageDeletedDelegate>
 }
 
 - (void)backButtonTaped:(id)sender{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (_postType == POST_TYPE_HDFX) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (void)sendButtonTaped
