@@ -148,8 +148,10 @@
         }else{
             bjqTableView.showsInfiniteScrolling = NO;
         }
-        [bjqTableView reloadData];
-        [bjqTableView bringSubviewToFront:avatar];
+        if (self.allTopicList != nil && [self.allTopicList count] != 0) {
+            [bjqTableView reloadData];
+            [bjqTableView bringSubviewToFront:avatar];
+        }
     }
     
     if ([@"notifyCount" isEqualToString:keyPath])  // 新消息
@@ -457,7 +459,7 @@
 //#ifdef IS_TEACHER
     BBJFViewController *jf = [[BBJFViewController alloc] init];
     jf.hidesBottomBarWhenPushed = YES;
-    jf.url = [NSURL URLWithString:@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"];
+    jf.url = [NSURL URLWithString:@"http://www.shouxiner.com/webview/class_autologin/jfenshop/mobile_index"];
     [self.navigationController pushViewController:jf animated:YES];
 //#endif
 }
@@ -466,7 +468,7 @@
 #ifdef IS_TEACHER
     BBJFViewController *jf = [[BBJFViewController alloc] init];
     jf.hidesBottomBarWhenPushed = YES;
-    jf.url = [NSURL URLWithString:@"http://www.shouxiner.com/teacher_jfen/mobile_web_shop"];
+    jf.url = [NSURL URLWithString:@"http://www.shouxiner.com/webview/class_autologin/jfenshop/mobile_index"];
     [self.navigationController pushViewController:jf animated:YES];
 #endif
 }
@@ -829,7 +831,9 @@
     static NSString *cellIdentifier4 = @"pbxCell";
     static NSString *cellIdentifier5 = @"noticeCell";
     static NSString *cellIdentifier6 = @"videoCell";
+    
     BBTopicModel *model = self.allTopicList[indexPath.row];
+    
     /*
     1 班级通知
     2 家庭作业

@@ -79,7 +79,7 @@
         [view addSubview:activityIndicator];
         [self.view addSubview:view];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successCallBack) name:@"WebDetailNeedCallBack" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successCallBack:) name:@"WebDetailNeedCallBack" object:nil];
     }
     return self;
 }
