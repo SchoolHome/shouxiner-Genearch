@@ -370,26 +370,16 @@
         if ([model.coupleAccount isEqualToString:@"Teacher"]) {
             tempModel.isTeacher = YES;
             tempModel.isParent  = NO;
-            [tempTeachersArray addObject:tempModel];
         }else if ([model.coupleAccount isEqualToString:@"Parent"])
         {
             tempModel.isTeacher = NO;
             tempModel.isParent  = YES;
             
-            
-            //所属班级
-            NSDictionary *dic = (NSDictionary *)[model.birthday objectFromJSONString];
-            if (dic && dic.allKeys > 0) {
-                for (NSString *key in dic.allKeys) {
-                    if ([key integerValue] == classNum) {
-                        [tempParentsArray addObject:tempModel];
-                    }
-                }
-            }
         }else if ([model.coupleAccount isEqualToString:@"TeacherAndParent"])
         {
             tempModel.isTeacher = YES;
             tempModel.isParent  = YES;
+            /*
             [tempTeachersArray addObject:tempModel];
             NSDictionary *dic = (NSDictionary *)[model.birthday objectFromJSONString];
             if (dic && dic.allKeys > 0) {
@@ -399,12 +389,21 @@
                     }
                 }
             }
+             */
         }else
         {
             tempModel.isTeacher = NO;
             tempModel.isParent  = NO;
         }
-        
+        //所属班级
+        NSDictionary *dic = (NSDictionary *)[model.birthday objectFromJSONString];
+        if (dic && dic.allKeys > 0) {
+            for (NSString *key in dic.allKeys) {
+                if ([key integerValue] == classNum) {
+                    [tempParentsArray addObject:tempModel];
+                }
+            }
+        }
     }
     if (classNum == -1) {
         return [NSArray arrayWithArray:tempTeachersArray];
