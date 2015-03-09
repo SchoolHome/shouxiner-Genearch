@@ -263,15 +263,25 @@
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
-    CGRect frame = webView.frame;
-    fxWebView.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, height);
-    [fxScrollView setContentSize:CGSizeMake(fxScrollView.frame.size.width, height+adScrollView.frame.size.height+serviceView.frame.size.height)];
+//    CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
+//    CGRect frame = webView.frame;
+//    fxWebView.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, height);
+//    [fxScrollView setContentSize:CGSizeMake(fxScrollView.frame.size.width, height+adScrollView.frame.size.height+serviceView.frame.size.height)];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     
+}
+
+-(void)setWebViewSize:(NSArray *)args
+{
+    CGFloat width = [[args objectAtIndex:0] floatValue];
+    CGFloat height = [[args objectAtIndex:1] floatValue];
+    CGRect frame = fxWebView.frame;
+    width = width > 0 ? width : fxWebView.frame.size.width;
+    fxWebView.frame = CGRectMake(frame.origin.x, frame.origin.y, width, height);
+    [fxScrollView setContentSize:CGSizeMake(fxScrollView.frame.size.width, height+adScrollView.frame.size.height+serviceView.frame.size.height)];
 }
 
 -(void)open:(NSArray *)args
