@@ -17,7 +17,10 @@
 {
     UIScrollView *adScroll;
     UIPageControl *pageControl;
+    NSTimer *pageTimer;
 }
 @property (nonatomic, strong) NSArray *adsArray;
 @property (nonatomic, assign) id<BBFXAdScrollViewDelegate> delegate;
+-(void)setTimerPose;
+-(void)restartTimer;
 @end

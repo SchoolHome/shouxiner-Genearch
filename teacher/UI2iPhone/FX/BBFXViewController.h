@@ -10,6 +10,7 @@
 
 @interface BBFXViewController : PalmViewController
 {
-    UITableView *fxTableView;
+    UIScrollView *fxScrollView;
+    UIWebView *fxWebView;
 }
 @end

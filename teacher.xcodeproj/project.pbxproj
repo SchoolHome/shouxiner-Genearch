@@ -90,7 +90,10 @@
 		04D431C7190F89F9004B2806 /* BBComentBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D431C3190F89F9004B2806 /* BBComentBG@2x.png */; };
 		04D431C8190F89F9004B2806 /* BBComentX.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D431C4190F89F9004B2806 /* BBComentX.png */; };
 		04D431C9190F89F9004B2806 /* BBComentX@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D431C5190F89F9004B2806 /* BBComentX@2x.png */; };
+		04EE99D01AA7E34900DC5622 /* BBFXServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EE99CF1AA7E34900DC5622 /* BBFXServiceView.m */; };
 		04F6E98818E00085007D24DF /* BBShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F6E98718E00085007D24DF /* BBShopViewController.m */; };
+		04F6ED881AAD7F8B0060DDA7 /* custom_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F6ED871AAD7F8B0060DDA7 /* custom_phone@2x.png */; };
+		04F6ED8A1AAD7FA20060DDA7 /* custom_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F6ED891AAD7FA20060DDA7 /* custom_phone.png */; };
 		04F7FEB718CEF38A0086D09D /* BBMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7FEB618CEF38A0086D09D /* BBMeViewController.m */; };
 		04FA269B1A425F1A00415405 /* 1_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 04FA268C1A425F1A00415405 /* 1_4.png */; };
 		04FA269C1A425F1A00415405 /* 1_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04FA268D1A425F1A00415405 /* 1_4@2x.png */; };
@@ -1640,8 +1643,12 @@
 		04D431C3190F89F9004B2806 /* BBComentBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBComentBG@2x.png"; sourceTree = "<group>"; };
 		04D431C4190F89F9004B2806 /* BBComentX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BBComentX.png; sourceTree = "<group>"; };
 		04D431C5190F89F9004B2806 /* BBComentX@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BBComentX@2x.png"; sourceTree = "<group>"; };
+		04EE99CE1AA7E34900DC5622 /* BBFXServiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBFXServiceView.h; path = FX/BBFXServiceView.h; sourceTree = "<group>"; };
+		04EE99CF1AA7E34900DC5622 /* BBFXServiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBFXServiceView.m; path = FX/BBFXServiceView.m; sourceTree = "<group>"; };
 		04F6E98618E00085007D24DF /* BBShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBShopViewController.h; sourceTree = "<group>"; };
 		04F6E98718E00085007D24DF /* BBShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBShopViewController.m; sourceTree = "<group>"; };
+		04F6ED871AAD7F8B0060DDA7 /* custom_phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom_phone@2x.png"; sourceTree = "<group>"; };
+		04F6ED891AAD7FA20060DDA7 /* custom_phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = custom_phone.png; sourceTree = "<group>"; };
 		04F7FEB518CEF38A0086D09D /* BBMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBMeViewController.h; path = ME/BBMeViewController.h; sourceTree = "<group>"; };
 		04F7FEB618CEF38A0086D09D /* BBMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBMeViewController.m; path = ME/BBMeViewController.m; sourceTree = "<group>"; };
 		04FA268C1A425F1A00415405 /* 1_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_4.png; sourceTree = "<group>"; };
@@ -3873,6 +3880,8 @@
 				043A1B631A394B1E004013B1 /* sign_out@2x.png */,
 				043A1B641A394B1E004013B1 /* star.png */,
 				043A1B651A394B1E004013B1 /* star@2x.png */,
+				04F6ED891AAD7FA20060DDA7 /* custom_phone.png */,
+				04F6ED871AAD7F8B0060DDA7 /* custom_phone@2x.png */,
 			);
 			name = ME;
 			sourceTree = "<group>";
@@ -3891,12 +3900,14 @@
 			children = (
 				043A1B8E1A395907004013B1 /* BBFXViewController.h */,
 				043A1B8F1A395907004013B1 /* BBFXViewController.m */,
+				043A1B861A395907004013B1 /* BBFXAdScrollView.h */,
+				043A1B871A395907004013B1 /* BBFXAdScrollView.m */,
+				04EE99CE1AA7E34900DC5622 /* BBFXServiceView.h */,
+				04EE99CF1AA7E34900DC5622 /* BBFXServiceView.m */,
 				043A1B8A1A395907004013B1 /* BBFXGridView.h */,
 				043A1B8B1A395907004013B1 /* BBFXGridView.m */,
 				043A1B8C1A395907004013B1 /* BBFXTableViewCell.h */,
 				043A1B8D1A395907004013B1 /* BBFXTableViewCell.m */,
-				043A1B861A395907004013B1 /* BBFXAdScrollView.h */,
-				043A1B871A395907004013B1 /* BBFXAdScrollView.m */,
 				043A1B881A395907004013B1 /* BBFXDetailViewController.h */,
 				043A1B891A395907004013B1 /* BBFXDetailViewController.m */,
 			);
@@ -7986,6 +7997,7 @@
 				19503CA11A4858D1007B6D52 /* addGroup.png in Resources */,
 				7A334AF118F2BF6F001F57C4 /* BBBottomIndexPress2@2x.png in Resources */,
 				332D7F9218C33F0A007A75D5 /* emotion_magic_02@2x.png in Resources */,
+				04F6ED881AAD7F8B0060DDA7 /* custom_phone@2x.png in Resources */,
 				332D7F0218C33F0A007A75D5 /* bg_profile@2x.png in Resources */,
 				332D7F5118C33F0A007A75D5 /* icon_im_point_gray@2x.png in Resources */,
 				332D7FC218C33F0A007A75D5 /* profile_headpic_group@2x.png in Resources */,
@@ -8253,6 +8265,7 @@
 				19CBA1FB19FE132000548396 /* BJQMath@2x.png in Resources */,
 				19A83D4718D34C8900441FDE /* LoginButton@2x.png in Resources */,
 				19EC86771A3DA7D200F98C76 /* BBNewMessage@2x.png in Resources */,
+				04F6ED8A1AAD7FA20060DDA7 /* custom_phone.png in Resources */,
 				332D7F6C18C33F0A007A75D5 /* btn_im_chuansheng_white@2x.png in Resources */,
 				332D7FD318C33F0A007A75D5 /* item_im_say_press@2x.png in Resources */,
 				04FA26A71A425F1A00415405 /* 3_5.png in Resources */,
@@ -8977,6 +8990,7 @@
 				332D836618C33F0B007A75D5 /* CocosDenshion.m in Sources */,
 				332D836918C33F0B007A75D5 /* ColorUtil.m in Sources */,
 				332D74D718C33552007A75D5 /* CPDAOUserInfoDataAddition.m in Sources */,
+				04EE99D01AA7E34900DC5622 /* BBFXServiceView.m in Sources */,
 				19451C7E19F78E5800E4D92B /* BBNoticeTableViewCell.m in Sources */,
 				19B39CA319AE3AEE00E8B186 /* ADDetailViewController.m in Sources */,
 				332D756918C33552007A75D5 /* DDTTYLogger.m in Sources */,
@@ -9389,8 +9403,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yuan gao (5PS549TGY5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yuan gao (5PS549TGY5)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -9408,7 +9422,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "6c5c30df-5841-4c89-a2d5-eb4884b35879";
+				PROVISIONING_PROFILE = "86d700c1-1db8-45ce-a6b9-cba6fb44fd06";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -9429,8 +9443,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shenyang Idtech Information Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yuan gao (5PS549TGY5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yuan gao (5PS549TGY5)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -9441,7 +9455,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PROVISIONING_PROFILE = "6c5c30df-5841-4c89-a2d5-eb4884b35879";
+				PROVISIONING_PROFILE = "86d700c1-1db8-45ce-a6b9-cba6fb44fd06";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -9475,7 +9489,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
+				PROVISIONING_PROFILE = "86d700c1-1db8-45ce-a6b9-cba6fb44fd06";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -9510,7 +9524,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FF0BE6B3-5626-4ED2-B2E0-ABF1794F19F4";
+				PROVISIONING_PROFILE = "86d700c1-1db8-45ce-a6b9-cba6fb44fd06";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

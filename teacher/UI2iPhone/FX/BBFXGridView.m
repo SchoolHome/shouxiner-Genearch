@@ -13,13 +13,14 @@
 -(id)init{
     self = [super init];
     if (self) {
-        [self setBackgroundColor:[UIColor whiteColor]];
+        [self setBackgroundColor:[UIColor clearColor]];
         _egoLogo = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@""]];
         [_egoLogo setContentMode:UIViewContentModeScaleAspectFit];
         [self addSubview:_egoLogo];
         
         _txtName = [[UILabel alloc] init];
         [_txtName setTextAlignment:NSTextAlignmentCenter];
+        [_txtName setTextColor:[UIColor colorWithRed:0.333f green:0.333f blue:0.333f alpha:1.0f]];
         [_txtName setBackgroundColor:[UIColor clearColor]];
         [_txtName setFont:[UIFont boldSystemFontOfSize:12]];
         [self addSubview:_txtName];
@@ -37,14 +38,9 @@
 {
     [super setFrame:frame];
     
-    UIImageView *bgImgv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-    [bgImgv setImage:[UIImage imageNamed:@"fx_grid_bg.png"]];
-    [self addSubview:bgImgv];
-    bgImgv = nil;
-    
-    [self.egoLogo setFrame:CGRectMake(0, 0, 107, 107)];
-    [self.txtName setFrame:CGRectMake(0, frame.size.height-30, frame.size.width-1, 20)];
-    [self.flagNew setFrame:CGRectMake(frame.size.width-20, 10, 10, 10)];
+    [self.egoLogo setFrame:CGRectMake(7.5f, 0, 40, 40)];
+    [self.txtName setFrame:CGRectMake(0, frame.size.height-12, frame.size.width, 12)];
+    [self.flagNew setFrame:CGRectMake(frame.size.width-10, 0, 6, 6)];
 }
 
 /*

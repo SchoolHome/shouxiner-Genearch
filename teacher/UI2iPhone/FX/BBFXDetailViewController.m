@@ -144,7 +144,7 @@
     }else{
         [adWebview setFrame:CGRectMake(0.f, 0, self.view.frame.size.width, self.screenHeight)];
     }
-    [self.navigationController setNavigationBarHidden:(!isShowNavBar) animated:YES];
+    [self.navigationController setNavigationBarHidden:(!isShowNavBar)];
     [adWebview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"onShouxinerSetTitleBarVisibleComplete(true)"]];
 }
 //定位

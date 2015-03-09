@@ -29,13 +29,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUpdateVersion:) name:@"CheckVersionInSetting" object:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CheckVersionInSetting" object:nil];
 }
 
 -(void)loadView
@@ -52,7 +50,7 @@
     
     settingList = [[NSArray alloc] initWithObjects:[NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:@"响铃提示", @"title", @"ring.png", @"icon", nil],
                                                     [NSDictionary dictionaryWithObjectsAndKeys:@"震动提示", @"title", @"activity-stream.png", @"icon", nil], nil],
-                   [NSArray arrayWithObjects: [NSDictionary dictionaryWithObjectsAndKeys:@"软件更新", @"title", @"", @"url", @"checkversion.png", @"icon", nil], [NSDictionary dictionaryWithObjectsAndKeys:@"帮助中心", @"title", @"http://www.shouxiner.com/res/mobilemall/helpl.html", @"url", @"help.png", @"icon", nil], [NSDictionary dictionaryWithObjectsAndKeys:@"反馈建议", @"title", @"http://www.shouxiner.com/advicebox/mobile_web_advice", @"url", @"file.png", @"icon", nil], [NSDictionary dictionaryWithObjectsAndKeys:@"关于手心", @"title", @"http://www.shouxiner.com/res/mobilemall/habout.html", @"url", @"about.png", @"icon",nil] ,nil],
+                   [NSArray arrayWithObjects: [NSDictionary dictionaryWithObjectsAndKeys:@"软件更新", @"title", @"", @"url", @"checkversion.png", @"icon", nil], [NSDictionary dictionaryWithObjectsAndKeys:@"联系客服", @"title", @"tel:400-024-2808", @"url", @"custom_phone.png", @"icon", nil], [NSDictionary dictionaryWithObjectsAndKeys:@"帮助中心", @"title", @"http://www.shouxiner.com/res/mobilemall/helpl.html", @"url", @"help.png", @"icon", nil], [NSDictionary dictionaryWithObjectsAndKeys:@"反馈建议", @"title", @"http://www.shouxiner.com/advicebox/mobile_web_advice", @"url", @"file.png", @"icon", nil], [NSDictionary dictionaryWithObjectsAndKeys:@"关于手心", @"title", @"http://www.shouxiner.com/res/mobilemall/habout.html", @"url", @"about.png", @"icon",nil] ,nil],
                    nil];
     
     tbvSetting = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.screenHeight-44) style:UITableViewStyleGrouped];
@@ -132,7 +130,14 @@
         NSDictionary *dic = [infoArr objectAtIndex:indexPath.row];
         if (indexPath.row == 0) {
             //更新
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUpdateVersion:) name:@"CheckVersionInSetting" object:nil];
             [[PalmUIManagement sharedInstance] postCheckVersion];
+        }else if(indexPath.row == 1){
+            UIWebView *callPhoneWebVw = [[UIWebView alloc] init];
+            NSURL *url = [NSURL URLWithString:dic[@"url"]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            [callPhoneWebVw loadRequest:request];
+            [self.view addSubview:callPhoneWebVw];
         }else{
             BBMeWebViewController *viewController = [[BBMeWebViewController alloc] init];
             viewController.url = [NSURL URLWithString:[dic objectForKey:@"url"]];
@@ -189,6 +194,7 @@
 
 -(void)checkUpdateVersion:(NSNotification *)notification
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CheckVersionInSetting" object:nil];
     [self showProgressWithText:@"已是最新版本" withDelayTime:1.f];
 }
 

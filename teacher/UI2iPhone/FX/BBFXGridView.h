@@ -11,8 +11,8 @@
 #import "EGOImageView.h"
 
 @interface BBFXGridView : UIButton
-@property (nonatomic) NSInteger colIndex;
-@property (nonatomic) NSInteger rowIndex;
+@property (nonatomic) NSInteger pageIndex;
+@property (nonatomic) NSInteger numIndex;
 @property (nonatomic, strong) UILabel *txtName;
 @property (nonatomic, strong) EGOImageView *egoLogo;
 @property (nonatomic, strong) UIView *flagNew;
