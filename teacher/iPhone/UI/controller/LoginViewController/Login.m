@@ -46,7 +46,7 @@
 
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"loginCode" options:0 context:@"loginCode"];
+    [[CPUIModelManagement sharedInstance] addObserver:self forKeyPath:@"loginCode" options:0 context:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -61,7 +61,7 @@
 
 -(void) viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [[CPUIModelManagement sharedInstance ] removeObserver:self forKeyPath:@"loginCode"];
+    [[CPUIModelManagement sharedInstance] removeObserver:self forKeyPath:@"loginCode"];
     [[PalmUIManagement sharedInstance] removeObserver:self forKeyPath:@"customerServiceTel"];
 }
 

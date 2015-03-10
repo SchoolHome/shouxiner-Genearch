@@ -60,10 +60,11 @@
     [back setBackgroundImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
     [back addTarget:self action:@selector(backViewController) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:back];
-    
     CGFloat fix = 20;
-    
-    adWebview = [[UIWebView alloc] initWithFrame:CGRectMake(0.f, 0, self.view.frame.size.width, self.screenHeight-fix-44)];
+    if (IOS7) {
+        fix = 0;
+    }
+    adWebview = [[UIWebView alloc] initWithFrame:CGRectMake(0.f, 0, self.view.frame.size.width, self.screenHeight-44-fix)];
     adWebview.scalesPageToFit = YES;
     adWebview.delegate = (id<UIWebViewDelegate>)self;
     [adWebview.scrollView setMaximumZoomScale:4.f];
@@ -71,7 +72,7 @@
     [adWebview loadRequest:request];
     [self.view addSubview:adWebview];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.screenHeight-44-fix)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.screenHeight-44)];
     [view setTag:103];
     [view setBackgroundColor:[UIColor blackColor]];
     [view setAlpha:0.5f];
@@ -139,10 +140,14 @@
 -(void)setTitleBarVisible:(NSArray *)args
 {
     isShowNavBar = [args[0] boolValue];
+    CGFloat fix = 20;
+    if (IOS7) {
+        fix = 0;
+    }
     if (isShowNavBar) {
-        [adWebview setFrame:CGRectMake(0.f, 0, self.view.frame.size.width, self.screenHeight-44)];
+        [adWebview setFrame:CGRectMake(0.f, 0, self.view.frame.size.width, self.screenHeight-44-fix)];
     }else{
-        [adWebview setFrame:CGRectMake(0.f, 0, self.view.frame.size.width, self.screenHeight)];
+        [adWebview setFrame:CGRectMake(0.f, 0, self.view.frame.size.width, self.screenHeight-fix)];
     }
     [self.navigationController setNavigationBarHidden:(!isShowNavBar)];
     [adWebview stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"onShouxinerSetTitleBarVisibleComplete(true)"]];

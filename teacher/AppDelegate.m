@@ -116,6 +116,7 @@
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window setBackgroundColor:[UIColor whiteColor]];
     // Override point for customization after application launch.
     
     NSString *guidVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"guidVersion"];

@@ -20,7 +20,7 @@
     self = [self initOperation];
     if (nil != self) {
         self.type = kGetDiscover;
-        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/discover",K_HOST_NAME_OF_PALM_SERVER];
+        NSString *urlStr = [NSString stringWithFormat:@"http://%@/mapi/discover?retver=1",K_HOST_NAME_OF_PALM_SERVER];
         [self setHttpRequestGetWithUrl:urlStr];
     }
     return self;

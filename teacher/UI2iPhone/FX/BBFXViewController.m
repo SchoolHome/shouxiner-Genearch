@@ -73,11 +73,13 @@
     [super loadView];
     self.navigationItem.title = @"发现";
     fxScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.screenHeight)];
+    [fxScrollView setBackgroundColor:[UIColor whiteColor]];
     
     fxWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, fxScrollView.frame.size.width, fxScrollView.frame.size.height)];
     [fxWebView.scrollView setScrollEnabled:NO];
     [fxWebView setDelegate:(id<UIWebViewDelegate>)self];
     [fxWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.shouxiner.com/webview/webview_login/groupon/find/gfind"]]];
+//    [fxWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.11.31:8088/wv-test.html"]]];
     [fxScrollView addSubview:fxWebView];
     
     [self.view addSubview:fxScrollView];
@@ -92,31 +94,20 @@
 {
     if ([PalmUIManagement sharedInstance].discoverResult) {
         NSDictionary *discoverResult = [PalmUIManagement sharedInstance].discoverResult;
-        if ([discoverResult[@"errno"] integerValue]==0) {
-            [self.discoverArray removeAllObjects];
+        if ([discoverResult[@"hasError"] integerValue] == 0) {
             NSDictionary *dataResult = discoverResult[@"data"];
             if (![dataResult[@"discover"] isKindOfClass:[NSNull class]]) {
-                NSDictionary *discoverDic = dataResult[@"discover"];
-                for (NSString *key in [discoverDic allKeys]) {
-                    NSDictionary *oneDiscover = discoverDic[key];
-                    BBFXModel *oneModel = [[BBFXModel alloc] initWithJson:oneDiscover];
+                [self.discoverArray removeAllObjects];
+                for (NSDictionary *discoverDic in dataResult[@"discover"]) {
+                    BBFXModel *oneModel = [[BBFXModel alloc] initWithJson:discoverDic];
                     [self.discoverArray addObject:oneModel];
                 }
             }
             if (![dataResult[@"service"] isKindOfClass:[NSNull class]]) {
-                [self.serviceArray removeAllObjects];
-                NSDictionary *serviceDic = dataResult[@"service"];
-//                for (int i=0; i<3; i++) {
-//                    for (NSString *key in [serviceDic allKeys]) {
-//                        NSDictionary *oneService = serviceDic[key];
-//                        BBFXModel *model = [[BBFXModel alloc] initWithJson:oneService];
-//                        [self.serviceArray addObject:model];
-//                    }
-//                }
-                for (NSString *key in [serviceDic allKeys]) {
-                    NSDictionary *oneService = serviceDic[key];
-                    BBFXModel *model = [[BBFXModel alloc] initWithJson:oneService];
-                    [self.serviceArray addObject:model];
+                 [self.serviceArray removeAllObjects];
+                for (NSDictionary *discoverDic in dataResult[@"service"]) {
+                    BBFXModel *oneModel = [[BBFXModel alloc] initWithJson:discoverDic];
+                    [self.serviceArray addObject:oneModel];
                 }
             }
             [self reloadFxScrollView];
@@ -278,10 +269,29 @@
 {
     CGFloat width = [[args objectAtIndex:0] floatValue];
     CGFloat height = [[args objectAtIndex:1] floatValue];
+    
+    CGFloat webWidth = 0;
+    CGFloat webHeight = 0;
     CGRect frame = fxWebView.frame;
-    width = width > 0 ? width : fxWebView.frame.size.width;
-    fxWebView.frame = CGRectMake(frame.origin.x, frame.origin.y, width, height);
-    [fxScrollView setContentSize:CGSizeMake(fxScrollView.frame.size.width, height+adScrollView.frame.size.height+serviceView.frame.size.height)];
+    
+    if(width == -2){
+        webWidth = [[fxWebView stringByEvaluatingJavaScriptFromString:@"document.body.offsetWidth"] floatValue];
+    }else if(width >= 0){
+        webWidth = width;
+    }else{
+        webWidth = frame.size.width;
+    }
+    
+    if (height == -2) {
+        webHeight = [[fxWebView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
+    }else if(height >= 0){
+        webHeight = height;
+    }else{
+        webHeight = frame.size.height;
+    }
+    
+    fxWebView.frame = CGRectMake(frame.origin.x, frame.origin.y, webWidth, webHeight);
+    [fxScrollView setContentSize:CGSizeMake(fxScrollView.frame.size.width, webHeight+adScrollView.frame.size.height+serviceView.frame.size.height)];
 }
 
 -(void)open:(NSArray *)args
